@@ -335,6 +335,55 @@ tbody tr:hover > * {
   min-width: 52rem;
 }
 
+@media (max-width: 55.99rem) {
+  .events-table {
+    min-width: 0;
+  }
+
+  .events-table thead {
+    display: none;
+  }
+
+  .events-table tbody,
+  .events-table tr,
+  .events-table th,
+  .events-table td {
+    display: block;
+  }
+
+  .events-table tr {
+    padding: var(--space-3);
+  }
+
+  .events-table tbody tr + tr {
+    border-top: 1px solid var(--border);
+  }
+
+  .events-table tbody tr:hover {
+    background: var(--surface-sunken);
+  }
+
+  .events-table th,
+  .events-table td {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .events-table td {
+    margin-top: var(--space-1);
+  }
+
+  .events-table td::before {
+    content: attr(data-label) ": ";
+    color: var(--fg-muted);
+    font-family: var(--font-sans);
+  }
+
+  .events-table td.num {
+    text-align: start;
+  }
+}
+
 .days-table {
   min-width: 36rem;
 }

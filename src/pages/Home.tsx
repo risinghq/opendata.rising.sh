@@ -15,13 +15,15 @@ function EventRow(props: { event: EventRecord }) {
         </a>
         <div class="muted">{eventStatus(event)}</div>
       </th>
-      <td>{formatDateRange(event.start, event.end)}</td>
-      <td>{event.places.join(", ")}</td>
-      <td class="num">
+      <td data-label="Fechas">{formatDateRange(event.start, event.end)}</td>
+      <td data-label="Lugares">{event.places.join(", ")}</td>
+      <td data-label="Actos realizados" class="num">
         {held.length} de {event.acts.length}
       </td>
-      <td class="num">{formatNumber(sumRange(held).central)}</td>
-      <td>{formatDateLima(event.updated)}</td>
+      <td data-label="Asistencia total" class="num">
+        {formatNumber(sumRange(held).central)}
+      </td>
+      <td data-label="Actualizado">{formatDateLima(event.updated)}</td>
     </tr>
   );
 }
