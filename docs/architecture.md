@@ -110,8 +110,9 @@ under `data/forecasts/mcu/`. The box office page reads the latest snapshot.
 The model lives in `src/forecast/`: `model.ts` fits the Poisson parameters,
 `simulate.ts` plays the remaining matches, `rules.ts` applies the league's
 points, tiebreaks, playoff and relegation rules, `backtest.ts` scores past
-rounds against the base rates and the closing odds, and `snapshot.ts` writes
-and reads the immutable dated snapshots.
+rounds against the base rates and the closing odds, `snapshot.ts` writes
+and reads the immutable dated snapshots, and `scoring.ts` scores every
+published snapshot on the matches held after its date.
 
 ## Styles
 

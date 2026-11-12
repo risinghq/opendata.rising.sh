@@ -236,6 +236,14 @@ table. The rules come from the "Sistema" section of
 Spanish Wikipedia. Playoff matches are simulated as single neutral-site games;
 a draw is decided by coin flip.
 
+`src/forecast/scoring.ts` scores every published snapshot at build time. For
+each snapshot it takes the matches it gave probabilities for that are held in
+the event, matched by tournament and both teams, and scores them by log loss
+and Brier score with the same functions the backtest uses. The baseline is the
+home, draw and away frequencies of that snapshot's `matchesUsed`. A postponed
+match counts in every snapshot that forecast it. The page shows one row per
+snapshot under "Pronósticos publicados".
+
 ### Source and licence
 
 The matches come from Spanish Wikipedia, under CC BY-SA 4.0. The JSON and each
@@ -253,8 +261,10 @@ including `stadiums`. It stops and lists any stadium missing from `stadiums`.
 
 ### Downloads
 
-- `/eventos/<slug>.json` holds the event with its `slug` and an `aviso` with the
-  notice of each tournament.
+- `/eventos/<slug>.json` holds the event with its `slug`, an `aviso` with the
+  notice of each tournament and `forecastScores`, one entry per published
+  snapshot with `date`, `matches`, `model` and `baseRates` as the
+  "Pronósticos publicados" section shows them.
 - `/eventos/<slug>.csv` holds one row per match, with the columns `torneo`,
   `fecha`, `inicio`, `local`, `visitante`, `estadio`, `ciudad`, `altitud_m`,
   `arbitro`, `estado`, `goles_local`, `goles_visitante`, `fuente` and `aviso`.
