@@ -64,13 +64,33 @@ are SVG written by hand. Each has a caption that links to its table.
 
 ## Importer
 
-`scripts/import-liga1.ts` is the only code that uses the network. It fetches
-the wikitext and revision of the Apertura and Clausura pages through the
-MediaWiki API, resolves each stadium link to its article, and rewrites the
-matches, teams and tournaments of `data/events/liga-1-2026.json`.
+`scripts/import-liga1.ts` fetches the wikitext and revision of the Apertura
+and Clausura pages through the MediaWiki API, resolves each stadium link to
+its article, and rewrites the matches, teams and tournaments of
+`data/events/liga-1-2026.json`, keeping `events` already on a match.
 `scripts/liga1-wikitext.ts` parses the results tables: rowspans and colspans,
 bold winners, linked scores and stadiums. `test/fixtures/` holds saved
 wikitext for its tests.
+
+`bun run refresh:liga1` runs `scripts/liga1/refresh.ts`, which chains the
+import, the API fetch, the join and the forecast. `scripts/liga1/api.ts` is
+the other network client: it reads the key from `FOOTBALL_API_KEY` or
+`~/.config/5dollarfootballapi/key`, paces requests under the per-minute
+ceiling, follows a `league_moved` redirect and stops on 429.
+`scripts/liga1/parse.ts` maps a fixture to the `events` schema,
+`scripts/liga1/aliases.ts` maps API team names to team ids, and
+`scripts/liga1/join.ts` matches fixtures to matches by Lima date and both
+teams; it fails on any unjoined match. Raw responses stay under
+`.cache/liga1/`, which is gitignored. `scripts/liga1/forecast.ts` fits the
+model, simulates the remaining matches, backtests against past Clausura
+rounds and the Bet365 closing odds cached at fetch time, and writes a dated
+snapshot under `data/forecasts/`. The season page reads the latest snapshot.
+
+The model lives in `src/forecast/`: `model.ts` fits the Poisson parameters,
+`simulate.ts` plays the remaining matches, `rules.ts` applies the league's
+points, tiebreaks, playoff and relegation rules, `backtest.ts` scores past
+rounds against the base rates and the closing odds, and `snapshot.ts` writes
+and reads the immutable dated snapshots.
 
 ## Styles
 

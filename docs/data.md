@@ -192,6 +192,20 @@ A held match adds `homeScore` and `awayScore`, non-negative integers. A planned
 match has neither. A postponed or suspended match with no result is planned. A
 team plays at most once per round of a tournament.
 
+A held match can also carry `events`, the record of what happened in it. It
+comes from 5DollarFootballAPI, joined onto the Wikipedia match by Lima date
+and both teams. Only the fields below are kept; the raw feed is never stored.
+
+| Field      | Value                                                                |
+| ---------- | -------------------------------------------------------------------- |
+| `halfTime` | `{home, away}` half-time score, non-negative integers.               |
+| `goals`    | list of `{minute, team}`. `team` is the side credited with the goal. |
+| `cards`    | list of `{minute, team, colour}`. `colour` is `yellow` or `red`.     |
+| `corners`  | `{home, away}` corner counts.                                        |
+
+`team` is `home` or `away`. `minute` counts from kickoff; stoppage time keeps
+its own count past 45 or 90.
+
 ### Method
 
 The standings come from the held matches only: 3 points for a win, 1 for a
@@ -199,11 +213,37 @@ draw. They order by points, goal difference and goals for. The page says that
 the official table can differ because of administrative sanctions. Home
 advantage by altitude uses stadiums with at least 5 held matches.
 
+### Forecast snapshots
+
+`data/forecasts/liga-1-2026/YYYY-MM-DD.json` is a dated snapshot of the
+forecast. A refresh writes a new one; a snapshot is never rewritten. It holds
+the date, the number of matches used, the fitted parameters, the seed and the
+simulation count, each remaining match with home, draw and away probabilities
+and expected goals, each team's probability of winning the Clausura, winning
+the season and being relegated, and the backtest scores.
+
+The model is a Poisson goals model fit by maximum likelihood in
+`src/forecast/model.ts`: per team an attack and a defence strength, a home
+effect that grows with the altitude difference between the match stadium and
+the visitor's home stadium, time decay on older matches and a ridge prior. A
+seeded simulator in `src/forecast/simulate.ts` plays the remaining matches
+20,000 times and applies the competition rules: points and tiebreaks (goal
+difference, goals for, fair play points from cards, head-to-head in the
+accumulated table), the playoff that decides the champion when no team wins
+both tournaments, and the relegation of the 17th and 18th of the accumulated
+table. The rules come from the "Sistema" section of
+[Liga1 2026 (Perú)](<https://es.wikipedia.org/wiki/Liga1_2026_(Per%C3%BA)>) on
+Spanish Wikipedia. Playoff matches are simulated as single neutral-site games;
+a draw is decided by coin flip.
+
 ### Source and licence
 
-The matches come from Spanish Wikipedia, under CC BY-SA 4.0. The page, the JSON
-and each CSV row state it as `Datos de Wikipedia en español (CC BY-SA 4.0),
-revisión del <día> de <mes> de <año>`.
+The matches come from Spanish Wikipedia, under CC BY-SA 4.0. The JSON and each
+CSV row state it as `Datos de Wikipedia en español (CC BY-SA 4.0):
+<tournament>, revisión del <día> de <mes> de <año>; …`. When a match carries
+`events`, the notice adds `Datos de partidos: Football data by
+5DollarFootballAPI (5dollarfootballapi.com).`, the attribution the Community
+Access plan requires.
 
 ### Importer
 

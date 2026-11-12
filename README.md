@@ -31,13 +31,16 @@ bun run preview  # serve dist/ in the Worker, after bun run build
 ## Refresh the Liga 1 season
 
 ```sh
-bun scripts/import-liga1.ts
+bun run refresh:liga1
 bun run test
 ```
 
-The script fetches the Apertura and Clausura pages from Spanish Wikipedia and
-rewrites the matches in `data/events/liga-1-2026.json`, with the revision of
-each page. The data is CC BY-SA 4.0. Network access is only in this script.
+The command imports the Apertura and Clausura pages from Spanish Wikipedia,
+fetches match events and odds from 5DollarFootballAPI, joins them onto the
+Wikipedia matches, fits the forecast model and writes a dated snapshot. The
+Wikipedia data is CC BY-SA 4.0. The API key is read from `FOOTBALL_API_KEY` or
+`~/.config/5dollarfootballapi/key`. Raw API responses stay in `.cache/liga1/`,
+which is gitignored.
 
 The code map is in [docs/architecture.md](docs/architecture.md).
 
