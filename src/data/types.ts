@@ -93,10 +93,36 @@ interface MatchBase {
   referee?: string;
 }
 
+export type CardColour = "yellow" | "red";
+
+export interface GoalEvent {
+  minute: number;
+  team: "home" | "away";
+}
+
+export interface CardEvent {
+  minute: number;
+  team: "home" | "away";
+  colour: CardColour;
+}
+
+export interface Score {
+  home: number;
+  away: number;
+}
+
+export interface MatchEvents {
+  halfTime: Score;
+  goals: GoalEvent[];
+  cards: CardEvent[];
+  corners: Score;
+}
+
 export interface HeldMatch extends MatchBase {
   status: "held";
   homeScore: number;
   awayScore: number;
+  events?: MatchEvents;
 }
 
 export interface PlannedMatch extends MatchBase {

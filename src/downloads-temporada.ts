@@ -1,4 +1,4 @@
-import { tournamentNotice } from "./data/notice.ts";
+import { eventNotice } from "./data/notice.ts";
 import type { TemporadaRecord } from "./data/types.ts";
 import { csv } from "./downloads-csv.ts";
 
@@ -21,8 +21,7 @@ const HEADER = [
 
 export function temporadaJson(event: TemporadaRecord): string {
   const { kind, ...rest } = event;
-  const aviso = event.tournaments.map(tournamentNotice).join(". ");
-  return `${JSON.stringify({ kind, aviso, ...rest }, null, 2)}\n`;
+  return `${JSON.stringify({ kind, aviso: eventNotice(event), ...rest }, null, 2)}\n`;
 }
 
 export function temporadaCsv(event: TemporadaRecord): string {
@@ -47,7 +46,7 @@ export function temporadaCsv(event: TemporadaRecord): string {
       held ? match.homeScore : undefined,
       held ? match.awayScore : undefined,
       tournament.source.url,
-      tournamentNotice(tournament),
+      eventNotice(event),
     ];
   });
   return csv(HEADER, rows);

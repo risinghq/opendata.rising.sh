@@ -28,6 +28,13 @@ export interface Frame {
   places: string[];
   method: string;
   stadiums: { id: string; [key: string]: unknown }[];
+  matches?: {
+    tournament: string;
+    round: number;
+    home: string;
+    away: string;
+    events?: unknown;
+  }[];
 }
 
 export const slug = (text: string) =>
@@ -117,19 +124,30 @@ export function assemble(
   }
 
   const teamNames = [...new Set(teamOf.values())].sort((a, b) => a.localeCompare(b, "es"));
+  const previous = new Map(
+    (frame.matches ?? [])
+      .filter((m) => m.events !== undefined)
+      .map((m) => [`${m.tournament}/${m.round}/${m.home}/${m.away}`, m.events]),
+  );
   const matches = parsed.flatMap(({ tournament, matches: list }) =>
-    list.map((m) => ({
-      tournament: tournament.id,
-      round: m.round,
-      start: m.start,
-      home: slug(teamOf.get(m.home)!),
-      away: slug(teamOf.get(m.away)!),
-      stadium: stadiumId(m),
-      ...(m.referee ? { referee: m.referee } : {}),
-      ...(m.score
-        ? { status: "held", homeScore: m.score.home, awayScore: m.score.away }
-        : { status: "planned" }),
-    })),
+    list.map((m) => {
+      const home = slug(teamOf.get(m.home)!);
+      const away = slug(teamOf.get(m.away)!);
+      const events = previous.get(`${tournament.id}/${m.round}/${home}/${away}`);
+      return {
+        tournament: tournament.id,
+        round: m.round,
+        start: m.start,
+        home,
+        away,
+        stadium: stadiumId(m),
+        ...(m.referee ? { referee: m.referee } : {}),
+        ...(m.score
+          ? { status: "held", homeScore: m.score.home, awayScore: m.score.away }
+          : { status: "planned" }),
+        ...(m.score && events ? { events } : {}),
+      };
+    }),
   );
   matches.sort(
     (a, b) =>

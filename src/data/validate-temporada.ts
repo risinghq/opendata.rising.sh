@@ -109,8 +109,72 @@ export function validateTemporada(data: Obj, report: Report) {
       for (const key of ["homeScore", "awayScore"]) {
         if (key in match) fail(`${path}.${key}`, "a planned match has no score");
       }
+      if ("events" in match) fail(`${path}.events`, "a planned match has no events");
     } else {
       fail(`${path}.status`, 'must be "planned" or "held"');
+    }
+
+    if ("events" in match) {
+      const events = match.events;
+      if (!isObj(events)) {
+        fail(`${path}.events`, "must be an object");
+      } else {
+        if (!isObj(events.halfTime)) {
+          fail(`${path}.events.halfTime`, "must be an object with home and away");
+        } else {
+          for (const key of ["home", "away"] as const) {
+            if (!isCount(events.halfTime[key]))
+              fail(`${path}.events.halfTime.${key}`, "must be a non-negative integer");
+          }
+        }
+        const side = (v: unknown) => v === "home" || v === "away";
+        if (!Array.isArray(events.goals)) {
+          fail(`${path}.events.goals`, "must be a list");
+        } else {
+          events.goals.forEach((goal: unknown, i) => {
+            const gpath = `${path}.events.goals[${i}]`;
+            if (!isObj(goal)) return fail(gpath, "must be an object");
+            if (!isCount(goal.minute) || goal.minute > 130)
+              fail(`${gpath}.minute`, "must be an integer of minutes, 0 to 130");
+            if (!side(goal.team)) fail(`${gpath}.team`, 'must be "home" or "away"');
+            for (const key of Object.keys(goal))
+              if (key !== "minute" && key !== "team")
+                fail(`${gpath}.${key}`, "is not a field the feed provides");
+          });
+        }
+        if (!Array.isArray(events.cards)) {
+          fail(`${path}.events.cards`, "must be a list");
+        } else {
+          events.cards.forEach((card: unknown, i) => {
+            const cpath = `${path}.events.cards[${i}]`;
+            if (!isObj(card)) return fail(cpath, "must be an object");
+            if (!isCount(card.minute) || card.minute > 130)
+              fail(`${cpath}.minute`, "must be an integer of minutes, 0 to 130");
+            if (!side(card.team)) fail(`${cpath}.team`, 'must be "home" or "away"');
+            if (!["yellow", "red"].includes(String(card.colour)))
+              fail(`${cpath}.colour`, 'must be "yellow" or "red"');
+          });
+        }
+        if (!isObj(events.corners)) {
+          fail(`${path}.events.corners`, "must be an object with home and away");
+        } else {
+          for (const key of ["home", "away"] as const) {
+            if (!isCount(events.corners[key]))
+              fail(`${path}.events.corners.${key}`, "must be a non-negative integer");
+          }
+        }
+        if (match.status === "held" && Array.isArray(events.goals)) {
+          const home = Number(match.homeScore);
+          const away = Number(match.awayScore);
+          const scored = home + away;
+          if (events.goals.length > scored)
+            fail(`${path}.events.goals`, "lists more goals than the score allows");
+          const homeGoals = events.goals.filter((g) => isObj(g) && g.team === "home").length;
+          const awayGoals = events.goals.filter((g) => isObj(g) && g.team === "away").length;
+          if (homeGoals > home || awayGoals > away)
+            fail(`${path}.events.goals`, "per-side goal events exceed the score");
+        }
+      }
     }
 
     for (const key of ["home", "away"] as const) {

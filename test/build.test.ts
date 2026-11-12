@@ -39,10 +39,11 @@ test("every event page holds its metadata, tables and downloads without JavaScri
         expect(html).toContain(`<table class="${name}">`);
       }
       for (const tournament of event.tournaments) {
-        const notice = tournamentNotice(tournament);
-        expect(html).toContain(notice);
-        expect(json.aviso).toContain(notice);
-        expect(csv[1]).toContain(notice.split(",")[0]);
+        expect(html).toContain(tournamentNotice(tournament));
+        expect(json.aviso).toContain(
+          `${tournament.name}, revisión del ${tournamentNotice(tournament).split("revisión del ")[1]}`,
+        );
+        expect(csv[1]).toContain("Datos de Wikipedia en español (CC BY-SA 4.0)");
         expect(html).toContain(`href="${tournament.source.url}"`);
       }
       expect(json.matches).toHaveLength(event.matches.length);

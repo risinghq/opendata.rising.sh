@@ -51,6 +51,8 @@ const decimal = new Intl.NumberFormat(LOCALE, {
 const percent = new Intl.NumberFormat(LOCALE, { style: "percent", maximumFractionDigits: 0 });
 export const formatDecimal = (value: number) => decimal.format(value);
 export const formatPercent = (value: number) => percent.format(value);
+export const formatChance = (value: number) =>
+  value > 0 && value < 0.005 ? "<1 %" : formatPercent(value);
 
 const compact = new Intl.NumberFormat(LOCALE, { notation: "compact", maximumFractionDigits: 1 });
 export const formatCompact = (value: number) => compact.format(value);
