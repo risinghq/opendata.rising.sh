@@ -31,6 +31,7 @@ const plannedAct = {
 };
 
 const event = {
+  kind: "asistencia",
   title: "Evento",
   summary: "Resumen.",
   start: "2026-11-07",
@@ -100,6 +101,100 @@ describe("validateEvent", () => {
       "outside",
     ],
     ["unknown status", withAct({ ...heldAct, status: "done" }), "planned"],
+  ];
+
+  test.each(failures)("rejects %s", (_name, data, message) => {
+    const errors = validateEvent(data);
+    expect(errors.length).toBeGreaterThan(0);
+    expect(errors.join("\n")).toContain(message);
+  });
+});
+
+describe("validateEvent, temporada", () => {
+  const wiki = {
+    outlet: "Wikipedia en español",
+    url: "https://es.wikipedia.org/wiki/Torneo?oldid=10",
+    revision: 10,
+    revisionDate: "2026-02-10",
+    license: "CC BY-SA 4.0",
+  };
+  const held = {
+    tournament: "apertura",
+    round: 1,
+    start: "2026-02-01T15:00-05:00",
+    home: "x",
+    away: "y",
+    stadium: "est",
+    status: "held",
+    homeScore: 1,
+    awayScore: 0,
+  };
+  const season = {
+    kind: "temporada",
+    title: "Liga",
+    summary: "Resumen.",
+    start: "2026-02-01",
+    end: "2026-02-28",
+    places: ["Perú"],
+    updated: "2026-02-10T12:00-05:00",
+    method: "Método.",
+    tournaments: [{ id: "apertura", name: "Apertura", source: wiki }],
+    teams: [
+      { id: "x", name: "X" },
+      { id: "y", name: "Y" },
+      { id: "z", name: "Z" },
+    ],
+    stadiums: [{ id: "est", name: "Estadio", city: "Lima", altitude: 150, source }],
+    matches: [held],
+  };
+  const withMatches = (...matches: object[]) => ({ ...season, matches });
+
+  test("accepts a held match and a planned one", () => {
+    const planned = { ...held, round: 2, status: "planned" } as Record<string, unknown>;
+    delete planned.homeScore;
+    delete planned.awayScore;
+    expect(validateEvent(season)).toEqual([]);
+    expect(validateEvent(withMatches(held, planned))).toEqual([]);
+  });
+
+  const failures: [string, unknown, string][] = [
+    ["a missing kind", { ...season, kind: undefined }, "kind"],
+    ["an unknown team", withMatches({ ...held, away: "w" }), "id of a team"],
+    ["an unknown stadium", withMatches({ ...held, stadium: "otro" }), "id of a stadium"],
+    ["an unknown tournament", withMatches({ ...held, tournament: "otro" }), "tournament"],
+    ["a held match without scores", withMatches({ ...held, homeScore: undefined }), "homeScore"],
+    ["a negative score", withMatches({ ...held, awayScore: -1 }), "awayScore"],
+    ["a fractional score", withMatches({ ...held, homeScore: 1.5 }), "homeScore"],
+    ["a planned match with a score", withMatches({ ...held, status: "planned" }), "no score"],
+    [
+      "a team that plays twice in a round",
+      withMatches(held, { ...held, home: "z", away: "x" }),
+      "already plays in round 1",
+    ],
+    [
+      "a match outside the event dates",
+      withMatches({ ...held, start: "2026-03-01T15:00-05:00" }),
+      "outside the event dates",
+    ],
+    [
+      "a stadium without an altitude",
+      { ...season, stadiums: [{ ...season.stadiums[0], altitude: undefined }] },
+      "altitude",
+    ],
+    [
+      "a tournament link that is not permanent",
+      {
+        ...season,
+        tournaments: [
+          {
+            id: "apertura",
+            name: "A",
+            source: { ...wiki, url: "https://es.wikipedia.org/wiki/T" },
+          },
+        ],
+      },
+      "oldid",
+    ],
   ];
 
   test.each(failures)("rejects %s", (_name, data, message) => {
