@@ -14,25 +14,29 @@ data/events/<slug>.json
 ## Data
 
 `src/data/types.ts` holds the types. An event is a union keyed by `kind`:
-`AsistenciaData` (acts and comparison rows) and `TemporadaData` (tournaments,
-teams, stadiums and matches). Both extend the shared fields: title, summary,
-dates, places, `updated` and `method`. The schema is described in
+`AsistenciaData` (acts and comparison rows), `TemporadaData` (tournaments,
+teams, stadiums and matches) and `TaquillaData` (the source and the films of a
+box office series). Each extends the shared fields: title, summary, dates,
+places, `updated` and `method`. The schema is described in
 [data.md](data.md).
 
 `src/data/load.ts` reads every `data/events/*.json`, takes the slug from the
 file name, validates it and sorts events by start date, newest first.
 
-Each kind has its own statistics, in `src/data/stats-asistencia.ts` and
-`src/data/stats-temporada.ts`. Pages never add figures themselves.
-`src/data/stats.ts` holds what the home list needs from both kinds: the status
-and the summary columns. `src/data/format.ts` formats numbers, dates and times
-in `es-PE`. `src/data/notice.ts` writes the source and licence notice of a
-tournament.
+Each kind has its own statistics, in `src/data/stats-asistencia.ts`,
+`src/data/stats-temporada.ts` and `src/data/stats-taquilla.ts`. Pages never
+add figures themselves. `src/data/stats.ts` holds what the home list needs
+from every kind: the status and the summary columns. `src/data/format.ts`
+formats numbers, dates and times in `es-PE`. `src/data/notice.ts` writes the
+source and licence notice of each event. `src/data/cpi.ts` loads the CPI
+series stored under `data/cpi/` and converts nominal dollars to the base
+year's dollars.
 
 ## Validation
 
 `src/data/validate.ts` reads `kind` and runs the validator of that kind:
-`src/data/validate-asistencia.ts` or `src/data/validate-temporada.ts`.
+`src/data/validate-asistencia.ts`, `src/data/validate-temporada.ts` or
+`src/data/validate-taquilla.ts`.
 `src/data/validate-common.ts` holds the shared field checks. A validator returns
 a list of errors, each with the path of the field. `assertEvent` throws when
 the list is not empty, so the build stops on bad data. `test/validate.test.ts`
@@ -40,9 +44,10 @@ runs it over every event file.
 
 ## Pages
 
-`src/pages/Home.tsx` is the table of events. `src/pages/AsistenciaPage.tsx` and
-`src/pages/TemporadaPage.tsx` are the event pages of each kind, with their
-sections in order. `src/pages/NotFound.tsx` is the 404 page.
+`src/pages/Home.tsx` is the table of events. `src/pages/AsistenciaPage.tsx`,
+`src/pages/TemporadaPage.tsx` and `src/pages/TaquillaPage.tsx` are the event
+pages of each kind, with their sections in order. `src/pages/NotFound.tsx` is
+the 404 page.
 `src/components/Document.tsx` is the HTML document: title, description,
 canonical link, Open Graph tags, header and footer.
 
@@ -50,7 +55,9 @@ The components of `asistencia` are `src/components/ActsTable.tsx`, the table of
 acts with sources as links in each row, and the charts below. The components of
 `temporada` are `src/components/StandingsTable.tsx`,
 `src/components/RoundsList.tsx` (one table per round) and
-`src/components/AltitudeChart.tsx`.
+`src/components/AltitudeChart.tsx`. The components of `taquilla` are
+`src/components/FilmsTable.tsx` (each figure nominal and real, sources as
+links) and `src/components/GrossChart.tsx`.
 
 ## Charts
 
@@ -61,6 +68,8 @@ accumulated attendance by day and the table behind it.
 match against altitude, with a least-squares line and the table behind it.
 `src/components/chart-scale.ts` picks the axis maximum and ticks. The charts
 are SVG written by hand. Each has a caption that links to its table.
+`src/components/GrossChart.tsx` draws one bar per release, worldwide gross in
+real terms, with Avengers films marked.
 
 ## Importer
 
@@ -86,6 +95,18 @@ model, simulates the remaining matches, backtests against past Clausura
 rounds and the Bet365 closing odds cached at fetch time, and writes a dated
 snapshot under `data/forecasts/`. The season page reads the latest snapshot.
 
+`bun run refresh:mcu` runs `scripts/mcu/refresh.ts`, which chains the import
+and the forecast. `scripts/import-mcu.ts` fetches the wikitext of the six MCU
+phase pages through the MediaWiki API, the wikitext of each film's article for
+the opening weekend, each article's `es` langlink for the Spanish title and
+the CPI annual averages from the BLS, then rewrites
+`data/events/mcu-taquilla.json`. `scripts/mcu-wikitext.ts` parses the box
+office table, the films list and the opening-weekend sentence.
+`scripts/mediawiki.ts` and `scripts/wikitext.ts` hold the API calls and
+wikitext helpers both importers share. `scripts/mcu/forecast.ts` fits the
+model, backtests it against the naive baseline and writes a dated snapshot
+under `data/forecasts/mcu/`. The box office page reads the latest snapshot.
+
 The model lives in `src/forecast/`: `model.ts` fits the Poisson parameters,
 `simulate.ts` plays the remaining matches, `rules.ts` applies the league's
 points, tiebreaks, playoff and relegation rules, `backtest.ts` scores past
@@ -103,7 +124,8 @@ the dark theme. `src/site.css` holds the rules and loads the fonts from the
 `src/render.tsx` turns events into a map from file path to content: `index.html`,
 `404.html`, and `eventos/<slug>.html`, `.json` and `.csv` for each event. It
 picks the page by `kind`. `src/downloads.ts` picks the JSON and the CSV writer
-by `kind`: `src/downloads-asistencia.ts` or `src/downloads-temporada.ts`.
+by `kind`: `src/downloads-asistencia.ts`, `src/downloads-temporada.ts` or
+`src/downloads-taquilla.ts`.
 
 `scripts/build.ts` builds the stylesheet with Vite, loads `src/render.tsx`
 through Vite's server so the JSX compiles for the server, and writes the map.

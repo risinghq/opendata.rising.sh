@@ -1,9 +1,11 @@
 # opendata.rising.sh
 
-A catalogue of public events, in Spanish. It has two kinds. An attendance event
-lists its acts, and each figure shows who estimated it and links to the report.
-A season lists its matches, and every figure on the page is derived from them.
-The first season is the Liga 1 2026.
+A catalogue of public events, in Spanish. It has three kinds. An attendance
+event lists its acts, and each figure shows who estimated it and links to the
+report. A season lists its matches, and every figure on the page is derived
+from them. A box office event lists a film series' grosses, nominal and in
+real terms. The first season is the Liga 1 2026 and the first box office
+series is the Marvel Cinematic Universe.
 
 ## Develop
 
@@ -41,6 +43,19 @@ Wikipedia matches, fits the forecast model and writes a dated snapshot. The
 Wikipedia data is CC BY-SA 4.0. The API key is read from `FOOTBALL_API_KEY` or
 `~/.config/5dollarfootballapi/key`. Raw API responses stay in `.cache/liga1/`,
 which is gitignored.
+
+## Refresh the MCU box office
+
+```sh
+bun run refresh:mcu
+bun run test
+```
+
+The command imports the box office table from English Wikipedia (CC BY-SA
+4.0), the opening weekend from each film's article, the Spanish titles from
+each article's `es` langlink, and the U.S. CPI annual averages from the BLS,
+then fits the forecast model and writes a dated snapshot. A snapshot is
+never rewritten.
 
 The code map is in [docs/architecture.md](docs/architecture.md).
 

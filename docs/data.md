@@ -258,3 +258,68 @@ including `stadiums`. It stops and lists any stadium missing from `stadiums`.
 - `/eventos/<slug>.csv` holds one row per match, with the columns `torneo`,
   `fecha`, `inicio`, `local`, `visitante`, `estadio`, `ciudad`, `altitud_m`,
   `arbitro`, `estado`, `goles_local`, `goles_visitante`, `fuente` and `aviso`.
+
+## Taquilla
+
+`taquilla` is the box office of a film series. `mcu-taquilla` is the Marvel
+Cinematic Universe.
+
+### Film
+
+Each entry in `films` holds `title` (the Spanish title from Wikipedia en
+español, else the original), `originalTitle`, `phase`, `release` (the U.S.
+date, `YYYY-MM-DD`) and `status`. A released film adds `budget` (optional;
+`low` and `high` when the source gives a range), `opening` (opening weekend
+gross in the United States and Canada), `usCanada` and `worldwide`, each a
+figure of `amount` in integer nominal U.S. dollars and its `source`. An
+unreleased film has none of those.
+
+### Source and licence
+
+The figures come from the box office table of "List of Marvel Cinematic
+Universe films" on English Wikipedia, under CC BY-SA 4.0. The page and the
+downloads state it as `Datos de Wikipedia en inglés (CC BY-SA 4.0), revisión
+del <día> de <mes> de <año>`. `source` holds the revision id and its
+permanent `?oldid=` link; each figure links the phase-page revision it came
+from, and each opening-weekend figure links the film-article revision.
+
+### Real terms
+
+`data/cpi/cuur0000sa0.json` holds the annual averages of the U.S. consumer
+price index (BLS series CUUR0000SA0) with their source, and `base`, the year
+of the dollar the page uses. Every figure shown in real terms converts with
+`amount × CPI(base) ÷ CPI(release year)`.
+
+### Forecast snapshots
+
+`data/forecasts/mcu/YYYY-MM-DD.json` is a dated snapshot of the Avengers:
+Doomsday forecast, made before the release and never rewritten. It holds the
+date, the dollar base year, the films used, the model form and coefficients,
+the point and interval per figure (opening weekend and worldwide) and the
+backtest.
+
+The model in `src/forecast/mcu.ts` is a ridge-regularized least-squares fit
+on the log of each figure in real dollars: the previous release's figure, the
+previous figure in the same line (the previous Avengers film for Doomsday)
+and the years since the first release. The interval comes from the
+leave-one-out errors. The backtest predicts each Avengers film and each of
+the last ten releases using only the films before it, and reports the median
+absolute percentage error against the naive baseline of the previous film's
+figure.
+
+### Importer
+
+`bun scripts/import-mcu.ts` rewrites `films`, `start`, `end`, `updated` and
+`source` from the live pages and refreshes `data/cpi/cuur0000sa0.json` from
+the BLS API. It keeps the other fields. The box office table is transcluded
+from the six phase pages; the opening weekend comes from each film's
+article; the Spanish titles come from each article's `es` langlink.
+
+### Downloads
+
+- `/eventos/<slug>.json` holds the event with its `slug` and an `aviso` with
+  the notice.
+- `/eventos/<slug>.csv` holds one row per film, with the columns `pelicula`,
+  `titulo_original`, `fase`, `estreno`, `estado`, `presupuesto_min_usd`,
+  `presupuesto_max_usd`, `estreno_fin_de_semana_usd`, `eeuu_y_canada_usd`,
+  `mundial_usd`, `fuentes` and `aviso`.
