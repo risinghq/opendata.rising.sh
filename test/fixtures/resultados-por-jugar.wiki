@@ -1,0 +1,98 @@
+== Resultados ==
+
+* ''La hora de cada encuentro corresponde al [[huso horario]] que rige al [[Perú]] ([[UTC-05:00|UTC-5]]).''
+{| class="wikitable collapsible uncollapsed" style="font-size:95%; text-align: center; width: 95%; margin:0 auto 0.5em auto;"
+! colspan="9" align="center" style="with: 100%;" |Fecha 17
+|-
+! width="170" |Local
+! width="60" |Resultado
+! width="170" |Visitante
+! width="150" |Estadio
+! width="100" |Fecha
+! width="50" |Hora
+! width="60" |Árbitro
+! width="60" |VAR
+! width="60" |TV
+|-
+|Comerciantes Unidos                 
+|–
+|Sport Boys
+|[[Estadio Juan Maldonado Gamarra|Juan Maldonado Gamarra]]
+| rowspan="2" |15 de noviembre
+|13:00
+|
+|
+|rowspan="3" |[[Archivo:L1MAX-LOGO.svg|50px|link=L1 Max]]
+|-
+|Juan Pablo II                
+|–
+|Deportivo Garcilaso
+|[[Complejo Deportivo Juan Pablo II]]
+|15:15
+|
+|
+|-
+|UTC
+|–
+|Los Chankas          
+|[[Estadio Héroes de San Ramón|Héroes de San Ramón]]
+|rowspan="3"|16 de noviembre
+|13:00
+|
+|
+|-
+|Deportivo Moquegua
+|–
+|Atlético Grau
+|[[Estadio 25 de Noviembre|25 de Noviembre]]
+|rowspan="2"|15:15
+|
+|
+|[[Archivo:L1-LOGO.svg|25px|link=L1 (canal de televisión)]]
+|-
+|Cusco FC
+|–
+|ADT
+|[[Estadio Inca Garcilaso de la Vega|Inca Garcilaso de la Vega]]
+|
+|
+|rowspan="3" |[[Archivo:L1MAX-LOGO.svg|50px|link=L1 Max]]
+|-
+|Alianza Atlético
+|–
+|FBC Melgar
+|[[Estadio Campeones del 36|Campeones del 36]]
+|18 de noviembre
+|15:00
+|
+|
+|-
+|Alianza Lima
+|–
+|FC Cajamarca
+|[[Estadio Alejandro Villanueva|Alejandro Villanueva]]
+|21 de noviembre
+|15:30
+|
+|
+|-
+|Sporting Cristal
+|–
+|Cienciano
+|[[Estadio San Martin de Porres|Alberto Gallardo]]
+|rowspan="2" |22 de noviembre
+|rowspan="2" |15:00
+|
+|
+|[[Archivo:L1-LOGO.svg|25px|link=L1 (canal de televisión)]]
+|-
+|Sport Huancayo
+|–
+|Universitario
+|[[Estadio Huancayo|Huancayo]]
+|
+|
+|[[Archivo:L1MAX-LOGO.svg|50px|link=L1 Max]]
+|}
+
+== Estadísticas ==

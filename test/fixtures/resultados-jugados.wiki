@@ -1,0 +1,98 @@
+{{Ficha}}
+== Resultados ==
+
+* ''La hora de cada encuentro corresponde al [[huso horario]] que rige al [[Perú]] ([[UTC-05:00|UTC-5]]).''
+{| class="wikitable collapsible collapsed" style="font-size:95%; text-align: center; width: 95%; margin:0 auto 0.5em auto;"
+! colspan="9" align="center" style="with: 100%;" |Fecha 1
+|-
+! width="170" |Local
+! width="60" |Resultado
+! width="170" |Visitante
+! width="150" |Estadio
+! width="100" |Fecha
+! width="50" |Hora
+! width="60" |Árbitro
+! width="60" |VAR
+! width="60" |TV
+|-
+|Sport Huancayo
+|1 – 2
+|bgcolor="#ddeeff"|'''Alianza Lima'''
+|[[Estadio Huancayo|Huancayo]]
+| rowspan="2" |30 de enero
+|12:00
+|Joel Alarcón
+| colspan="2" |–
+|-
+|bgcolor="#ddeeff"|'''UTC'''
+|2 – 0
+|Atlético Grau
+|[[Estadio Héroes de San Ramón|Héroes de San Ramón]]
+|15:15
+|Junior Rivera
+|Jesús Cartagena
+| rowspan="7" |[[Archivo:L1MAX-LOGO.svg|50px|link=L1 Max]]
+|-
+|Sport Boys
+|bgcolor="#ddeeff"|'''1 – 1'''
+|Los Chankas
+|[[Estadio Miguel Grau (Callao)|Miguel Grau]]
+| rowspan="3" |31 de enero
+|13:00
+|Víctor Cori
+|Fernando Legario
+|-
+|Juan Pablo II College
+|bgcolor="#ddeeff"|'''3 – 3'''
+|FC Cajamarca
+|[[Complejo Deportivo Juan Pablo II|CD Juan Pablo II]]
+|15:15
+|Daniel Ureta
+|Hibert Villegas
+|-
+|bgcolor="#ddeeff"|'''FBC Melgar'''
+|[[Clásico del Sur Peruano|2 – 0]]
+|Cienciano
+|[[Estadio Arequipa|Arequipa]]
+|18:30
+|Edwin Ordóñez
+|David Huamán
+|-
+|Deportivo Garcilaso
+|bgcolor="#ddeeff"|'''1 – 1''' 
+|Sporting Cristal
+|[[Estadio Inca Garcilaso de la Vega|Inca Garcilaso de la Vega]]
+| rowspan="3" |1 de febrero
+|13:00
+|Kevin Ortega
+|Ítalo Gonzales
+|-
+|bgcolor="#ddeeff"|'''Alianza Atlético'''
+|1 – 0 
+|Cusco FC
+|[[Estadio Campeones del 36|Campeones del 36]]
+|15:15
+|Jordi Espinoza
+|César García
+|-
+|bgcolor="#ddeeff"|'''Universitario'''
+|2 – 0 
+|ADT
+|[[Estadio Monumental (Perú)|Monumental]]
+|18:00
+|Micke Palomino
+|Pablo López
+|-
+|bgcolor="#ddeeff"|'''Comerciantes Unidos'''
+|1 – 0 
+|Deportivo Moquegua
+|[[Estadio Juan Maldonado Gamarra|Juan Maldonado Gamarra]]
+|2 de febrero
+|15:00
+|Walter Guadalupe
+|Sebastián Lozano
+|[[Archivo:L1MAX-LOGO.svg|50px|link=L1 Max]]<br>[[Archivo:NativaTV_logo2.png|50px|link=Nativa (canal de televisión)]]
+|}
+
+== Estadísticas ==
+texto

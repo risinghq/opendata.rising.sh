@@ -1,0 +1,36 @@
+== Resultados ==
+* ''La hora de cada encuentro corresponde al [[huso horario]] que rige al [[Perú]] ([[UTC-05:00|UTC-5]]).''
+{| class="wikitable collapsible collapsed"
+! colspan="9" align="center" |Fecha 3
+|-
+! width="170" |Local
+! width="60" |Resultado
+! width="170" |Visitante
+! width="150" |Estadio
+! width="100" |Fecha
+! width="50" |Hora
+! width="60" |Árbitro
+! width="60" |VAR
+! width="60" |TV
+|-
+|bgcolor="#ddeeff"|'''ADT'''
+|2 – 1
+|UTC
+|[[Estadio Unión Tarma|Unión Tarma]]
+| rowspan="2" |14 de febrero
+|13:00
+|Joel Alarcón
+|Pablo López
+|[[Archivo:L1MAX-LOGO.svg|50px|link=L1 Max]]
+|-
+|Cusco FC
+|Pospuesto
+|Los Chankas
+|[[Estadio Inca Garcilaso de la Vega|Inca Garcilaso de la Vega]]
+|15:15
+|
+|
+|
+|}
+
+== Estadísticas ==
