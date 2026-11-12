@@ -17,7 +17,7 @@ bun run preview  # the built site in the Worker, after bun run build
 
 ## Deploy
 
-A push to `master` runs `.github/workflows/deploy.yml`. It builds the site with
+A push to `main` runs `.github/workflows/deploy.yml`. It builds the site with
 Vite and uploads `dist/` as the static assets of the Cloudflare Worker
 `opendata` (`wrangler.jsonc`). The workflow reads the repository secrets
 `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
