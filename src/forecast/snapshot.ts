@@ -79,3 +79,12 @@ export function latestBefore<T>(series: string, date: string, root = ROOT): T | 
 export function latestSnapshot(season: string, root = ROOT): ForecastSnapshot | null {
   return latestJson<ForecastSnapshot>(season, root);
 }
+
+export function allSnapshots(season: string, root = ROOT): ForecastSnapshot[] {
+  const dir = forecastDir(season, root);
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".json"))
+    .sort()
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")) as ForecastSnapshot);
+}

@@ -9,6 +9,7 @@ import { keyFigures as taquillaFigures } from "./data/stats-taquilla.ts";
 import { loadCpi } from "./data/cpi.ts";
 import type { EventRecord } from "./data/types.ts";
 import { latestBefore, latestJson, latestSnapshot } from "./forecast/snapshot.ts";
+import { publishedScores } from "./forecast/scoring.ts";
 import type { McuSnapshot } from "./forecast/mcu.ts";
 import { AsistenciaPage } from "./pages/AsistenciaPage.tsx";
 import { Home } from "./pages/Home.tsx";
@@ -84,16 +85,17 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
     ),
   };
   for (const event of events) {
+    const scores = event.kind === "temporada" ? publishedScores(event) : undefined;
     files[`eventos/${event.slug}.html`] = html(eventMeta(event), stylesheet, () =>
       event.kind === "temporada" ? (
-        <TemporadaPage event={event} forecast={latestSnapshot(event.slug)} />
+        <TemporadaPage event={event} forecast={latestSnapshot(event.slug)} scores={scores} />
       ) : event.kind === "taquilla" ? (
         <TaquillaPage event={event} forecast={mcuForecast()} />
       ) : (
         <AsistenciaPage event={event} />
       ),
     );
-    files[`eventos/${event.slug}.json`] = toJson(event);
+    files[`eventos/${event.slug}.json`] = toJson(event, scores);
     files[`eventos/${event.slug}.csv`] = toCsv(event);
   }
   return files;

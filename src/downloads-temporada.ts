@@ -1,5 +1,6 @@
 import { eventNotice } from "./data/notice.ts";
 import type { TemporadaRecord } from "./data/types.ts";
+import type { PublishedScore } from "./forecast/scoring.ts";
 import { csv } from "./downloads-csv.ts";
 
 const HEADER = [
@@ -19,9 +20,9 @@ const HEADER = [
   "aviso",
 ];
 
-export function temporadaJson(event: TemporadaRecord): string {
+export function temporadaJson(event: TemporadaRecord, scores: PublishedScore[] = []): string {
   const { kind, ...rest } = event;
-  return `${JSON.stringify({ kind, aviso: eventNotice(event), ...rest }, null, 2)}\n`;
+  return `${JSON.stringify({ kind, aviso: eventNotice(event), ...rest, forecastScores: scores }, null, 2)}\n`;
 }
 
 export function temporadaCsv(event: TemporadaRecord): string {

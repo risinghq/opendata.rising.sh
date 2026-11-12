@@ -47,7 +47,26 @@ export function toInput(
   };
 }
 
-function score(preds: { p: [number, number, number]; out: number }[]): Score {
+export const outcome = (m: { homeScore: number; awayScore: number }) =>
+  m.homeScore > m.awayScore ? 0 : m.homeScore === m.awayScore ? 1 : 2;
+
+export function outcomeRates(
+  matches: { homeScore: number; awayScore: number }[],
+): [number, number, number] {
+  let home = 0;
+  let draw = 0;
+  let away = 0;
+  for (const m of matches) {
+    const out = outcome(m);
+    if (out === 0) home++;
+    else if (out === 1) draw++;
+    else away++;
+  }
+  const n = matches.length;
+  return [home / n, draw / n, away / n];
+}
+
+export function score(preds: { p: [number, number, number]; out: number }[]): Score {
   let ll = 0;
   let br = 0;
   for (const { p, out } of preds) {
@@ -86,13 +105,9 @@ export function backtest(
       teams,
       options,
     );
-    const prior: [number, number, number] = [
-      training.filter((m) => m.homeScore > m.awayScore).length / training.length,
-      training.filter((m) => m.homeScore === m.awayScore).length / training.length,
-      training.filter((m) => m.homeScore < m.awayScore).length / training.length,
-    ];
+    const prior = outcomeRates(training);
     for (const m of played) {
-      const out = m.homeScore > m.awayScore ? 0 : m.homeScore === m.awayScore ? 1 : 2;
+      const out = outcome(m);
       const p = probabilities(params, m.home, m.away, altDiff(event, m));
       model.push({ p: [p.home, p.draw, p.away], out });
       base.push({ p: prior, out });

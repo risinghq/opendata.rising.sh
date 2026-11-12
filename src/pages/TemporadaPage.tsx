@@ -6,6 +6,7 @@ import { GoalTimingChart, GoalTimingTable } from "../components/GoalTimingChart.
 import { RoundTable } from "../components/RoundsList.tsx";
 import { StandingsTable } from "../components/StandingsTable.tsx";
 import {
+  formatDate,
   formatDateLima,
   formatDateRange,
   formatDecimal,
@@ -32,12 +33,14 @@ import {
 import { eventStatus } from "../data/stats.ts";
 import type { TemporadaRecord } from "../data/types.ts";
 import { goalTiming } from "../forecast/events.ts";
+import type { PublishedScore } from "../forecast/scoring.ts";
 import type { ForecastSnapshot } from "../forecast/snapshot.ts";
 import { SITE_URL } from "../site.ts";
 
 export function TemporadaPage(props: {
   event: TemporadaRecord;
   forecast?: ForecastSnapshot | null;
+  scores?: PublishedScore[];
 }) {
   const event = props.event;
   const figures = keyFigures(event);
@@ -48,6 +51,9 @@ export function TemporadaPage(props: {
   const forecast = props.forecast ?? null;
   const timing = hasMatchEvents(event) ? goalTiming(event) : null;
   const backtest = forecast?.backtest;
+  const scores = props.scores ?? [];
+  const scored = scores.filter((s) => s.model !== null);
+  const pending = scores.filter((s) => s.model === null);
   const share = (count: number) =>
     figures.held === 0 ? "0 %" : formatPercent(count / figures.held);
   const url = `${SITE_URL}/eventos/${event.slug}`;
@@ -225,6 +231,81 @@ export function TemporadaPage(props: {
             </p>
           </section>
         )}
+      </Show>
+
+      <Show when={scores.length > 0}>
+        <section class="section" aria-labelledby="publicados">
+          <h2 id="publicados">Pronósticos publicados</h2>
+          <p>
+            Cada pronóstico publicado se guarda con su fecha y no se vuelve a tocar. Aquí se anota
+            con los partidos que se jugaron después de esa fecha: sus probabilidades y las
+            frecuencias base que llevaba. Menos error es mejor.
+          </p>
+          <Show when={scored.length > 0}>
+            <div class="table-scroll" tabindex="0">
+              <table class="backtest-table">
+                <caption class="visually-hidden">
+                  Puntaje de cada pronóstico publicado en los partidos jugados después de su fecha
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col" rowspan="2">
+                      Pronóstico
+                    </th>
+                    <th scope="col" rowspan="2" class="num">
+                      Partidos
+                    </th>
+                    <th scope="colgroup" colspan="2">
+                      El modelo
+                    </th>
+                    <th scope="colgroup" colspan="2">
+                      Frecuencias base
+                    </th>
+                  </tr>
+                  <tr>
+                    <th scope="col" class="num">
+                      Error logarítmico
+                    </th>
+                    <th scope="col" class="num">
+                      Error de Brier
+                    </th>
+                    <th scope="col" class="num">
+                      Error logarítmico
+                    </th>
+                    <th scope="col" class="num">
+                      Error de Brier
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <For each={scored}>
+                    {(row) => (
+                      <tr>
+                        <th scope="row" class="nowrap">
+                          {formatDate(row.date)}
+                        </th>
+                        <td class="num">{row.matches}</td>
+                        <td class="num strong">{formatDecimal(row.model!.logLoss)}</td>
+                        <td class="num strong">{formatDecimal(row.model!.brier)}</td>
+                        <td class="num">
+                          {row.baseRates ? formatDecimal(row.baseRates.logLoss) : ""}
+                        </td>
+                        <td class="num">
+                          {row.baseRates ? formatDecimal(row.baseRates.brier) : ""}
+                        </td>
+                      </tr>
+                    )}
+                  </For>
+                </tbody>
+              </table>
+            </div>
+          </Show>
+          <For each={pending}>
+            {(row) => (
+              <p>{formatDate(row.date)}: Todavía no se jugó ningún partido de este pronóstico.</p>
+            )}
+          </For>
+        </section>
       </Show>
 
       <Show when={timing}>
