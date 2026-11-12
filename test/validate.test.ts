@@ -204,6 +204,97 @@ describe("validateEvent, temporada", () => {
   });
 });
 
+describe("validateEvent, taquilla", () => {
+  const wiki = {
+    outlet: "Wikipedia en inglés",
+    url: "https://en.wikipedia.org/wiki/List?oldid=10",
+    revision: 10,
+    revisionDate: "2026-02-10",
+    license: "CC BY-SA 4.0",
+  };
+  const figure = (amount: number) => ({ amount, source: wiki });
+  const released = {
+    title: "Película",
+    originalTitle: "Film",
+    phase: 1,
+    release: "2020-05-01",
+    status: "released",
+    opening: figure(100),
+    usCanada: figure(300),
+    worldwide: figure(600),
+  };
+  const planned = {
+    title: "Otra",
+    originalTitle: "Other",
+    phase: 2,
+    release: "2027-01-01",
+    status: "unreleased",
+  };
+  const series = {
+    kind: "taquilla",
+    title: "Saga",
+    summary: "Resumen.",
+    start: "2020-05-01",
+    end: "2027-01-01",
+    places: ["Estados Unidos", "Mundial"],
+    updated: "2026-02-10T12:00-05:00",
+    method: "Método.",
+    source: wiki,
+    films: [released, planned],
+  };
+  const withFilms = (...films: object[]) => ({ ...series, films });
+
+  test("accepts a released film and an unreleased one", () => {
+    expect(validateEvent(series)).toEqual([]);
+  });
+
+  const failures: [string, unknown, string][] = [
+    [
+      "worldwide below domestic",
+      withFilms({ ...released, worldwide: figure(200) }),
+      "at least the US and Canada gross",
+    ],
+    [
+      "opening above domestic",
+      withFilms({ ...released, opening: figure(400) }),
+      "must not exceed the US and Canada gross",
+    ],
+    [
+      "a released film missing a figure",
+      withFilms({ ...released, opening: undefined }),
+      "amount and source",
+    ],
+    [
+      "an unreleased film with a figure",
+      withFilms({ ...planned, worldwide: figure(1) }),
+      "no grosses",
+    ],
+    ["a figure without a source", withFilms({ ...released, opening: { amount: 5 } }), "source"],
+    ["a negative figure", withFilms({ ...released, opening: figure(-1) }), "non-negative"],
+    [
+      "two films on one date",
+      withFilms(released, { ...planned, release: released.release }),
+      "in order of release",
+    ],
+    [
+      "a source link that is not permanent",
+      { ...series, source: { ...wiki, url: "https://en.wikipedia.org/wiki/X" } },
+      "oldid",
+    ],
+    [
+      "a film out of release order",
+      withFilms(released, { ...planned, release: "2019-01-01", title: "Vieja" }),
+      "in order of release",
+    ],
+  ];
+
+  test.each(failures)("rejects %s", (_name, data, message) => {
+    const errors = validateEvent(data);
+    expect(errors.length).toBeGreaterThan(0);
+    expect(errors.join("\n")).toContain(message);
+  });
+});
+
 describe("validateSlug", () => {
   test.each([
     ["visita-leon-xiv-2026", true],

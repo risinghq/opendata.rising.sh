@@ -57,6 +57,20 @@ export const formatChance = (value: number) =>
 const compact = new Intl.NumberFormat(LOCALE, { notation: "compact", maximumFractionDigits: 1 });
 export const formatCompact = (value: number) => compact.format(value);
 
+const money = new Intl.NumberFormat(LOCALE, {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+const moneyCompact = new Intl.NumberFormat(LOCALE, {
+  style: "currency",
+  currency: "USD",
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
+export const formatMoney = (value: number) => money.format(value);
+export const formatMoneyCompact = (value: number) => moneyCompact.format(value);
+
 export const isLimaOffset = (instant: string) => instant.slice(-6) === "-05:00";
 
 const limaDate = new Intl.DateTimeFormat(LOCALE, {

@@ -1,5 +1,5 @@
 import { formatDate } from "./format.ts";
-import type { TemporadaData, Tournament } from "./types.ts";
+import type { TaquillaData, TemporadaData, Tournament } from "./types.ts";
 
 export const MATCH_DATA_NOTICE = "Datos de partidos: Football data by 5DollarFootballAPI";
 export const MATCH_DATA_URL = "https://5dollarfootballapi.com";
@@ -7,6 +7,11 @@ export const MATCH_DATA_URL = "https://5dollarfootballapi.com";
 export function tournamentNotice(tournament: Tournament): string {
   const { license, revisionDate } = tournament.source;
   return `Datos de Wikipedia en español (${license}), revisión del ${formatDate(revisionDate)}`;
+}
+
+export function taquillaNotice(event: TaquillaData): string {
+  const { license, revisionDate } = event.source;
+  return `Datos de Wikipedia en inglés (${license}), revisión del ${formatDate(revisionDate)}`;
 }
 
 export function hasMatchEvents(event: TemporadaData): boolean {

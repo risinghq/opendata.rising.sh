@@ -139,8 +139,47 @@ export interface TemporadaData extends EventBase {
   matches: Match[];
 }
 
-export type EventData = AsistenciaData | TemporadaData;
+export interface Figure {
+  amount: number;
+  source: Source;
+}
+
+export interface Budget {
+  low: number;
+  high?: number;
+  source: Source;
+}
+
+interface FilmBase {
+  title: string;
+  originalTitle: string;
+  phase: number;
+  release: string;
+  budget?: Budget;
+}
+
+export interface ReleasedFilm extends FilmBase {
+  status: "released";
+  opening: Figure;
+  usCanada: Figure;
+  worldwide: Figure;
+}
+
+export interface UnreleasedFilm extends FilmBase {
+  status: "unreleased";
+}
+
+export type Film = ReleasedFilm | UnreleasedFilm;
+
+export interface TaquillaData extends EventBase {
+  kind: "taquilla";
+  source: WikiSource;
+  films: Film[];
+}
+
+export type EventData = AsistenciaData | TemporadaData | TaquillaData;
 
 export type AsistenciaRecord = AsistenciaData & { slug: string };
 export type TemporadaRecord = TemporadaData & { slug: string };
-export type EventRecord = AsistenciaRecord | TemporadaRecord;
+export type TaquillaRecord = TaquillaData & { slug: string };
+export type EventRecord = AsistenciaRecord | TemporadaRecord | TaquillaRecord;

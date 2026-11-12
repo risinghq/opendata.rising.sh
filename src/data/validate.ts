@@ -1,6 +1,7 @@
 import type { EventData } from "./types.ts";
 import { validateAsistencia } from "./validate-asistencia.ts";
 import { createReport, isObj, validateBase } from "./validate-common.ts";
+import { validateTaquilla } from "./validate-taquilla.ts";
 import { validateTemporada } from "./validate-temporada.ts";
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -17,8 +18,10 @@ export function validateEvent(data: unknown): string[] {
     validateAsistencia(data, report);
   } else if (data.kind === "temporada") {
     validateTemporada(data, report);
+  } else if (data.kind === "taquilla") {
+    validateTaquilla(data, report);
   } else {
-    report.fail("kind", 'must be "asistencia" or "temporada"');
+    report.fail("kind", 'must be "asistencia", "temporada" or "taquilla"');
   }
   return report.errors;
 }

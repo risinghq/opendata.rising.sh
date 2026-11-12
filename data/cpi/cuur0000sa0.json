@@ -1,0 +1,29 @@
+{
+  "series": "CUUR0000SA0",
+  "name": "Índice de precios al consumidor de Estados Unidos, todos los artículos, promedio anual",
+  "source": {
+    "outlet": "U.S. Bureau of Labor Statistics",
+    "url": "https://www.bls.gov/cpi/data.htm"
+  },
+  "base": 2025,
+  "values": {
+    "2008": 215.303,
+    "2009": 214.537,
+    "2010": 218.056,
+    "2011": 224.939,
+    "2012": 229.594,
+    "2013": 232.957,
+    "2014": 236.736,
+    "2015": 237.017,
+    "2016": 240.007,
+    "2017": 245.12,
+    "2018": 251.107,
+    "2019": 255.657,
+    "2020": 258.811,
+    "2021": 270.97,
+    "2022": 292.655,
+    "2023": 304.702,
+    "2024": 313.689,
+    "2025": 321.943
+  }
+}

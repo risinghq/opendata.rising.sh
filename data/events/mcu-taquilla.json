@@ -1,0 +1,1372 @@
+{
+  "kind": "taquilla",
+  "title": "Taquilla del Universo cinematográfico de Marvel",
+  "summary": "Recaudación de las películas del Universo cinematográfico de Marvel en dólares de Estados Unidos, nominales y ajustadas por inflación, con un pronóstico para Avengers: Doomsday.",
+  "places": ["Estados Unidos", "Canadá", "Mundial"],
+  "method": "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se publica como una foto fechada antes del estreno y se compara con las cifras reales después.",
+  "start": "2008-05-02",
+  "end": "2027-12-17",
+  "updated": "2026-11-09T10:34-05:00",
+  "source": {
+    "outlet": "Wikipedia en inglés",
+    "url": "https://en.wikipedia.org/wiki/List_of_Marvel_Cinematic_Universe_films?oldid=1384683947",
+    "revision": 1384683947,
+    "revisionDate": "2026-11-09",
+    "license": "CC BY-SA 4.0"
+  },
+  "films": [
+    {
+      "title": "Iron Man",
+      "originalTitle": "Iron Man",
+      "phase": 1,
+      "release": "2008-05-02",
+      "status": "released",
+      "budget": {
+        "low": 140000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "opening": {
+        "amount": 98600000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Iron_Man_(2008_film)?oldid=1384692269"
+        }
+      },
+      "usCanada": {
+        "amount": 319034126,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "worldwide": {
+        "amount": 585796247,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      }
+    },
+    {
+      "title": "The Incredible Hulk",
+      "originalTitle": "The Incredible Hulk",
+      "phase": 1,
+      "release": "2008-06-13",
+      "status": "released",
+      "budget": {
+        "low": 137500000,
+        "high": 150000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "opening": {
+        "amount": 55400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/The_Incredible_Hulk_(film)?oldid=1385030756"
+        }
+      },
+      "usCanada": {
+        "amount": 134806913,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "worldwide": {
+        "amount": 264770996,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      }
+    },
+    {
+      "title": "Iron Man 2",
+      "originalTitle": "Iron Man 2",
+      "phase": 1,
+      "release": "2010-05-07",
+      "status": "released",
+      "budget": {
+        "low": 170000000,
+        "high": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "opening": {
+        "amount": 128000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Iron_Man_2?oldid=1383809070"
+        }
+      },
+      "usCanada": {
+        "amount": 312433331,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "worldwide": {
+        "amount": 623933331,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      }
+    },
+    {
+      "title": "Thor",
+      "originalTitle": "Thor",
+      "phase": 1,
+      "release": "2011-05-06",
+      "status": "released",
+      "budget": {
+        "low": 150000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "opening": {
+        "amount": 65700000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Thor_(film)?oldid=1382496483"
+        }
+      },
+      "usCanada": {
+        "amount": 181030624,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "worldwide": {
+        "amount": 449326618,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      }
+    },
+    {
+      "title": "Capitán América: el primer vengador",
+      "originalTitle": "Captain America: The First Avenger",
+      "phase": 1,
+      "release": "2011-07-22",
+      "status": "released",
+      "budget": {
+        "low": 140000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "opening": {
+        "amount": 65100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Captain_America%3A_The_First_Avenger?oldid=1384260621"
+        }
+      },
+      "usCanada": {
+        "amount": 176654505,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "worldwide": {
+        "amount": 370569774,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      }
+    },
+    {
+      "title": "The Avengers",
+      "originalTitle": "The Avengers",
+      "phase": 1,
+      "release": "2012-05-04",
+      "status": "released",
+      "budget": {
+        "low": 220000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "opening": {
+        "amount": 207438708,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/The_Avengers_(2012_film)?oldid=1383883624"
+        }
+      },
+      "usCanada": {
+        "amount": 623357910,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      },
+      "worldwide": {
+        "amount": 1520538536,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+        }
+      }
+    },
+    {
+      "title": "Iron Man 3",
+      "originalTitle": "Iron Man 3",
+      "phase": 2,
+      "release": "2013-05-03",
+      "status": "released",
+      "budget": {
+        "low": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "opening": {
+        "amount": 174100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Iron_Man_3?oldid=1385080126"
+        }
+      },
+      "usCanada": {
+        "amount": 409013994,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "worldwide": {
+        "amount": 1215577205,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      }
+    },
+    {
+      "title": "Thor: The Dark World",
+      "originalTitle": "Thor: The Dark World",
+      "phase": 2,
+      "release": "2013-11-08",
+      "status": "released",
+      "budget": {
+        "low": 150000000,
+        "high": 170000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "opening": {
+        "amount": 85700000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Thor%3A_The_Dark_World?oldid=1380947520"
+        }
+      },
+      "usCanada": {
+        "amount": 206362140,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "worldwide": {
+        "amount": 644783140,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      }
+    },
+    {
+      "title": "Captain America: The Winter Soldier",
+      "originalTitle": "Captain America: The Winter Soldier",
+      "phase": 2,
+      "release": "2014-04-04",
+      "status": "released",
+      "budget": {
+        "low": 170000000,
+        "high": 177000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "opening": {
+        "amount": 95000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Captain_America%3A_The_Winter_Soldier?oldid=1383796604"
+        }
+      },
+      "usCanada": {
+        "amount": 259766572,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "worldwide": {
+        "amount": 714421503,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      }
+    },
+    {
+      "title": "Guardianes de la Galaxia",
+      "originalTitle": "Guardians of the Galaxy",
+      "phase": 2,
+      "release": "2014-08-01",
+      "status": "released",
+      "budget": {
+        "low": 170000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "opening": {
+        "amount": 94300000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_(film)?oldid=1385141315"
+        }
+      },
+      "usCanada": {
+        "amount": 333718600,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "worldwide": {
+        "amount": 773350147,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      }
+    },
+    {
+      "title": "Avengers: Age of Ultron",
+      "originalTitle": "Avengers: Age of Ultron",
+      "phase": 2,
+      "release": "2015-05-01",
+      "status": "released",
+      "budget": {
+        "low": 250000000,
+        "high": 444000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "opening": {
+        "amount": 191300000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Avengers%3A_Age_of_Ultron?oldid=1381695484"
+        }
+      },
+      "usCanada": {
+        "amount": 459005868,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "worldwide": {
+        "amount": 1405018048,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      }
+    },
+    {
+      "title": "Ant-Man",
+      "originalTitle": "Ant-Man",
+      "phase": 2,
+      "release": "2015-07-17",
+      "status": "released",
+      "budget": {
+        "low": 130000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "opening": {
+        "amount": 57200000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Ant-Man_(film)?oldid=1384949065"
+        }
+      },
+      "usCanada": {
+        "amount": 180202163,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      },
+      "worldwide": {
+        "amount": 519311965,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+        }
+      }
+    },
+    {
+      "title": "Captain America: Civil War",
+      "originalTitle": "Captain America: Civil War",
+      "phase": 3,
+      "release": "2016-05-06",
+      "status": "released",
+      "budget": {
+        "low": 250000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 179100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Captain_America%3A_Civil_War?oldid=1384183007"
+        }
+      },
+      "usCanada": {
+        "amount": 408084349,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 1155046416,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Doctor Strange",
+      "originalTitle": "Doctor Strange",
+      "phase": 3,
+      "release": "2016-11-04",
+      "status": "released",
+      "budget": {
+        "low": 165000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 85100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Doctor_Strange_(2016_film)?oldid=1381743686"
+        }
+      },
+      "usCanada": {
+        "amount": 232641920,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 677796076,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Guardians of the Galaxy Vol. 2",
+      "originalTitle": "Guardians of the Galaxy Vol. 2",
+      "phase": 3,
+      "release": "2017-05-05",
+      "status": "released",
+      "budget": {
+        "low": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 146500000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_Vol._2?oldid=1381318811"
+        }
+      },
+      "usCanada": {
+        "amount": 389813101,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 863756051,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Spider-Man: Homecoming",
+      "originalTitle": "Spider-Man: Homecoming",
+      "phase": 3,
+      "release": "2017-07-07",
+      "status": "released",
+      "budget": {
+        "low": 175000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 117000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_Homecoming?oldid=1384921438"
+        }
+      },
+      "usCanada": {
+        "amount": 334201140,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 880166924,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Thor: Ragnarok",
+      "originalTitle": "Thor: Ragnarok",
+      "phase": 3,
+      "release": "2017-11-03",
+      "status": "released",
+      "budget": {
+        "low": 180000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 122700000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Thor%3A_Ragnarok?oldid=1385117560"
+        }
+      },
+      "usCanada": {
+        "amount": 315058289,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 855301806,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Black Panther",
+      "originalTitle": "Black Panther",
+      "phase": 3,
+      "release": "2018-02-16",
+      "status": "released",
+      "budget": {
+        "low": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 202000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Black_Panther_(film)?oldid=1383750341"
+        }
+      },
+      "usCanada": {
+        "amount": 700426566,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 1374959729,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Avengers: Infinity War",
+      "originalTitle": "Avengers: Infinity War",
+      "phase": 3,
+      "release": "2018-04-27",
+      "status": "released",
+      "budget": {
+        "low": 325000000,
+        "high": 400000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 258200000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Avengers%3A_Infinity_War?oldid=1383796592"
+        }
+      },
+      "usCanada": {
+        "amount": 678815482,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 2052415039,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Ant-Man and the Wasp",
+      "originalTitle": "Ant-Man and the Wasp",
+      "phase": 3,
+      "release": "2018-07-06",
+      "status": "released",
+      "budget": {
+        "low": 162000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 75800000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Ant-Man_and_the_Wasp?oldid=1382264992"
+        }
+      },
+      "usCanada": {
+        "amount": 216648740,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 622674139,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Captain Marvel",
+      "originalTitle": "Captain Marvel",
+      "phase": 3,
+      "release": "2019-03-08",
+      "status": "released",
+      "budget": {
+        "low": 150000000,
+        "high": 175000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 153400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Captain_Marvel_(film)?oldid=1380254633"
+        }
+      },
+      "usCanada": {
+        "amount": 426829839,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 1131416446,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Avengers: Endgame",
+      "originalTitle": "Avengers: Endgame",
+      "phase": 3,
+      "release": "2019-04-26",
+      "status": "released",
+      "budget": {
+        "low": 356000000,
+        "high": 400000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 357100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Avengers%3A_Endgame?oldid=1383904568"
+        }
+      },
+      "usCanada": {
+        "amount": 898462695,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 2942177764,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Spider-Man: Far From Home",
+      "originalTitle": "Spider-Man: Far From Home",
+      "phase": 3,
+      "release": "2019-07-02",
+      "status": "released",
+      "budget": {
+        "low": 160000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "opening": {
+        "amount": 92600000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_Far_From_Home?oldid=1384925555"
+        }
+      },
+      "usCanada": {
+        "amount": 391283774,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      },
+      "worldwide": {
+        "amount": 1138121790,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+        }
+      }
+    },
+    {
+      "title": "Black Widow",
+      "originalTitle": "Black Widow",
+      "phase": 4,
+      "release": "2021-07-09",
+      "status": "released",
+      "budget": {
+        "low": 289000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 80400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Black_Widow_(2021_film)?oldid=1382193275"
+        }
+      },
+      "usCanada": {
+        "amount": 183651655,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 379751655,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Shang-Chi and the Legend of the Ten Rings",
+      "originalTitle": "Shang-Chi and the Legend of the Ten Rings",
+      "phase": 4,
+      "release": "2021-09-03",
+      "status": "released",
+      "budget": {
+        "low": 150000000,
+        "high": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 75500000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Shang-Chi_and_the_Legend_of_the_Ten_Rings?oldid=1382322340"
+        }
+      },
+      "usCanada": {
+        "amount": 224543292,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 432243292,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Eternals",
+      "originalTitle": "Eternals",
+      "phase": 4,
+      "release": "2021-11-05",
+      "status": "released",
+      "budget": {
+        "low": 236200000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 71300000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Eternals_(film)?oldid=1384912584"
+        }
+      },
+      "usCanada": {
+        "amount": 164870234,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 402064899,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Spider-Man: No Way Home",
+      "originalTitle": "Spider-Man: No Way Home",
+      "phase": 4,
+      "release": "2021-12-17",
+      "status": "released",
+      "budget": {
+        "low": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 260000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_No_Way_Home?oldid=1384081284"
+        }
+      },
+      "usCanada": {
+        "amount": 814866759,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 1928040905,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Doctor Strange in the Multiverse of Madness",
+      "originalTitle": "Doctor Strange in the Multiverse of Madness",
+      "phase": 4,
+      "release": "2022-05-06",
+      "status": "released",
+      "budget": {
+        "low": 351000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 187400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Doctor_Strange_in_the_Multiverse_of_Madness?oldid=1385077630"
+        }
+      },
+      "usCanada": {
+        "amount": 411331607,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 955775804,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Thor: Love and Thunder",
+      "originalTitle": "Thor: Love and Thunder",
+      "phase": 4,
+      "release": "2022-07-08",
+      "status": "released",
+      "budget": {
+        "low": 250000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 144200000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Thor%3A_Love_and_Thunder?oldid=1373636966"
+        }
+      },
+      "usCanada": {
+        "amount": 343256830,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 760928081,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Black Panther: Wakanda Forever",
+      "originalTitle": "Black Panther: Wakanda Forever",
+      "phase": 4,
+      "release": "2022-11-11",
+      "status": "released",
+      "budget": {
+        "low": 250000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "opening": {
+        "amount": 181300000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Black_Panther%3A_Wakanda_Forever?oldid=1385094656"
+        }
+      },
+      "usCanada": {
+        "amount": 453829060,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      },
+      "worldwide": {
+        "amount": 859208836,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+        }
+      }
+    },
+    {
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "originalTitle": "Ant-Man and the Wasp: Quantumania",
+      "phase": 5,
+      "release": "2023-02-17",
+      "status": "released",
+      "budget": {
+        "low": 388400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "opening": {
+        "amount": 106100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Ant-Man_and_the_Wasp%3A_Quantumania?oldid=1374088712"
+        }
+      },
+      "usCanada": {
+        "amount": 214504909,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "worldwide": {
+        "amount": 476071180,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      }
+    },
+    {
+      "title": "Guardians of the Galaxy Vol. 3",
+      "originalTitle": "Guardians of the Galaxy Vol. 3",
+      "phase": 5,
+      "release": "2023-05-05",
+      "status": "released",
+      "budget": {
+        "low": 250000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "opening": {
+        "amount": 118400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_Vol._3?oldid=1383445533"
+        }
+      },
+      "usCanada": {
+        "amount": 358995815,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "worldwide": {
+        "amount": 845555777,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      }
+    },
+    {
+      "title": "The Marvels",
+      "originalTitle": "The Marvels",
+      "phase": 5,
+      "release": "2023-11-10",
+      "status": "released",
+      "budget": {
+        "low": 375000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "opening": {
+        "amount": 46100000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/The_Marvels?oldid=1380991137"
+        }
+      },
+      "usCanada": {
+        "amount": 84500223,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "worldwide": {
+        "amount": 206136825,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      }
+    },
+    {
+      "title": "Deadpool & Wolverine",
+      "originalTitle": "Deadpool & Wolverine",
+      "phase": 5,
+      "release": "2024-07-26",
+      "status": "released",
+      "budget": {
+        "low": 429000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "opening": {
+        "amount": 211400000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Deadpool_%26_Wolverine?oldid=1384412844"
+        }
+      },
+      "usCanada": {
+        "amount": 636745858,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "worldwide": {
+        "amount": 1338073645,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      }
+    },
+    {
+      "title": "Captain America: Brave New World",
+      "originalTitle": "Captain America: Brave New World",
+      "phase": 5,
+      "release": "2025-02-14",
+      "status": "released",
+      "budget": {
+        "low": 180000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "opening": {
+        "amount": 88800000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Captain_America%3A_Brave_New_World?oldid=1383638387"
+        }
+      },
+      "usCanada": {
+        "amount": 200500001,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "worldwide": {
+        "amount": 415101577,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      }
+    },
+    {
+      "title": "Thunderbolts*",
+      "originalTitle": "Thunderbolts*",
+      "phase": 5,
+      "release": "2025-05-02",
+      "status": "released",
+      "budget": {
+        "low": 180000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "opening": {
+        "amount": 74300000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Thunderbolts*?oldid=1376997159"
+        }
+      },
+      "usCanada": {
+        "amount": 190274328,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      },
+      "worldwide": {
+        "amount": 382436917,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+        }
+      }
+    },
+    {
+      "title": "The Fantastic Four: First Steps",
+      "originalTitle": "The Fantastic Four: First Steps",
+      "phase": 6,
+      "release": "2025-07-25",
+      "status": "released",
+      "budget": {
+        "low": 200000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+        }
+      },
+      "opening": {
+        "amount": 117600000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/The_Fantastic_Four%3A_First_Steps?oldid=1384710815"
+        }
+      },
+      "usCanada": {
+        "amount": 274286610,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+        }
+      },
+      "worldwide": {
+        "amount": 521858728,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+        }
+      }
+    },
+    {
+      "title": "Spider-Man: Brand New Day",
+      "originalTitle": "Spider-Man: Brand New Day",
+      "phase": 6,
+      "release": "2026-07-31",
+      "status": "released",
+      "budget": {
+        "low": 225000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+        }
+      },
+      "opening": {
+        "amount": 360000000,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_Brand_New_Day?oldid=1385118219"
+        }
+      },
+      "usCanada": {
+        "amount": 959006311,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+        }
+      },
+      "worldwide": {
+        "amount": 2523147515,
+        "source": {
+          "outlet": "Wikipedia en inglés",
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+        }
+      }
+    },
+    {
+      "title": "Avengers: Doomsday",
+      "originalTitle": "Avengers: Doomsday",
+      "phase": 6,
+      "release": "2026-12-18",
+      "status": "unreleased"
+    },
+    {
+      "title": "Avengers: Secret Wars",
+      "originalTitle": "Avengers: Secret Wars",
+      "phase": 6,
+      "release": "2027-12-17",
+      "status": "unreleased"
+    }
+  ]
+}

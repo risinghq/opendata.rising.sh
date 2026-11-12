@@ -1,0 +1,68 @@
+==Box office performance==
+<section begin=BoxOffice />
+{| class="wikitable plainrowheaders" style="text-align:center;"
+! scope="col" | Film
+! scope="col" | U.S. release date
+! scope="col" | U.S. and Canada
+! scope="col" | Other territories
+! scope="col" | Worldwide
+! scope="col" colspan="2" | All-time ranking
+! scope="col" | Budget
+! scope="col" class="unsortable" | {{abbr|Ref.|Reference}}
+|-
+! scope="col" colspan="2" |
+! scope="col" colspan="2" | U.S. and Canada
+! scope="col" | Worldwide
+! scope="col" colspan="3" |
+|-
+! scope="row" | ''[[First Film (film)#Box office|First Film]]''
+| {{#invoke:dts|main|2020|5|1}}
+| $274,286,610
+| $247,572,118
+| $521,858,728{{efn|This figure includes a later re-release.<ref name="FF" />}}
+| 145
+| 265
+| $200&nbsp;million
+| <ref name="FirstFilm" />
+|-
+! scope="row" | ''[[Second Film#Box office|Second Film]]''
+| {{#invoke:dts|main|2021|7|9}}
+| $183,651,655
+| $196,100,000
+| $379,751,655
+| 210
+| 300
+| $160–200&nbsp;million
+| <ref name="SecondFilm" />
+|-
+! scope="row" colspan="2" | '''Total'''
+| ${{val|fmt=commas|{{#expr:274286610+183651655}}}}
+| ${{val|fmt=commas|{{#expr:247572118+196100000}}}}
+| ${{val|fmt=commas|{{#expr:521858728+379751655}}}}
+| colspan="2" |
+| ${{val|fmt=commas|{{#expr:200+160}}}}–{{val|fmt=commas|{{#expr:200+200}}}}&nbsp;million
+|
+|}<section end=BoxOffice />
+== Films ==
+{{Episode table
+| title1       = ''[[First Film (film)|First Film]]''
+| date1        = {{Start date|2020|5|1}}
+| director1    = [[Director One]]
+| writer1      = [[Writer One]]
+| producer1    = [[Kevin Feige]]
+| status1      = Released
+
+| title2       = ''[[Second Film]]''
+| date2        = {{Start date|2021|7|9}}
+| director2    = [[Director Two]]
+| writer2      = [[Writer Two]]
+| producer2    = Kevin Feige
+| status2      = Released
+
+| title3       = ''[[Future Film]]''
+| date3        = {{Start date|2027|12|17}}<ref name="FutureDate" />
+| director3    = [[Director Three]]
+| writer3      = [[Writer Three]]
+| producer3    = Kevin Feige
+| status3      = In production
+}}
