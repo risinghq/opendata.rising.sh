@@ -1,0 +1,28 @@
+{
+  "name": "opendata.rising.sh",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "wrangler dev",
+    "lint": "oxlint && oxfmt --check .",
+    "fix": "oxfmt .",
+    "typecheck": "tsc --noEmit",
+    "check": "bun run lint && bun run typecheck",
+    "deploy": "bun run build && wrangler deploy"
+  },
+  "dependencies": {
+    "@solidjs/router": "^2.0.0-next.44",
+    "@solidjs/web": "^2.0.0-rc.21",
+    "solid-js": "^2.0.0-rc.21"
+  },
+  "devDependencies": {
+    "@solidjs/vite-plugin": "^3.0.0-next.57",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "wrangler": "^4.161.0"
+  }
+}
