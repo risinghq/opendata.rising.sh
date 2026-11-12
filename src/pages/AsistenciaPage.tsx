@@ -13,20 +13,20 @@ import {
 import {
   actDate,
   dailyTotals,
-  eventStatus,
   heldActs,
   largestAct,
   plannedActs,
   sumRange,
-} from "../data/stats.ts";
-import type { EventRecord } from "../data/types.ts";
+} from "../data/stats-asistencia.ts";
+import { eventStatus } from "../data/stats.ts";
+import type { AsistenciaRecord, EventRecord } from "../data/types.ts";
 import { SITE_URL } from "../site.ts";
 
 export function eventUrl(event: EventRecord): string {
   return `${SITE_URL}/eventos/${event.slug}`;
 }
 
-export function EventPage(props: { event: EventRecord }) {
+export function AsistenciaPage(props: { event: AsistenciaRecord }) {
   const event = props.event;
   const held = heldActs(event);
   const planned = plannedActs(event);

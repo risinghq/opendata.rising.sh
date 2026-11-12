@@ -44,6 +44,14 @@ export function formatLocalTime(instant: string): string {
   }).format(new Date(instant));
 }
 
+const decimal = new Intl.NumberFormat(LOCALE, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+const percent = new Intl.NumberFormat(LOCALE, { style: "percent", maximumFractionDigits: 0 });
+export const formatDecimal = (value: number) => decimal.format(value);
+export const formatPercent = (value: number) => percent.format(value);
+
 const compact = new Intl.NumberFormat(LOCALE, { notation: "compact", maximumFractionDigits: 1 });
 export const formatCompact = (value: number) => compact.format(value);
 

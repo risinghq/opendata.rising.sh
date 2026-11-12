@@ -8,7 +8,7 @@ import {
   formatWeekday,
   isLimaOffset,
 } from "../data/format.ts";
-import { actDate } from "../data/stats.ts";
+import { actDate } from "../data/stats-asistencia.ts";
 import type { Act, Source } from "../data/types.ts";
 
 function Sources(props: { sources: Source[] }) {

@@ -1,67 +1,34 @@
-import type { EventData, HeldAct, PlannedAct } from "./types.ts";
-
-export interface Range {
-  low: number;
-  central: number;
-  high: number;
-}
-
-export interface Day {
-  date: string;
-  day: Range;
-  total: Range;
-  held: boolean;
-}
-
-export const actDate = (act: { start: string }) => act.start.slice(0, 10);
-
-export function heldActs(event: EventData): HeldAct[] {
-  return event.acts.filter((act): act is HeldAct => act.status === "held");
-}
-
-export function plannedActs(event: EventData): PlannedAct[] {
-  return event.acts.filter((act): act is PlannedAct => act.status === "planned");
-}
-
-export function sumRange(acts: Range[]): Range {
-  return acts.reduce(
-    (sum, act) => ({
-      low: sum.low + act.low,
-      central: sum.central + act.central,
-      high: sum.high + act.high,
-    }),
-    { low: 0, central: 0, high: 0 },
-  );
-}
+import { formatDecimal, formatNumber } from "./format.ts";
+import { heldActs, plannedActs, sumRange } from "./stats-asistencia.ts";
+import { heldMatches, keyFigures } from "./stats-temporada.ts";
+import type { EventData } from "./types.ts";
 
 export function eventStatus(event: EventData): "en curso" | "finalizado" {
-  return plannedActs(event).length > 0 ? "en curso" : "finalizado";
+  if (event.kind === "asistencia") return plannedActs(event).length > 0 ? "en curso" : "finalizado";
+  return heldMatches(event).length < event.matches.length ? "en curso" : "finalizado";
 }
 
-export function largestAct(event: EventData): HeldAct | undefined {
-  return heldActs(event).reduce<HeldAct | undefined>(
-    (best, act) => (best === undefined || act.central > best.central ? act : best),
-    undefined,
-  );
+export interface EventSummary {
+  kindLabel: string;
+  progress: string;
+  figureLabel: string;
+  figure: string;
 }
 
-function addDays(date: string, days: number): string {
-  const moment = new Date(`${date}T00:00:00Z`);
-  moment.setUTCDate(moment.getUTCDate() + days);
-  return moment.toISOString().slice(0, 10);
-}
-
-export function dailyTotals(event: EventData): Day[] {
-  const held = heldActs(event);
-  const last = held.map(actDate).sort().at(-1);
-  const days: Day[] = [];
-  let running: Range = { low: 0, central: 0, high: 0 };
-  if (last === undefined) return days;
-  for (let date = event.start; date <= last; date = addDays(date, 1)) {
-    const today = held.filter((act) => actDate(act) === date);
-    const day = sumRange(today);
-    running = sumRange([running, day]);
-    days.push({ date, day, total: running, held: today.length > 0 });
+export function summarize(event: EventData): EventSummary {
+  if (event.kind === "asistencia") {
+    return {
+      kindLabel: "Asistencia",
+      progress: `${heldActs(event).length} de ${event.acts.length} actos`,
+      figureLabel: "Asistencia total",
+      figure: formatNumber(sumRange(heldActs(event)).central),
+    };
   }
-  return days;
+  const figures = keyFigures(event);
+  return {
+    kindLabel: "Temporada",
+    progress: `${figures.held} de ${figures.total} partidos`,
+    figureLabel: "Goles por partido",
+    figure: formatDecimal(figures.goalsPerMatch),
+  };
 }

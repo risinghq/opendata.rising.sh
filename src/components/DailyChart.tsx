@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 
 import { formatCompact, formatNumber, formatShortDate } from "../data/format.ts";
-import type { Day } from "../data/stats.ts";
+import type { Day } from "../data/stats-asistencia.ts";
 
 export function DailyChart(props: { days: Day[] }) {
   const max = Math.max(...props.days.map((d) => d.total.central));

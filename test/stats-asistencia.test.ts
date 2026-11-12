@@ -1,7 +1,8 @@
 import { expect, test } from "bun:test";
 
-import type { EventData, HeldAct } from "../src/data/types.ts";
-import { dailyTotals, eventStatus, largestAct, sumRange } from "../src/data/stats.ts";
+import type { AsistenciaData, HeldAct } from "../src/data/types.ts";
+import { dailyTotals, largestAct, sumRange } from "../src/data/stats-asistencia.ts";
+import { eventStatus } from "../src/data/stats.ts";
 
 const src = { outlet: "Medio", url: "https://example.org" };
 
@@ -21,7 +22,8 @@ function held(day: string, low: number, central: number, high: number): HeldAct 
   };
 }
 
-const event: EventData = {
+const event: AsistenciaData = {
+  kind: "asistencia",
   title: "E",
   summary: "S.",
   start: "2026-11-07",

@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 
 import { formatCompact, formatNumber, formatShortDate } from "../data/format.ts";
-import { actDate } from "../data/stats.ts";
+import { actDate } from "../data/stats-asistencia.ts";
 import type { HeldAct } from "../data/types.ts";
 import { niceScale } from "./chart-scale.ts";
 

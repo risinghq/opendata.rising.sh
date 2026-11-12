@@ -69,6 +69,13 @@ h2 {
   font-size: var(--text-base);
 }
 
+h3 {
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-heading);
+  color: var(--fg-muted);
+}
+
 p {
   text-wrap: pretty;
 }
@@ -156,6 +163,11 @@ main {
 .facts div {
   display: flex;
   gap: var(--space-2);
+}
+
+.facts a {
+  display: inline-block;
+  padding-block: var(--space-1);
 }
 
 .facts dt {
@@ -332,10 +344,10 @@ tbody tr:hover > * {
 }
 
 .events-table {
-  min-width: 52rem;
+  min-width: 64rem;
 }
 
-@media (max-width: 55.99rem) {
+@media (max-width: 63.99rem) {
   .events-table {
     min-width: 0;
   }
@@ -622,6 +634,141 @@ tbody tr:hover > * {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   overflow-wrap: anywhere;
+}
+
+.strong {
+  font-weight: var(--weight-strong);
+}
+
+.events-table .figure-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 63.99rem) {
+  .events-table .figure-label {
+    display: none;
+  }
+}
+
+.block + .block {
+  margin-top: var(--space-8);
+}
+
+.block > h3 {
+  margin-bottom: var(--space-3);
+}
+
+.section > p + .block,
+.section > p + .chart {
+  margin-top: var(--space-6);
+}
+
+.standings-table {
+  min-width: 44rem;
+}
+
+.standings-table .num {
+  padding-inline: var(--space-2);
+}
+
+.standings-table abbr {
+  text-decoration: none;
+}
+
+.matches-table {
+  min-width: 52rem;
+}
+
+.matches-table .home-team {
+  text-align: end;
+}
+
+.matches-table tr[data-state="planned"] .score {
+  font-family: var(--font-sans);
+}
+
+.altitude-table {
+  min-width: 52rem;
+}
+
+.round + .round {
+  margin-top: var(--space-2);
+}
+
+.round > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  min-height: var(--space-8);
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.round > summary .round-name {
+  font-weight: var(--weight-strong);
+}
+
+.round[open] > summary {
+  margin-bottom: var(--space-2);
+}
+
+.scatter {
+  position: relative;
+  aspect-ratio: 100 / 56;
+  margin: var(--space-2) var(--space-2) var(--space-8) var(--space-8);
+  max-width: 48rem;
+}
+
+.scatter svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dot {
+  fill: var(--bar);
+  fill-opacity: 0.85;
+  stroke: var(--surface);
+  stroke-width: 0.3;
+}
+
+.tick-x,
+.tick-y {
+  position: absolute;
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
+}
+
+.tick-x {
+  top: 100%;
+  margin-top: var(--space-1);
+  transform: translateX(-50%);
+}
+
+.tick-y {
+  right: 100%;
+  margin-right: var(--space-2);
+  transform: translateY(50%);
+}
+
+.axis-note {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.notices {
+  margin-top: var(--space-4);
+  padding: 0;
+  list-style: none;
+  max-width: var(--prose-width);
+}
+
+.notices li + li {
+  margin-top: var(--space-2);
 }
 
 @media print {
