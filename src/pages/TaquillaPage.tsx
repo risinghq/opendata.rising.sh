@@ -131,7 +131,7 @@ export function TaquillaPage(props: { event: TaquillaRecord; forecast?: McuSnaps
             <section class="section" aria-labelledby="pronostico">
               <h2 id="pronostico">Pronóstico: {snap().target.title}</h2>
               <p>
-                Foto calculada el {formatDateLima(`${snap().date}T12:00-05:00`)} con los{" "}
+                Pronóstico calculado el {formatDateLima(`${snap().date}T12:00-05:00`)} con los{" "}
                 {snap().filmsUsed.length} estrenos publicados hasta ese día, en dólares de{" "}
                 {snap().dollars}. El estreno está previsto para el{" "}
                 {formatDateLima(`${snap().target.release}T12:00-05:00`)}.
@@ -214,9 +214,10 @@ export function TaquillaPage(props: { event: TaquillaRecord; forecast?: McuSnaps
             <p>
               El pronóstico ajusta por mínimos cuadrados una recta sobre el logaritmo de cada cifra
               en dólares de {snap().dollars}: cuánto recaudó la película anterior, cuánto recaudó la
-              anterior de la misma serie (para Avengers: Doomsday, Avengers: Endgame) y cuántos años
-              lleva la saga. El intervalo sale de los errores que comete el modelo al dejar fuera
-              cada película. Es un ejercicio estadístico, no una predicción comercial.
+              anterior de la misma serie (para Avengers: Doomsday, Avengers: Endgame, cuya
+              recaudación incluye el reestreno de 2026) y cuántos años lleva la saga. El intervalo
+              sale de los errores que comete el modelo al dejar fuera cada película. Es un ejercicio
+              estadístico, no una predicción comercial.
             </p>
           )}
         </Show>

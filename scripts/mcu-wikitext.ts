@@ -1,4 +1,4 @@
-import { expandSpans, link, parseTables, plain } from "./wikitext.ts";
+import { expandSpans, link, parseTables, plain, splitOutside } from "./wikitext.ts";
 
 export interface RawFilm {
   originalTitle: string;
@@ -6,6 +6,7 @@ export interface RawFilm {
   usCanada?: number;
   worldwide?: number;
   budget?: { low: number; high?: number };
+  note?: string;
 }
 
 const UNITS: Record<string, number> = { million: 1e6, billion: 1e9, millones: 1e6 };
@@ -42,6 +43,33 @@ export function budget(text: string): { low: number; high?: number } | undefined
   return amounts.length ? { low: amounts[0]! } : undefined;
 }
 
+function efns(text: string): string[] {
+  const out: string[] = [];
+  for (const m of text.matchAll(/\{\{efn\|/gi)) {
+    let depth = 1;
+    let i = m.index + m[0].length;
+    const start = i;
+    while (i < text.length && depth > 0) {
+      if (text.startsWith("{{", i)) {
+        depth++;
+        i += 2;
+      } else if (text.startsWith("}}", i)) {
+        depth--;
+        i += 2;
+      } else {
+        i++;
+      }
+    }
+    const body = splitOutside(text.slice(start, i - 2), "|")
+      .filter((part) => !/^\s*[A-Za-z-]+\s*=/.test(part))
+      .map(plain)
+      .join(" ")
+      .trim();
+    if (body) out.push(body);
+  }
+  return out;
+}
+
 export function parseBoxOfficeRows(section: string): RawFilm[] {
   const films: RawFilm[] = [];
   const clean = section
@@ -57,12 +85,14 @@ export function parseBoxOfficeRows(section: string): RawFilm[] {
       if (row.length < 8) throw new Error(`row for ${film.title} has ${row.length} cells`);
       const amounts = row.slice(2, 5).map((cell) => money(plain(cell.text))[0]);
       if (amounts.some((a) => a === undefined)) continue;
+      const notes = efns(row[0]!.text);
       films.push({
         originalTitle: film.title.split("#")[0]!.trim(),
         release: date(row[1]!.text, film.title),
         usCanada: amounts[0],
         worldwide: amounts[2],
         budget: budget(row[7]!.text),
+        note: notes.length ? notes.join(" ") : undefined,
       });
     }
   }

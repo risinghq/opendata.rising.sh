@@ -62,6 +62,8 @@ export function validateTaquilla(data: Obj, report: Report) {
       titles.add(film.title);
     }
     if (!isText(film.originalTitle)) fail(`${path}.originalTitle`, "must be a non-empty string");
+    if (film.note !== undefined && !isText(film.note))
+      fail(`${path}.note`, "must be a non-empty string");
     if (!isCount(film.phase) || film.phase === 0)
       fail(`${path}.phase`, "must be a positive integer");
     if (!isDate(film.release)) {

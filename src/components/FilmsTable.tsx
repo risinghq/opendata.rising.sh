@@ -31,6 +31,9 @@ function FilmRow(props: { film: Film; cpi: CpiData }) {
         <Show when={film.title !== film.originalTitle}>
           <div class="muted">{film.originalTitle}</div>
         </Show>
+        <Show when={film.note}>
+          <div class="muted">{film.note}</div>
+        </Show>
       </th>
       <td data-label="Fase" class="num">
         {film.phase}

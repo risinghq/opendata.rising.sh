@@ -33,8 +33,33 @@ const DEFAULT_FRAME = {
     "Recaudación de las películas del Universo cinematográfico de Marvel en dólares de Estados Unidos, nominales y ajustadas por inflación, con un pronóstico para Avengers: Doomsday.",
   places: ["Estados Unidos", "Canadá", "Mundial"],
   method:
-    "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se publica como una foto fechada antes del estreno y se compara con las cifras reales después.",
+    "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
 };
+
+const MONTHS: Record<string, string> = {
+  january: "enero",
+  february: "febrero",
+  march: "marzo",
+  april: "abril",
+  may: "mayo",
+  june: "junio",
+  july: "julio",
+  august: "agosto",
+  september: "septiembre",
+  october: "octubre",
+  november: "noviembre",
+  december: "diciembre",
+};
+
+function spanishNote(film: RawFilm): string | undefined {
+  if (!film.note) return undefined;
+  const m =
+    /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})\s+re-?release,\s*([^,.]+)\./i.exec(
+      film.note,
+    );
+  if (!m) throw new Error(`${film.originalTitle}: cannot write a note for "${film.note}"`);
+  return `Las cifras incluyen el reestreno de ${MONTHS[m[1]!.toLowerCase()]} de ${m[2]}, ${m[3]!.trim()}.`;
+}
 
 interface FilmRow extends RawFilm {
   title: string;
@@ -107,6 +132,7 @@ export function toFilm(
     originalTitle: film.originalTitle.replace(/ \([^)]*\bfilm\)$/, ""),
     phase: film.phase,
     release: film.release,
+    note: spanishNote(film),
   };
   if (film.usCanada === undefined || film.worldwide === undefined) {
     return { ...base, status: "unreleased" };

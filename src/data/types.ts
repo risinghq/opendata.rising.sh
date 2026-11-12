@@ -155,6 +155,7 @@ interface FilmBase {
   originalTitle: string;
   phase: number;
   release: string;
+  note?: string;
   budget?: Budget;
 }
 

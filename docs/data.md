@@ -274,6 +274,10 @@ gross in the United States and Canada), `usCanada` and `worldwide`, each a
 figure of `amount` in integer nominal U.S. dollars and its `source`. An
 unreleased film has none of those.
 
+`note` is optional: a caveat in Spanish, shown under the title, for a figure
+that needs one. `Avengers: Endgame` carries one because its worldwide gross
+includes the September 2026 re-release.
+
 ### Source and licence
 
 The figures come from the box office table of "List of Marvel Cinematic
@@ -314,6 +318,14 @@ figure.
 the BLS API. It keeps the other fields. The box office table is transcluded
 from the six phase pages; the opening weekend comes from each film's
 article; the Spanish titles come from each article's `es` langlink.
+
+A row can carry two sets of figures in `<noinclude>` and `<includeonly>`
+cells. The importer reads the `<includeonly>` ones, the cells the List page
+transcludes, so the figures match what the source link shows. `Avengers:
+Endgame` is the case: its `<includeonly>` row adds the September 2026
+_Avengers Endgame: Encore_ re-release to the 2019 gross. An `{{efn}}` note
+on the film's title cell is kept as `note`, written in Spanish; an efn the
+importer cannot turn into a note stops the run.
 
 ### Downloads
 
