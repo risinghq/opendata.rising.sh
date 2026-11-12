@@ -1,6 +1,8 @@
 import { For, Show } from "solid-js";
 
 import { AltitudeChart, AltitudeTable } from "../components/AltitudeChart.tsx";
+import { ForecastTable, MatchForecastTable } from "../components/ForecastTable.tsx";
+import { GoalTimingChart, GoalTimingTable } from "../components/GoalTimingChart.tsx";
 import { RoundTable } from "../components/RoundsList.tsx";
 import { StandingsTable } from "../components/StandingsTable.tsx";
 import {
@@ -12,7 +14,12 @@ import {
   formatShortDate,
   formatStamp,
 } from "../data/format.ts";
-import { tournamentNotice } from "../data/notice.ts";
+import {
+  MATCH_DATA_NOTICE,
+  MATCH_DATA_URL,
+  hasMatchEvents,
+  tournamentNotice,
+} from "../data/notice.ts";
 import { actDate } from "../data/stats-asistencia.ts";
 import {
   altitudePoints,
@@ -24,15 +31,23 @@ import {
 } from "../data/stats-temporada.ts";
 import { eventStatus } from "../data/stats.ts";
 import type { TemporadaRecord } from "../data/types.ts";
+import { goalTiming } from "../forecast/events.ts";
+import type { ForecastSnapshot } from "../forecast/snapshot.ts";
 import { SITE_URL } from "../site.ts";
 
-export function TemporadaPage(props: { event: TemporadaRecord }) {
+export function TemporadaPage(props: {
+  event: TemporadaRecord;
+  forecast?: ForecastSnapshot | null;
+}) {
   const event = props.event;
   const figures = keyFigures(event);
   const status = eventStatus(event);
   const teams = new Map(event.teams.map((team) => [team.id, team.name]));
   const stadiums = new Map(event.stadiums.map((stadium) => [stadium.id, stadium]));
   const points = altitudePoints(event);
+  const forecast = props.forecast ?? null;
+  const timing = hasMatchEvents(event) ? goalTiming(event) : null;
+  const backtest = forecast?.backtest;
   const share = (count: number) =>
     figures.held === 0 ? "0 %" : formatPercent(count / figures.held);
   const url = `${SITE_URL}/eventos/${event.slug}`;
@@ -125,6 +140,107 @@ export function TemporadaPage(props: { event: TemporadaRecord }) {
         </div>
       </section>
 
+      <Show when={forecast}>
+        {(snap) => (
+          <section class="section" aria-labelledby="pronostico">
+            <h2 id="pronostico">Pronóstico</h2>
+            <p>
+              Probabilidades calculadas el {formatDateLima(`${snap().date}T12:00-05:00`)} con{" "}
+              {formatNumber(snap().simulations)} simulaciones de los partidos que faltan. El modelo
+              usa los {snap().matchesUsed.length} partidos jugados.
+            </p>
+            <ForecastTable snapshot={snap()} teams={teams} />
+            <Show when={snap().matches.length > 0}>
+              <div class="block">
+                <h3>Partidos por jugar</h3>
+                <MatchForecastTable snapshot={snap()} teams={teams} />
+              </div>
+            </Show>
+          </section>
+        )}
+      </Show>
+
+      <Show when={backtest}>
+        {(bt) => (
+          <section class="section" aria-labelledby="acierto">
+            <h2 id="acierto">Qué tan bien acierta</h2>
+            <p>
+              Para medir el modelo se repitió el pronóstico hacia atrás: antes de cada fecha del
+              Clausura se ajustó solo con los partidos anteriores y se predijo esa fecha. Se compara
+              con dos bases: las frecuencias de local, empate y visita de los mismos partidos, y las
+              cuotas de cierre de Bet365 convertidas a probabilidades.
+            </p>
+            <div class="table-scroll" tabindex="0">
+              <table class="backtest-table">
+                <caption class="visually-hidden">
+                  Error del modelo y de las dos bases en las fechas pasadas del Clausura
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Pronóstico</th>
+                    <th scope="col" class="num">
+                      Error logarítmico
+                    </th>
+                    <th scope="col" class="num">
+                      Error de Brier
+                    </th>
+                    <th scope="col" class="num">
+                      Partidos
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">El modelo</th>
+                    <td class="num strong">{formatDecimal(bt().model.logLoss)}</td>
+                    <td class="num strong">{formatDecimal(bt().model.brier)}</td>
+                    <td class="num">{bt().model.matches}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Frecuencias base</th>
+                    <td class="num">{formatDecimal(bt().baseRates.logLoss)}</td>
+                    <td class="num">{formatDecimal(bt().baseRates.brier)}</td>
+                    <td class="num">{bt().baseRates.matches}</td>
+                  </tr>
+                  <Show when={bt().odds}>
+                    {(odds) => (
+                      <tr>
+                        <th scope="row">Cuotas de Bet365</th>
+                        <td class="num">{formatDecimal(odds().logLoss)}</td>
+                        <td class="num">{formatDecimal(odds().brier)}</td>
+                        <td class="num">{odds().matches}</td>
+                      </tr>
+                    )}
+                  </Show>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Menos error es mejor.
+              {bt().odds && bt().model.logLoss <= bt().odds!.logLoss
+                ? " El modelo acierta mejor que las cuotas en este tramo."
+                : bt().odds
+                  ? " El modelo no supera a las cuotas en este tramo."
+                  : " No hubo cuotas suficientes para comparar."}
+            </p>
+          </section>
+        )}
+      </Show>
+
+      <Show when={timing}>
+        {(periods) => (
+          <section class="section" aria-labelledby="goles">
+            <h2 id="goles">Cuándo caen los goles</h2>
+            <p>
+              Goles por tramo de 15 minutos en los partidos con datos de eventos. Los minutos de
+              descuento entran en el último tramo de su tiempo.
+            </p>
+            <GoalTimingChart periods={periods()} />
+            <GoalTimingTable periods={periods()} />
+          </section>
+        )}
+      </Show>
+
       <Show when={points.length > 1}>
         <section class="section" aria-labelledby="altitud">
           <h2 id="altitud">Ventaja de local por altitud</h2>
@@ -184,6 +300,20 @@ export function TemporadaPage(props: { event: TemporadaRecord }) {
       <section class="section" aria-labelledby="metodo">
         <h2 id="metodo">Método</h2>
         <p>{event.method}</p>
+        <Show when={forecast}>
+          {(snap) => (
+            <p>
+              El pronóstico ajusta un modelo de goles de Poisson: cada equipo tiene una fuerza de
+              ataque y una de defensa, jugar de local suma una ventaja que crece con la diferencia
+              de altitud entre el estadio del partido y el del visitante, y los partidos antiguos
+              pesan menos que los recientes. Con esas fuerzas se simularon los partidos que faltan{" "}
+              {formatNumber(snap().simulations)} veces, aplicando las reglas de la liga: puntos,
+              desempates, el playoff por el título y el descenso de los dos últimos de la tabla
+              acumulada. El modelo no ve lesiones, fichajes ni motivación; trata a todos los equipos
+              como si llegaran igual a cada partido.
+            </p>
+          )}
+        </Show>
         <ul class="notices">
           <For each={event.tournaments}>
             {(tournament) => (
@@ -193,6 +323,11 @@ export function TemporadaPage(props: { event: TemporadaRecord }) {
               </li>
             )}
           </For>
+          <Show when={hasMatchEvents(event)}>
+            <li>
+              Datos de partidos: <a href={MATCH_DATA_URL}>Football data by 5DollarFootballAPI</a>.
+            </li>
+          </Show>
         </ul>
       </section>
 

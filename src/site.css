@@ -660,7 +660,8 @@ tbody tr:hover > * {
 }
 
 .section > p + .block,
-.section > p + .chart {
+.section > p + .chart,
+.section > .table-scroll + .block {
   margin-top: var(--space-6);
 }
 
@@ -769,6 +770,69 @@ tbody tr:hover > * {
 
 .notices li + li {
   margin-top: var(--space-2);
+}
+
+.prob-bar {
+  display: block;
+  width: 100%;
+  height: var(--space-1);
+  margin-top: var(--space-1);
+  border-radius: var(--radius-full);
+  background: var(--neutral-4);
+}
+
+.prob-bar span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--bar);
+}
+
+.forecast-table {
+  min-width: 36rem;
+}
+
+.forecast-table .num {
+  min-width: 7rem;
+}
+
+.forecast-matches-table {
+  min-width: 44rem;
+}
+
+.forecast-matches-table .home-team {
+  text-align: end;
+}
+
+.backtest-table {
+  min-width: 30rem;
+}
+
+.histogram {
+  max-width: 48rem;
+  margin: var(--space-2) 0 0;
+}
+
+.histogram svg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 100 / 40;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.histogram-labels {
+  display: flex;
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
+}
+
+.histogram-labels span {
+  flex: 1;
+  text-align: center;
+}
+
+.timing-table {
+  min-width: 24rem;
 }
 
 @media print {

@@ -9,6 +9,7 @@ import type { EventRecord } from "./data/types.ts";
 import { AsistenciaPage } from "./pages/AsistenciaPage.tsx";
 import { Home } from "./pages/Home.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
+import { latestSnapshot } from "./forecast/snapshot.ts";
 import { TemporadaPage } from "./pages/TemporadaPage.tsx";
 import { SITE_DESCRIPTION, SITE_TITLE } from "./site.ts";
 
@@ -66,7 +67,7 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
   for (const event of events) {
     files[`eventos/${event.slug}.html`] = html(eventMeta(event), stylesheet, () =>
       event.kind === "temporada" ? (
-        <TemporadaPage event={event} />
+        <TemporadaPage event={event} forecast={latestSnapshot(event.slug)} />
       ) : (
         <AsistenciaPage event={event} />
       ),
