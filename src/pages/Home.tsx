@@ -36,7 +36,8 @@ export function Home(props: { events: EventRecord[] }) {
       <h1>Eventos públicos</h1>
       <p class="lead">
         Cifras de eventos públicos, cada una con su fuente: la asistencia a actos con quién la
-        estimó, y los resultados de torneos calculados partido por partido.
+        estimó, los resultados de torneos calculados partido por partido, y la taquilla de películas
+        en dólares nominales y ajustados por inflación.
       </p>
       <section class="section" aria-labelledby="eventos">
         <h2 id="eventos" class="visually-hidden">

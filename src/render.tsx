@@ -5,11 +5,15 @@ import { toCsv, toJson } from "./downloads.ts";
 import { formatDecimal, formatNumber } from "./data/format.ts";
 import { heldActs, sumRange } from "./data/stats-asistencia.ts";
 import { keyFigures } from "./data/stats-temporada.ts";
+import { keyFigures as taquillaFigures } from "./data/stats-taquilla.ts";
+import { loadCpi } from "./data/cpi.ts";
 import type { EventRecord } from "./data/types.ts";
+import { latestBefore, latestJson, latestSnapshot } from "./forecast/snapshot.ts";
+import type { McuSnapshot } from "./forecast/mcu.ts";
 import { AsistenciaPage } from "./pages/AsistenciaPage.tsx";
 import { Home } from "./pages/Home.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
-import { latestSnapshot } from "./forecast/snapshot.ts";
+import { TaquillaPage } from "./pages/TaquillaPage.tsx";
 import { TemporadaPage } from "./pages/TemporadaPage.tsx";
 import { SITE_DESCRIPTION, SITE_TITLE } from "./site.ts";
 
@@ -21,6 +25,11 @@ function html(meta: Meta, stylesheet: string, view: () => JSX.Element): string {
   ))}`;
 }
 
+function mcuForecast(): McuSnapshot | null {
+  const snap = latestJson<McuSnapshot>("mcu");
+  return snap ? latestBefore<McuSnapshot>("mcu", snap.target.release) : null;
+}
+
 function eventMeta(event: EventRecord): Meta {
   const path = `/eventos/${event.slug}`;
   const title = `${event.title} | Datos abiertos`;
@@ -30,6 +39,16 @@ function eventMeta(event: EventRecord): Meta {
       path,
       title,
       description: `${event.summary} ${figures.held} de ${figures.total} partidos jugados. Goles por partido: ${formatDecimal(figures.goalsPerMatch)}.`,
+      kind: "article",
+      index: true,
+    };
+  }
+  if (event.kind === "taquilla") {
+    const figures = taquillaFigures(event, loadCpi());
+    return {
+      path,
+      title,
+      description: `${event.summary} ${figures.released} de ${figures.total} películas estrenadas.`,
       kind: "article",
       index: true,
     };
@@ -68,6 +87,8 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
     files[`eventos/${event.slug}.html`] = html(eventMeta(event), stylesheet, () =>
       event.kind === "temporada" ? (
         <TemporadaPage event={event} forecast={latestSnapshot(event.slug)} />
+      ) : event.kind === "taquilla" ? (
+        <TaquillaPage event={event} forecast={mcuForecast()} />
       ) : (
         <AsistenciaPage event={event} />
       ),

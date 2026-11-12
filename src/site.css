@@ -614,6 +614,46 @@ tbody tr:hover > * {
   margin-top: var(--space-6);
 }
 
+.gross-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-tick {
+  fill: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.bar-fill.avengers {
+  fill: var(--accent);
+}
+
+.legend .key-avengers::before {
+  background: var(--accent);
+}
+
+.tag {
+  display: inline-block;
+  margin-inline-start: var(--space-2);
+  padding-inline: var(--space-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: normal;
+  vertical-align: 1px;
+}
+
+.film-sources a {
+  display: inline-block;
+  margin-inline-end: var(--space-3);
+  padding-block: var(--space-1);
+  white-space: nowrap;
+}
+
 .downloads {
   display: flex;
   flex-wrap: wrap;
