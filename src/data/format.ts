@@ -62,14 +62,10 @@ const money = new Intl.NumberFormat(LOCALE, {
   currency: "USD",
   maximumFractionDigits: 0,
 });
-const moneyCompact = new Intl.NumberFormat(LOCALE, {
-  style: "currency",
-  currency: "USD",
-  notation: "compact",
-  maximumFractionDigits: 1,
-});
+const moneyNumber = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 1 });
 export const formatMoney = (value: number) => money.format(value);
-export const formatMoneyCompact = (value: number) => moneyCompact.format(value);
+export const formatMoneyCompact = (value: number) =>
+  Math.abs(value) < 1e6 ? money.format(value) : `USD ${moneyNumber.format(value / 1e6)} M`;
 
 export const isLimaOffset = (instant: string) => instant.slice(-6) === "-05:00";
 
