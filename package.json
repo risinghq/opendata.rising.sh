@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "bun scripts/dev.ts",
+    "build": "bun scripts/build.ts",
     "preview": "wrangler dev",
+    "test": "bun test --timeout=60000",
     "lint": "oxlint && oxfmt --check .",
     "fix": "oxfmt .",
     "typecheck": "tsc --noEmit",
@@ -13,12 +14,15 @@
     "deploy": "bun run build && wrangler deploy"
   },
   "dependencies": {
-    "@solidjs/router": "^2.0.0-next.44",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
     "@solidjs/web": "^2.0.0-rc.21",
     "solid-js": "^2.0.0-rc.21"
   },
   "devDependencies": {
     "@solidjs/vite-plugin": "^3.0.0-next.57",
+    "@types/bun": "^1.4.4",
+    "@types/node": "^26.6.6",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.93.0",
     "typescript": "^7.0.2",

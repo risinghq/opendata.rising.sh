@@ -6,12 +6,12 @@
     "jsx": "preserve",
     "jsxImportSource": "@solidjs/web",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "types": [],
+    "types": ["node", "bun"],
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "scripts", "test", "vite.config.ts"]
 }
