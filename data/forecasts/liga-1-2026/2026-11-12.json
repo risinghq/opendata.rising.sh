@@ -1,0 +1,2037 @@
+{
+  "season": "liga-1-2026",
+  "date": "2026-11-12",
+  "matchesUsed": [
+    {
+      "start": "2026-01-30T12:00-05:00",
+      "home": "sport-huancayo",
+      "away": "alianza-lima",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-01-30T15:15-05:00",
+      "home": "utc",
+      "away": "atletico-grau",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-01-31T13:00-05:00",
+      "home": "sport-boys",
+      "away": "los-chankas",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-01-31T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "fc-cajamarca",
+      "score": "3-3"
+    },
+    {
+      "start": "2026-01-31T18:30-05:00",
+      "home": "fbc-melgar",
+      "away": "cienciano",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-02-01T13:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "sporting-cristal",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-02-01T15:15-05:00",
+      "home": "alianza-atletico",
+      "away": "cusco-fc",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-01T18:00-05:00",
+      "home": "universitario",
+      "away": "adt",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-02-02T15:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "deportivo-moquegua",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-06T15:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "utc",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-02-07T13:00-05:00",
+      "home": "adt",
+      "away": "sport-boys",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-07T15:15-05:00",
+      "home": "atletico-grau",
+      "away": "sport-huancayo",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-02-07T20:00-05:00",
+      "home": "cusco-fc",
+      "away": "universitario",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-02-08T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "fbc-melgar",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-02-08T13:15-05:00",
+      "home": "los-chankas",
+      "away": "alianza-atletico",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-08T15:30-05:00",
+      "home": "cienciano",
+      "away": "juan-pablo-ii-college",
+      "score": "6-1"
+    },
+    {
+      "start": "2026-02-08T18:00-05:00",
+      "home": "alianza-lima",
+      "away": "comerciantes-unidos",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-02-09T15:30-05:00",
+      "home": "fc-cajamarca",
+      "away": "deportivo-garcilaso",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-02-13T15:00-05:00",
+      "home": "utc",
+      "away": "cusco-fc",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-13T20:30-05:00",
+      "home": "universitario",
+      "away": "cienciano",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-02-14T13:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "adt",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-14T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "sporting-cristal",
+      "score": "0-2"
+    },
+    {
+      "start": "2026-02-14T17:30-05:00",
+      "home": "sport-boys",
+      "away": "atletico-grau",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-14T20:00-05:00",
+      "home": "alianza-atletico",
+      "away": "alianza-lima",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-02-15T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "fc-cajamarca",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-02-15T15:15-05:00",
+      "home": "comerciantes-unidos",
+      "away": "los-chankas",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-02-15T18:30-05:00",
+      "home": "fbc-melgar",
+      "away": "deportivo-moquegua",
+      "score": "4-0"
+    },
+    {
+      "start": "2026-02-20T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "sport-boys",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-21T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "fbc-melgar",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-02-21T16:00-05:00",
+      "home": "sporting-cristal",
+      "away": "universitario",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-02-21T19:00-05:00",
+      "home": "cienciano",
+      "away": "alianza-atletico",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-02-22T11:00-05:00",
+      "home": "adt",
+      "away": "utc",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-02-22T13:15-05:00",
+      "home": "los-chankas",
+      "away": "sport-huancayo",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-02-22T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "juan-pablo-ii-college",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-02-22T18:30-05:00",
+      "home": "cusco-fc",
+      "away": "comerciantes-unidos",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-02-23T15:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "deportivo-garcilaso",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-02-27T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "adt",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-02-27T17:45-05:00",
+      "home": "fbc-melgar",
+      "away": "los-chankas",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-02-27T20:15-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "cienciano",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-02-28T11:00-05:00",
+      "home": "sport-huancayo",
+      "away": "sporting-cristal",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-02-28T13:15-05:00",
+      "home": "utc",
+      "away": "alianza-lima",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-02-28T19:00-05:00",
+      "home": "sport-boys",
+      "away": "deportivo-moquegua",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-03-01T13:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "atletico-grau",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-03-01T15:30-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "cusco-fc",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-03-01T18:00-05:00",
+      "home": "universitario",
+      "away": "fc-cajamarca",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-03-06T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "fc-cajamarca",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-03-07T11:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "sport-huancayo",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-03-07T13:15-05:00",
+      "home": "comerciantes-unidos",
+      "away": "utc",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-03-07T15:30-05:00",
+      "home": "sporting-cristal",
+      "away": "alianza-atletico",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-03-07T19:00-05:00",
+      "home": "cusco-fc",
+      "away": "deportivo-garcilaso",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-03-08T13:15-05:00",
+      "home": "adt",
+      "away": "juan-pablo-ii-college",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-03-08T15:30-05:00",
+      "home": "los-chankas",
+      "away": "universitario",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-03-09T17:30-05:00",
+      "home": "cienciano",
+      "away": "sport-boys",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-03-09T20:30-05:00",
+      "home": "alianza-lima",
+      "away": "fbc-melgar",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-03-13T15:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "comerciantes-unidos",
+      "score": "3-4"
+    },
+    {
+      "start": "2026-03-14T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "adt",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-03-14T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "los-chankas",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-03-14T18:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "alianza-lima",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-03-14T20:30-05:00",
+      "home": "universitario",
+      "away": "utc",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-03-15T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "sport-boys",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-03-15T13:15-05:00",
+      "home": "fbc-melgar",
+      "away": "atletico-grau",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-03-15T15:30-05:00",
+      "home": "alianza-atletico",
+      "away": "deportivo-moquegua",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-03-15T18:00-05:00",
+      "home": "cusco-fc",
+      "away": "cienciano",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-03-20T15:30-05:00",
+      "home": "adt",
+      "away": "fbc-melgar",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-03-20T19:30-05:00",
+      "home": "cienciano",
+      "away": "fc-cajamarca",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-03-21T11:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "cusco-fc",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-03-21T13:15-05:00",
+      "home": "comerciantes-unidos",
+      "away": "universitario",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-03-21T15:30-05:00",
+      "home": "los-chankas",
+      "away": "sporting-cristal",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-03-21T18:30-05:00",
+      "home": "alianza-lima",
+      "away": "juan-pablo-ii-college",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-03-22T13:00-05:00",
+      "home": "utc",
+      "away": "alianza-atletico",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-03-22T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "deportivo-garcilaso",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-03-22T18:00-05:00",
+      "home": "sport-boys",
+      "away": "sport-huancayo",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-04-03T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "deportivo-moquegua",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-04-03T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "atletico-grau",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-04-03T18:15-05:00",
+      "home": "cienciano",
+      "away": "adt",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-04-04T13:15-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "sport-boys",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-04-04T15:30-05:00",
+      "home": "fbc-melgar",
+      "away": "cusco-fc",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-04-04T20:00-05:00",
+      "home": "universitario",
+      "away": "alianza-lima",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-04-05T13:15-05:00",
+      "home": "sport-huancayo",
+      "away": "comerciantes-unidos",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-04-05T15:30-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "utc",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-04-06T15:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "los-chankas",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-04-14T13:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "juan-pablo-ii-college",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-04-14T15:15-05:00",
+      "home": "adt",
+      "away": "alianza-lima",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-04-14T20:00-05:00",
+      "home": "sport-boys",
+      "away": "fbc-melgar",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-04-15T15:00-05:00",
+      "home": "utc",
+      "away": "sport-huancayo",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-04-22T13:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "alianza-atletico",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-04-22T15:15-05:00",
+      "home": "atletico-grau",
+      "away": "sporting-cristal",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-04-22T18:00-05:00",
+      "home": "cusco-fc",
+      "away": "fc-cajamarca",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-04-22T20:30-05:00",
+      "home": "universitario",
+      "away": "deportivo-garcilaso",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-04-23T15:00-05:00",
+      "home": "los-chankas",
+      "away": "cienciano",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-04-17T15:00-05:00",
+      "home": "los-chankas",
+      "away": "atletico-grau",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-04-18T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "adt",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-04-18T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "comerciantes-unidos",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-04-18T17:30-05:00",
+      "home": "sport-huancayo",
+      "away": "deportivo-garcilaso",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-04-18T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "cusco-fc",
+      "score": "8-0"
+    },
+    {
+      "start": "2026-04-19T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "utc",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-04-19T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "sport-boys",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-04-19T17:15-05:00",
+      "home": "fbc-melgar",
+      "away": "universitario",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-04-19T19:30-05:00",
+      "home": "cienciano",
+      "away": "deportivo-moquegua",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-04-25T13:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "fc-cajamarca",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-04-25T15:30-05:00",
+      "home": "comerciantes-unidos",
+      "away": "sporting-cristal",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-04-25T19:00-05:00",
+      "home": "sport-boys",
+      "away": "juan-pablo-ii-college",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-04-26T11:00-05:00",
+      "home": "utc",
+      "away": "cienciano",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-04-26T13:15-05:00",
+      "home": "cusco-fc",
+      "away": "sport-huancayo",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-04-26T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "alianza-lima",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-04-26T18:00-05:00",
+      "home": "universitario",
+      "away": "alianza-atletico",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-04-27T15:00-05:00",
+      "home": "adt",
+      "away": "los-chankas",
+      "score": "4-0"
+    },
+    {
+      "start": "2026-04-27T19:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "fbc-melgar",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-02T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "sport-boys",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-05-02T15:15-05:00",
+      "home": "adt",
+      "away": "atletico-grau",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-02T17:30-05:00",
+      "home": "cienciano",
+      "away": "comerciantes-unidos",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-02T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "deportivo-moquegua",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-05-03T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "cusco-fc",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-05-03T13:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "universitario",
+      "score": "1-4"
+    },
+    {
+      "start": "2026-05-03T15:30-05:00",
+      "home": "alianza-atletico",
+      "away": "sport-huancayo",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-05-03T18:00-05:00",
+      "home": "fbc-melgar",
+      "away": "utc",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-05-04T13:00-05:00",
+      "home": "los-chankas",
+      "away": "deportivo-garcilaso",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-05-08T15:00-05:00",
+      "home": "utc",
+      "away": "fc-cajamarca",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-05-09T13:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "adt",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-05-09T15:15-05:00",
+      "home": "atletico-grau",
+      "away": "cienciano",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-05-09T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "sporting-cristal",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-05-10T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "juan-pablo-ii-college",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-05-10T15:15-05:00",
+      "home": "comerciantes-unidos",
+      "away": "fbc-melgar",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-05-10T17:30-05:00",
+      "home": "cusco-fc",
+      "away": "los-chankas",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-05-11T13:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "alianza-atletico",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-05-11T20:30-05:00",
+      "home": "sport-boys",
+      "away": "universitario",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-05-15T15:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "sporting-cristal",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-05-15T20:00-05:00",
+      "home": "universitario",
+      "away": "atletico-grau",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-05-16T13:00-05:00",
+      "home": "fbc-melgar",
+      "away": "sport-huancayo",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-05-16T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "alianza-atletico",
+      "score": "0-2"
+    },
+    {
+      "start": "2026-05-16T17:45-05:00",
+      "home": "cienciano",
+      "away": "alianza-lima",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-05-16T20:30-05:00",
+      "home": "sport-boys",
+      "away": "cusco-fc",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-17T11:00-05:00",
+      "home": "adt",
+      "away": "comerciantes-unidos",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-05-17T13:15-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "utc",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-05-17T15:30-05:00",
+      "home": "los-chankas",
+      "away": "deportivo-moquegua",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-22T15:00-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "fbc-melgar",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-05-23T12:45-05:00",
+      "home": "deportivo-moquegua",
+      "away": "universitario",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-05-23T15:00-05:00",
+      "home": "utc",
+      "away": "sport-boys",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-05-23T17:15-05:00",
+      "home": "cusco-fc",
+      "away": "atletico-grau",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-23T20:30-05:00",
+      "home": "alianza-lima",
+      "away": "los-chankas",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-05-24T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "adt",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-05-24T13:15-05:00",
+      "home": "sport-huancayo",
+      "away": "cienciano",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-05-24T15:30-05:00",
+      "home": "alianza-atletico",
+      "away": "fc-cajamarca",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-05-25T15:30-05:00",
+      "home": "comerciantes-unidos",
+      "away": "deportivo-garcilaso",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-05-29T15:00-05:00",
+      "home": "atletico-grau",
+      "away": "deportivo-moquegua",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-30T11:00-05:00",
+      "home": "adt",
+      "away": "cusco-fc",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-05-30T15:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "juan-pablo-ii-college",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-05-30T17:30-05:00",
+      "home": "sport-boys",
+      "away": "comerciantes-unidos",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-05-30T20:00-05:00",
+      "home": "universitario",
+      "away": "sport-huancayo",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-05-31T11:00-05:00",
+      "home": "fbc-melgar",
+      "away": "alianza-atletico",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-05-31T13:15-05:00",
+      "home": "fc-cajamarca",
+      "away": "alianza-lima",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-05-31T15:15-05:00",
+      "home": "los-chankas",
+      "away": "utc",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-05-31T17:00-05:00",
+      "home": "cienciano",
+      "away": "sporting-cristal",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-07-17T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "juan-pablo-ii-college",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-07-17T15:15-05:00",
+      "home": "sporting-cristal",
+      "away": "deportivo-garcilaso",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-07-17T20:00-05:00",
+      "home": "cienciano",
+      "away": "fbc-melgar",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-07-18T11:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "comerciantes-unidos",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-07-18T13:15-05:00",
+      "home": "adt",
+      "away": "universitario",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-07-18T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "utc",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-07-18T18:30-05:00",
+      "home": "cusco-fc",
+      "away": "alianza-atletico",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-07-19T11:00-05:00",
+      "home": "los-chankas",
+      "away": "sport-boys",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-07-19T19:00-05:00",
+      "home": "alianza-lima",
+      "away": "sport-huancayo",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-07-24T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "los-chankas",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-07-24T20:30-05:00",
+      "home": "universitario",
+      "away": "cusco-fc",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-07-25T10:30-05:00",
+      "home": "sport-boys",
+      "away": "adt",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-07-25T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "atletico-grau",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-07-25T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "cienciano",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-07-25T20:00-05:00",
+      "home": "fbc-melgar",
+      "away": "sporting-cristal",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-07-26T13:00-05:00",
+      "home": "utc",
+      "away": "deportivo-moquegua",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-07-26T15:30-05:00",
+      "home": "comerciantes-unidos",
+      "away": "alianza-lima",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-07-26T19:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "fc-cajamarca",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-07-31T15:00-05:00",
+      "home": "los-chankas",
+      "away": "comerciantes-unidos",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-08-01T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "sport-huancayo",
+      "score": "0-2"
+    },
+    {
+      "start": "2026-08-01T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "sport-boys",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-08-01T18:00-05:00",
+      "home": "cusco-fc",
+      "away": "utc",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-08-01T20:30-05:00",
+      "home": "alianza-lima",
+      "away": "alianza-atletico",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-08-02T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "juan-pablo-ii-college",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-08-02T13:15-05:00",
+      "home": "adt",
+      "away": "deportivo-garcilaso",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-08-02T15:30-05:00",
+      "home": "deportivo-moquegua",
+      "away": "fbc-melgar",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-08-02T18:30-05:00",
+      "home": "cienciano",
+      "away": "universitario",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-08-06T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "cienciano",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-08-07T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "los-chankas",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-07T15:15-05:00",
+      "home": "comerciantes-unidos",
+      "away": "cusco-fc",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-08-07T20:30-05:00",
+      "home": "universitario",
+      "away": "sporting-cristal",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-08T13:00-05:00",
+      "home": "utc",
+      "away": "adt",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-08T15:30-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "atletico-grau",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-08-08T20:00-05:00",
+      "home": "sport-boys",
+      "away": "alianza-lima",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-09T13:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "deportivo-moquegua",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-08-09T15:30-05:00",
+      "home": "fbc-melgar",
+      "away": "fc-cajamarca",
+      "score": "2-4"
+    },
+    {
+      "start": "2026-08-14T15:00-05:00",
+      "home": "atletico-grau",
+      "away": "comerciantes-unidos",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-08-14T18:00-05:00",
+      "home": "cusco-fc",
+      "away": "juan-pablo-ii-college",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-08-15T13:00-05:00",
+      "home": "adt",
+      "away": "alianza-atletico",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-15T15:30-05:00",
+      "home": "los-chankas",
+      "away": "fbc-melgar",
+      "score": "0-3"
+    },
+    {
+      "start": "2026-08-15T19:30-05:00",
+      "home": "alianza-lima",
+      "away": "utc",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-08-16T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "sport-huancayo",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-08-16T13:15-05:00",
+      "home": "deportivo-moquegua",
+      "away": "sport-boys",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-16T15:30-05:00",
+      "home": "fc-cajamarca",
+      "away": "universitario",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-08-16T18:30-05:00",
+      "home": "cienciano",
+      "away": "deportivo-garcilaso",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-08-21T12:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "atletico-grau",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-08-21T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "sporting-cristal",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-08-22T11:00-05:00",
+      "home": "sport-huancayo",
+      "away": "deportivo-moquegua",
+      "score": "0-2"
+    },
+    {
+      "start": "2026-08-22T13:15-05:00",
+      "home": "utc",
+      "away": "comerciantes-unidos",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-08-22T15:30-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "adt",
+      "score": "5-1"
+    },
+    {
+      "start": "2026-08-22T19:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "cusco-fc",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-08-23T13:00-05:00",
+      "home": "sport-boys",
+      "away": "cienciano",
+      "score": "5-1"
+    },
+    {
+      "start": "2026-08-23T15:30-05:00",
+      "home": "fbc-melgar",
+      "away": "alianza-lima",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-08-23T18:30-05:00",
+      "home": "universitario",
+      "away": "los-chankas",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-08-28T15:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "fc-cajamarca",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-08-29T13:00-05:00",
+      "home": "los-chankas",
+      "away": "juan-pablo-ii-college",
+      "score": "3-4"
+    },
+    {
+      "start": "2026-08-29T15:30-05:00",
+      "home": "utc",
+      "away": "universitario",
+      "score": "2-4"
+    },
+    {
+      "start": "2026-08-29T19:30-05:00",
+      "home": "alianza-lima",
+      "away": "deportivo-garcilaso",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-08-30T11:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "alianza-atletico",
+      "score": "1-4"
+    },
+    {
+      "start": "2026-08-30T13:15-05:00",
+      "home": "adt",
+      "away": "sport-huancayo",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-08-30T15:30-05:00",
+      "home": "sport-boys",
+      "away": "sporting-cristal",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-08-30T19:00-05:00",
+      "home": "cienciano",
+      "away": "cusco-fc",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-09-01T15:00-05:00",
+      "home": "atletico-grau",
+      "away": "fbc-melgar",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-09-04T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "cienciano",
+      "score": "2-5"
+    },
+    {
+      "start": "2026-09-04T15:15-05:00",
+      "home": "alianza-atletico",
+      "away": "utc",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-09-05T15:00-05:00",
+      "home": "sport-huancayo",
+      "away": "sport-boys",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-09-05T18:00-05:00",
+      "home": "cusco-fc",
+      "away": "deportivo-moquegua",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-09-05T20:30-05:00",
+      "home": "universitario",
+      "away": "comerciantes-unidos",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-09-06T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "los-chankas",
+      "score": "5-0"
+    },
+    {
+      "start": "2026-09-06T13:30-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "atletico-grau",
+      "score": "4-2"
+    },
+    {
+      "start": "2026-09-06T15:00-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "alianza-lima",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-09-06T18:30-05:00",
+      "home": "fbc-melgar",
+      "away": "adt",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-09-11T15:00-05:00",
+      "home": "utc",
+      "away": "juan-pablo-ii-college",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-09-11T19:00-05:00",
+      "home": "cusco-fc",
+      "away": "fbc-melgar",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-09-12T10:30-05:00",
+      "home": "los-chankas",
+      "away": "fc-cajamarca",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-09-12T13:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "sport-huancayo",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-09-12T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "universitario",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-09-13T10:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "sporting-cristal",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-09-13T13:00-05:00",
+      "home": "sport-boys",
+      "away": "deportivo-garcilaso",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-09-13T15:15-05:00",
+      "home": "atletico-grau",
+      "away": "alianza-atletico",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-09-23T15:00-05:00",
+      "home": "adt",
+      "away": "cienciano",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-09-18T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "comerciantes-unidos",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-09-18T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "adt",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-09-19T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "cusco-fc",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-09-19T15:30-05:00",
+      "home": "sporting-cristal",
+      "away": "atletico-grau",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-09-19T18:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "universitario",
+      "score": "4-0"
+    },
+    {
+      "start": "2026-09-19T20:15-05:00",
+      "home": "fbc-melgar",
+      "away": "sport-boys",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-09-20T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "utc",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-09-20T15:30-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "deportivo-moquegua",
+      "score": "4-0"
+    },
+    {
+      "start": "2026-09-30T15:00-05:00",
+      "home": "cienciano",
+      "away": "los-chankas",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-10-08T13:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "cienciano",
+      "score": "0-2"
+    },
+    {
+      "start": "2026-10-08T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "los-chankas",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-10-09T20:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "sport-huancayo",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-10-10T13:00-05:00",
+      "home": "adt",
+      "away": "fc-cajamarca",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-10-10T15:30-05:00",
+      "home": "comerciantes-unidos",
+      "away": "juan-pablo-ii-college",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-10-10T19:00-05:00",
+      "home": "universitario",
+      "away": "fbc-melgar",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-10-11T13:00-05:00",
+      "home": "utc",
+      "away": "sporting-cristal",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-10-11T15:30-05:00",
+      "home": "sport-boys",
+      "away": "alianza-atletico",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-10-11T18:30-05:00",
+      "home": "cusco-fc",
+      "away": "alianza-lima",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-10-16T13:00-05:00",
+      "home": "sport-huancayo",
+      "away": "cusco-fc",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-10-16T15:30-05:00",
+      "home": "los-chankas",
+      "away": "adt",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-10-17T15:00-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "sport-boys",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-10-17T18:00-05:00",
+      "home": "fbc-melgar",
+      "away": "deportivo-garcilaso",
+      "score": "4-2"
+    },
+    {
+      "start": "2026-10-17T20:30-05:00",
+      "home": "alianza-lima",
+      "away": "atletico-grau",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-10-18T11:00-05:00",
+      "home": "sporting-cristal",
+      "away": "comerciantes-unidos",
+      "score": "4-2"
+    },
+    {
+      "start": "2026-10-18T13:00-05:00",
+      "home": "fc-cajamarca",
+      "away": "deportivo-moquegua",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-10-18T15:30-05:00",
+      "home": "alianza-atletico",
+      "away": "universitario",
+      "score": "1-4"
+    },
+    {
+      "start": "2026-10-18T18:30-05:00",
+      "home": "cienciano",
+      "away": "utc",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-10-23T13:00-05:00",
+      "home": "utc",
+      "away": "fbc-melgar",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-10-23T15:15-05:00",
+      "home": "atletico-grau",
+      "away": "adt",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-10-24T12:45-05:00",
+      "home": "sport-huancayo",
+      "away": "alianza-atletico",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-10-24T15:15-05:00",
+      "home": "cusco-fc",
+      "away": "sporting-cristal",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-10-24T20:30-05:00",
+      "home": "universitario",
+      "away": "juan-pablo-ii-college",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-10-25T11:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "cienciano",
+      "score": "3-1"
+    },
+    {
+      "start": "2026-10-25T13:15-05:00",
+      "home": "deportivo-moquegua",
+      "away": "alianza-lima",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-10-25T15:30-05:00",
+      "home": "sport-boys",
+      "away": "fc-cajamarca",
+      "score": "4-2"
+    },
+    {
+      "start": "2026-10-25T18:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "los-chankas",
+      "score": "4-1"
+    },
+    {
+      "start": "2026-10-27T15:00-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "sport-huancayo",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-10-28T11:00-05:00",
+      "home": "adt",
+      "away": "deportivo-moquegua",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-10-28T13:15-05:00",
+      "home": "fc-cajamarca",
+      "away": "utc",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-10-28T15:30-05:00",
+      "home": "alianza-atletico",
+      "away": "deportivo-garcilaso",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-10-28T19:00-05:00",
+      "home": "cienciano",
+      "away": "atletico-grau",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-10-29T13:00-05:00",
+      "home": "los-chankas",
+      "away": "cusco-fc",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-10-29T15:30-05:00",
+      "home": "sporting-cristal",
+      "away": "alianza-lima",
+      "score": "3-2"
+    },
+    {
+      "start": "2026-10-29T19:30-05:00",
+      "home": "fbc-melgar",
+      "away": "comerciantes-unidos",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-11-04T20:30-05:00",
+      "home": "universitario",
+      "away": "sport-boys",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-10-31T15:30-05:00",
+      "home": "alianza-atletico",
+      "away": "juan-pablo-ii-college",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-11-01T11:00-05:00",
+      "home": "deportivo-moquegua",
+      "away": "los-chankas",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-11-01T13:15-05:00",
+      "home": "cusco-fc",
+      "away": "sport-boys",
+      "score": "0-1"
+    },
+    {
+      "start": "2026-11-01T15:30-05:00",
+      "home": "atletico-grau",
+      "away": "universitario",
+      "score": "1-3"
+    },
+    {
+      "start": "2026-11-02T11:00-05:00",
+      "home": "sport-huancayo",
+      "away": "fbc-melgar",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-11-02T13:15-05:00",
+      "home": "utc",
+      "away": "deportivo-garcilaso",
+      "score": "2-3"
+    },
+    {
+      "start": "2026-11-02T15:30-05:00",
+      "home": "sporting-cristal",
+      "away": "fc-cajamarca",
+      "score": "5-0"
+    },
+    {
+      "start": "2026-11-03T15:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "adt",
+      "score": "2-2"
+    },
+    {
+      "start": "2026-11-03T20:00-05:00",
+      "home": "alianza-lima",
+      "away": "cienciano",
+      "score": "1-0"
+    },
+    {
+      "start": "2026-11-06T15:00-05:00",
+      "home": "atletico-grau",
+      "away": "cusco-fc",
+      "score": "3-0"
+    },
+    {
+      "start": "2026-11-07T13:00-05:00",
+      "home": "adt",
+      "away": "sporting-cristal",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-11-07T15:30-05:00",
+      "home": "fc-cajamarca",
+      "away": "alianza-atletico",
+      "score": "2-0"
+    },
+    {
+      "start": "2026-11-07T18:00-05:00",
+      "home": "fbc-melgar",
+      "away": "juan-pablo-ii-college",
+      "score": "2-1"
+    },
+    {
+      "start": "2026-11-07T20:30-05:00",
+      "home": "cienciano",
+      "away": "sport-huancayo",
+      "score": "1-2"
+    },
+    {
+      "start": "2026-11-08T13:00-05:00",
+      "home": "los-chankas",
+      "away": "alianza-lima",
+      "score": "1-1"
+    },
+    {
+      "start": "2026-11-08T15:30-05:00",
+      "home": "sport-boys",
+      "away": "utc",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-11-08T18:00-05:00",
+      "home": "deportivo-garcilaso",
+      "away": "comerciantes-unidos",
+      "score": "0-0"
+    },
+    {
+      "start": "2026-11-08T20:30-05:00",
+      "home": "universitario",
+      "away": "deportivo-moquegua",
+      "score": "2-2"
+    }
+  ],
+  "parameters": {
+    "decay": 0.004,
+    "ridge": 5,
+    "dixonColes": true,
+    "home": 0.42886178601302266,
+    "altitude": -0.021595483061365838,
+    "rho": 0.0030929596965825765,
+    "intercept": 0.08534203620966187
+  },
+  "simulations": 20000,
+  "seed": 20261112,
+  "matches": [
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-15T13:00-05:00",
+      "home": "comerciantes-unidos",
+      "away": "sport-boys",
+      "pHome": 0.4507169078726878,
+      "pDraw": 0.2792725753564744,
+      "pAway": 0.27001051677083804,
+      "xHome": 1.32,
+      "xAway": 0.95
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-15T15:15-05:00",
+      "home": "juan-pablo-ii-college",
+      "away": "deportivo-garcilaso",
+      "pHome": 0.4206230978400672,
+      "pDraw": 0.2439154793259707,
+      "pAway": 0.3354614228339623,
+      "xHome": 1.57,
+      "xAway": 1.37
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-16T13:00-05:00",
+      "home": "utc",
+      "away": "los-chankas",
+      "pHome": 0.5032421392976283,
+      "pDraw": 0.24313623983425708,
+      "pAway": 0.2536216208681148,
+      "xHome": 1.66,
+      "xAway": 1.1
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-16T15:15-05:00",
+      "home": "cusco-fc",
+      "away": "adt",
+      "pHome": 0.5775465478974473,
+      "pDraw": 0.23148335109680565,
+      "pAway": 0.19097010100574682,
+      "xHome": 1.77,
+      "xAway": 0.91
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-16T15:15-05:00",
+      "home": "deportivo-moquegua",
+      "away": "atletico-grau",
+      "pHome": 0.3904500469689318,
+      "pDraw": 0.31065765827196207,
+      "pAway": 0.29889229475910634,
+      "xHome": 1.06,
+      "xAway": 0.89
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-18T15:00-05:00",
+      "home": "alianza-atletico",
+      "away": "fbc-melgar",
+      "pHome": 0.4334562786854554,
+      "pDraw": 0.23553029277609036,
+      "pAway": 0.3310134285384544,
+      "xHome": 1.68,
+      "xAway": 1.44
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-21T15:30-05:00",
+      "home": "alianza-lima",
+      "away": "fc-cajamarca",
+      "pHome": 0.7716577838446145,
+      "pDraw": 0.1426693375603595,
+      "pAway": 0.08567287859502574,
+      "xHome": 2.65,
+      "xAway": 0.78
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-22T15:00-05:00",
+      "home": "sport-huancayo",
+      "away": "universitario",
+      "pHome": 0.45510703818382187,
+      "pDraw": 0.23728400400349797,
+      "pAway": 0.30760895781267966,
+      "xHome": 1.68,
+      "xAway": 1.35
+    },
+    {
+      "tournament": "clausura",
+      "round": 17,
+      "start": "2026-11-22T15:00-05:00",
+      "home": "sporting-cristal",
+      "away": "cienciano",
+      "pHome": 0.6375508645819838,
+      "pDraw": 0.18434409195047755,
+      "pAway": 0.17810504346753867,
+      "xHome": 2.4,
+      "xAway": 1.21
+    }
+  ],
+  "teams": [
+    {
+      "team": "alianza-lima",
+      "clausura": 0,
+      "season": 0.55285,
+      "relegation": 0
+    },
+    {
+      "team": "universitario",
+      "clausura": 0.1117,
+      "season": 0.2671,
+      "relegation": 0
+    },
+    {
+      "team": "sport-huancayo",
+      "clausura": 0.53775,
+      "season": 0.104,
+      "relegation": 0
+    },
+    {
+      "team": "sporting-cristal",
+      "clausura": 0.35055,
+      "season": 0.07605,
+      "relegation": 0
+    },
+    {
+      "team": "alianza-atletico",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "atletico-grau",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "cienciano",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "comerciantes-unidos",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "cusco-fc",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "deportivo-garcilaso",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "fbc-melgar",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "juan-pablo-ii-college",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "los-chankas",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "sport-boys",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0
+    },
+    {
+      "team": "adt",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0.01865
+    },
+    {
+      "team": "fc-cajamarca",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0.4637
+    },
+    {
+      "team": "deportivo-moquegua",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 0.51765
+    },
+    {
+      "team": "utc",
+      "clausura": 0,
+      "season": 0,
+      "relegation": 1
+    }
+  ],
+  "backtest": {
+    "rounds": 16,
+    "model": {
+      "logLoss": 1.0149074346734075,
+      "brier": 0.6082205692425066,
+      "matches": 144
+    },
+    "baseRates": {
+      "logLoss": 1.0589766040623394,
+      "brier": 0.6366190480024856,
+      "matches": 144
+    },
+    "odds": {
+      "logLoss": 0.9451819702818803,
+      "brier": 0.559269003249796,
+      "matches": 144
+    }
+  }
+}
