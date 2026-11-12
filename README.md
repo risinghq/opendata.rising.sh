@@ -1,7 +1,9 @@
 # opendata.rising.sh
 
-A catalogue of public events. Each event lists its acts, and each attendance
-figure shows who estimated it and links to the report. The site is in Spanish.
+A catalogue of public events, in Spanish. It has two kinds. An attendance event
+lists its acts, and each figure shows who estimated it and links to the report.
+A season lists its matches, and every figure on the page is derived from them.
+The first season is the Liga 1 2026.
 
 ## Develop
 
@@ -19,12 +21,23 @@ bun run preview  # serve dist/ in the Worker, after bun run build
 
 ## Add an event
 
-1. Create `data/events/<slug>.json`. The slug becomes the address
+1. Create `data/events/<slug>.json` with a `kind`. The slug becomes the address
    `/eventos/<slug>`.
 2. Fill it in as [docs/data.md](docs/data.md) describes.
 3. Run `bun run test`. The test fails with a path to each invalid field.
 4. Run `bun run build`. The page, the JSON and the CSV appear under
    `dist/eventos/`.
+
+## Refresh the Liga 1 season
+
+```sh
+bun scripts/import-liga1.ts
+bun run test
+```
+
+The script fetches the Apertura and Clausura pages from Spanish Wikipedia and
+rewrites the matches in `data/events/liga-1-2026.json`, with the revision of
+each page. The data is CC BY-SA 4.0. Network access is only in this script.
 
 The code map is in [docs/architecture.md](docs/architecture.md).
 
