@@ -1,0 +1,35 @@
+export const TEAM_ALIASES: Record<string, string> = {
+  "AD Tarma": "adt",
+  ADT: "adt",
+  "ADT Tarma": "adt",
+  "Alianza Atletico": "alianza-atletico",
+  "Alianza Atlético": "alianza-atletico",
+  "Alianza Lima": "alianza-lima",
+  "Atletico Grau": "atletico-grau",
+  "Atlético Grau": "atletico-grau",
+  Cienciano: "cienciano",
+  "Comerciantes Unidos": "comerciantes-unidos",
+  Cusco: "cusco-fc",
+  "Cusco FC": "cusco-fc",
+  "Deportivo Garcilaso": "deportivo-garcilaso",
+  "Deportivo Moquegua": "deportivo-moquegua",
+  "FBC Melgar": "fbc-melgar",
+  Melgar: "fbc-melgar",
+  "FC Cajamarca": "fc-cajamarca",
+  Cajamarca: "fc-cajamarca",
+  "Juan Pablo II": "juan-pablo-ii-college",
+  "Juan Pablo II College": "juan-pablo-ii-college",
+  "CD Los Chankas": "los-chankas",
+  "Los Chankas": "los-chankas",
+  "Sport Boys": "sport-boys",
+  "Sport Huancayo": "sport-huancayo",
+  "Sporting Cristal": "sporting-cristal",
+  Universitario: "universitario",
+  "Universitario de Deportes": "universitario",
+  UTC: "utc",
+  "UTC Cajamarca": "utc",
+};
+
+export function teamId(apiName: string): string | null {
+  return TEAM_ALIASES[apiName] ?? null;
+}
