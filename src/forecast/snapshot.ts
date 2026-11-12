@@ -35,9 +35,18 @@ export function snapshotExists(season: string, date: string, root = ROOT): boole
 }
 
 export function writeSnapshot(snapshot: ForecastSnapshot, root = ROOT): string {
-  const dir = forecastDir(snapshot.season, root);
+  return writeImmutable(snapshot.season, snapshot.date, snapshot, root);
+}
+
+export function writeImmutable(
+  series: string,
+  date: string,
+  snapshot: unknown,
+  root = ROOT,
+): string {
+  const dir = forecastDir(series, root);
   mkdirSync(dir, { recursive: true });
-  const path = join(dir, `${snapshot.date}.json`);
+  const path = join(dir, `${date}.json`);
   if (existsSync(path)) {
     throw new Error(`forecast snapshot ${path} already exists and is never rewritten`);
   }
@@ -45,13 +54,28 @@ export function writeSnapshot(snapshot: ForecastSnapshot, root = ROOT): string {
   return path;
 }
 
-export function latestSnapshot(season: string, root = ROOT): ForecastSnapshot | null {
-  const dir = forecastDir(season, root);
+export function latestJson<T>(series: string, root = ROOT): T | null {
+  const dir = forecastDir(series, root);
   if (!existsSync(dir)) return null;
   const latest = readdirSync(dir)
     .filter((f) => f.endsWith(".json"))
     .sort()
     .at(-1);
   if (!latest) return null;
-  return JSON.parse(readFileSync(join(dir, latest), "utf8")) as ForecastSnapshot;
+  return JSON.parse(readFileSync(join(dir, latest), "utf8")) as T;
+}
+
+export function latestBefore<T>(series: string, date: string, root = ROOT): T | null {
+  const dir = forecastDir(series, root);
+  if (!existsSync(dir)) return null;
+  const latest = readdirSync(dir)
+    .filter((f) => f.endsWith(".json") && f.slice(0, 10) < date)
+    .sort()
+    .at(-1);
+  if (!latest) return null;
+  return JSON.parse(readFileSync(join(dir, latest), "utf8")) as T;
+}
+
+export function latestSnapshot(season: string, root = ROOT): ForecastSnapshot | null {
+  return latestJson<ForecastSnapshot>(season, root);
 }

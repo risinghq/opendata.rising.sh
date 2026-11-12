@@ -7,6 +7,7 @@
     "build": "bun scripts/build.ts",
     "preview": "wrangler dev",
     "refresh:liga1": "bun scripts/liga1/refresh.ts",
+    "refresh:mcu": "bun scripts/mcu/refresh.ts",
     "test": "bun test --timeout=60000",
     "lint": "oxlint && oxfmt --check .",
     "fix": "oxfmt .",
