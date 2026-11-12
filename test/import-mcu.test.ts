@@ -50,6 +50,17 @@ describe("box office table", () => {
     const rows = parseBoxOfficeRows(section);
     expect(rows.some((f) => /total/i.test(f.originalTitle))).toBe(false);
   });
+
+  test("keeps the efn of the title cell as a note", () => {
+    const table = `{| class="wikitable"
+! scope="col" | Film
+|-
+! scope="row" | ''[[Third Film]]''{{efn|The row adds its September 2026 re-release, ''[[Third Film: Encore]]''.<ref />}}
+| {{#invoke:dts|main|2022|1|1}} || $100,000,000 || $50,000,000 || $150,000,000 || 1 || 2 || $50&nbsp;million || <ref />
+|}`;
+    const rows = parseBoxOfficeRows(table);
+    expect(rows[0]!.note).toBe("The row adds its September 2026 re-release, Third Film: Encore.");
+  });
 });
 
 describe("films list", () => {
@@ -147,5 +158,22 @@ describe("toFilm", () => {
   test("keeps an unreleased film without asking for an opening", () => {
     const film = { ...released, usCanada: undefined, worldwide: undefined };
     expect(toFilm(film, "Mystery Film", src, src)).toMatchObject({ status: "unreleased" });
+  });
+
+  test("writes the re-release efn as a Spanish note", () => {
+    const film = {
+      ...released,
+      usCanada: undefined,
+      worldwide: undefined,
+      note: "The row adds its September 2026 re-release, Third Film: Encore.",
+    };
+    expect(toFilm(film, "Mystery Film", src, src).note).toBe(
+      "Las cifras incluyen el reestreno de septiembre de 2026, Third Film: Encore.",
+    );
+  });
+
+  test("throws naming the film when the efn cannot be written as a note", () => {
+    const film = { ...released, usCanada: undefined, worldwide: undefined, note: "Unrelated." };
+    expect(() => toFilm(film, "Mystery Film", src, src)).toThrow(/Mystery Film/);
   });
 });
