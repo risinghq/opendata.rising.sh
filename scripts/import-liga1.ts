@@ -3,10 +3,15 @@ import { join, resolve } from "node:path";
 import { parseArgs } from "node:util";
 
 import { parseResults, type RawMatch } from "./liga1-wikitext.ts";
+import {
+  canonicalTitles,
+  fetchPage,
+  limaParts,
+  permalink,
+  type PageRevision,
+} from "./mediawiki.ts";
 
-const API = "https://es.wikipedia.org/w/api.php";
-const USER_AGENT =
-  "opendata-rising-sh-importer/1.0 (open data catalogue; https://opendata.rising.sh)";
+const HOST = "es.wikipedia.org";
 const LICENSE = "CC BY-SA 4.0";
 const OUTLET = "Wikipedia en español";
 
@@ -14,13 +19,6 @@ export const TOURNAMENTS = [
   { id: "apertura", name: "Torneo Apertura", page: "Torneo Apertura 2026 (Perú)", year: 2026 },
   { id: "clausura", name: "Torneo Clausura", page: "Torneo Clausura 2026 (Perú)", year: 2026 },
 ] as const;
-
-export interface PageRevision {
-  title: string;
-  revid: number;
-  timestamp: string;
-  wikitext: string;
-}
 
 export interface Frame {
   title: string;
@@ -82,18 +80,6 @@ export function stadiumTitles(
     out.set(match, title);
   }
   return out;
-}
-
-const pad = (n: number) => String(n).padStart(2, "0");
-
-function limaParts(timestamp: string) {
-  const moment = new Date(new Date(timestamp).getTime() - 5 * 3_600_000);
-  const date = `${moment.getUTCFullYear()}-${pad(moment.getUTCMonth() + 1)}-${pad(moment.getUTCDate())}`;
-  return { date, time: `${pad(moment.getUTCHours())}:${pad(moment.getUTCMinutes())}` };
-}
-
-function permalink(title: string, revid: number) {
-  return `https://es.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}?oldid=${revid}`;
 }
 
 export function assemble(
@@ -179,7 +165,7 @@ export function assemble(
       name: tournament.name,
       source: {
         outlet: OUTLET,
-        url: permalink(page.title, page.revid),
+        url: permalink(page.title, page.revid, HOST),
         revision: page.revid,
         revisionDate: limaParts(page.timestamp).date,
         license: LICENSE,
@@ -191,50 +177,6 @@ export function assemble(
   };
 }
 
-async function call(params: Record<string, string>): Promise<any> {
-  const url = `${API}?${new URLSearchParams({ format: "json", formatversion: "2", ...params })}`;
-  const response = await fetch(url, { headers: { "user-agent": USER_AGENT } });
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
-  const body = await response.json();
-  if (body.error) throw new Error(`${body.error.code}: ${body.error.info}`);
-  return body;
-}
-
-async function fetchPage(title: string): Promise<PageRevision> {
-  const parsed = (await call({ action: "parse", page: title, prop: "wikitext|revid" })).parse;
-  const info = await call({
-    action: "query",
-    prop: "revisions",
-    revids: String(parsed.revid),
-    rvprop: "timestamp",
-  });
-  const timestamp = info.query.pages[0].revisions[0].timestamp as string;
-  return { title: parsed.title, revid: parsed.revid, timestamp, wikitext: parsed.wikitext };
-}
-
-async function canonicalTitles(titles: string[]): Promise<(title: string) => string> {
-  const map = new Map<string, string>();
-  const distinct = [...new Set(titles)];
-  for (let i = 0; i < distinct.length; i += 50) {
-    const body = await call({
-      action: "query",
-      titles: distinct.slice(i, i + 50).join("|"),
-      redirects: "1",
-    });
-    const hops = new Map<string, string>(
-      [...(body.query.normalized ?? []), ...(body.query.redirects ?? [])].map(
-        (hop: { from: string; to: string }) => [hop.from, hop.to],
-      ),
-    );
-    for (const title of distinct.slice(i, i + 50)) {
-      let at = title;
-      for (let guard = 0; hops.has(at) && guard < 5; guard++) at = hops.get(at)!;
-      map.set(title, at);
-    }
-  }
-  return (title) => map.get(title) ?? title;
-}
-
 async function main() {
   const root = resolve(import.meta.dirname, "..");
   const { values } = parseArgs({
@@ -244,14 +186,14 @@ async function main() {
   const frame = JSON.parse(readFileSync(values.file, "utf8")) as Frame;
 
   const pages: PageRevision[] = [];
-  for (const tournament of TOURNAMENTS) pages.push(await fetchPage(tournament.page));
+  for (const tournament of TOURNAMENTS) pages.push(await fetchPage(tournament.page, HOST));
 
   const links = pages.flatMap((page, i) =>
     parseResults(page.wikitext, TOURNAMENTS[i]!.year).flatMap((m) =>
       m.stadium.title ? [m.stadium.title] : [],
     ),
   );
-  const event = assemble(frame, pages, await canonicalTitles(links));
+  const event = assemble(frame, pages, await canonicalTitles(links, HOST));
 
   writeFileSync(values.file, `${JSON.stringify(event, null, 2)}\n`);
   for (const t of event.tournaments) {
