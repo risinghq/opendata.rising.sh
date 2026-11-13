@@ -26,7 +26,7 @@ export interface ForecastSnapshot {
 
 const ROOT = join(import.meta.dirname, "..", "..", "data", "forecasts");
 
-export function forecastDir(season: string, root = ROOT): string {
+function forecastDir(season: string, root = ROOT): string {
   return join(root, season);
 }
 
@@ -59,17 +59,6 @@ export function latestJson<T>(series: string, root = ROOT): T | null {
   if (!existsSync(dir)) return null;
   const latest = readdirSync(dir)
     .filter((f) => f.endsWith(".json"))
-    .sort()
-    .at(-1);
-  if (!latest) return null;
-  return JSON.parse(readFileSync(join(dir, latest), "utf8")) as T;
-}
-
-export function latestBefore<T>(series: string, date: string, root = ROOT): T | null {
-  const dir = forecastDir(series, root);
-  if (!existsSync(dir)) return null;
-  const latest = readdirSync(dir)
-    .filter((f) => f.endsWith(".json") && f.slice(0, 10) < date)
     .sort()
     .at(-1);
   if (!latest) return null;

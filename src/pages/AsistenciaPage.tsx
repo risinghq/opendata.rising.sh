@@ -23,7 +23,7 @@ import { eventStatus } from "../data/stats.ts";
 import type { AsistenciaRecord, EventRecord } from "../data/types.ts";
 import { SITE_URL } from "../site.ts";
 
-export function eventUrl(event: EventRecord): string {
+function eventUrl(event: EventRecord): string {
   return `${SITE_URL}/eventos/${event.slug}`;
 }
 

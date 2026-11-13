@@ -9,16 +9,6 @@ export function mulberry32(seed: number): () => number {
   };
 }
 
-export function poissonPmf(k: number, lambda: number): number {
-  return Math.exp(-lambda + k * Math.log(lambda) - logFactorial(k));
-}
-
-const LOG_FACT = [0];
-function logFactorial(k: number): number {
-  for (let i = LOG_FACT.length; i <= k; i++) LOG_FACT[i] = LOG_FACT[i - 1]! + Math.log(i);
-  return LOG_FACT[k]!;
-}
-
 export function samplePoisson(lambda: number, rng: () => number): number {
   if (lambda <= 0) return 0;
   if (lambda > 20) return Math.max(0, Math.round(lambda + Math.sqrt(lambda) * normal(rng)));

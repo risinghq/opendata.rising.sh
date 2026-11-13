@@ -33,7 +33,7 @@ export interface AltitudePoint {
 export const MIN_MATCHES_PER_STADIUM = 5;
 
 export const isHeld = (match: Match): match is HeldMatch => match.status === "held";
-export const isPlanned = (match: Match): match is PlannedMatch => match.status === "planned";
+const isPlanned = (match: Match): match is PlannedMatch => match.status === "planned";
 
 export function heldMatches(event: TemporadaData, tournament?: string): HeldMatch[] {
   return event.matches

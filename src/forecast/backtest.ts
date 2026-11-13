@@ -20,7 +20,7 @@ const LIMA_OFFSET_MS = 5 * 3_600_000;
 const limaDay = (instant: string) =>
   new Date(new Date(instant).getTime() - LIMA_OFFSET_MS).toISOString().slice(0, 10);
 
-export function matchKey(m: { start: string; home: string; away: string }): string {
+function matchKey(m: { start: string; home: string; away: string }): string {
   return `${limaDay(m.start)}|${m.home}|${m.away}`;
 }
 

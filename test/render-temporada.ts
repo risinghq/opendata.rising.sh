@@ -8,7 +8,7 @@ const server = await createServer({
 });
 try {
   const mod = await server.ssrLoadModule("/src/pages/TemporadaPage.tsx");
-  const { renderToString } = await server.ssrLoadModule("/node_modules/@solidjs/web");
+  const { renderToString } = await server.ssrLoadModule("@solidjs/web");
   process.stdout.write(renderToString(() => mod.TemporadaPage(input)));
 } finally {
   await server.close();

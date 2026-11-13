@@ -8,7 +8,7 @@ const server = await createServer({
 });
 try {
   const mod = await server.ssrLoadModule("/src/pages/TaquillaPage.tsx");
-  const { renderToString } = await server.ssrLoadModule("/node_modules/@solidjs/web");
+  const { renderToString } = await server.ssrLoadModule("@solidjs/web");
   process.stdout.write(renderToString(() => mod.TaquillaPage(input)));
 } finally {
   await server.close();
