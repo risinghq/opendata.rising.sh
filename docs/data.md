@@ -322,8 +322,11 @@ español, else the original), `originalTitle`, `phase`, `release` (the U.S.
 date, `YYYY-MM-DD`) and `status`. A released film adds `budget` (optional;
 `low` and `high` when the source gives a range), `opening` (opening weekend
 gross in the United States and Canada), `usCanada` and `worldwide`, each a
-figure of `amount` in integer nominal U.S. dollars and its `source`. An
-unreleased film has none of those.
+figure of `amount` in integer nominal U.S. dollars and its `source`. A released
+film may also hold `boxOfficeMojo`: `url` and `accessed` (`YYYY-MM-DD`) of the
+Box Office Mojo page that Wikipedia cites for its gross, and `archive`, the
+`web.archive.org` copy when the citation has one. An unreleased film has none
+of those.
 
 `note` is optional: a caveat in Spanish, shown under the title, for a figure
 that needs one. `Avengers: Endgame` carries one because its worldwide gross
@@ -338,6 +341,13 @@ del <día> de <mes> de <año>`. `source` holds the revision id and its
 permanent `?oldid=` link; each figure links the phase-page revision it came
 from, and each opening-weekend figure links the film-article revision.
 
+Wikipedia cites Box Office Mojo for the gross of each film. Box Office Mojo and
+The Numbers forbid scraping, so Wikipedia stays the carrier and nothing fetches
+either site. A film with `boxOfficeMojo` shows the source as "Box Office Mojo,
+vía Wikipedia" on the page and in the CSV, with links to the Box Office Mojo
+page, its archive copy and the Wikipedia revision. A film without it shows the
+Wikipedia link alone.
+
 ### Real terms
 
 `data/cpi/cuur0000sa0.json` holds the annual averages of the U.S. consumer
@@ -351,11 +361,16 @@ of the dollar the page uses. Every figure shown in real terms converts with
 Doomsday forecast, made before the release and never rewritten. It holds the
 date, the dollar base year, the films used, the model form and coefficients,
 the published point and 80% interval per figure (opening weekend and
-worldwide), the worldwide-given-opening ratio, the probabilities, the backtest
-and `basis`. The page lists every snapshot taken before the release, latest
-first, and shows each against the real figures once the film is released. The
+worldwide), the worldwide-given-opening ratio, the probabilities of the
+published worldwide figure, the backtest and `basis`. `basis` names the
+published method of each figure: `{ "opening": "model", "worldwide": "previous"
+}`. The page lists every snapshot taken before the release, latest first, and
+shows each against the real figures once the film is released. The
 `2026-11-12.json` snapshot comes from the first model and has no `basis`,
-`ratio` or `probabilities`.
+`ratio` or `probabilities`. The `2026-11-13.json` snapshot has `basis` as the
+single word `model`, which stands for the model on both figures.
+`bun scripts/mcu/forecast.ts` writes the snapshot of the current Lima day, never
+another date, and leaves an existing file as it is.
 
 The model in `src/forecast/mcu.ts` has two stages, both on real dollars.
 
@@ -384,18 +399,28 @@ leave-one-out errors with the seeded generator `mulberry32` (seed
 
 The backtest predicts each Avengers film and each of the last ten releases
 using only the films before it, and reports the median absolute percentage
-error of the model and of the naive baseline for the opening and for worldwide.
-The naive opening is the previous film's opening. The naive worldwide is that
-opening times the ratio, so it goes through the same ratio stage as the model
-and the published worldwide is always an opening times the ratio. The backtest
-also records `previousWorldwide`, the error of repeating the previous film's
-worldwide gross, as a reference that the rule does not use. The rule that picks
-what is published is fixed before the run: the model is published only if it
-beats the naive baseline on both figures. Otherwise `basis` is `naive`: the
-snapshot publishes the previous film's opening and that opening times the
-ratio, with the opening interval from the steps between consecutive openings
-and the worldwide interval and probabilities simulated with those steps and the
-ratio errors, and keeps the model's figures in `candidate`.
+error (APE) of each method. The methods are:
+
+- `model`: the two stages above.
+- `naive`: the previous film's opening for the opening, and that opening times
+  the ratio for worldwide.
+- `previous`, for worldwide only: the previous film's worldwide gross, recorded
+  as `previousWorldwide`.
+
+The publication rule is fixed before the run. For each figure, the snapshot
+publishes the method with the lowest backtest median APE among the methods of
+that figure. A tie goes to the simpler method, in the order `previous`,
+`naive`, `model`, so the model is published only when it is strictly better. A
+published figure never loses to a baseline the page reports. The snapshot
+keeps the model's own figures in `candidate` when any figure uses another
+method.
+
+The interval of `naive` and `previous` comes from the 10th and 90th percentiles
+of the steps between consecutive films, in logs: openings for the opening and
+worldwide grosses for `previous`. The worldwide interval of `naive` and its
+probabilities are simulated with the opening steps and the ratio errors. The
+probabilities of `previous` are simulated with the worldwide steps. The same
+seed gives the same draws.
 
 ### Projections
 
@@ -424,6 +449,14 @@ the BLS API. It keeps the other fields. The box office table is transcluded
 from the six phase pages; the opening weekend comes from each film's
 article; the Spanish titles come from each article's `es` langlink.
 
+Each table row ends with a reference cell. The importer reads the Box Office
+Mojo citation in it, a `{{Cite Box Office Mojo}}` or a `cite web` template whose
+`url` is on `boxofficemojo.com`, and stores `url`, `accessed` and `archive` as
+`boxOfficeMojo`. The `url` of a `{{Cite Box Office Mojo}}` is built from its
+`id` as `https://www.boxofficemojo.com/title/tt<id>/`, with a leading `tt` in
+the `id` dropped. A row without a citation with a URL and an access date keeps
+the Wikipedia source alone, and the importer prints a warning naming the film.
+
 A row can carry two sets of figures in `<noinclude>` and `<includeonly>`
 cells. The importer reads the `<includeonly>` ones, the cells the List page
 transcludes, so the figures match what the source link shows. `Avengers:
@@ -439,4 +472,7 @@ importer cannot turn into a note stops the run.
 - `/eventos/<slug>.csv` holds one row per film, with the columns `pelicula`,
   `titulo_original`, `fase`, `estreno`, `estado`, `presupuesto_min_usd`,
   `presupuesto_max_usd`, `estreno_fin_de_semana_usd`, `eeuu_y_canada_usd`,
-  `mundial_usd`, `fuentes` and `aviso`.
+  `mundial_usd`, `fuente_taquilla` ("Box Office Mojo, vía Wikipedia" or
+  "Wikipedia en inglés"), `taquilla_url`, `taquilla_copia_url`,
+  `taquilla_consulta` (the Box Office Mojo page, its archive copy and the
+  access date), `fuentes` and `aviso`.

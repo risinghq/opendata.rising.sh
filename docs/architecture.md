@@ -102,11 +102,12 @@ phase pages through the MediaWiki API, the wikitext of each film's article for
 the opening weekend, each article's `es` langlink for the Spanish title and
 the CPI annual averages from the BLS, then rewrites
 `data/events/mcu-taquilla.json`. `scripts/mcu-wikitext.ts` parses the box
-office table, the films list and the opening-weekend sentence.
+office table with each row's Box Office Mojo citation, the films list and the
+opening-weekend sentence.
 `scripts/mediawiki.ts` and `scripts/wikitext.ts` hold the API calls and
 wikitext helpers both importers share. `scripts/mcu/forecast.ts` fits the
-model, backtests it against the naive baseline and writes a dated snapshot
-under `data/forecasts/mcu/`. The box office page reads the latest snapshot.
+model, backtests it against the baselines, publishes per figure the method
+with the lowest error and writes a dated snapshot under `data/forecasts/mcu/`. The box office page reads the latest snapshot.
 
 The model lives in `src/forecast/`: `model.ts` fits the Poisson parameters,
 `simulate.ts` plays the remaining matches, `rules.ts` applies the league's
