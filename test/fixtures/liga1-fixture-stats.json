@@ -1,0 +1,242 @@
+{
+  "id": 3503937770,
+  "kickoff_utc": "2026-11-08T01:30:00+00:00",
+  "status": "finished",
+  "teams": {
+    "home": {
+      "name": "Cienciano"
+    },
+    "away": {
+      "name": "Sport Huancayo"
+    }
+  },
+  "goals": {
+    "home": 1,
+    "away": 2,
+    "half_home": 1,
+    "half_away": 1
+  },
+  "corners": {
+    "home": 8,
+    "away": 3,
+    "half_home": 3,
+    "half_away": 1
+  },
+  "events": [
+    {
+      "type": "corner",
+      "minute": 5,
+      "team": "home",
+      "count": 1
+    },
+    {
+      "type": "goal",
+      "minute": 5,
+      "team": "home",
+      "count": 1
+    },
+    {
+      "type": "corner",
+      "minute": 16,
+      "team": "home",
+      "count": 2
+    },
+    {
+      "type": "missed_penalty",
+      "minute": 21,
+      "team": "home"
+    },
+    {
+      "type": "corner",
+      "minute": 22,
+      "team": "home",
+      "count": 3
+    },
+    {
+      "type": "corner",
+      "minute": 29,
+      "team": "away",
+      "count": 4
+    },
+    {
+      "type": "goal",
+      "minute": 40,
+      "team": "away",
+      "count": 2
+    },
+    {
+      "type": "period_score",
+      "minute": null,
+      "team": null,
+      "period": "first_half",
+      "score": {
+        "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "type": "corner",
+      "minute": 47,
+      "team": "home",
+      "count": 5
+    },
+    {
+      "type": "substitution",
+      "minute": 46,
+      "team": "home"
+    },
+    {
+      "type": "corner",
+      "minute": 51,
+      "team": "home",
+      "count": 6
+    },
+    {
+      "type": "corner",
+      "minute": 51,
+      "team": "home",
+      "count": 7
+    },
+    {
+      "type": "goal",
+      "minute": 58,
+      "team": "away",
+      "count": 3
+    },
+    {
+      "type": "yellow_card",
+      "minute": 59,
+      "team": "away",
+      "count": 1
+    },
+    {
+      "type": "corner",
+      "minute": 63,
+      "team": "home",
+      "count": 8
+    },
+    {
+      "type": "substitution",
+      "minute": 62,
+      "team": "away"
+    },
+    {
+      "type": "substitution",
+      "minute": 65,
+      "team": "away"
+    },
+    {
+      "type": "yellow_card",
+      "minute": 67,
+      "team": "away",
+      "count": 2
+    },
+    {
+      "type": "red_card",
+      "minute": 75,
+      "team": "home"
+    },
+    {
+      "type": "substitution",
+      "minute": 78,
+      "team": "home"
+    },
+    {
+      "type": "corner",
+      "minute": 85,
+      "team": "home",
+      "count": 9
+    },
+    {
+      "type": "substitution",
+      "minute": 83,
+      "team": "away"
+    },
+    {
+      "type": "substitution",
+      "minute": 83,
+      "team": "away"
+    },
+    {
+      "type": "corner",
+      "minute": 86,
+      "team": "away",
+      "count": 10
+    },
+    {
+      "type": "substitution",
+      "minute": 85,
+      "team": "home"
+    },
+    {
+      "type": "corner",
+      "minute": 90,
+      "team": "away",
+      "count": 11
+    },
+    {
+      "type": "substitution",
+      "minute": 93,
+      "team": "home"
+    },
+    {
+      "type": "substitution",
+      "minute": 90,
+      "team": "home"
+    },
+    {
+      "type": "period_score",
+      "minute": null,
+      "team": null,
+      "period": "second_half",
+      "score": {
+        "home": 1,
+        "away": 2
+      }
+    }
+  ],
+  "statistics": {
+    "attacks": {
+      "home": 104,
+      "away": 88
+    },
+    "dangerous_attacks": {
+      "home": 61,
+      "away": 47
+    },
+    "shots_on_target": {
+      "home": 6,
+      "away": 4
+    },
+    "shots_off_target": {
+      "home": 5,
+      "away": 7
+    },
+    "possession": {
+      "home": 54,
+      "away": 46
+    },
+    "first_half": {
+      "attacks": {
+        "home": 52,
+        "away": 41
+      },
+      "dangerous_attacks": {
+        "home": 30,
+        "away": 22
+      },
+      "shots_on_target": {
+        "home": 3,
+        "away": 2
+      },
+      "shots_off_target": {
+        "home": 2,
+        "away": 3
+      },
+      "possession": {
+        "home": 56,
+        "away": 44
+      }
+    }
+  }
+}

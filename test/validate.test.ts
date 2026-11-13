@@ -177,7 +177,83 @@ describe("validateEvent, temporada", () => {
     expect(validateEvent(withMatches(held, planned))).toEqual([]);
   });
 
+  const teamStats = (possession: number) => ({
+    possession,
+    shotsOnTarget: 4,
+    shotsOffTarget: 5,
+    attacks: 80,
+    dangerousAttacks: 30,
+  });
+  const events = {
+    halfTime: { home: 0, away: 0 },
+    goals: [{ minute: 10, team: "home" }],
+    cards: [],
+    corners: { home: 2, away: 1 },
+    cornerMinutes: [
+      { minute: 12, team: "home" },
+      { minute: 40, team: "away" },
+    ],
+    substitutions: [{ minute: 60, team: "away" }],
+    missedPenalties: [{ minute: 30, team: "home" }],
+    stats: { home: teamStats(55), away: teamStats(45) },
+  };
+  const withEvents = (change: object) => withMatches({ ...held, events: { ...events, ...change } });
+
+  test("accepts events with the match statistics, with stats null, and without the new fields", () => {
+    expect(validateEvent(withEvents({}))).toEqual([]);
+    expect(validateEvent(withEvents({ stats: null }))).toEqual([]);
+    expect(
+      validateEvent(withEvents({ stats: { home: teamStats(54), away: teamStats(47) } })),
+    ).toEqual([]);
+    const { cornerMinutes: _c, substitutions: _s, missedPenalties: _m, stats: _t, ...old } = events;
+    expect(validateEvent(withMatches({ ...held, events: old }))).toEqual([]);
+  });
+
   const failures: [string, unknown, string][] = [
+    [
+      "possession that does not add up to 100",
+      withEvents({ stats: { home: teamStats(60), away: teamStats(45) } }),
+      "add up to 100",
+    ],
+    [
+      "possession above 100",
+      withEvents({ stats: { home: teamStats(101), away: teamStats(0) } }),
+      "stats.home.possession",
+    ],
+    [
+      "a fractional shot count",
+      withEvents({
+        stats: { home: { ...teamStats(55), shotsOnTarget: 1.5 }, away: teamStats(45) },
+      }),
+      "stats.home.shotsOnTarget",
+    ],
+    [
+      "a negative attack count",
+      withEvents({ stats: { home: teamStats(55), away: { ...teamStats(45), attacks: -1 } } }),
+      "stats.away.attacks",
+    ],
+    [
+      "a statistic the feed does not name",
+      withEvents({ stats: { home: { ...teamStats(55), fouls: 3 }, away: teamStats(45) } }),
+      "stats.home.fouls",
+    ],
+    ["stats missing a side", withEvents({ stats: { home: teamStats(55) } }), "stats.away"],
+    [
+      "a substitution after minute 130",
+      withEvents({ substitutions: [{ minute: 131, team: "home" }] }),
+      "substitutions[0].minute",
+    ],
+    [
+      "a missed penalty with no team",
+      withEvents({ missedPenalties: [{ minute: 20 }] }),
+      "missedPenalties[0].team",
+    ],
+    ["a corner minute that is not a list", withEvents({ cornerMinutes: {} }), "cornerMinutes"],
+    [
+      "more corner minutes than corners",
+      withEvents({ corners: { home: 0, away: 1 } }),
+      "more home corners",
+    ],
     ["a missing kind", { ...season, kind: undefined }, "kind"],
     ["an unknown team", withMatches({ ...held, away: "w" }), "id of a team"],
     ["an unknown stadium", withMatches({ ...held, stadium: "otro" }), "id of a stadium"],
