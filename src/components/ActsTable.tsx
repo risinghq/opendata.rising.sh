@@ -11,6 +11,7 @@ import {
 } from "../data/format.ts";
 import { actDate, expectedDifference } from "../data/stats-asistencia.ts";
 import type { Act, Expected, Source } from "../data/types.ts";
+import { ArchiveCopy } from "./ArchiveCopy.tsx";
 
 function Sources(props: { sources: Source[] }) {
   return (
@@ -19,6 +20,7 @@ function Sources(props: { sources: Source[] }) {
         {(source) => (
           <li>
             <a href={source.url}>{source.outlet}</a>
+            <ArchiveCopy archive={source.archive} />
           </li>
         )}
       </For>

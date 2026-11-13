@@ -55,6 +55,11 @@ describe("validateEvent", () => {
       expect(validateEvent(withAct({ ...act, expected }))).toEqual([]);
       expect(validateEvent(withAct({ ...act, expected: range }))).toEqual([]);
     }
+    const archived = {
+      ...source,
+      archive: `https://web.archive.org/web/20261113120000/${source.url}`,
+    };
+    expect(validateEvent(withAct({ ...heldAct, sources: [archived] }))).toEqual([]);
   });
 
   const expected = { figure: 50, attribution: "Organizadores.", source };
@@ -93,6 +98,42 @@ describe("validateEvent", () => {
         },
       }),
       "https URL",
+    ],
+    [
+      "an archive copy off web.archive.org",
+      withAct({
+        ...heldAct,
+        sources: [
+          {
+            ...source,
+            archive: "https://example.com/web/20261113120000/https://example.org/nota",
+          },
+        ],
+      }),
+      "web.archive.org",
+    ],
+    [
+      "an archive copy of another page",
+      withAct({
+        ...heldAct,
+        sources: [
+          {
+            ...source,
+            archive: "https://web.archive.org/web/20261113120000/https://example.org/otra",
+          },
+        ],
+      }),
+      "archive",
+    ],
+    [
+      "an archive copy without a 14-digit timestamp",
+      withAct({
+        ...heldAct,
+        sources: [
+          { ...source, archive: "https://web.archive.org/web/2026/https://example.org/nota" },
+        ],
+      }),
+      "archive",
     ],
     [
       "http comparison source",

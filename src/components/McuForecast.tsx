@@ -11,6 +11,7 @@ import {
 } from "../data/format.ts";
 import { isReleased, realAmount } from "../data/stats-taquilla.ts";
 import type { Projection, TaquillaRecord } from "../data/types.ts";
+import { ArchiveCopy } from "./ArchiveCopy.tsx";
 import {
   methodsOf,
   scoresOf,
@@ -316,6 +317,7 @@ function Projections(props: { projections: Projection[]; target: string }) {
                     <td>{row.by}</td>
                     <td>
                       <a href={row.source.url}>{row.source.outlet}</a>
+                      <ArchiveCopy archive={row.source.archive} class="link-block" />
                     </td>
                     <td class="num">
                       {row.low === row.high

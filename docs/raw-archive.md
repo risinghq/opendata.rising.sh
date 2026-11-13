@@ -1,7 +1,8 @@
 # Raw archive
 
-Every fetch the importers and `bun run refresh:liga1` make goes through
-`scripts/raw.ts`, which keeps a copy of each response outside the repository.
+Every fetch the importers, `bun run refresh:liga1` and
+`bun run archive:sources` make goes through `scripts/raw.ts`, which keeps a
+copy of each response outside the repository.
 A parser fix or a new field can then be developed against what the source
 said, without a new API run. The API terms forbid publishing the raw feed,
 not keeping it, so nothing under the archive is committed.
@@ -28,6 +29,7 @@ network:
 OPENDATA_REPLAY=1 bun run refresh:liga1
 OPENDATA_REPLAY=1 bun scripts/import-liga1.ts
 OPENDATA_REPLAY=1 bun scripts/import-mcu.ts
+OPENDATA_REPLAY=1 bun run archive:sources
 ```
 
 The archive keys a response on its URL alone, so every archived request is a

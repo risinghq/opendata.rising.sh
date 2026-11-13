@@ -35,6 +35,11 @@ test("every event page holds its metadata, tables and downloads without JavaScri
       for (const act of event.acts) expect(html).toContain(act.name);
       for (const source of heldActs(event).flatMap((act) => act.sources)) {
         expect(html).toContain(`href="${source.url.replaceAll("&", "&amp;")}"`);
+        if (source.archive) {
+          expect(html).toMatch(
+            new RegExp(`href="${RegExp.escape(source.archive)}"[^>]*class="archive-copy"`),
+          );
+        }
       }
       expect(json.acts).toHaveLength(event.acts.length);
       expect(csv).toHaveLength(event.acts.length + 2);

@@ -1,0 +1,37 @@
+{
+  "kind": "asistencia",
+  "title": "Evento",
+  "acts": [
+    {
+      "status": "held",
+      "sources": [
+        {
+          "outlet": "Medio",
+          "url": "https://example.org/nota"
+        },
+        {
+          "outlet": "Otro",
+          "url": "https://otro.org/nota"
+        }
+      ],
+      "expected": {
+        "source": {
+          "outlet": "Medio",
+          "url": "https://example.org/nota"
+        }
+      }
+    }
+  ],
+  "meta": {
+    "url": "https://mojo.example/title/tt1/",
+    "accessed": "2020-11-27"
+  },
+  "comparison": [
+    {
+      "source": {
+        "outlet": "Medio",
+        "url": "https://example.org/nota"
+      }
+    }
+  ]
+}
