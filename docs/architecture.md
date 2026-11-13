@@ -54,7 +54,8 @@ canonical link, Open Graph tags, header and footer.
 The components of `asistencia` are `src/components/ActsTable.tsx`, the table of
 acts with sources as links in each row, and the charts below. The components of
 `temporada` are `src/components/StandingsTable.tsx`,
-`src/components/RoundsList.tsx` (one table per round) and
+`src/components/RoundsList.tsx` (one table per round),
+`src/components/TeamStatsTable.tsx` (averages per match) and
 `src/components/AltitudeChart.tsx`. The components of `taquilla` are
 `src/components/FilmsTable.tsx` (each figure nominal and real, sources as
 links) and `src/components/GrossChart.tsx`.

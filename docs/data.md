@@ -212,6 +212,26 @@ and both teams. Only the fields below are kept; the raw feed is never stored.
 | `cards`    | list of `{minute, team, colour}`. `colour` is `yellow` or `red`.     |
 | `corners`  | `{home, away}` corner counts.                                        |
 
+These fields are optional until a refresh writes them:
+
+| Field             | Value                                                                |
+| ----------------- | -------------------------------------------------------------------- |
+| `cornerMinutes`   | list of `{minute, team}`, one per corner.                            |
+| `substitutions`   | list of `{minute, team}`, one per substitution.                      |
+| `missedPenalties` | list of `{minute, team}`.                                            |
+| `stats`           | `{home, away}` of team statistics, or `null` when the feed has none. |
+
+A team's statistics are `possession` (percent), `shotsOnTarget`,
+`shotsOffTarget`, `attacks` and `dangerousAttacks`. The feed sends them as
+`statistics.possession`, `shots_on_target`, `shots_off_target`, `attacks` and
+`dangerous_attacks`, each with a `home` and an `away` value. The feed's
+first-half statistics are not kept. A match whose feed lacks any of the five
+statistics for either side gets `stats: null`, never zeros.
+
+The validator requires counts to be non-negative integers, possession of the
+two teams to add up to 100 give or take 1, minutes to be 0 to 130, and no more
+corner minutes of a side than its corner count.
+
 `team` is `home` or `away`. `minute` counts from kickoff; stoppage time keeps
 its own count past 45 or 90.
 
@@ -220,7 +240,10 @@ its own count past 45 or 90.
 The standings come from the held matches only: 3 points for a win, 1 for a
 draw. They order by points, goal difference and goals for. The page says that
 the official table can differ because of administrative sanctions. Home
-advantage by altitude uses stadiums with at least 5 held matches.
+advantage by altitude uses stadiums with at least 5 held matches. The team
+table of averages per match (possession, shots on target for and against,
+dangerous attacks) counts the held matches that have `stats`, and the page
+hides it when none has.
 
 ### Forecast snapshots
 
@@ -276,7 +299,10 @@ including `stadiums`. It stops and lists any stadium missing from `stadiums`.
   "Pronósticos publicados" section shows them.
 - `/eventos/<slug>.csv` holds one row per match, with the columns `torneo`,
   `fecha`, `inicio`, `local`, `visitante`, `estadio`, `ciudad`, `altitud_m`,
-  `arbitro`, `estado`, `goles_local`, `goles_visitante`, `fuente` and `aviso`.
+  `arbitro`, `estado`, `goles_local`, `goles_visitante`, the statistics
+  `posesion_*`, `tiros_arco_*`, `tiros_fuera_*`, `ataques_*` and
+  `ataques_peligrosos_*` (each with `local` and `visitante`), `fuente` and
+  `aviso`. The statistics are empty for a match without `stats`.
 
 ## Taquilla
 
