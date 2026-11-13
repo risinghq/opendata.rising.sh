@@ -107,7 +107,8 @@ opening-weekend sentence.
 `scripts/mediawiki.ts` and `scripts/wikitext.ts` hold the API calls and
 wikitext helpers both importers share. `scripts/mcu/forecast.ts` fits the
 model, backtests it against the baselines, publishes per figure the method
-with the lowest error and writes a dated snapshot under `data/forecasts/mcu/`. The box office page reads the latest snapshot.
+with the lowest error and writes a dated snapshot under `data/forecasts/mcu/`.
+The box office page reads the latest snapshot.
 
 The model lives in `src/forecast/`: `model.ts` fits the Poisson parameters,
 `simulate.ts` plays the remaining matches, `rules.ts` applies the league's

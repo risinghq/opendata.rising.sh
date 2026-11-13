@@ -1,5 +1,5 @@
-import { describe, expect, test } from "bun:test";
-import { mkdtempSync, readdirSync, readFileSync } from "node:fs";
+import { describe, expect, onTestFinished, test } from "bun:test";
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -279,6 +279,7 @@ describe("what is published", () => {
 describe("run", () => {
   test("writes the snapshot of the Lima clock day and leaves an existing one unchanged", () => {
     const root = mkdtempSync(join(tmpdir(), "mcu-forecast-"));
+    onTestFinished(() => rmSync(root, { recursive: true, force: true }));
     const dir = join(root, "mcu");
     const lateInLima = new Date("2026-11-20T04:59:00Z");
     expect(run(lateInLima, root)?.date).toBe("2026-11-19");

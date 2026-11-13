@@ -83,7 +83,6 @@ export function backtest(
   event: TemporadaData,
   options: FitOptions,
   odds: Map<string, [number, number, number]>,
-  today: string,
 ): BacktestResult {
   const clausura = event.matches.filter((m) => m.tournament === "clausura");
   const rounds = [...new Set(clausura.filter(isHeld).map((m) => m.round))].sort((a, b) => a - b);
