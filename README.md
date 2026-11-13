@@ -42,7 +42,9 @@ fetches match events and odds from 5DollarFootballAPI, joins them onto the
 Wikipedia matches, fits the forecast model and writes a dated snapshot. The
 Wikipedia data is CC BY-SA 4.0. The API key is read from `FOOTBALL_API_KEY` or
 `~/.config/5dollarfootballapi/key`. Raw API responses stay in `.cache/liga1/`,
-which is gitignored.
+which is gitignored. A copy of every fetched response is also kept outside
+the repository and can be replayed offline; see
+[docs/raw-archive.md](docs/raw-archive.md).
 
 ## Refresh the MCU box office
 

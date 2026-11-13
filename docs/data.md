@@ -208,7 +208,8 @@ team plays at most once per round of a tournament.
 
 A held match can also carry `events`, the record of what happened in it. It
 comes from 5DollarFootballAPI, joined onto the Wikipedia match by Lima date
-and both teams. Only the fields below are kept; the raw feed is never stored.
+and both teams. Only the fields below are kept. The raw feed is archived
+outside the repository as [raw-archive.md](raw-archive.md) describes.
 
 | Field      | Value                                                                |
 | ---------- | -------------------------------------------------------------------- |
