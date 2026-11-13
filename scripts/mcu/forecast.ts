@@ -6,12 +6,10 @@ import { isReleased, realAmount } from "../../src/data/stats-taquilla.ts";
 import type { TaquillaData } from "../../src/data/types.ts";
 import {
   backtest,
-  fit,
-  interval,
+  chooseBasis,
+  forecastTarget,
   lineOf,
-  predict,
   snapshotForm,
-  targetVector,
   FIGURE_KEYS,
   type McuFilm,
   type McuSnapshot,
@@ -21,6 +19,7 @@ import { latestJson, snapshotExists, writeImmutable } from "../../src/forecast/s
 const EVENT_FILE = joinPath(import.meta.dirname, "..", "..", "data", "events", "mcu-taquilla.json");
 const SERIES = "mcu";
 const TARGET = /Avengers: Doomsday/;
+const BENCHMARK = /Avengers: Endgame/;
 
 export function inputs(event: TaquillaData): { films: McuFilm[]; base: number } {
   const cpi = loadCpi();
@@ -42,17 +41,20 @@ export function buildSnapshot(event: TaquillaData, today: string): McuSnapshot |
   const target = films.find((f) => TARGET.test(f.title) && f.worldwide === undefined);
   if (!target || today >= target.release) return null;
 
-  const predictions = {} as McuSnapshot["predictions"];
-  const coefficients = {} as McuSnapshot["model"]["coefficients"];
-  for (const key of FIGURE_KEYS) {
-    const beta = fit(released, key);
-    if (!beta) throw new Error(`not enough released films to fit ${key}`);
-    coefficients[key] = beta.map((v) => Number(v.toFixed(4)));
-    const point = Math.round(predict(beta, targetVector(released, target, key)));
-    predictions[key] = { point, ...interval(released, key, point) };
-  }
+  const benchmark = event.films.find((f) => BENCHMARK.test(f.originalTitle));
+  const benchmarkReal = released.find((f) => BENCHMARK.test(f.title));
+  if (!benchmark || !isReleased(benchmark) || !benchmarkReal)
+    throw new Error("the benchmark film is not released");
+  const result = forecastTarget(released, target, [
+    { id: "1000", usd: 1_000_000_000 },
+    { id: "2000", usd: 2_000_000_000 },
+    { id: "endgame-nominal", usd: benchmark.worldwide.amount },
+    { id: "endgame-real", usd: benchmarkReal.worldwide! },
+  ]);
 
-  const test = backtest(released);
+  const results = backtest(released);
+  const basis = chooseBasis(results);
+  const published = basis === "model" ? result.model : result.naive;
   return {
     series: SERIES,
     event: "mcu-taquilla",
@@ -65,9 +67,18 @@ export function buildSnapshot(event: TaquillaData, today: string): McuSnapshot |
       opening: f.opening!,
       worldwide: f.worldwide!,
     })),
-    model: { ...snapshotForm(), coefficients },
-    predictions,
-    backtest: test,
+    model: {
+      ...snapshotForm(),
+      coefficients: { opening: result.fit.coefficients.map((v) => Number(v.toFixed(4))) },
+      center: Number(result.fit.center.toFixed(4)),
+    },
+    basis,
+    previous: result.previous,
+    predictions: published.predictions,
+    ratio: result.ratio,
+    probabilities: published.probabilities,
+    ...(basis === "naive" ? { candidate: result.model } : {}),
+    backtest: results,
   };
 }
 

@@ -80,11 +80,11 @@ export function latestSnapshot(season: string, root = ROOT): ForecastSnapshot | 
   return latestJson<ForecastSnapshot>(season, root);
 }
 
-export function allSnapshots(season: string, root = ROOT): ForecastSnapshot[] {
-  const dir = forecastDir(season, root);
+export function allSnapshots<T = ForecastSnapshot>(series: string, root = ROOT): T[] {
+  const dir = forecastDir(series, root);
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
     .filter((f) => f.endsWith(".json"))
     .sort()
-    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")) as ForecastSnapshot);
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")) as T);
 }

@@ -1,3 +1,5 @@
+import { mulberry32 } from "./poisson.ts";
+
 export interface McuFilm {
   title: string;
   release: string;
@@ -27,52 +29,25 @@ const LINES: [RegExp, string][] = [
 export const lineOf = (originalTitle: string) =>
   LINES.find(([re]) => re.test(originalTitle))?.[1] ?? originalTitle;
 
-const DAYS = 86_400_000;
-const years = (release: string, first: string) =>
-  (new Date(release).getTime() - new Date(first).getTime()) / (365.25 * DAYS);
-
 export const COVARIATES = [
   "intercept",
-  "log prev release",
   "has line predecessor",
-  "log prev same-line",
-  "years since first release",
+  "log opening of the line predecessor, centred",
 ] as const;
 export const RIDGE = 1;
 export const INTERVAL = 0.8;
+export const SIMULATIONS = 20_000;
+export const SEED = 20_261_113;
 const MIN_FIT = 5;
 
-type Row = { x: number[]; y: number };
+export const predict = (beta: number[], x: number[]) => beta.reduce((s, v, i) => s + v * x[i]!, 0);
+const mean = (values: number[]) => values.reduce((s, v) => s + v, 0) / values.length;
+const sortedCopy = (values: number[]) => [...values].sort((a, b) => a - b);
 
-function row(films: McuFilm[], i: number, key: FigureKey): Row | undefined {
-  const film = films[i]!;
-  const actual = film[key];
-  const prev = films[i - 1]?.[key];
-  if (actual === undefined || prev === undefined) return undefined;
-  const prevLine = films.slice(0, i).findLast((f) => f.line === film.line && f[key] !== undefined);
-  return {
-    x: [
-      1,
-      Math.log(prev),
-      prevLine ? 1 : 0,
-      prevLine ? Math.log(prevLine[key]!) : 0,
-      years(film.release, films[0]!.release),
-    ],
-    y: Math.log(actual),
-  };
-}
+const quantile = (sorted: number[], q: number) =>
+  sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))]!;
 
-export function targetVector(films: McuFilm[], target: McuFilm, key: FigureKey): number[] {
-  const prev = films.findLast((f) => f[key] !== undefined);
-  const prevLine = films.findLast((f) => f.line === target.line && f[key] !== undefined);
-  return [
-    1,
-    Math.log(prev![key]!),
-    prevLine ? 1 : 0,
-    prevLine ? Math.log(prevLine[key]!) : 0,
-    years(target.release, films[0]!.release),
-  ];
-}
+const tail = (1 - INTERVAL) / 2;
 
 function solve(matrix: number[][], rhs: number[]): number[] {
   const n = rhs.length;
@@ -95,14 +70,11 @@ function solve(matrix: number[][], rhs: number[]): number[] {
   return x;
 }
 
-export function fit(films: McuFilm[], key: FigureKey, skip = -1): number[] | undefined {
-  const rows = films.map((_, i) => (i === skip ? undefined : row(films, i, key)));
-  const usable = rows.filter((r): r is Row => r !== undefined);
-  if (usable.length < MIN_FIT) return undefined;
+function ridge(rows: { x: number[]; y: number }[]): number[] {
   const p = COVARIATES.length;
   const xtx = Array.from({ length: p }, () => Array.from<number>({ length: p }).fill(0));
   const xty = Array.from<number>({ length: p }).fill(0);
-  for (const { x, y } of usable) {
+  for (const { x, y } of rows) {
     for (let i = 0; i < p; i++) {
       xty[i]! += x[i]! * y;
       for (let j = 0; j < p; j++) xtx[i]![j]! += x[i]! * x[j]!;
@@ -112,30 +84,113 @@ export function fit(films: McuFilm[], key: FigureKey, skip = -1): number[] | und
   return solve(xtx, xty);
 }
 
-const dot = (b: number[], x: number[]) => b.reduce((s, v, i) => s + v * x[i]!, 0);
-
-export function predict(beta: number[], x: number[]): number {
-  return Math.exp(dot(beta, x));
+export interface OpeningFit {
+  coefficients: number[];
+  center: number;
 }
 
-const quantile = (sorted: number[], q: number) =>
-  sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))]!;
+const predecessorIndex = (films: McuFilm[], i: number) =>
+  films.slice(0, i).findLastIndex((f) => f.line === films[i]!.line && f.opening !== undefined);
 
-export function interval(films: McuFilm[], key: FigureKey, point: number) {
-  const errors = films
-    .map((film, i) => {
-      const b = fit(films, key, i);
-      const r = row(films, i, key);
-      return b && r ? r.y - dot(b, r.x) : undefined;
-    })
-    .filter((e): e is number => e !== undefined)
-    .sort((a, b) => a - b);
-  const tail = (1 - INTERVAL) / 2;
+export function fitOpening(films: McuFilm[], skip = -1): OpeningFit | undefined {
+  const rows = films.flatMap((film, i) => {
+    const via = predecessorIndex(films, i);
+    if (film.opening === undefined || i === skip || (via >= 0 && via === skip)) return [];
+    return [
+      { y: Math.log(film.opening), level: via >= 0 ? Math.log(films[via]!.opening!) : undefined },
+    ];
+  });
+  const levels = rows.flatMap((r) => (r.level === undefined ? [] : [r.level]));
+  if (rows.length < MIN_FIT || levels.length === 0) return undefined;
+  const center = mean(levels);
+  const coefficients = ridge(
+    rows.map((r) => ({
+      x: r.level === undefined ? [1, 0, 0] : [1, 1, r.level - center],
+      y: r.y,
+    })),
+  );
+  return { coefficients, center };
+}
+
+export function predictOpening(fit: OpeningFit, before: McuFilm[], target: McuFilm): number {
+  const predecessor = before.findLast((f) => f.line === target.line && f.opening !== undefined);
+  const x = predecessor ? [1, 1, Math.log(predecessor.opening!) - fit.center] : [1, 0, 0];
+  return Math.exp(predict(fit.coefficients, x));
+}
+
+export function fitRatio(films: McuFilm[], skip = -1): number | undefined {
+  const logs = films.flatMap((f, i) =>
+    i === skip || f.opening === undefined || f.worldwide === undefined
+      ? []
+      : [Math.log(f.worldwide / f.opening)],
+  );
+  return logs.length < MIN_FIT ? undefined : Math.exp(mean(logs));
+}
+
+export function openingErrors(films: McuFilm[]): number[] {
+  return films.flatMap((film, i) => {
+    const fit = fitOpening(films, i);
+    return fit && film.opening !== undefined
+      ? [Math.log(film.opening / predictOpening(fit, films.slice(0, i), film))]
+      : [];
+  });
+}
+
+export function ratioErrors(films: McuFilm[]): number[] {
+  return films.flatMap((film, i) => {
+    const ratio = fitRatio(films, i);
+    return ratio !== undefined && film.opening !== undefined && film.worldwide !== undefined
+      ? [Math.log(film.worldwide / film.opening / ratio)]
+      : [];
+  });
+}
+
+export function naiveErrors(films: McuFilm[], key: FigureKey): number[] {
+  return films.flatMap((film, i) => {
+    const previous = films[i - 1];
+    return film[key] !== undefined && previous?.[key] !== undefined
+      ? [Math.log(film[key] / previous[key])]
+      : [];
+  });
+}
+
+export function intervalOf(point: number, errors: number[]) {
+  const sorted = sortedCopy(errors);
   return {
-    low: Math.round(point * Math.exp(quantile(errors, tail))),
-    high: Math.round(point * Math.exp(quantile(errors, 1 - tail))),
+    low: point * Math.exp(quantile(sorted, tail)),
+    high: point * Math.exp(quantile(sorted, 1 - tail)),
   };
 }
+
+const roundedInterval = (point: number, errors: number[]) => {
+  const { low, high } = intervalOf(point, errors);
+  return { point: Math.round(point), low: Math.round(low), high: Math.round(high) };
+};
+
+export function simulateWorldwide(
+  opening: number,
+  ratio: number,
+  errors: { opening: number[]; ratio: number[] },
+  seed = SEED,
+  draws = SIMULATIONS,
+): number[] {
+  const rng = mulberry32(seed);
+  const pick = (values: number[]) => values[Math.floor(rng() * values.length)]!;
+  return sortedCopy(
+    Array.from(
+      { length: draws },
+      () => opening * Math.exp(pick(errors.opening)) * ratio * Math.exp(pick(errors.ratio)),
+    ),
+  );
+}
+
+export const probabilityAbove = (sorted: number[], threshold: number) =>
+  sorted.filter((v) => v > threshold).length / sorted.length;
+
+export const rangeOf = (sorted: number[]) => ({
+  low: Math.round(quantile(sorted, tail)),
+  high: Math.round(quantile(sorted, 1 - tail)),
+});
 
 export interface BacktestRow {
   film: string;
@@ -148,11 +203,12 @@ export interface BacktestRow {
 export interface BacktestResult {
   cases: number;
   byFigure: Record<FigureKey, { model: number; naive: number }>;
+  previousWorldwide?: number;
   rows: BacktestRow[];
 }
 
 const median = (values: number[]) => {
-  const sorted = [...values].sort((a, b) => a - b);
+  const sorted = sortedCopy(values);
   const mid = Math.floor(sorted.length / 2);
   return sorted.length % 2 ? sorted[mid]! : (sorted[mid - 1]! + sorted[mid]!) / 2;
 };
@@ -164,22 +220,34 @@ export function backtest(films: McuFilm[]): BacktestResult {
   });
   films.slice(-10).forEach((film) => targets.add(films.indexOf(film)));
   const rows: BacktestRow[] = [];
+  const previousErrors: number[] = [];
   for (const i of [...targets].sort((a, b) => a - b)) {
     const film = films[i]!;
-    for (const key of FIGURE_KEYS) {
-      const before = films.slice(0, i);
-      const beta = fit(before, key);
-      const actual = film[key];
-      const naive = films[i - 1]?.[key];
-      if (!beta || actual === undefined || naive === undefined) continue;
-      rows.push({
+    const before = films.slice(0, i);
+    const fit = fitOpening(before);
+    const ratio = fitRatio(before);
+    const previous = films[i - 1];
+    if (!fit || ratio === undefined || !previous) continue;
+    if (film.opening === undefined || film.worldwide === undefined) continue;
+    const opening = predictOpening(fit, before, film);
+    if (previous.worldwide !== undefined)
+      previousErrors.push(Math.abs(previous.worldwide - film.worldwide) / film.worldwide);
+    rows.push(
+      {
         film: film.title,
-        figure: key,
-        actual,
-        predicted: Math.round(predict(beta, targetVector(before, film, key))),
-        naive,
-      });
-    }
+        figure: "opening",
+        actual: film.opening,
+        predicted: Math.round(opening),
+        naive: previous.opening!,
+      },
+      {
+        film: film.title,
+        figure: "worldwide",
+        actual: film.worldwide,
+        predicted: Math.round(opening * ratio),
+        naive: previous.opening! * ratio,
+      },
+    );
   }
   const ape = (get: (r: BacktestRow) => number, key: FigureKey) =>
     median(rows.filter((r) => r.figure === key).map((r) => Math.abs(get(r) - r.actual) / r.actual));
@@ -192,13 +260,83 @@ export function backtest(films: McuFilm[]): BacktestResult {
         naive: ape((r) => r.naive, "worldwide"),
       },
     },
+    previousWorldwide: median(previousErrors),
     rows,
+  };
+}
+
+export interface Threshold {
+  id: string;
+  usd: number;
+}
+
+export type Basis = "model" | "naive";
+
+export const chooseBasis = (result: BacktestResult): Basis =>
+  FIGURE_KEYS.every((key) => result.byFigure[key].model < result.byFigure[key].naive)
+    ? "model"
+    : "naive";
+
+export interface Forecast {
+  predictions: Record<FigureKey, { point: number; low: number; high: number }>;
+  probabilities: {
+    seed: number;
+    simulations: number;
+    above: { id: string; usd: number; probability: number }[];
+  };
+}
+
+const probabilitiesOf = (draws: number[], thresholds: Threshold[]) => ({
+  seed: SEED,
+  simulations: draws.length,
+  above: thresholds.map(({ id, usd }) => ({
+    id,
+    usd,
+    probability: probabilityAbove(draws, usd),
+  })),
+});
+
+export function forecastTarget(released: McuFilm[], target: McuFilm, thresholds: Threshold[]) {
+  const fit = fitOpening(released);
+  const ratio = fitRatio(released);
+  const previous = released.findLast((f) => f.release < target.release);
+  if (!fit || ratio === undefined || !previous?.opening)
+    throw new Error("not enough released films to fit the model");
+  const openingPoint = predictOpening(fit, released, target);
+  const errors = { opening: openingErrors(released), ratio: ratioErrors(released) };
+  const modelDraws = simulateWorldwide(openingPoint, ratio, errors);
+  const model: Forecast = {
+    predictions: {
+      opening: roundedInterval(openingPoint, errors.opening),
+      worldwide: { point: Math.round(openingPoint * ratio), ...rangeOf(modelDraws) },
+    },
+    probabilities: probabilitiesOf(modelDraws, thresholds),
+  };
+  const naiveOpening = naiveErrors(released, "opening");
+  const naiveDraws = simulateWorldwide(previous.opening, ratio, {
+    opening: naiveOpening,
+    ratio: errors.ratio,
+  });
+  const baseline: Forecast = {
+    predictions: {
+      opening: roundedInterval(previous.opening, naiveOpening),
+      worldwide: { point: Math.round(previous.opening * ratio), ...rangeOf(naiveDraws) },
+    },
+    probabilities: probabilitiesOf(naiveDraws, thresholds),
+  };
+  const { low, high } = intervalOf(ratio, errors.ratio);
+  return {
+    fit,
+    model,
+    naive: baseline,
+    previous: previous.title,
+    ratio: { point: ratio, low, high, films: errors.ratio.length },
   };
 }
 
 export function snapshotForm() {
   return {
-    form: "log(figure) ~ log(prev release) + prev same-line + years since first release, in real dollars",
+    form: "log(opening) ~ has line predecessor + log(opening of the line predecessor) centred on its mean, in real dollars; worldwide = opening x the geometric mean of worldwide / opening",
     covariates: COVARIATES,
     ridge: RIDGE,
     interval: INTERVAL,
@@ -217,8 +355,14 @@ export interface McuSnapshot {
     covariates: readonly string[];
     ridge: number;
     interval: number;
-    coefficients: Record<FigureKey, number[]>;
+    coefficients: Partial<Record<FigureKey, number[]>>;
+    center?: number;
   };
+  basis?: Basis;
+  previous?: string;
   predictions: Record<FigureKey, { point: number; low: number; high: number }>;
+  ratio?: { point: number; low: number; high: number; films: number };
+  probabilities?: Forecast["probabilities"];
+  candidate?: Forecast;
   backtest: BacktestResult;
 }
