@@ -105,3 +105,7 @@ export function cacheWrite(name: string, data: unknown) {
 export function cacheRead<T>(name: string): T {
   return JSON.parse(readFileSync(join(CACHE, name), "utf8")) as T;
 }
+
+export function cacheReadOptional<T>(name: string): T | undefined {
+  return existsSync(join(CACHE, name)) ? cacheRead<T>(name) : undefined;
+}
