@@ -10,6 +10,7 @@ import {
   parseFilmList,
   type RawFilm,
 } from "./mcu-wikitext.ts";
+import { rawFetch } from "./raw.ts";
 
 const HOST = "en.wikipedia.org";
 const LIST_PAGE = "List of Marvel Cinematic Universe films";
@@ -84,18 +85,10 @@ async function fetchCpi(file: string) {
     [2008, 2017],
     [2018, 2027],
   ]) {
-    const response = await fetch(BLS, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "user-agent": "opendata-rising-sh-importer/1.0",
-      },
-      body: JSON.stringify({
-        seriesid: [CPI_SERIES],
-        startyear: String(start),
-        endyear: String(end),
-        annualaverage: true,
-      }),
+    // The single-series GET puts the years in the URL, which the raw archive keys on.
+    const url = `${BLS}${CPI_SERIES}?startyear=${start}&endyear=${end}&annualaverage=true`;
+    const response = await rawFetch(url, {
+      headers: { "user-agent": "opendata-rising-sh-importer/1.0" },
     });
     if (!response.ok) throw new Error(`BLS ${response.status}`);
     const body = await response.json();

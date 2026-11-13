@@ -27,9 +27,12 @@ network:
 ```sh
 OPENDATA_REPLAY=1 bun run refresh:liga1
 OPENDATA_REPLAY=1 bun scripts/import-liga1.ts
+OPENDATA_REPLAY=1 bun scripts/import-mcu.ts
 ```
 
-For each URL, the newest index entry whose status is 2xx or 3xx gives the
+The archive keys a response on its URL alone, so every archived request is a
+GET whose URL holds all its parameters. The CPI fetch uses the BLS
+single-series GET for that reason. For each URL, the newest index entry whose status is 2xx or 3xx gives the
 response; a stored redirect is an answer the caller still follows, as the
 Liga 1 client does with `league_moved`. A URL with no stored 2xx or 3xx body
 fails with `OPENDATA_REPLAY=1: no stored response for <url>`. No request
