@@ -137,11 +137,12 @@ export function TaquillaPage(props: {
                 con los dos errores a la vez, con una semilla fija.
               </p>
               <p>
-                Antes de publicar, el modelo se compara con la base ingenua (el estreno de la
-                película anterior, y ese estreno por la misma razón para la recaudación mundial) en
-                la prueba hacia atrás. Solo se publica si gana en las dos cifras; si no, el
-                pronóstico es la base. Las proyecciones de terceros se muestran al lado y no entran
-                en el cálculo. Es un ejercicio estadístico, no una predicción comercial.
+                Antes de publicar, el modelo se compara en la prueba hacia atrás con la base ingenua
+                (el estreno de la película anterior, y ese estreno por la misma razón para la
+                recaudación mundial) y con repetir la recaudación mundial de la película anterior.
+                Cada cifra se publica con el método de menor error mediano. Las proyecciones de
+                terceros se muestran al lado y no entran en el cálculo. Es un ejercicio estadístico,
+                no una predicción comercial.
               </p>
             </>
           )}

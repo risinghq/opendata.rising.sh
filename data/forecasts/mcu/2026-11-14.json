@@ -1,0 +1,555 @@
+{
+  "series": "mcu",
+  "event": "mcu-taquilla",
+  "date": "2026-11-14",
+  "dollars": 2025,
+  "target": {
+    "title": "Avengers: Doomsday",
+    "release": "2026-12-18"
+  },
+  "filmsUsed": [
+    {
+      "title": "Iron Man",
+      "release": "2008-05-02",
+      "opening": 147436774,
+      "worldwide": 875942282
+    },
+    {
+      "title": "The Incredible Hulk",
+      "release": "2008-06-13",
+      "opening": 82839729,
+      "worldwide": 395912592
+    },
+    {
+      "title": "Iron Man 2",
+      "release": "2010-05-07",
+      "opening": 188982206,
+      "worldwide": 921189825
+    },
+    {
+      "title": "Thor",
+      "release": "2011-05-06",
+      "opening": 94032849,
+      "worldwide": 643096837
+    },
+    {
+      "title": "Capitán América: el primer vengador",
+      "release": "2011-07-22",
+      "opening": 93174102,
+      "worldwide": 530376434
+    },
+    {
+      "title": "The Avengers",
+      "release": "2012-05-04",
+      "opening": 290876242,
+      "worldwide": 2132140813
+    },
+    {
+      "title": "Iron Man 3",
+      "release": "2013-05-03",
+      "opening": 240603529,
+      "worldwide": 1679909048
+    },
+    {
+      "title": "Thor: The Dark World",
+      "release": "2013-11-08",
+      "opening": 118436085,
+      "worldwide": 891080407
+    },
+    {
+      "title": "Captain America: The Winter Soldier",
+      "release": "2014-04-04",
+      "opening": 129192793,
+      "worldwide": 971559044
+    },
+    {
+      "title": "Guardianes de la Galaxia",
+      "release": "2014-08-01",
+      "opening": 128240846,
+      "worldwide": 1051697530
+    },
+    {
+      "title": "Avengers: Age of Ultron",
+      "release": "2015-05-01",
+      "opening": 259845057,
+      "worldwide": 1908452666
+    },
+    {
+      "title": "Ant-Man",
+      "release": "2015-07-17",
+      "opening": 77695438,
+      "worldwide": 705387596
+    },
+    {
+      "title": "Captain America: Civil War",
+      "release": "2016-05-06",
+      "opening": 240242957,
+      "worldwide": 1549367761
+    },
+    {
+      "title": "Doctor Strange",
+      "release": "2016-11-04",
+      "opening": 114152293,
+      "worldwide": 909188907
+    },
+    {
+      "title": "Guardians of the Galaxy Vol. 2",
+      "release": "2017-05-05",
+      "opening": 192414530,
+      "worldwide": 1134465626
+    },
+    {
+      "title": "Spider-Man: Homecoming",
+      "release": "2017-07-07",
+      "opening": 153668942,
+      "worldwide": 1156019827
+    },
+    {
+      "title": "Thor: Ragnarok",
+      "release": "2017-11-03",
+      "opening": 161155377,
+      "worldwide": 1123361738
+    },
+    {
+      "title": "Black Panther",
+      "release": "2018-02-16",
+      "opening": 258983167,
+      "worldwide": 1762828834
+    },
+    {
+      "title": "Avengers: Infinity War",
+      "release": "2018-04-27",
+      "opening": 331036899,
+      "worldwide": 2631390821
+    },
+    {
+      "title": "Ant-Man and the Wasp",
+      "release": "2018-07-06",
+      "opening": 97182792,
+      "worldwide": 798327328
+    },
+    {
+      "title": "Captain Marvel",
+      "release": "2019-03-08",
+      "opening": 193173104,
+      "worldwide": 1424766796
+    },
+    {
+      "title": "Avengers: Endgame",
+      "release": "2019-04-26",
+      "opening": 449687845,
+      "worldwide": 3705017018
+    },
+    {
+      "title": "Spider-Man: Far From Home",
+      "release": "2019-07-02",
+      "opening": 116609057,
+      "worldwide": 1433210682
+    },
+    {
+      "title": "Black Widow",
+      "release": "2021-07-09",
+      "opening": 95524291,
+      "worldwide": 451187907
+    },
+    {
+      "title": "Shang-Chi and the Legend of the Ten Rings",
+      "release": "2021-09-03",
+      "opening": 89702537,
+      "worldwide": 513553907
+    },
+    {
+      "title": "Eternals",
+      "release": "2021-11-05",
+      "opening": 84712462,
+      "worldwide": 477698564
+    },
+    {
+      "title": "Spider-Man: No Way Home",
+      "release": "2021-12-17",
+      "opening": 308909400,
+      "worldwide": 2290730609
+    },
+    {
+      "title": "Doctor Strange in the Multiverse of Madness",
+      "release": "2022-05-06",
+      "opening": 206154408,
+      "worldwide": 1051426867
+    },
+    {
+      "title": "Thor: Love and Thunder",
+      "release": "2022-07-08",
+      "opening": 158631086,
+      "worldwide": 837079391
+    },
+    {
+      "title": "Black Panther: Wakanda Forever",
+      "release": "2022-11-11",
+      "opening": 199443939,
+      "worldwide": 945195778
+    },
+    {
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "release": "2023-02-17",
+      "opening": 112103473,
+      "worldwide": 503008789
+    },
+    {
+      "title": "Guardians of the Galaxy Vol. 3",
+      "release": "2023-05-05",
+      "opening": 125099445,
+      "worldwide": 893399989
+    },
+    {
+      "title": "The Marvels",
+      "release": "2023-11-10",
+      "opening": 48708483,
+      "worldwide": 217800697
+    },
+    {
+      "title": "Deadpool & Wolverine",
+      "release": "2024-07-26",
+      "opening": 216962502,
+      "worldwide": 1373281956
+    },
+    {
+      "title": "Captain America: Brave New World",
+      "release": "2025-02-14",
+      "opening": 88800000,
+      "worldwide": 415101577
+    },
+    {
+      "title": "Thunderbolts*",
+      "release": "2025-05-02",
+      "opening": 74300000,
+      "worldwide": 382436917
+    },
+    {
+      "title": "The Fantastic Four: First Steps",
+      "release": "2025-07-25",
+      "opening": 117600000,
+      "worldwide": 521858728
+    },
+    {
+      "title": "Spider-Man: Brand New Day",
+      "release": "2026-07-31",
+      "opening": 360000000,
+      "worldwide": 2523147515
+    }
+  ],
+  "model": {
+    "form": "log(opening) ~ has line predecessor + log(opening of the line predecessor) centred on its mean, in real dollars; worldwide = opening x the geometric mean of worldwide / opening",
+    "covariates": [
+      "intercept",
+      "has line predecessor",
+      "log opening of the line predecessor, centred"
+    ],
+    "ridge": 1,
+    "interval": 0.8,
+    "coefficients": {
+      "opening": [18.6516, 0.3029, 0.4111]
+    },
+    "center": 18.8953
+  },
+  "basis": {
+    "opening": "model",
+    "worldwide": "previous"
+  },
+  "previous": "Spider-Man: Brand New Day",
+  "predictions": {
+    "opening": {
+      "point": 260305955,
+      "low": 166989795,
+      "high": 486822528
+    },
+    "worldwide": {
+      "point": 2523147515,
+      "low": 932586378,
+      "high": 6561287439
+    }
+  },
+  "ratio": {
+    "point": 6.4034575345784965,
+    "low": 4.684588428613453,
+    "high": 8.255978097853308,
+    "films": 38
+  },
+  "probabilities": {
+    "seed": 20261113,
+    "simulations": 20000,
+    "above": [
+      {
+        "id": "1000",
+        "usd": 1000000000,
+        "probability": 0.8397
+      },
+      {
+        "id": "2000",
+        "usd": 2000000000,
+        "probability": 0.6481
+      },
+      {
+        "id": "endgame-nominal",
+        "usd": 2942177764,
+        "probability": 0.37395
+      },
+      {
+        "id": "endgame-real",
+        "usd": 3705017018,
+        "probability": 0.32115
+      }
+    ]
+  },
+  "candidate": {
+    "predictions": {
+      "opening": {
+        "point": 260305955,
+        "low": 166989795,
+        "high": 486822528
+      },
+      "worldwide": {
+        "point": 1666858131,
+        "low": 859912155,
+        "high": 3411312597
+      }
+    },
+    "probabilities": {
+      "seed": 20261113,
+      "simulations": 20000,
+      "above": [
+        {
+          "id": "1000",
+          "usd": 1000000000,
+          "probability": 0.8401
+        },
+        {
+          "id": "2000",
+          "usd": 2000000000,
+          "probability": 0.36995
+        },
+        {
+          "id": "endgame-nominal",
+          "usd": 2942177764,
+          "probability": 0.15975
+        },
+        {
+          "id": "endgame-real",
+          "usd": 3705017018,
+          "probability": 0.07855
+        }
+      ]
+    }
+  },
+  "backtest": {
+    "cases": 14,
+    "byFigure": {
+      "opening": {
+        "model": 0.3997908967268975,
+        "naive": 0.5384501588714413
+      },
+      "worldwide": {
+        "model": 0.6265940555971179,
+        "naive": 0.6640162536982636
+      }
+    },
+    "previousWorldwide": 0.532187954367278,
+    "rows": [
+      {
+        "film": "The Avengers",
+        "figure": "opening",
+        "actual": 290876242,
+        "predicted": 108955976,
+        "naive": 93174102
+      },
+      {
+        "film": "The Avengers",
+        "figure": "worldwide",
+        "actual": 2132140813,
+        "predicted": 607491101,
+        "naive": 519498238.16248065
+      },
+      {
+        "film": "Avengers: Age of Ultron",
+        "figure": "opening",
+        "actual": 259845057,
+        "predicted": 192172962,
+        "naive": 128240846
+      },
+      {
+        "film": "Avengers: Age of Ultron",
+        "figure": "worldwide",
+        "actual": 1908452666,
+        "predicted": 1242792664,
+        "naive": 829340303.1970915
+      },
+      {
+        "film": "Avengers: Infinity War",
+        "figure": "opening",
+        "actual": 331036899,
+        "predicted": 218476426,
+        "naive": 258983167
+      },
+      {
+        "film": "Avengers: Infinity War",
+        "figure": "worldwide",
+        "actual": 2631390821,
+        "predicted": 1481790997,
+        "naive": 1756523263.0862877
+      },
+      {
+        "film": "Avengers: Endgame",
+        "figure": "opening",
+        "actual": 449687845,
+        "predicted": 277856798,
+        "naive": 193173104
+      },
+      {
+        "film": "Avengers: Endgame",
+        "figure": "worldwide",
+        "actual": 3705017018,
+        "predicted": 1923897789,
+        "naive": 1337542611.3728921
+      },
+      {
+        "film": "Thor: Love and Thunder",
+        "figure": "opening",
+        "actual": 158631086,
+        "predicted": 203720385,
+        "naive": 206154408
+      },
+      {
+        "film": "Thor: Love and Thunder",
+        "figure": "worldwide",
+        "actual": 837079391,
+        "predicted": 1397168240,
+        "naive": 1413861412.2492466
+      },
+      {
+        "film": "Black Panther: Wakanda Forever",
+        "figure": "opening",
+        "actual": 199443939,
+        "predicted": 259799827,
+        "naive": 158631086
+      },
+      {
+        "film": "Black Panther: Wakanda Forever",
+        "figure": "worldwide",
+        "actual": 945195778,
+        "predicted": 1765743835,
+        "naive": 1078144915.635186
+      },
+      {
+        "film": "Ant-Man and the Wasp: Quantumania",
+        "figure": "opening",
+        "actual": 112103473,
+        "predicted": 152091711,
+        "naive": 199443939
+      },
+      {
+        "film": "Ant-Man and the Wasp: Quantumania",
+        "figure": "worldwide",
+        "actual": 503008789,
+        "predicted": 1021350466,
+        "naive": 1339337681.1642475
+      },
+      {
+        "film": "Guardians of the Galaxy Vol. 3",
+        "figure": "opening",
+        "actual": 125099445,
+        "predicted": 213503574,
+        "naive": 112103473
+      },
+      {
+        "film": "Guardians of the Galaxy Vol. 3",
+        "figure": "worldwide",
+        "actual": 893399989,
+        "predicted": 1415225338,
+        "naive": 743086744.1335555
+      },
+      {
+        "film": "The Marvels",
+        "figure": "opening",
+        "actual": 48708483,
+        "predicted": 206152747,
+        "naive": 125099445
+      },
+      {
+        "film": "The Marvels",
+        "figure": "worldwide",
+        "actual": 217800697,
+        "predicted": 1369686384,
+        "naive": 831165284.5262148
+      },
+      {
+        "film": "Deadpool & Wolverine",
+        "figure": "opening",
+        "actual": 216962502,
+        "predicted": 126387175,
+        "naive": 48708483
+      },
+      {
+        "film": "Deadpool & Wolverine",
+        "figure": "worldwide",
+        "actual": 1373281956,
+        "predicted": 829704764,
+        "naive": 319760770.47883064
+      },
+      {
+        "film": "Captain America: Brave New World",
+        "figure": "opening",
+        "actual": 88800000,
+        "predicted": 206396252,
+        "naive": 216962502
+      },
+      {
+        "film": "Captain America: Brave New World",
+        "figure": "worldwide",
+        "actual": 415101577,
+        "predicted": 1353494014,
+        "naive": 1422784786.8787546
+      },
+      {
+        "film": "Thunderbolts*",
+        "figure": "opening",
+        "actual": 74300000,
+        "predicted": 130489123,
+        "naive": 88800000
+      },
+      {
+        "film": "Thunderbolts*",
+        "figure": "worldwide",
+        "actual": 382436917,
+        "predicted": 847478070,
+        "naive": 576722803.2001218
+      },
+      {
+        "film": "The Fantastic Four: First Steps",
+        "figure": "opening",
+        "actual": 117600000,
+        "predicted": 126225330,
+        "naive": 74300000
+      },
+      {
+        "film": "The Fantastic Four: First Steps",
+        "figure": "worldwide",
+        "actual": 521858728,
+        "predicted": 814508433,
+        "naive": 479443995.07610345
+      },
+      {
+        "film": "Spider-Man: Brand New Day",
+        "figure": "opening",
+        "actual": 360000000,
+        "predicted": 207488922,
+        "naive": 117600000
+      },
+      {
+        "film": "Spider-Man: Brand New Day",
+        "figure": "worldwide",
+        "actual": 2523147515,
+        "predicted": 1325407113,
+        "naive": 751210593.9977857
+      }
+    ]
+  }
+}

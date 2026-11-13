@@ -184,6 +184,21 @@ export function simulateWorldwide(
   );
 }
 
+export function simulateSteps(
+  point: number,
+  errors: number[],
+  seed = SEED,
+  draws = SIMULATIONS,
+): number[] {
+  const rng = mulberry32(seed);
+  return sortedCopy(
+    Array.from(
+      { length: draws },
+      () => point * Math.exp(errors[Math.floor(rng() * errors.length)]!),
+    ),
+  );
+}
+
 export const probabilityAbove = (sorted: number[], threshold: number) =>
   sorted.filter((v) => v > threshold).length / sorted.length;
 
@@ -270,12 +285,29 @@ export interface Threshold {
   usd: number;
 }
 
-export type Basis = "model" | "naive";
+export type Method = "model" | "naive" | "previous";
 
-export const chooseBasis = (result: BacktestResult): Basis =>
-  FIGURE_KEYS.every((key) => result.byFigure[key].model < result.byFigure[key].naive)
-    ? "model"
-    : "naive";
+export function scoresOf(result: BacktestResult, key: FigureKey): Partial<Record<Method, number>> {
+  const { model, naive } = result.byFigure[key];
+  return key === "worldwide" && result.previousWorldwide !== undefined
+    ? { previous: result.previousWorldwide, naive, model }
+    : { naive, model };
+}
+
+export function chooseMethods(result: BacktestResult): Record<FigureKey, Method> {
+  const pick = (key: FigureKey) => {
+    const scores = Object.entries(scoresOf(result, key)) as [Method, number][];
+    return scores.reduce((best, next) => (next[1] < best[1] ? next : best))[0];
+  };
+  return { opening: pick("opening"), worldwide: pick("worldwide") };
+}
+
+export const methodsOf = (snapshot: Pick<McuSnapshot, "basis">) =>
+  snapshot.basis === undefined
+    ? undefined
+    : snapshot.basis === "model"
+      ? { opening: "model" as const, worldwide: "model" as const }
+      : snapshot.basis;
 
 export interface Forecast {
   predictions: Record<FigureKey, { point: number; low: number; high: number }>;
@@ -295,6 +327,29 @@ const probabilitiesOf = (draws: number[], thresholds: Threshold[]) => ({
     probability: probabilityAbove(draws, usd),
   })),
 });
+
+export interface WorldwideForecast {
+  worldwide: { point: number; low: number; high: number };
+  probabilities: Forecast["probabilities"];
+}
+
+export function publish(
+  forecasts: { model: Forecast; naive: Forecast; previousWorldwide: WorldwideForecast },
+  methods: Record<FigureKey, Method>,
+): Forecast {
+  const { opening } = (methods.opening === "model" ? forecasts.model : forecasts.naive).predictions;
+  if (methods.worldwide === "previous") {
+    return {
+      predictions: { opening, worldwide: forecasts.previousWorldwide.worldwide },
+      probabilities: forecasts.previousWorldwide.probabilities,
+    };
+  }
+  const source = methods.worldwide === "model" ? forecasts.model : forecasts.naive;
+  return {
+    predictions: { opening, worldwide: source.predictions.worldwide },
+    probabilities: source.probabilities,
+  };
+}
 
 export function forecastTarget(released: McuFilm[], target: McuFilm, thresholds: Threshold[]) {
   const fit = fitOpening(released);
@@ -325,10 +380,17 @@ export function forecastTarget(released: McuFilm[], target: McuFilm, thresholds:
     probabilities: probabilitiesOf(naiveDraws, thresholds),
   };
   const { low, high } = intervalOf(ratio, errors.ratio);
+  const worldwideSteps = naiveErrors(released, "worldwide");
+  const repeated = previous.worldwide!;
+  const previousWorldwide: WorldwideForecast = {
+    worldwide: roundedInterval(repeated, worldwideSteps),
+    probabilities: probabilitiesOf(simulateSteps(repeated, worldwideSteps), thresholds),
+  };
   return {
     fit,
     model,
     naive: baseline,
+    previousWorldwide,
     previous: previous.title,
     ratio: { point: ratio, low, high, films: errors.ratio.length },
   };
@@ -358,7 +420,7 @@ export interface McuSnapshot {
     coefficients: Partial<Record<FigureKey, number[]>>;
     center?: number;
   };
-  basis?: Basis;
+  basis?: "model" | Record<FigureKey, Method>;
   previous?: string;
   predictions: Record<FigureKey, { point: number; low: number; high: number }>;
   ratio?: { point: number; low: number; high: number; films: number };

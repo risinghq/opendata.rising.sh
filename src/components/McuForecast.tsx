@@ -11,7 +11,13 @@ import {
 } from "../data/format.ts";
 import { isReleased, realAmount } from "../data/stats-taquilla.ts";
 import type { Projection, TaquillaRecord } from "../data/types.ts";
-import type { FigureKey, McuSnapshot } from "../forecast/mcu.ts";
+import {
+  methodsOf,
+  scoresOf,
+  type FigureKey,
+  type McuSnapshot,
+  type Method,
+} from "../forecast/mcu.ts";
 
 const FIGURE_LABEL: Record<FigureKey, string> = {
   opening: "Fin de semana de estreno, EE. UU. y Canadá",
@@ -27,16 +33,82 @@ const THRESHOLD_LABEL = (id: string, usd: number, dollars: number) =>
       ? `Avengers: Endgame en dólares de ${dollars}, ${formatMoneyCompact(usd)}`
       : formatMoneyCompact(usd);
 
+const SCORE_LABEL: Record<FigureKey, Partial<Record<Method, string>>> = {
+  opening: { model: "el modelo", naive: "repetir el estreno anterior" },
+  worldwide: {
+    model: "el modelo",
+    naive: "el estreno anterior por la razón",
+    previous: "repetir la recaudación mundial anterior",
+  },
+};
+
+const PUBLISHED_LABEL: Record<FigureKey, Partial<Record<Method, (previous: string) => string>>> = {
+  opening: {
+    model: () => "sale del modelo estadístico",
+    naive: (previous) => `repite el estreno de la película anterior, ${previous}`,
+  },
+  worldwide: {
+    model: () => "sale del modelo estadístico",
+    naive: (previous) =>
+      `es el estreno de la película anterior, ${previous}, por la razón de la recaudación mundial al estreno`,
+    previous: (previous) => `repite la recaudación mundial de la película anterior, ${previous}`,
+  },
+};
+
+const FIGURE_SUBJECT: Record<FigureKey, string> = {
+  opening: "El fin de semana de estreno",
+  worldwide: "La recaudación mundial",
+};
+
+function Basis(props: { snap: McuSnapshot }) {
+  const methods = () => methodsOf(props.snap);
+  return (
+    <Show when={methods()}>
+      {(chosen) => (
+        <Show
+          when={typeof props.snap.basis === "object"}
+          fallback={
+            <p>
+              El pronóstico sale del modelo estadístico, que superó a la base de la película
+              anterior en las dos cifras de la prueba hacia atrás.
+            </p>
+          }
+        >
+          <For each={Object.keys(FIGURE_SUBJECT) as FigureKey[]}>
+            {(key) => {
+              const scores = () =>
+                Object.entries(scoresOf(props.snap.backtest, key)) as [Method, number][];
+              return (
+                <p>
+                  {FIGURE_SUBJECT[key]}{" "}
+                  {PUBLISHED_LABEL[key][chosen()[key]]!(props.snap.previous ?? "")}. Es el método de
+                  menor error mediano en la prueba hacia atrás:{" "}
+                  {scores()
+                    .toSorted((a, b) => a[1] - b[1])
+                    .map(([method, ape]) => `${SCORE_LABEL[key][method]!} ${formatPercent(ape)}`)
+                    .join(", ")}
+                  .
+                </p>
+              );
+            }}
+          </For>
+        </Show>
+      )}
+    </Show>
+  );
+}
+
 function backtestSentence(snap: McuSnapshot) {
   const bt = snap.backtest;
   const wins = (["opening", "worldwide"] as const).every(
     (key) => bt.byFigure[key].model < bt.byFigure[key].naive,
   );
-  const verdict = wins
-    ? "El modelo supera a la base en las dos cifras."
-    : snap.basis === "naive"
-      ? "El modelo no supera a la base en las dos cifras, así que el pronóstico publicado es la base."
-      : "El modelo no supera a la base en las dos cifras, así que el pronóstico va con esa advertencia.";
+  const verdict =
+    typeof snap.basis === "object"
+      ? "En cada cifra se publica el método de menor error mediano."
+      : wins
+        ? "El modelo supera a la base en las dos cifras."
+        : "El modelo no supera a la base en las dos cifras, así que el pronóstico va con esa advertencia.";
   return (
     `Para medirlo, el modelo se entrenó hacia atrás con ${bt.cases} películas: cada película de ` +
     `Avengers y cada uno de los últimos diez estrenos se predijo usando solo las películas ` +
@@ -117,19 +189,37 @@ function ForecastFigures(props: { snap: McuSnapshot; event: TaquillaRecord; cpi:
 }
 
 function Worldwide(props: { snap: McuSnapshot }) {
+  const repeated = () =>
+    typeof props.snap.basis === "object" && props.snap.basis.worldwide === "previous";
+  const simulations = () =>
+    `${formatNumber(props.snap.probabilities!.simulations)} simulaciones con semilla ${props.snap.probabilities!.seed}`;
   return (
     <Show when={props.snap.ratio && props.snap.probabilities}>
       <div class="block">
-        <h3>Recaudación mundial dada la del estreno</h3>
-        <p>
-          En {props.snap.ratio!.films} películas estrenadas, la recaudación mundial fue una media
-          geométrica de {formatDecimal(props.snap.ratio!.point)} veces la del fin de semana de
-          estreno, con un intervalo del {formatPercent(props.snap.model.interval)} de{" "}
-          {formatDecimal(props.snap.ratio!.low)} a {formatDecimal(props.snap.ratio!.high)} veces.
-          Las probabilidades salen de {formatNumber(props.snap.probabilities!.simulations)}{" "}
-          simulaciones con semilla {props.snap.probabilities!.seed}, que combinan el error de las
-          cifras previstas con el de esta razón.
-        </p>
+        <h3>
+          {repeated()
+            ? "Probabilidades de la recaudación mundial"
+            : "Recaudación mundial dada la del estreno"}
+        </h3>
+        <Show
+          when={!repeated()}
+          fallback={
+            <p>
+              Las probabilidades salen de {simulations()}, que parten de la recaudación mundial
+              anterior y le aplican al azar uno de los cambios observados entre dos estrenos
+              consecutivos.
+            </p>
+          }
+        >
+          <p>
+            En {props.snap.ratio!.films} películas estrenadas, la recaudación mundial fue una media
+            geométrica de {formatDecimal(props.snap.ratio!.point)} veces la del fin de semana de
+            estreno, con un intervalo del {formatPercent(props.snap.model.interval)} de{" "}
+            {formatDecimal(props.snap.ratio!.low)} a {formatDecimal(props.snap.ratio!.high)} veces.
+            Las probabilidades salen de {simulations()}, que combinan el error de las cifras
+            previstas con el de esta razón.
+          </p>
+        </Show>
         <div class="table-scroll" tabindex="0">
           <table class="backtest-table">
             <caption class="visually-hidden">
@@ -164,17 +254,27 @@ function Worldwide(props: { snap: McuSnapshot }) {
 function Candidate(props: { snap: McuSnapshot }) {
   return (
     <Show when={props.snap.candidate}>
-      {(candidate) => (
-        <>
-          {" "}
-          El modelo habría dado {formatMoneyCompact(candidate().predictions.opening.point)} en el
-          fin de semana de estreno (de {formatMoneyCompact(candidate().predictions.opening.low)} a{" "}
-          {formatMoneyCompact(candidate().predictions.opening.high)}) y{" "}
-          {formatMoneyCompact(candidate().predictions.worldwide.point)} en la recaudación mundial
-          (de {formatMoneyCompact(candidate().predictions.worldwide.low)} a{" "}
-          {formatMoneyCompact(candidate().predictions.worldwide.high)}).
-        </>
-      )}
+      {(candidate) => {
+        const methods = () => methodsOf(props.snap)!;
+        const range = (key: FigureKey) => {
+          const { point, low, high } = candidate().predictions[key];
+          return `${formatMoneyCompact(point)} (de ${formatMoneyCompact(low)} a ${formatMoneyCompact(high)})`;
+        };
+        return (
+          <>
+            {" "}
+            El modelo habría dado{" "}
+            {(["opening", "worldwide"] as const)
+              .filter((key) => methods()[key] !== "model")
+              .map(
+                (key) =>
+                  `${range(key)} ${key === "opening" ? "en el fin de semana de estreno" : "en la recaudación mundial"}`,
+              )
+              .join(" y ")}
+            .
+          </>
+        );
+      }}
     </Show>
   );
 }
@@ -248,19 +348,7 @@ export function McuForecast(props: {
         publicados hasta ese día, en dólares de {snap().dollars}. El estreno está previsto para el{" "}
         {day(snap().target.release)}.
       </p>
-      <Show when={snap().basis === "naive"}>
-        <p>
-          El pronóstico repite el estreno de la película anterior, {snap().previous}, y calcula la
-          recaudación mundial con la misma razón. El modelo estadístico no superó a esa base en las
-          dos cifras de la prueba hacia atrás, así que no se publica como pronóstico.
-        </p>
-      </Show>
-      <Show when={snap().basis === "model"}>
-        <p>
-          El pronóstico sale del modelo estadístico, que superó a la base de la película anterior en
-          las dos cifras de la prueba hacia atrás.
-        </p>
-      </Show>
+      <Basis snap={snap()} />
       <ForecastFigures snap={snap()} event={props.event} cpi={props.cpi} />
       <Worldwide snap={snap()} />
       <Projections projections={props.event.projections ?? []} target={snap().target.title} />

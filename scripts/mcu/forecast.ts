@@ -6,9 +6,12 @@ import { isReleased, realAmount } from "../../src/data/stats-taquilla.ts";
 import type { TaquillaData } from "../../src/data/types.ts";
 import {
   backtest,
-  chooseBasis,
+  chooseMethods,
   forecastTarget,
   lineOf,
+  methodsOf,
+  publish,
+  scoresOf,
   snapshotForm,
   FIGURE_KEYS,
   type McuFilm,
@@ -53,8 +56,8 @@ export function buildSnapshot(event: TaquillaData, today: string): McuSnapshot |
   ]);
 
   const results = backtest(released);
-  const basis = chooseBasis(results);
-  const published = basis === "model" ? result.model : result.naive;
+  const basis = chooseMethods(results);
+  const published = publish(result, basis);
   return {
     series: SERIES,
     event: "mcu-taquilla",
@@ -77,30 +80,38 @@ export function buildSnapshot(event: TaquillaData, today: string): McuSnapshot |
     predictions: published.predictions,
     ratio: result.ratio,
     probabilities: published.probabilities,
-    ...(basis === "naive" ? { candidate: result.model } : {}),
+    ...(Object.values(basis).every((method) => method === "model")
+      ? {}
+      : { candidate: result.model }),
     backtest: results,
   };
 }
 
-export function run(): McuSnapshot | null {
+export function limaDay(now: Date): string {
+  return new Date(now.getTime() - 5 * 3_600_000).toISOString().slice(0, 10);
+}
+
+export function run(now = new Date(), root?: string): McuSnapshot | null {
   const event = JSON.parse(readFileSync(EVENT_FILE, "utf8")) as TaquillaData;
-  const today = new Date(new Date().getTime() - 5 * 3_600_000).toISOString().slice(0, 10);
+  const today = limaDay(now);
   const snapshot = buildSnapshot(event, today);
   if (!snapshot) {
     console.log("target released; snapshot left as is");
     return null;
   }
-  if (snapshotExists(SERIES, snapshot.date)) {
+  if (snapshotExists(SERIES, snapshot.date, root)) {
     console.log(`snapshot for ${snapshot.date} already exists; left unchanged`);
   } else {
-    console.log(`snapshot: ${writeImmutable(SERIES, snapshot.date, snapshot)}`);
+    console.log(`snapshot: ${writeImmutable(SERIES, snapshot.date, snapshot, root)}`);
   }
   for (const key of FIGURE_KEYS) {
     const p = snapshot.predictions[key];
-    const b = snapshot.backtest.byFigure[key];
+    const scores = Object.entries(scoresOf(snapshot.backtest, key))
+      .map(([method, ape]) => `${method} ${(ape * 100).toFixed(1)}%`)
+      .join(", ");
     console.log(
-      `${key}: point ${p.point} interval ${p.low}–${p.high}; ` +
-        `backtest model ${(b.model * 100).toFixed(1)}% vs naive ${(b.naive * 100).toFixed(1)}%`,
+      `${key}: basis ${methodsOf(snapshot)![key]}, point ${p.point} ` +
+        `interval ${p.low}–${p.high}; backtest median APE ${scores}`,
     );
   }
   return snapshot;
