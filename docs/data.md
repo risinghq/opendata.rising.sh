@@ -121,9 +121,14 @@ The page sorts the rows by figure, largest first.
 Write the method in `method`, in prose, for the reader of the page. A new event
 of this kind follows the method of the first one.
 
-- Central is the Vatican Press Office figure, which cites local authorities or
-  organisers, when one exists. Otherwise it is the local authority's official
-  figure.
+- Central is the Vatican's figure, published by Vatican News or given by the
+  Holy See Press Office, when one exists. Otherwise it is the local authority's
+  official figure.
+- Each figure links to the publisher that issued it: vaticannews.va, a
+  government's own news page. A press article is the source only when the body
+  gave the figure to the press and did not publish it. A wire copy (EFE, AP)
+  stays beside the primary only when it adds a fact the primary lacks, such as
+  who supplied the count.
 - Low and high are the lowest and highest figures that a different official
   source attributes to the same act. When no other official source gives a
   different figure, the three are equal.
@@ -403,7 +408,11 @@ row with `low` above `high`, a date on or after the release, a film that is not
 in the list, or a missing `by` or `source`. A row stays valid after the film is
 released.
 
-Each row is checked at its URL on the day it is added. Add rows by hand: the
+A row comes from the outlet whose tracking produced the range: Boxoffice Pro's
+long-range forecast, Box Office Theory's tracking, or a trade paper (Deadline,
+Variety, The Hollywood Reporter) reporting studio or NRG tracking. A blog that
+relays one of them, a forum post or unnamed analysts is not a source; cite the
+tracker's own page instead. Each row is checked at its URL on the day it is added. Add rows by hand: the
 importer keeps `projections` as it keeps the other fields.
 
 ### Importer

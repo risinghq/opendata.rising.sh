@@ -6,7 +6,7 @@
   "end": "2026-11-16",
   "places": ["Uruguay", "Argentina", "Perú"],
   "updated": "2026-11-12T23:00-05:00",
-  "method": "La cifra central es la de la Oficina de Prensa del Vaticano, que cita a las autoridades locales o a los organizadores, cuando existe. Si no existe, es la cifra oficial de la autoridad local. La cifra baja y la alta son la menor y la mayor de las cifras que otra fuente oficial atribuye al mismo acto. Si ninguna otra fuente oficial da una cifra distinta, las tres coinciden. Una cifra de la prensa sin fuente oficial no entra en el rango. Los totales suman las cifras de cada acto, así que cuentan asistencias y no personas distintas: quien fue a dos actos se cuenta dos veces. La cifra esperada es la que dan los organizadores o una autoridad antes del acto. Se muestra junto a la cifra central del acto realizado, con la diferencia en porcentaje, y no entra en ningún total.",
+  "method": "La cifra central es la del Vaticano, publicada por Vatican News o dada por su Oficina de Prensa, cuando existe. Si no existe, es la cifra oficial de la autoridad local. Cada cifra enlaza a la página de quien la dio. Si esa institución no la publicó en su sitio y solo la dio a la prensa, enlaza a la nota que la cita. La cifra baja y la alta son la menor y la mayor de las cifras que otra fuente oficial atribuye al mismo acto. Si ninguna otra fuente oficial da una cifra distinta, las tres coinciden. Una cifra de la prensa sin fuente oficial no entra en el rango. Los totales suman las cifras de cada acto, así que cuentan asistencias y no personas distintas: quien fue a dos actos se cuenta dos veces. La cifra esperada es la que dan los organizadores o una autoridad antes del acto. Se muestra junto a la cifra central del acto realizado, con la diferencia en porcentaje, y no entra en ningún total.",
   "acts": [
     {
       "start": "2026-11-07T10:00-03:00",
@@ -78,11 +78,11 @@
       "low": 50000,
       "central": 50000,
       "high": 50000,
-      "attribution": "El Vaticano informó de unas 50,000 personas (EFE). El Ministerio del Interior de Uruguay calculó cerca de 50,000.",
+      "attribution": "Vatican News informó de unos 50,000 fieles. El Ministerio del Interior de Uruguay calculó cerca de 50,000.",
       "sources": [
         {
-          "outlet": "Yahoo Noticias (EFE)",
-          "url": "https://es-us.noticias.yahoo.com/emoci%C3%B3n-fieles-asisten-misa-le%C3%B3n-171124727.html"
+          "outlet": "Vatican News",
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-homilia-misa-santuario-virgen-treinta-y-tres-florida.html"
         },
         {
           "outlet": "Teledoce (Ministerio del Interior)",
@@ -100,19 +100,19 @@
       "low": 2000000,
       "central": 2500000,
       "high": 2500000,
-      "attribution": "El Vaticano informó de 2.5 millones de personas con datos de los organizadores (EFE), que añaden que la Policía manejaba una cifra similar. La Policía de la Ciudad calculó 2 millones (Perfil).",
+      "attribution": "Vatican News informó de cerca de 2.5 millones de personas. Según EFE, la cifra viene de los organizadores. El Gobierno de la Ciudad de Buenos Aires informó de más de 2 millones.",
       "sources": [
+        {
+          "outlet": "Vatican News",
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/leon-xiv-despide-de-argentina-rumbo-a-peru-final-viaje-apostolic.html"
+        },
         {
           "outlet": "Diari de Tarragona (EFE)",
           "url": "https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html"
         },
         {
-          "outlet": "Perfil (Policía de la Ciudad)",
-          "url": "https://perfil.com/sociedad/multitudinaria-misa-papal-en-palermo-la-homilia-completa-de-leon-xiv-aqjzo1V9J6FQ"
-        },
-        {
-          "outlet": "Teleamazonas (AFP)",
-          "url": "https://www.teleamazonas.com/actualidad/noticias/internacional/dos-millones-personas-misa-papa-leon-xiv-buenos-aires-132521/"
+          "outlet": "Gobierno de la Ciudad de Buenos Aires",
+          "url": "https://buenosaires.gob.ar/noticias/historica-santa-misa-en-la-ciudad-mas-de-dos-millones-de-personas-se-emocionaron-con-el"
         }
       ]
     },
@@ -126,15 +126,15 @@
       "low": 650000,
       "central": 650000,
       "high": 800000,
-      "attribution": "El Vaticano informó de 650,000 personas, citando a los organizadores (EFE). Después de la misa, el Gobierno de Córdoba y el intendente Daniel Passerini dieron 800,000. Un medio cordobés habló de 400,000 sin citar una fuente oficial, y esa cifra no entra en el rango.",
+      "attribution": "Vatican News informó de más de 650,000 fieles. Según EFE, la cifra viene de los organizadores. Después de la misa, el Gobierno de Córdoba y el intendente Daniel Passerini dieron 800,000. Un medio cordobés habló de 400,000 sin citar una fuente oficial, y esa cifra no entra en el rango.",
       "sources": [
-        {
-          "outlet": "Swissinfo (EFE)",
-          "url": "https://www.swissinfo.ch/spa/el-papa-le%C3%B3n-xiv-congrega-a-650.000-fieles-en-la-misa-en-la-provincia-argentina-de-c%C3%B3rdoba/92358034"
-        },
         {
           "outlet": "Vatican News",
           "url": "https://www.vaticannews.va/es/papa/news/2026-11/peregrinos-cordoba-viven-otra-vigilia-junto-papa-leon-xiv.html"
+        },
+        {
+          "outlet": "Swissinfo (EFE)",
+          "url": "https://www.swissinfo.ch/spa/el-papa-le%C3%B3n-xiv-congrega-a-650.000-fieles-en-la-misa-en-la-provincia-argentina-de-c%C3%B3rdoba/92358034"
         },
         {
           "outlet": "C5N",
@@ -186,8 +186,12 @@
       "low": 1000000,
       "central": 1000000,
       "high": 1000000,
-      "attribution": "El gobierno de la Ciudad de Buenos Aires informó de un millón de personas (Infobae). Los organizadores confirmaron la misma cifra (Ámbito).",
+      "attribution": "Vatican News informó de más de un millón de personas. El Gobierno de la Ciudad de Buenos Aires informó de un millón (Infobae), y los organizadores confirmaron la misma cifra (Ámbito).",
       "sources": [
+        {
+          "outlet": "Vatican News",
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/argentina-leon-xiv-vigilia-con-los-jovenes-en-buenos-aires.html"
+        },
         {
           "outlet": "Infobae (Gobierno de la Ciudad)",
           "url": "https://www.infobae.com/sociedad/2026/11/10/visita-del-papa-leon-xiv-en-vivo-la-expectativa-por-la-misa-en-cordoba-donde-se-espera-un-millon-de-fieles/"
@@ -208,11 +212,15 @@
       "low": 2000000,
       "central": 2000000,
       "high": 3500000,
-      "attribution": "El Vaticano informó de más de 2 millones de personas, citando a las autoridades locales (EFE). La Policía de la provincia de Buenos Aires habló de 2.5 millones (Ámbito) y el Ministerio de Seguridad bonaerense de 3.5 millones (Revista Gente).",
+      "attribution": "Vatican News informó de más de 2 millones de fieles, y el Gobierno de la provincia de Buenos Aires dio la misma cifra. La Policía de la provincia habló de 2.5 millones (Ámbito) y el Ministerio de Seguridad bonaerense de 3.5 millones (Revista Gente).",
       "sources": [
         {
-          "outlet": "Swissinfo (EFE)",
-          "url": "https://www.swissinfo.ch/spa/m%C3%A1s-de-dos-millones-de-fieles-acudieron-a-luj%C3%A1n-para-%C3%BAltima-misa-de-le%C3%B3n-xiv-en-argentina/92364676"
+          "outlet": "Vatican News",
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-xiv-en-lujan-argentina-levantate-y-camina.html"
+        },
+        {
+          "outlet": "Gobierno de la provincia de Buenos Aires",
+          "url": "https://www.gba.gob.ar/comunicacion_publica/gacetillas/kicillof_particip%C3%B3_de_la_santa_misa_brindada_por_el_papa_le%C3%B3n_xiv_en"
         },
         {
           "outlet": "Ámbito (Policía bonaerense)",
@@ -244,19 +252,11 @@
       "low": 3000000,
       "central": 3000000,
       "high": 3000000,
-      "attribution": "Vatican News informó de unos 3 millones de personas a lo largo del recorrido, citando a las autoridades locales.",
+      "attribution": "Vatican News informó de casi 3 millones de personas a lo largo del recorrido.",
       "sources": [
         {
-          "outlet": "Infobae (Vatican News)",
-          "url": "https://www.infobae.com/peru/2026/11/12/el-papa-es-peruano-tres-millones-de-personas-salieron-a-las-calles-para-darle-la-bienvenida-a-leon-xiv/"
-        },
-        {
-          "outlet": "Diario Correo",
-          "url": "https://diariocorreo.pe/edicion/lima/papa-leon-xiv-unos-3-millones-de-personas-tomaron-las-calles-de-lima-para-darle-la-bienvenida-segun-el-vaticano-noticia/"
-        },
-        {
-          "outlet": "El Comercio",
-          "url": "https://elcomercio.pe/lima/papa-leon-xiv-cerca-de-tres-millones-de-personas-tomaron-las-calles-de-lima-y-callao-para-darle-la-bienvenida-gira-sudamerica-2026-apuesplan-ultimas-noticia/"
+          "outlet": "Vatican News",
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/viaje-apostolico-el-papa-llega-a-lima-peru-desde-argentina.html"
         }
       ]
     },
