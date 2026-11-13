@@ -23,7 +23,7 @@ export interface ModelParams {
   decay: number;
 }
 
-export function tau(h: number, a: number, lh: number, la: number, rho: number): number {
+function tau(h: number, a: number, lh: number, la: number, rho: number): number {
   if (h === 0 && a === 0) return 1 - lh * la * rho;
   if (h === 0 && a === 1) return 1 + lh * rho;
   if (h === 1 && a === 0) return 1 + la * rho;

@@ -2,7 +2,7 @@ import type { TemporadaData } from "../data/types.ts";
 import { isHeld } from "../data/stats-temporada.ts";
 import { expected, probabilities, type ModelParams } from "./model.ts";
 import { mulberry32, samplePoisson } from "./poisson.ts";
-import { matchResult, order, resolveSeason, table, type MatchResult } from "./rules.ts";
+import { matchResult, resolveSeason, type MatchResult } from "./rules.ts";
 
 export interface MatchForecast {
   tournament: string;
@@ -125,5 +125,3 @@ export function simulate(
     .sort((a, b) => b.season - a.season || b.clausura - a.clausura || a.relegation - b.relegation);
   return { matches, teams: teamRows };
 }
-
-export { order, table };

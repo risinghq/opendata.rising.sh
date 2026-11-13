@@ -185,7 +185,7 @@ export interface BudgetClaim {
   source: Source;
 }
 
-export interface Budget {
+interface Budget {
   low: number;
   high?: number;
   source: Source;

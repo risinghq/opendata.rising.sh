@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "entry": ["scripts/**/*.ts", "test/render-*.ts"],
+  "ignoreDependencies": ["@fontsource-variable/geist", "@fontsource-variable/geist-mono"],
+  "ignorePatterns": ["src/*.css"],
+  "rules": {
+    "unused-exports": "error",
+    "unused-files": "error",
+    "unused-dependencies": "error",
+    "unused-dev-dependencies": "error",
+    "unused-types": "error",
+    "unresolved-imports": "error",
+    "unlisted-dependencies": "error",
+    "circular-dependencies": "error",
+    "duplicate-exports": "off"
+  }
+}

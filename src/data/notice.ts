@@ -1,7 +1,7 @@
 import { formatDate } from "./format.ts";
 import type { TaquillaData, TemporadaData, Tournament } from "./types.ts";
 
-export const MATCH_DATA_NOTICE = "Datos de partidos: Football data by 5DollarFootballAPI";
+const MATCH_DATA_NOTICE = "Datos de partidos: Football data by 5DollarFootballAPI";
 export const MATCH_DATA_URL = "https://5dollarfootballapi.com";
 
 export function tournamentNotice(tournament: Tournament): string {

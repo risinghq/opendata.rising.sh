@@ -29,18 +29,18 @@ const LINES: [RegExp, string][] = [
 export const lineOf = (originalTitle: string) =>
   LINES.find(([re]) => re.test(originalTitle))?.[1] ?? originalTitle;
 
-export const COVARIATES = [
+const COVARIATES = [
   "intercept",
   "has line predecessor",
   "log opening of the line predecessor, centred",
 ] as const;
-export const RIDGE = 1;
-export const INTERVAL = 0.8;
-export const SIMULATIONS = 20_000;
-export const SEED = 20_261_113;
+const RIDGE = 1;
+const INTERVAL = 0.8;
+const SIMULATIONS = 20_000;
+const SEED = 20_261_113;
 const MIN_FIT = 5;
 
-export const predict = (beta: number[], x: number[]) => beta.reduce((s, v, i) => s + v * x[i]!, 0);
+const predict = (beta: number[], x: number[]) => beta.reduce((s, v, i) => s + v * x[i]!, 0);
 const mean = (values: number[]) => values.reduce((s, v) => s + v, 0) / values.length;
 const sortedCopy = (values: number[]) => [...values].sort((a, b) => a - b);
 
@@ -112,7 +112,7 @@ export function fitOpening(films: McuFilm[], skip = -1): OpeningFit | undefined 
   return { coefficients, center };
 }
 
-export function predictOpening(fit: OpeningFit, before: McuFilm[], target: McuFilm): number {
+function predictOpening(fit: OpeningFit, before: McuFilm[], target: McuFilm): number {
   const predecessor = before.findLast((f) => f.line === target.line && f.opening !== undefined);
   const x = predecessor ? [1, 1, Math.log(predecessor.opening!) - fit.center] : [1, 0, 0];
   return Math.exp(predict(fit.coefficients, x));
@@ -127,7 +127,7 @@ export function fitRatio(films: McuFilm[], skip = -1): number | undefined {
   return logs.length < MIN_FIT ? undefined : Math.exp(mean(logs));
 }
 
-export function openingErrors(films: McuFilm[]): number[] {
+function openingErrors(films: McuFilm[]): number[] {
   return films.flatMap((film, i) => {
     const fit = fitOpening(films, i);
     return fit && film.opening !== undefined
@@ -154,7 +154,7 @@ export function naiveErrors(films: McuFilm[], key: FigureKey): number[] {
   });
 }
 
-export function intervalOf(point: number, errors: number[]) {
+function intervalOf(point: number, errors: number[]) {
   const sorted = sortedCopy(errors);
   return {
     low: point * Math.exp(quantile(sorted, tail)),
@@ -184,7 +184,7 @@ export function simulateWorldwide(
   );
 }
 
-export function simulateSteps(
+function simulateSteps(
   point: number,
   errors: number[],
   seed = SEED,
@@ -202,7 +202,7 @@ export function simulateSteps(
 export const probabilityAbove = (sorted: number[], threshold: number) =>
   sorted.filter((v) => v > threshold).length / sorted.length;
 
-export const rangeOf = (sorted: number[]) => ({
+const rangeOf = (sorted: number[]) => ({
   low: Math.round(quantile(sorted, tail)),
   high: Math.round(quantile(sorted, 1 - tail)),
 });
