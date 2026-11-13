@@ -77,20 +77,28 @@ A held act adds these fields. All are required.
 `low <= central <= high` must hold. When only one figure exists, the three are
 equal.
 
-A planned act has no `low`, `central`, `high`, `attribution` or `sources`. It
-may have an expected figure.
+A planned act has no `low`, `central`, `high`, `attribution` or `sources`.
+
+Any act may have an expected figure: the number that the organisers or an
+authority published before the act.
 
 ```json
 "expected": {
-  "figure": 1000000,
+  "figure": 975000,
+  "low": 950000,
+  "high": 1000000,
   "attribution": "Quién la espera y cómo la calculó.",
   "source": { "outlet": "Nombre del medio", "url": "https://example.org/nota" }
 }
 ```
 
+`low` and `high` are optional and go together. They hold a published range, and
+`figure` is its central value. `low <= figure <= high` must hold.
+
 An expected figure never enters a total or a chart. When the act happens, set
-`status` to `held`, remove `expected`, add the held fields and update
-`updated`.
+`status` to `held`, add the held fields, keep `expected` and update `updated`.
+The table shows `expected` beside the central figure, with the difference in
+percent: `(central - figure) / figure`, rounded to a whole percent.
 
 Put the agency in the outlet name when the outlet republishes it, as in
 `Swissinfo (EFE)`.
@@ -122,7 +130,7 @@ of this kind follows the method of the first one.
 - A press figure with no official source stays out of the range.
 - A total sums the central, low and high figures of the acts held. It counts
   attendances, not distinct people.
-- An expected figure of a planned act stays out of every total.
+- An expected figure stays out of every total and out of the range.
 
 An event that follows another method says so in `method`.
 
@@ -131,7 +139,8 @@ An event that follows another method says so in `method`.
 - `/eventos/<slug>.json` holds the event with its `slug`.
 - `/eventos/<slug>.csv` holds one row per act, with the columns `inicio`,
   `pais`, `ciudad`, `lugar`, `acto`, `estado`, `baja`, `central`, `alta`,
-  `esperado`, `atribucion` and `fuentes`. Sources are joined as
+  `atribucion`, `fuentes`, `esperado`, `esperado_baja`, `esperado_alta`,
+  `esperado_atribucion` and `esperado_fuente`. Sources are joined as
   `outlet: url | outlet: url`.
 
 ## Temporada
