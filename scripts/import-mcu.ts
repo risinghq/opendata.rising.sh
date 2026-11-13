@@ -3,6 +3,7 @@ import { dirname, join, resolve } from "node:path";
 import { parseArgs } from "node:util";
 
 import { fetchPage, limaParts, permalink, spanishTitles, type PageRevision } from "./mediawiki.ts";
+import { agrees, articleClaims, budgetAgrees, type ArticleClaims } from "./mcu-claims.ts";
 import {
   labeledSection,
   openingWeekend,
@@ -11,6 +12,8 @@ import {
   type RawFilm,
 } from "./mcu-wikitext.ts";
 import { rawFetch } from "./raw.ts";
+import { writtenAmounts } from "../src/data/dollars.ts";
+import { plain } from "./wikitext.ts";
 
 const HOST = "en.wikipedia.org";
 const LIST_PAGE = "List of Marvel Cinematic Universe films";
@@ -34,7 +37,7 @@ const DEFAULT_FRAME = {
     "Recaudación de las películas del Universo cinematográfico de Marvel en dólares de Estados Unidos, nominales y ajustadas por inflación, con un pronóstico para Avengers: Doomsday.",
   places: ["Estados Unidos", "Canadá", "Mundial"],
   method:
-    "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Wikipedia cita a Box Office Mojo para la recaudación de cada película, y cada fila enlaza esa página y, cuando Wikipedia la cita, su copia archivada. Box Office Mojo no se consulta directamente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
+    "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Wikipedia cita a Box Office Mojo para la recaudación de cada película, y cada fila enlaza esa página y, cuando Wikipedia la cita, su copia archivada. Box Office Mojo no se consulta directamente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. Cuando el artículo de una película informa una cifra distinta de la tabla, la página muestra la de la tabla, que cita a Box Office Mojo, y enlaza las demás cifras citadas. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
 };
 
 const MONTHS: Record<string, string> = {
@@ -134,13 +137,53 @@ export function toFilm(
   if (opening === undefined) {
     throw new Error(`no opening weekend found for ${film.originalTitle}`);
   }
+  const article = film.article
+    ? articleClaims(film.article.wikitext, [film.originalTitle.replace(/ \([^)]*\)$/, "")])
+    : { usCanada: [], worldwide: [], budget: [] };
+  const shown = (cell: string) => {
+    const quote = plain(cell);
+    const written = writtenAmounts(quote)[0];
+    return {
+      precision: written?.precision[0] ?? 1,
+      claim: { text: written?.text ?? quote, quote, source: phaseSource },
+    };
+  };
+  const figure = (amount: number, cell: string, claims: ArticleClaims["usCanada"]) => {
+    const table = shown(cell);
+    const others = claims
+      .filter((claim) => !agrees(claim, amount, table.precision))
+      .map(({ value, text, quote }) => ({ amount: value, text, quote, source: articleSource }));
+    if (!others.length) return { amount, source: phaseSource };
+    return { amount, source: phaseSource, claims: [{ amount, ...table.claim }, ...others] };
+  };
+  const budget = () => {
+    if (!film.budget) return undefined;
+    const { low, high } = film.budget;
+    const table = shown(film.cells.budget);
+    const others = article.budget
+      .filter((claim) => !budgetAgrees(claim, { low, high, precision: table.precision }))
+      .map(({ low: l, high: h, basis, text, quote }) => ({
+        low: l,
+        ...(h === undefined ? {} : { high: h }),
+        ...(basis === undefined ? {} : { basis }),
+        text,
+        quote,
+        source: articleSource,
+      }));
+    const stored = { low, ...(high === undefined ? {} : { high }), source: phaseSource };
+    if (!others.length) return stored;
+    return {
+      ...stored,
+      claims: [{ low, ...(high === undefined ? {} : { high }), ...table.claim }, ...others],
+    };
+  };
   return {
     ...base,
     status: "released",
-    budget: film.budget ? { ...film.budget, source: phaseSource } : undefined,
+    budget: budget(),
     opening: { amount: opening, source: articleSource },
-    usCanada: { amount: film.usCanada, source: phaseSource },
-    worldwide: { amount: film.worldwide, source: phaseSource },
+    usCanada: figure(film.usCanada, film.cells.usCanada, article.usCanada),
+    worldwide: figure(film.worldwide, film.cells.worldwide, article.worldwide),
     boxOfficeMojo: film.boxOfficeMojo,
   };
 }
@@ -166,7 +209,13 @@ async function main() {
       headingSection(page.wikitext, "Films"),
     )) {
       if (!rows.some((r) => r.originalTitle === originalTitle)) {
-        rows.push({ title: "", originalTitle, phase: i + 1, release });
+        rows.push({
+          title: "",
+          originalTitle,
+          phase: i + 1,
+          release,
+          cells: { usCanada: "", worldwide: "", budget: "" },
+        });
       }
     }
   }
@@ -198,6 +247,25 @@ async function main() {
       film.article ? source(film.article) : source(phasePage(film.phase)),
     ),
   );
+
+  for (const film of films) {
+    if (film.status !== "released") continue;
+    for (const [key, label] of [
+      ["usCanada", "US and Canada"],
+      ["worldwide", "worldwide"],
+      ["budget", "budget"],
+    ] as const) {
+      const figure = (film as Record<string, { claims?: { text: string }[] } | undefined>)[key];
+      if (!figure?.claims) continue;
+      const rest = figure.claims
+        .slice(1)
+        .map((c) => c.text)
+        .join(", ");
+      console.log(
+        `dispute: ${film.originalTitle} ${label}: table ${figure.claims[0].text}; article ${rest}`,
+      );
+    }
+  }
 
   const uncited = released.filter((r) => r.boxOfficeMojo === undefined);
   for (const film of uncited) {

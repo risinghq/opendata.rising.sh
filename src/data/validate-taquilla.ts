@@ -1,3 +1,4 @@
+import { writtenAmounts } from "./dollars.ts";
 import {
   isCount,
   isDate,
@@ -9,6 +10,38 @@ import {
 } from "./validate-common.ts";
 
 const FIGURES = ["opening", "usCanada", "worldwide"] as const;
+
+function claims(
+  value: unknown,
+  shown: number[],
+  path: string,
+  { fail, source }: Report,
+  amounts: (c: Obj, path: string) => number[],
+) {
+  if (!Array.isArray(value) || value.length < 2)
+    return fail(path, "must be a list of at least two claims");
+  const keys = value.map((c: unknown, i) => {
+    if (!isObj(c)) {
+      fail(`${path}[${i}]`, "must be an object");
+      return "";
+    }
+    const parsed = amounts(c, `${path}[${i}]`);
+    if (!isText(c.text)) fail(`${path}[${i}].text`, "must be a non-empty string");
+    if (!isText(c.quote)) fail(`${path}[${i}].quote`, "must be a non-empty string");
+    source(c.source, `${path}[${i}].source`);
+    if (isText(c.text) && isText(c.quote) && !c.quote.includes(c.text))
+      fail(`${path}[${i}].quote`, "must contain the value as written");
+    if (isText(c.text)) {
+      const written = writtenAmounts(c.text).flatMap((w) => w.values);
+      if (written.length !== parsed.length || written.some((v, j) => v !== parsed[j]))
+        fail(`${path}[${i}].text`, "must write the claimed value");
+    }
+    return JSON.stringify(parsed);
+  });
+  if (keys[0] !== JSON.stringify(shown)) fail(`${path}[0]`, "must be the claim of the value shown");
+  if (keys.slice(1).includes(keys[0]!))
+    fail(path, "the other claims must differ from the value shown");
+}
 
 function figure(
   item: Obj,
@@ -23,6 +56,20 @@ function figure(
   }
   if (!isCount(value.amount)) fail(`${path}.${key}.amount`, "must be a non-negative integer");
   source(value.source, `${path}.${key}.source`);
+  if (isCount(value.amount) && value.claims !== undefined)
+    claims(
+      value.claims,
+      [value.amount],
+      `${path}.${key}.claims`,
+      { fail, source } as Report,
+      (c, p) => {
+        if (!isCount(c.amount)) {
+          fail(`${p}.amount`, "must be a non-negative integer");
+          return [];
+        }
+        return [c.amount];
+      },
+    );
   return isCount(value.amount) ? value.amount : undefined;
 }
 
@@ -105,6 +152,28 @@ export function validateTaquilla(data: Obj, report: Report) {
         if (isCount(budget.low) && isCount(budget.high) && budget.high < budget.low)
           fail(`${path}.budget.high`, "must not be below low");
         source(budget.source, `${path}.budget.source`);
+        if (isCount(budget.low) && budget.claims !== undefined)
+          claims(
+            budget.claims,
+            [budget.low, ...(isCount(budget.high) ? [budget.high] : [])],
+            `${path}.budget.claims`,
+            report,
+            (c, p) => {
+              const out: number[] = [];
+              if (!isCount(c.low)) {
+                fail(`${p}.low`, "must be a non-negative integer");
+                return out;
+              }
+              out.push(c.low);
+              if (c.high !== undefined) {
+                if (!isCount(c.high)) fail(`${p}.high`, "must be a non-negative integer");
+                else out.push(c.high);
+              }
+              if (c.basis !== undefined && c.basis !== "gross" && c.basis !== "net")
+                fail(`${p}.basis`, 'must be "gross" or "net"');
+              return out;
+            },
+          );
       }
     }
 

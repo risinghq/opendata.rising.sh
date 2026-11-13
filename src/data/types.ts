@@ -161,8 +161,25 @@ export interface TemporadaData extends EventBase {
   matches: Match[];
 }
 
+export interface Claim {
+  amount: number;
+  text: string;
+  quote: string;
+  source: Source;
+}
+
 export interface Figure {
   amount: number;
+  source: Source;
+  claims?: Claim[];
+}
+
+export interface BudgetClaim {
+  low: number;
+  high?: number;
+  basis?: "gross" | "net";
+  text: string;
+  quote: string;
   source: Source;
 }
 
@@ -170,6 +187,7 @@ export interface Budget {
   low: number;
   high?: number;
   source: Source;
+  claims?: BudgetClaim[];
 }
 
 interface FilmBase {

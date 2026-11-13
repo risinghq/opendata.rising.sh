@@ -1,5 +1,14 @@
+import { writtenAmounts } from "../src/data/dollars.ts";
 import type { MojoCitation } from "../src/data/types.ts";
-import { expandSpans, link, parseTables, plain, splitOutside } from "./wikitext.ts";
+import {
+  expandSpans,
+  link,
+  parameters,
+  parseTables,
+  plain,
+  splitOutside,
+  topTemplates,
+} from "./wikitext.ts";
 
 export interface RawFilm {
   originalTitle: string;
@@ -7,6 +16,7 @@ export interface RawFilm {
   usCanada?: number;
   worldwide?: number;
   budget?: { low: number; high?: number };
+  cells: { usCanada: string; worldwide: string; budget: string };
   note?: string;
   boxOfficeMojo?: MojoCitation;
 }
@@ -15,15 +25,7 @@ const UNITS: Record<string, number> = { million: 1e6, billion: 1e9, millones: 1e
 
 function money(text: string): number[] {
   const clean = text.replace(/&nbsp;/g, " ").replace(/\{\{nbsp\}\}/gi, " ");
-  const out: number[] = [];
-  const re =
-    /\$\s*([\d,]+(?:\.\d+)?)(?:\s*(?:–|to|and)\s*\$?\s*([\d,]+(?:\.\d+)?))?\s*(million|billion)?/g;
-  for (let m = re.exec(clean); m; m = re.exec(clean)) {
-    const unit = m[3] ? UNITS[m[3]]! : m[1]!.includes(",") ? 1 : 1e6;
-    out.push(Math.round(Number(m[1]!.replaceAll(",", "")) * unit));
-    if (m[2]) out.push(Math.round(Number(m[2].replaceAll(",", "")) * unit));
-  }
-  return out;
+  return writtenAmounts(clean).flatMap((w) => w.values);
 }
 
 function date(text: string, where: string): string {
@@ -70,32 +72,6 @@ function efns(text: string): string[] {
     if (body) out.push(body);
   }
   return out;
-}
-
-function topTemplates(text: string): string[] {
-  const out: string[] = [];
-  let depth = 0;
-  let start = 0;
-  for (let i = 0; i < text.length; i++) {
-    if (text.startsWith("{{", i)) {
-      if (depth++ === 0) start = i + 2;
-      i++;
-    } else if (text.startsWith("}}", i) && depth > 0) {
-      if (--depth === 0) out.push(text.slice(start, i));
-      i++;
-    }
-  }
-  return out;
-}
-
-function parameters(template: string): { name: string; named: Map<string, string> } {
-  const [name = "", ...rest] = splitOutside(template, "|");
-  const named = new Map<string, string>();
-  for (const part of rest) {
-    const m = /^\s*([\w-]+)\s*=([\s\S]*)$/.exec(part);
-    if (m) named.set(m[1]!.toLowerCase(), m[2]!.trim());
-  }
-  return { name: name.trim(), named };
 }
 
 const MOJO_HOST = /^https?:\/\/(www\.)?boxofficemojo\.com\//i;
@@ -153,6 +129,7 @@ export function parseBoxOfficeRows(section: string): RawFilm[] {
         usCanada: amounts[0],
         worldwide: amounts[2],
         budget: budget(row[7]!.text),
+        cells: { usCanada: row[2]!.text, worldwide: row[4]!.text, budget: row[7]!.text },
         boxOfficeMojo: boxOfficeMojo(row[8]?.text ?? ""),
         note: notes.length ? notes.join(" ") : undefined,
       });

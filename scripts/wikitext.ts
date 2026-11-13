@@ -31,6 +31,32 @@ export function splitOutside(text: string, separator: string): string[] {
   return parts;
 }
 
+export function topTemplates(text: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text.startsWith("{{", i)) {
+      if (depth++ === 0) start = i + 2;
+      i++;
+    } else if (text.startsWith("}}", i) && depth > 0) {
+      if (--depth === 0) out.push(text.slice(start, i));
+      i++;
+    }
+  }
+  return out;
+}
+
+export function parameters(template: string): { name: string; named: Map<string, string> } {
+  const [name = "", ...rest] = splitOutside(template, "|");
+  const named = new Map<string, string>();
+  for (const part of rest) {
+    const m = /^\s*([\w-]+)\s*=([\s\S]*)$/.exec(part);
+    if (m) named.set(m[1]!.toLowerCase(), m[2]!.trim());
+  }
+  return { name: name.trim(), named };
+}
+
 function parseCell(source: string): Cell {
   const parts = splitOutside(source, "|");
   const hasAttrs = parts.length > 1 && !parts[0]!.includes("[[") && !parts[0]!.includes("{{");

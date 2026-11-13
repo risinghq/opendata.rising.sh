@@ -2,8 +2,12 @@
   "kind": "taquilla",
   "title": "Taquilla del Universo cinematográfico de Marvel",
   "summary": "Recaudación de las películas del Universo cinematográfico de Marvel en dólares de Estados Unidos, nominales y ajustadas por inflación, con un pronóstico para Avengers: Doomsday.",
-  "places": ["Estados Unidos", "Canadá", "Mundial"],
-  "method": "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Wikipedia cita a Box Office Mojo para la recaudación de cada película, y cada fila enlaza esa página y, cuando Wikipedia la cita, su copia archivada. Box Office Mojo no se consulta directamente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
+  "places": [
+    "Estados Unidos",
+    "Canadá",
+    "Mundial"
+  ],
+  "method": "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Wikipedia cita a Box Office Mojo para la recaudación de cada película, y cada fila enlaza esa página y, cuando Wikipedia la cita, su copia archivada. Box Office Mojo no se consulta directamente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. Cuando el artículo de una película informa una cifra distinta de la tabla, la página muestra la de la tabla, que cita a Box Office Mojo, y enlaza las demás cifras citadas. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
   "start": "2008-05-02",
   "end": "2027-12-17",
   "updated": "2026-11-09T10:34-05:00",
@@ -26,7 +30,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
-        }
+        },
+        "claims": [
+          {
+            "low": 140000000,
+            "text": "$140 million",
+            "quote": "$140 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_One?oldid=1384729100"
+            }
+          },
+          {
+            "low": 150000000,
+            "text": "$150 million",
+            "quote": "budget = $150 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Iron_Man_(2008_film)?oldid=1384692269"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 98600000,
@@ -289,7 +313,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
-        }
+        },
+        "claims": [
+          {
+            "amount": 1215577205,
+            "text": "$1,215,577,205",
+            "quote": "$1,215,577,205",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+            }
+          },
+          {
+            "amount": 1266000000,
+            "text": "$1.266 billion",
+            "quote": "Iron Man 3 grossed $409 million in North America and $857.1 million in other countries for a worldwide total of $1.266 billion, outgrossing both of its predecessors combined.",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Iron_Man_3?oldid=1385080126"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/release/rl1532659201/",
@@ -309,7 +353,29 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
-        }
+        },
+        "claims": [
+          {
+            "low": 150000000,
+            "high": 170000000,
+            "text": "$150–170 million",
+            "quote": "$150–170 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+            }
+          },
+          {
+            "low": 150000000,
+            "high": 272100000,
+            "text": "$150–272.1 million",
+            "quote": "budget = $150–272.1 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Thor%3A_The_Dark_World?oldid=1380947520"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 85700000,
@@ -390,7 +456,38 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
-        }
+        },
+        "claims": [
+          {
+            "low": 170000000,
+            "text": "$170 million",
+            "quote": "$170 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+            }
+          },
+          {
+            "low": 232300000,
+            "basis": "gross",
+            "text": "$232.3 million",
+            "quote": "$232.3 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_(film)?oldid=1385141315"
+            }
+          },
+          {
+            "low": 195900000,
+            "basis": "net",
+            "text": "$195.9 million",
+            "quote": "$195.9 million (net)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_(film)?oldid=1385141315"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 94300000,
@@ -431,7 +528,30 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
-        }
+        },
+        "claims": [
+          {
+            "low": 250000000,
+            "high": 444000000,
+            "text": "$250–444 million",
+            "quote": "$250–444 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Two?oldid=1384729119"
+            }
+          },
+          {
+            "low": 444000000,
+            "high": 495200000,
+            "basis": "gross",
+            "text": "$444–495.2 million",
+            "quote": "$444–495.2 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Avengers%3A_Age_of_Ultron?oldid=1381695484"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 191300000,
@@ -476,7 +596,7 @@
         "amount": 57200000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Ant-Man_(film)?oldid=1384949065"
+          "url": "https://en.wikipedia.org/wiki/Ant-Man_(film)?oldid=1385363309"
         }
       },
       "usCanada": {
@@ -531,7 +651,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 1155046416,
+            "text": "$1,155,046,416",
+            "quote": "$1,155,046,416",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 1153000000,
+            "text": "$1.153 billion",
+            "quote": "Captain America: Civil War grossed $408.1 million in the U.S. and Canada and $745.2 million in other territories, for a worldwide total of $1.153 billion.",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Captain_America%3A_Civil_War?oldid=1384183007"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/title/tt3498820/",
@@ -609,7 +749,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 863756051,
+            "text": "$863,756,051",
+            "quote": "$863,756,051",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 869100000,
+            "text": "$869.1 million",
+            "quote": "gross = $869.1 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Guardians_of_the_Galaxy_Vol._2?oldid=1381318811"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/title/tt3896198/",
@@ -641,14 +801,54 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 334201140,
+            "text": "$334,201,140",
+            "quote": "$334,201,140",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 334900000,
+            "text": "$334.9 million",
+            "quote": "Spider-Man: Homecoming grossed $334.9 million in the United States and Canada, and $546 million in other territories, for a worldwide total of $880.9 million.",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_Homecoming?oldid=1384921438"
+            }
+          }
+        ]
       },
       "worldwide": {
         "amount": 880166924,
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 880166924,
+            "text": "$880,166,924",
+            "quote": "$880,166,924",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 880900000,
+            "text": "$880.9 million",
+            "quote": "gross = $880.9 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_Homecoming?oldid=1384921438"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/title/tt2250912/",
@@ -680,7 +880,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 315058289,
+            "text": "$315,058,289",
+            "quote": "$315,058,289",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 316000000,
+            "text": "$316 million",
+            "quote": "Thor: Ragnarok grossed $316 million in the United States and Canada, and $539 million in other territories, for a worldwide total of $855 million.",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Thor%3A_Ragnarok?oldid=1385117560"
+            }
+          }
+        ]
       },
       "worldwide": {
         "amount": 855301806,
@@ -726,7 +946,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 1374959729,
+            "text": "$1,374,959,729",
+            "quote": "$1,374,959,729",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 1350000000,
+            "text": "$1.35 billion",
+            "quote": "gross = $1.35 billion",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Black_Panther_(film)?oldid=1383750341"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/title/tt1825683/",
@@ -790,7 +1030,7 @@
         "amount": 75800000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Ant-Man_and_the_Wasp?oldid=1382264992"
+          "url": "https://en.wikipedia.org/wiki/Ant-Man_and_the_Wasp?oldid=1385361829"
         }
       },
       "usCanada": {
@@ -824,7 +1064,29 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "low": 150000000,
+            "high": 175000000,
+            "text": "$150–175 million",
+            "quote": "$150–175 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "low": 152000000,
+            "high": 175000000,
+            "text": "$152–175 million",
+            "quote": "budget = $152–175 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Captain_Marvel_(film)?oldid=1380254633"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 153400000,
@@ -925,7 +1187,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
-        }
+        },
+        "claims": [
+          {
+            "amount": 1138121790,
+            "text": "$1,138,121,790",
+            "quote": "$1,138,121,790",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Three?oldid=1384729134"
+            }
+          },
+          {
+            "amount": 1133000000,
+            "text": "$1.133 billion",
+            "quote": "gross = $1.133 billion",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_Far_From_Home?oldid=1384925555"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/title/tt6320628/",
@@ -1022,13 +1304,44 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
-        }
+        },
+        "claims": [
+          {
+            "low": 236200000,
+            "text": "$236.2 million",
+            "quote": "$236.2 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+            }
+          },
+          {
+            "low": 292200000,
+            "basis": "gross",
+            "text": "$292.2 million",
+            "quote": "$292.2 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Eternals_(film)?oldid=1385424560"
+            }
+          },
+          {
+            "low": 253600000,
+            "basis": "net",
+            "text": "$253.6 million",
+            "quote": "$253.6 million (net)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Eternals_(film)?oldid=1385424560"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 71300000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Eternals_(film)?oldid=1384912584"
+          "url": "https://en.wikipedia.org/wiki/Eternals_(film)?oldid=1385424560"
         }
       },
       "usCanada": {
@@ -1067,7 +1380,7 @@
         "amount": 260000000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_No_Way_Home?oldid=1384081284"
+          "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_No_Way_Home?oldid=1385457884"
         }
       },
       "usCanada": {
@@ -1082,7 +1395,27 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
-        }
+        },
+        "claims": [
+          {
+            "amount": 1928040905,
+            "text": "$1,928,040,905",
+            "quote": "$1,928,040,905",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+            }
+          },
+          {
+            "amount": 1921000000,
+            "text": "$1.921 billion",
+            "quote": "gross = $1.921 billion",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Spider-Man%3A_No_Way_Home?oldid=1385457884"
+            }
+          }
+        ]
       },
       "boxOfficeMojo": {
         "url": "https://www.boxofficemojo.com/title/tt10872600/",
@@ -1100,7 +1433,28 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
-        }
+        },
+        "claims": [
+          {
+            "low": 351000000,
+            "text": "$351 million",
+            "quote": "$351 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Four?oldid=1384729145"
+            }
+          },
+          {
+            "low": 414900000,
+            "basis": "gross",
+            "text": "$414.9 million",
+            "quote": "$414.9 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Doctor_Strange_in_the_Multiverse_of_Madness?oldid=1385077630"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 187400000,
@@ -1217,7 +1571,28 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
-        }
+        },
+        "claims": [
+          {
+            "low": 388400000,
+            "text": "$388.4 million",
+            "quote": "$388.4 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+            }
+          },
+          {
+            "low": 330100000,
+            "basis": "net",
+            "text": "$330.1 million",
+            "quote": "$330.1 million (net)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Ant-Man_and_the_Wasp%3A_Quantumania?oldid=1374088712"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 106100000,
@@ -1295,7 +1670,38 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
-        }
+        },
+        "claims": [
+          {
+            "low": 375000000,
+            "text": "$375 million",
+            "quote": "$375 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+            }
+          },
+          {
+            "low": 374000000,
+            "basis": "gross",
+            "text": "$374 million",
+            "quote": "$374 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/The_Marvels?oldid=1380991137"
+            }
+          },
+          {
+            "low": 307300000,
+            "basis": "net",
+            "text": "$307.3 million",
+            "quote": "$307.3 million (net)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/The_Marvels?oldid=1380991137"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 46100000,
@@ -1334,7 +1740,38 @@
         "source": {
           "outlet": "Wikipedia en inglés",
           "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
-        }
+        },
+        "claims": [
+          {
+            "low": 429000000,
+            "text": "$429 million",
+            "quote": "$429 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Five?oldid=1384737236"
+            }
+          },
+          {
+            "low": 556800000,
+            "basis": "gross",
+            "text": "$556.8 million",
+            "quote": "$556.8 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Deadpool_%26_Wolverine?oldid=1384412844"
+            }
+          },
+          {
+            "low": 446100000,
+            "basis": "net",
+            "text": "$446.1 million",
+            "quote": "$446.1 million (net)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Deadpool_%26_Wolverine?oldid=1384412844"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 211400000,
@@ -1379,7 +1816,7 @@
         "amount": 88800000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Captain_America%3A_Brave_New_World?oldid=1383638387"
+          "url": "https://en.wikipedia.org/wiki/Captain_America%3A_Brave_New_World?oldid=1385461963"
         }
       },
       "usCanada": {
@@ -1450,8 +1887,39 @@
         "low": 200000000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
-        }
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
+        },
+        "claims": [
+          {
+            "low": 200000000,
+            "text": "$200 million",
+            "quote": "$200 million",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
+            }
+          },
+          {
+            "low": 229600000,
+            "basis": "gross",
+            "text": "$229.6 million",
+            "quote": "$229.6 million (gross)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/The_Fantastic_Four%3A_First_Steps?oldid=1384710815"
+            }
+          },
+          {
+            "low": 181000000,
+            "basis": "net",
+            "text": "$181 million",
+            "quote": "$181 million (net)",
+            "source": {
+              "outlet": "Wikipedia en inglés",
+              "url": "https://en.wikipedia.org/wiki/The_Fantastic_Four%3A_First_Steps?oldid=1384710815"
+            }
+          }
+        ]
       },
       "opening": {
         "amount": 117600000,
@@ -1464,14 +1932,14 @@
         "amount": 274286610,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
         }
       },
       "worldwide": {
         "amount": 521858728,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
         }
       },
       "boxOfficeMojo": {
@@ -1489,7 +1957,7 @@
         "low": 225000000,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
         }
       },
       "opening": {
@@ -1503,14 +1971,14 @@
         "amount": 959006311,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
         }
       },
       "worldwide": {
         "amount": 2523147515,
         "source": {
           "outlet": "Wikipedia en inglés",
-          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385335884"
+          "url": "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe%3A_Phase_Six?oldid=1385488082"
         }
       },
       "boxOfficeMojo": {
