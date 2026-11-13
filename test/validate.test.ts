@@ -263,9 +263,43 @@ describe("validateEvent, taquilla", () => {
     films: [released, planned],
   };
   const withFilms = (...films: object[]) => ({ ...series, films });
+  const projection = {
+    film: "Otra",
+    low: 200,
+    high: 300,
+    by: "Analista",
+    published: "2026-10-01",
+    source: { outlet: "Prensa", url: "https://example.com/nota" },
+  };
+  const withProjection = (change: object) => ({
+    ...series,
+    projections: [{ ...projection, ...change }],
+  });
 
   test("accepts a released film and an unreleased one", () => {
     expect(validateEvent(series)).toEqual([]);
+  });
+
+  test("accepts a projection for an unreleased film", () => {
+    expect(validateEvent(withProjection({}))).toEqual([]);
+  });
+
+  test("accepts a projection for a film that has since been released", () => {
+    const data = {
+      ...series,
+      films: [
+        released,
+        {
+          ...planned,
+          status: "released",
+          opening: figure(100),
+          usCanada: figure(300),
+          worldwide: figure(600),
+        },
+      ],
+      projections: [projection],
+    };
+    expect(validateEvent(data)).toEqual([]);
   });
 
   const failures: [string, unknown, string][] = [
@@ -306,6 +340,24 @@ describe("validateEvent, taquilla", () => {
       withFilms(released, { ...planned, release: "2019-01-01", title: "Vieja" }),
       "in order of release",
     ],
+    ["a projection with low above high", withProjection({ low: 300, high: 200 }), "below low"],
+    [
+      "a projection published on the release date",
+      withProjection({ published: "2027-01-01" }),
+      "before the release",
+    ],
+    [
+      "a projection published after a film's release",
+      withProjection({ film: "Película" }),
+      "before the release",
+    ],
+    [
+      "a projection for a title not in the list",
+      withProjection({ film: "Inexistente" }),
+      "film in the list",
+    ],
+    ["a projection without a source", withProjection({ source: undefined }), "outlet and url"],
+    ["a projection without an author", withProjection({ by: " " }), "who made"],
   ];
 
   test.each(failures)("rejects %s", (_name, data, message) => {
