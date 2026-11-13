@@ -5,8 +5,8 @@
   "start": "2026-11-07",
   "end": "2026-11-16",
   "places": ["Uruguay", "Argentina", "Perú"],
-  "updated": "2026-11-12T12:00-05:00",
-  "method": "La cifra central es la de la Oficina de Prensa del Vaticano, que cita a las autoridades locales o a los organizadores, cuando existe. Si no existe, es la cifra oficial de la autoridad local. La cifra baja y la alta son la menor y la mayor de las cifras que otra fuente oficial atribuye al mismo acto. Si ninguna otra fuente oficial da una cifra distinta, las tres coinciden. Una cifra de la prensa sin fuente oficial no entra en el rango. Los totales suman las cifras de cada acto, así que cuentan asistencias y no personas distintas: quien fue a dos actos se cuenta dos veces. En un acto previsto, la cifra esperada es la que da una fuente oficial antes del acto y no entra en ningún total.",
+  "updated": "2026-11-12T23:00-05:00",
+  "method": "La cifra central es la de la Oficina de Prensa del Vaticano, que cita a las autoridades locales o a los organizadores, cuando existe. Si no existe, es la cifra oficial de la autoridad local. La cifra baja y la alta son la menor y la mayor de las cifras que otra fuente oficial atribuye al mismo acto. Si ninguna otra fuente oficial da una cifra distinta, las tres coinciden. Una cifra de la prensa sin fuente oficial no entra en el rango. Los totales suman las cifras de cada acto, así que cuentan asistencias y no personas distintas: quien fue a dos actos se cuenta dos veces. La cifra esperada es la que dan los organizadores o una autoridad antes del acto. Se muestra junto a la cifra central del acto realizado, con la diferencia en porcentaje, y no entra en ningún total.",
   "acts": [
     {
       "start": "2026-11-07T10:00-03:00",
@@ -58,7 +58,15 @@
           "outlet": "El Observador",
           "url": "https://www.elobservador.com.uy/multitudes-mensajes-contra-la-desigualdad-y-un-llamado-la-unidad-todo-lo-que-dejo-la-visita-del-papa-leon-xiv-uruguay-n6063211"
         }
-      ]
+      ],
+      "expected": {
+        "figure": 60000,
+        "attribution": "Los organizadores esperaban unas 60,000 personas en la vigilia, según Vatican News.",
+        "source": {
+          "outlet": "Vatican News",
+          "url": "https://www.vaticannews.va/en/pope/news/2026-11/uruguay-prepares-to-welcome-pope-leo-xiv.html"
+        }
+      }
     },
     {
       "start": "2026-11-08T10:30-03:00",
@@ -118,7 +126,7 @@
       "low": 650000,
       "central": 650000,
       "high": 650000,
-      "attribution": "El Vaticano informó de 650,000 personas, citando a los organizadores (EFE). Las autoridades locales habían previsto hasta 800,000 antes del acto, y un medio cordobés habló de 400,000 sin citar una fuente oficial. Ninguna de las dos entra en el rango.",
+      "attribution": "El Vaticano informó de 650,000 personas, citando a los organizadores (EFE). Un medio cordobés habló de 400,000 sin citar una fuente oficial, y esa cifra no entra en el rango.",
       "sources": [
         {
           "outlet": "Swissinfo (EFE)",
@@ -132,7 +140,15 @@
           "outlet": "C5N",
           "url": "https://www.c5n.com/sociedad/cordoba-papa-leon-xiv-misa-fadea-martes-10-noviembre-2026"
         }
-      ]
+      ],
+      "expected": {
+        "figure": 800000,
+        "attribution": "La Municipalidad de Córdoba esperaba unas 800,000 personas en el predio de FAdeA.",
+        "source": {
+          "outlet": "Diario Nuevo Día",
+          "url": "https://www.eldiarionuevodia.com.ar/nacionales/el-papa-viaja-a-cordoba-esperan-800-000-personas-habra-350-cortes-y-colectivos-gratis-3197/"
+        }
+      }
     },
     {
       "start": "2026-11-10T15:15-03:00",
@@ -198,7 +214,17 @@
           "outlet": "Revista Gente (Ministerio de Seguridad bonaerense)",
           "url": "https://www.revistagente.com/actualidad/multitud-record-en-lujan-la-impresionante-cifra-de-fieles-que-reunio-el-papa-leon-xiv-y-supero-su-convocatoria-del-lunes-y-la-misa-de-juan-pablo-ii-en-1982/"
         }
-      ]
+      ],
+      "expected": {
+        "figure": 3500000,
+        "low": 3000000,
+        "high": 4000000,
+        "attribution": "Carlos Bianco, ministro de Gobierno de la provincia de Buenos Aires, calculó entre 3 y 4 millones de personas en una conferencia de prensa.",
+        "source": {
+          "outlet": "Chequeado",
+          "url": "https://chequeado.com/el-explicador/el-papa-leon-xiv-visitara-lujan-durante-su-paso-por-argentina-algunos-datos-para-conocer-la-ciudad/"
+        }
+      }
     },
     {
       "start": "2026-11-11T17:00-05:00",
@@ -250,7 +276,9 @@
       "name": "Misa",
       "status": "planned",
       "expected": {
-        "figure": 1000000,
+        "figure": 975000,
+        "low": 950000,
+        "high": 1000000,
         "attribution": "El general Jorge Chávez Cresta, coordinador de la visita designado por el Gobierno Regional de Lambayeque, calcula entre 950,000 y 1 millón de asistentes.",
         "source": {
           "outlet": "El Tiempo",
@@ -272,7 +300,15 @@
       "city": "Cusco",
       "venue": "Parque Arqueológico Nacional de Saqsaywaman",
       "name": "Encuentro con fieles",
-      "status": "planned"
+      "status": "planned",
+      "expected": {
+        "figure": 75000,
+        "attribution": "Francisco Solís, jefe del Parque Arqueológico Nacional de Saqsaywaman, indica que la explanada recibirá a unas 75,000 personas.",
+        "source": {
+          "outlet": "Andina",
+          "url": "https://andina.pe/agencia/noticia-inca-fortress-of-sacsayhuaman-will-host-75000-people-to-meet-pope-leo-xiv-in-cusco-1097802.aspx"
+        }
+      }
     },
     {
       "start": "2026-11-15T16:45-05:00",
