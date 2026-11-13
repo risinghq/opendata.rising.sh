@@ -1,21 +1,25 @@
 import { describe, expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
+import { mkdtempSync, readdirSync, readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import { buildSnapshot } from "../scripts/mcu/forecast.ts";
+import { buildSnapshot, run } from "../scripts/mcu/forecast.ts";
 import type { TaquillaData } from "../src/data/types.ts";
 import {
   backtest,
-  chooseBasis,
+  chooseMethods,
   fitOpening,
   fitRatio,
   forecastTarget,
   naiveErrors,
   probabilityAbove,
+  publish,
   ratioErrors,
+  scoresOf,
   simulateWorldwide,
   type BacktestResult,
   type McuFilm,
+  type Method,
 } from "../src/forecast/mcu.ts";
 
 const event = JSON.parse(
@@ -201,9 +205,14 @@ describe("the naive baseline", () => {
 });
 
 describe("what is published", () => {
-  const score = (opening: [number, number], worldwide: [number, number]): BacktestResult => ({
+  const score = (
+    opening: [number, number],
+    worldwide: [number, number],
+    previousWorldwide?: number,
+  ): BacktestResult => ({
     cases: 10,
     rows: [],
+    previousWorldwide,
     byFigure: {
       opening: { model: opening[0], naive: opening[1] },
       worldwide: { model: worldwide[0], naive: worldwide[1] },
@@ -211,11 +220,76 @@ describe("what is published", () => {
   });
 
   test.each([
-    { name: "the model wins both figures", result: score([0.3, 0.5], [0.4, 0.5]), basis: "model" },
-    { name: "the model loses worldwide", result: score([0.3, 0.5], [0.6, 0.5]), basis: "naive" },
-    { name: "the model loses the opening", result: score([0.6, 0.5], [0.4, 0.5]), basis: "naive" },
-    { name: "a tie is not a win", result: score([0.5, 0.5], [0.4, 0.5]), basis: "naive" },
-  ])("$name", ({ result, basis }) => {
-    expect(chooseBasis(result)).toBe(basis);
+    {
+      name: "the model wins both figures",
+      result: score([0.3, 0.5], [0.4, 0.5], 0.6),
+      methods: { opening: "model", worldwide: "model" },
+    },
+    {
+      name: "each figure takes its own winner",
+      result: score([0.6, 0.5], [0.4, 0.5]),
+      methods: { opening: "naive", worldwide: "model" },
+    },
+    {
+      name: "the previous worldwide beats the model and the naive rule",
+      result: score([0.3, 0.5], [0.6, 0.66], 0.53),
+      methods: { opening: "model", worldwide: "previous" },
+    },
+    {
+      name: "a tie goes to the simpler method",
+      result: score([0.5, 0.5], [0.4, 0.4], 0.4),
+      methods: { opening: "naive", worldwide: "previous" },
+    },
+    {
+      name: "the previous worldwide is out of the choice when the backtest has none",
+      result: score([0.3, 0.5], [0.6, 0.5]),
+      methods: { opening: "model", worldwide: "naive" },
+    },
+  ])("$name", ({ result, methods }) => {
+    expect(chooseMethods(result)).toEqual(methods);
+  });
+
+  test("a snapshot publishes, per figure, the method with the lowest median error", () => {
+    const snap = buildSnapshot(event, "2026-11-12")!;
+    const methods = snap.basis as Record<"opening" | "worldwide", Method>;
+    for (const key of ["opening", "worldwide"] as const) {
+      const scores = scoresOf(snap.backtest, key);
+      for (const score of Object.values(scores)) {
+        expect(scores[methods[key]]!).toBeLessThanOrEqual(score);
+      }
+    }
+  });
+
+  test("publish takes each figure from its method and the probabilities from the worldwide one", () => {
+    const films = series(0.8, (i) => 4 + (i % 3));
+    const target: McuFilm = { title: "next", release: "2100-01-01", line: "a" };
+    const result = forecastTarget(films, target, [{ id: "x", usd: 1 }]);
+    const last = films.at(-1)!;
+    const published = publish(result, { opening: "model", worldwide: "previous" });
+    expect(published.predictions.opening).toEqual(result.model.predictions.opening);
+    expect(published.predictions.worldwide.point).toBe(Math.round(last.worldwide!));
+    expect(published.predictions.worldwide.low).toBeLessThan(last.worldwide!);
+    expect(published.predictions.worldwide.high).toBeGreaterThan(last.worldwide!);
+    expect(published.probabilities).toEqual(result.previousWorldwide.probabilities);
+    const naive = publish(result, { opening: "naive", worldwide: "naive" });
+    expect(naive.predictions).toEqual(result.naive.predictions);
+  });
+});
+
+describe("run", () => {
+  test("writes the snapshot of the Lima clock day and leaves an existing one unchanged", () => {
+    const root = mkdtempSync(join(tmpdir(), "mcu-forecast-"));
+    const dir = join(root, "mcu");
+    const lateInLima = new Date("2026-11-20T04:59:00Z");
+    expect(run(lateInLima, root)?.date).toBe("2026-11-19");
+    expect(readdirSync(dir)).toEqual(["2026-11-19.json"]);
+    const first = readFileSync(join(dir, "2026-11-19.json"), "utf8");
+
+    expect(run(new Date("2026-11-19T15:00:00Z"), root)?.date).toBe("2026-11-19");
+    expect(readdirSync(dir)).toEqual(["2026-11-19.json"]);
+    expect(readFileSync(join(dir, "2026-11-19.json"), "utf8")).toBe(first);
+
+    expect(run(new Date("2026-11-20T05:00:00Z"), root)?.date).toBe("2026-11-20");
+    expect(readdirSync(dir).sort()).toEqual(["2026-11-19.json", "2026-11-20.json"]);
   });
 });
