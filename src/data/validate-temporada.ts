@@ -40,6 +40,52 @@ function ids(
   return seen;
 }
 
+const MAX_MINUTE = 130;
+const STAT_KEYS = ["possession", "shotsOnTarget", "shotsOffTarget", "attacks", "dangerousAttacks"];
+
+function minuteList(list: unknown, path: string, { fail }: Report) {
+  if (!Array.isArray(list)) return fail(path, "must be a list");
+  list.forEach((item: unknown, i) => {
+    const ipath = `${path}[${i}]`;
+    if (!isObj(item)) return fail(ipath, "must be an object");
+    if (!isCount(item.minute) || item.minute > MAX_MINUTE)
+      fail(`${ipath}.minute`, `must be an integer of minutes, 0 to ${MAX_MINUTE}`);
+    if (item.team !== "home" && item.team !== "away")
+      fail(`${ipath}.team`, 'must be "home" or "away"');
+    for (const key of Object.keys(item))
+      if (key !== "minute" && key !== "team")
+        fail(`${ipath}.${key}`, "is not a field the feed provides");
+  });
+}
+
+function matchStats(stats: unknown, path: string, { fail }: Report) {
+  if (!isObj(stats)) return fail(path, "must be null or an object with home and away");
+  for (const side of ["home", "away"] as const) {
+    const team = stats[side];
+    if (!isObj(team)) {
+      fail(`${path}.${side}`, "must be an object");
+      continue;
+    }
+    for (const key of STAT_KEYS) {
+      if (!isCount(team[key])) fail(`${path}.${side}.${key}`, "must be a non-negative integer");
+    }
+    if (isCount(team.possession) && team.possession > 100)
+      fail(`${path}.${side}.possession`, "must be a percentage, 0 to 100");
+    for (const key of Object.keys(team))
+      if (!STAT_KEYS.includes(key))
+        fail(`${path}.${side}.${key}`, "is not a field the feed provides");
+  }
+  if (isObj(stats.home) && isObj(stats.away)) {
+    const { home, away } = stats;
+    if (
+      isCount(home.possession) &&
+      isCount(away.possession) &&
+      Math.abs(home.possession + away.possession - 100) > 1
+    )
+      fail(`${path}.possession`, "possession of the two teams must add up to 100, give or take 1");
+  }
+}
+
 export function validateTemporada(data: Obj, report: Report) {
   const { fail, source } = report;
 
@@ -162,6 +208,19 @@ export function validateTemporada(data: Obj, report: Report) {
             if (!isCount(events.corners[key]))
               fail(`${path}.events.corners.${key}`, "must be a non-negative integer");
           }
+        }
+        for (const key of ["cornerMinutes", "substitutions", "missedPenalties"] as const) {
+          if (key in events) minuteList(events[key], `${path}.events.${key}`, report);
+        }
+        if (isObj(events.corners) && Array.isArray(events.cornerMinutes)) {
+          for (const key of ["home", "away"] as const) {
+            const listed = events.cornerMinutes.filter((c) => isObj(c) && c.team === key).length;
+            if (isCount(events.corners[key]) && listed > events.corners[key])
+              fail(`${path}.events.cornerMinutes`, `lists more ${key} corners than the total`);
+          }
+        }
+        if ("stats" in events && events.stats !== null) {
+          matchStats(events.stats, `${path}.events.stats`, report);
         }
         if (match.status === "held" && Array.isArray(events.goals)) {
           const home = Number(match.homeScore);

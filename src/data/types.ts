@@ -98,10 +98,12 @@ interface MatchBase {
 
 export type CardColour = "yellow" | "red";
 
-export interface GoalEvent {
+export interface TimedEvent {
   minute: number;
   team: "home" | "away";
 }
+
+export type GoalEvent = TimedEvent;
 
 export interface CardEvent {
   minute: number;
@@ -114,11 +116,28 @@ export interface Score {
   away: number;
 }
 
+export interface TeamStats {
+  possession: number;
+  shotsOnTarget: number;
+  shotsOffTarget: number;
+  attacks: number;
+  dangerousAttacks: number;
+}
+
+export interface MatchStats {
+  home: TeamStats;
+  away: TeamStats;
+}
+
 export interface MatchEvents {
   halfTime: Score;
   goals: GoalEvent[];
   cards: CardEvent[];
   corners: Score;
+  cornerMinutes?: TimedEvent[];
+  substitutions?: TimedEvent[];
+  missedPenalties?: TimedEvent[];
+  stats?: MatchStats | null;
 }
 
 export interface HeldMatch extends MatchBase {
