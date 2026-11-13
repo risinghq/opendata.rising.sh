@@ -1,35 +1,27 @@
-import { For, Show } from "solid-js";
+import { Show } from "solid-js";
 
 import { FilmsTable } from "../components/FilmsTable.tsx";
 import { GrossChart, grossPoints, GrossTable } from "../components/GrossChart.tsx";
+import { McuForecast } from "../components/McuForecast.tsx";
 import { latestYear, loadCpi } from "../data/cpi.ts";
 import {
   formatDateLima,
   formatDateRange,
-  formatMoney,
   formatMoneyCompact,
-  formatPercent,
   formatStamp,
 } from "../data/format.ts";
 import { taquillaNotice } from "../data/notice.ts";
 import { eventStatus } from "../data/stats.ts";
-import {
-  filmYear,
-  isReleased,
-  keyFigures,
-  realAmount,
-  releasedFilms,
-} from "../data/stats-taquilla.ts";
+import { filmYear, keyFigures, releasedFilms } from "../data/stats-taquilla.ts";
 import type { TaquillaRecord } from "../data/types.ts";
-import type { FigureKey, McuSnapshot } from "../forecast/mcu.ts";
+import type { McuSnapshot } from "../forecast/mcu.ts";
 import { SITE_URL } from "../site.ts";
 
-const FIGURE_LABEL: Record<FigureKey, string> = {
-  opening: "Fin de semana de estreno, EE. UU. y Canadá",
-  worldwide: "Recaudación mundial",
-};
-
-export function TaquillaPage(props: { event: TaquillaRecord; forecast?: McuSnapshot | null }) {
+export function TaquillaPage(props: {
+  event: TaquillaRecord;
+  forecast?: McuSnapshot | null;
+  earlier?: McuSnapshot[];
+}) {
   const event = props.event;
   const cpi = loadCpi();
   const figures = keyFigures(event, cpi);
@@ -123,87 +115,9 @@ export function TaquillaPage(props: { event: TaquillaRecord; forecast?: McuSnaps
       </section>
 
       <Show when={forecast}>
-        {(snap) => {
-          const bt = snap().backtest;
-          const target = event.films.find((f) => f.title === snap().target.title);
-          const actual = target && isReleased(target) ? target : null;
-          return (
-            <section class="section" aria-labelledby="pronostico">
-              <h2 id="pronostico">Pronóstico: {snap().target.title}</h2>
-              <p>
-                Pronóstico calculado el {formatDateLima(`${snap().date}T12:00-05:00`)} con los{" "}
-                {snap().filmsUsed.length} estrenos publicados hasta ese día, en dólares de{" "}
-                {snap().dollars}. El estreno está previsto para el{" "}
-                {formatDateLima(`${snap().target.release}T12:00-05:00`)}.
-              </p>
-              <div class="table-scroll" tabindex="0">
-                <table class="forecast-table">
-                  <caption class="visually-hidden">
-                    Cifras previstas para {snap().target.title} con su intervalo
-                  </caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Cifra</th>
-                      <th scope="col" class="num">
-                        Pronóstico
-                      </th>
-                      <th scope="col" class="num">
-                        Intervalo del {formatPercent(snap().model.interval)}
-                      </th>
-                      <Show when={actual}>
-                        <th scope="col" class="num">
-                          Real (dólares de {snap().dollars})
-                        </th>
-                        <th scope="col">Dentro del intervalo</th>
-                      </Show>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <For each={Object.keys(FIGURE_LABEL) as FigureKey[]}>
-                      {(key) => {
-                        const real = actual
-                          ? realAmount(actual[key].amount, actual, cpi, snap().dollars)
-                          : undefined;
-                        const inside =
-                          real !== undefined &&
-                          real >= snap().predictions[key].low &&
-                          real <= snap().predictions[key].high;
-                        return (
-                          <tr>
-                            <th scope="row">{FIGURE_LABEL[key]}</th>
-                            <td class="num strong">{formatMoney(snap().predictions[key].point)}</td>
-                            <td class="num">
-                              {formatMoney(snap().predictions[key].low)} –{" "}
-                              {formatMoney(snap().predictions[key].high)}
-                            </td>
-                            <Show when={real !== undefined}>
-                              <td class="num">{formatMoney(real!)}</td>
-                              <td>{inside ? "Sí" : "No"}</td>
-                            </Show>
-                          </tr>
-                        );
-                      }}
-                    </For>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                Para medirlo, el mismo modelo se entrenó hacia atrás con {bt.cases} películas: cada
-                película de Avengers y cada uno de los últimos diez estrenos se predijo usando solo
-                las películas anteriores. El error mediano del modelo es{" "}
-                {formatPercent(bt.byFigure.worldwide.model)} en la recaudación mundial y{" "}
-                {formatPercent(bt.byFigure.opening.model)} en el fin de semana de estreno, contra{" "}
-                {formatPercent(bt.byFigure.worldwide.naive)} y{" "}
-                {formatPercent(bt.byFigure.opening.naive)} de la base ingenua (la cifra de la
-                película anterior).
-                {bt.byFigure.worldwide.model <= bt.byFigure.worldwide.naive &&
-                bt.byFigure.opening.model <= bt.byFigure.opening.naive
-                  ? " El modelo supera a la base en las dos cifras."
-                  : " El modelo no supera a la base en las dos cifras, así que el pronóstico va con esa advertencia."}
-              </p>
-            </section>
-          );
-        }}
+        {(snap) => (
+          <McuForecast event={event} cpi={cpi} forecast={snap()} earlier={props.earlier ?? []} />
+        )}
       </Show>
 
       <section class="section" aria-labelledby="metodo">
@@ -211,14 +125,25 @@ export function TaquillaPage(props: { event: TaquillaRecord; forecast?: McuSnaps
         <p>{event.method}</p>
         <Show when={forecast}>
           {(snap) => (
-            <p>
-              El pronóstico ajusta por mínimos cuadrados una recta sobre el logaritmo de cada cifra
-              en dólares de {snap().dollars}: cuánto recaudó la película anterior, cuánto recaudó la
-              anterior de la misma serie (para Avengers: Doomsday, Avengers: Endgame, cuya
-              recaudación incluye el reestreno de 2026) y cuántos años lleva la saga. El intervalo
-              sale de los errores que comete el modelo al dejar fuera cada película. Es un ejercicio
-              estadístico, no una predicción comercial.
-            </p>
+            <>
+              <p>
+                El modelo estima el fin de semana de estreno con una regresión de cresta sobre el
+                logaritmo de la cifra en dólares de {snap().dollars}. Usa dos datos: si la película
+                tiene una anterior en su serie y, de ser así, cuánto fue el estreno de esa anterior,
+                medido contra el promedio de las películas que tienen anterior. La recaudación
+                mundial es el estreno por la media geométrica de la razón entre recaudación mundial
+                y estreno de las películas ya estrenadas. Los intervalos salen de los errores que
+                comete cada etapa al dejar fuera una película, y la recaudación mundial se simula
+                con los dos errores a la vez, con una semilla fija.
+              </p>
+              <p>
+                Antes de publicar, el modelo se compara con la base ingenua (el estreno de la
+                película anterior, y ese estreno por la misma razón para la recaudación mundial) en
+                la prueba hacia atrás. Solo se publica si gana en las dos cifras; si no, el
+                pronóstico es la base. Las proyecciones de terceros se muestran al lado y no entran
+                en el cálculo. Es un ejercicio estadístico, no una predicción comercial.
+              </p>
+            </>
           )}
         </Show>
         <ul class="notices">

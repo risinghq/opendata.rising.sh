@@ -8,7 +8,7 @@ import { keyFigures } from "./data/stats-temporada.ts";
 import { keyFigures as taquillaFigures } from "./data/stats-taquilla.ts";
 import { loadCpi } from "./data/cpi.ts";
 import type { EventRecord } from "./data/types.ts";
-import { latestBefore, latestJson, latestSnapshot } from "./forecast/snapshot.ts";
+import { allSnapshots, latestSnapshot } from "./forecast/snapshot.ts";
 import { publishedScores } from "./forecast/scoring.ts";
 import type { McuSnapshot } from "./forecast/mcu.ts";
 import { AsistenciaPage } from "./pages/AsistenciaPage.tsx";
@@ -26,9 +26,11 @@ function html(meta: Meta, stylesheet: string, view: () => JSX.Element): string {
   ))}`;
 }
 
-function mcuForecast(): McuSnapshot | null {
-  const snap = latestJson<McuSnapshot>("mcu");
-  return snap ? latestBefore<McuSnapshot>("mcu", snap.target.release) : null;
+function mcuForecasts(): { forecast: McuSnapshot | null; earlier: McuSnapshot[] } {
+  const all = allSnapshots<McuSnapshot>("mcu");
+  const last = all.at(-1);
+  const published = last ? all.filter((s) => s.date < last.target.release).reverse() : [];
+  return { forecast: published[0] ?? null, earlier: published.slice(1) };
 }
 
 function eventMeta(event: EventRecord): Meta {
@@ -90,7 +92,7 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
       event.kind === "temporada" ? (
         <TemporadaPage event={event} forecast={latestSnapshot(event.slug)} scores={scores} />
       ) : event.kind === "taquilla" ? (
-        <TaquillaPage event={event} forecast={mcuForecast()} />
+        <TaquillaPage event={event} {...mcuForecasts()} />
       ) : (
         <AsistenciaPage event={event} />
       ),
