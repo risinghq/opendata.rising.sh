@@ -1,10 +1,10 @@
 import { For, Show } from "solid-js";
 
-import { formatDate, formatMoney } from "../data/format.ts";
+import { claimLabel, formatDate, formatMoney } from "../data/format.ts";
 import { MOJO_LABEL } from "../data/notice.ts";
 import type { CpiData } from "../data/cpi.ts";
 import { isReleased, realAmount } from "../data/stats-taquilla.ts";
-import type { Film } from "../data/types.ts";
+import type { BudgetClaim, Claim, Film } from "../data/types.ts";
 
 function Amount(props: { amount: number; film: Film; cpi: CpiData }) {
   return (
@@ -12,6 +12,27 @@ function Amount(props: { amount: number; film: Film; cpi: CpiData }) {
       {formatMoney(props.amount)}
       <div class="muted">{formatMoney(realAmount(props.amount, props.film, props.cpi))}</div>
     </>
+  );
+}
+
+function OtherClaims(props: { claims?: Claim[] | BudgetClaim[] }) {
+  const others = () => props.claims?.slice(1) ?? [];
+  return (
+    <Show when={others().length > 0}>
+      <div class="muted">
+        En disputa:{" "}
+        <For each={others()}>
+          {(claim, i) => (
+            <>
+              {i() > 0 && ", "}
+              <a href={claim.source.url} class="source">
+                {claimLabel(claim)}
+              </a>
+            </>
+          )}
+        </For>
+      </div>
+    </Show>
   );
 }
 
@@ -55,9 +76,11 @@ function FilmRow(props: { film: Film; cpi: CpiData }) {
             </td>
             <td data-label="EE. UU. y Canadá" class="num">
               <Amount amount={film.usCanada.amount} film={film} cpi={props.cpi} />
+              <OtherClaims claims={film.usCanada.claims} />
             </td>
             <td data-label="Mundial" class="num">
               <Amount amount={film.worldwide.amount} film={film} cpi={props.cpi} />
+              <OtherClaims claims={film.worldwide.claims} />
             </td>
             <td data-label="Presupuesto" class="num">
               <Show when={film.budget}>
@@ -65,6 +88,7 @@ function FilmRow(props: { film: Film; cpi: CpiData }) {
                   <>
                     {formatMoney(budget().low)}
                     <Show when={budget().high}>{(high) => ` – ${formatMoney(high())}`}</Show>
+                    <OtherClaims claims={budget().claims} />
                   </>
                 )}
               </Show>

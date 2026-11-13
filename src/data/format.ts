@@ -1,3 +1,5 @@
+import type { BudgetClaim, Claim } from "./types.ts";
+
 const LOCALE = "es-PE";
 const LIMA = "America/Lima";
 
@@ -72,6 +74,15 @@ const moneyNumber = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 1 });
 export const formatMoney = (value: number) => money.format(value);
 export const formatMoneyCompact = (value: number) =>
   Math.abs(value) < 1e6 ? money.format(value) : `USD ${moneyNumber.format(value / 1e6)} M`;
+
+export const claimLabel = (claim: Claim | BudgetClaim) => {
+  const amount =
+    "amount" in claim
+      ? formatMoney(claim.amount)
+      : `${formatMoney(claim.low)}${claim.high !== undefined ? ` – ${formatMoney(claim.high)}` : ""}`;
+  const basis = "basis" in claim && claim.basis ? (claim.basis === "gross" ? "bruto" : "neto") : "";
+  return basis ? `${amount} (${basis})` : amount;
+};
 
 export const isLimaOffset = (instant: string) => instant.slice(-6) === "-05:00";
 
