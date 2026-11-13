@@ -125,8 +125,8 @@
       "status": "held",
       "low": 650000,
       "central": 650000,
-      "high": 650000,
-      "attribution": "El Vaticano informó de 650,000 personas, citando a los organizadores (EFE). Un medio cordobés habló de 400,000 sin citar una fuente oficial, y esa cifra no entra en el rango.",
+      "high": 800000,
+      "attribution": "El Vaticano informó de 650,000 personas, citando a los organizadores (EFE). Después de la misa, el Gobierno de Córdoba y el intendente Daniel Passerini dieron 800,000. Un medio cordobés habló de 400,000 sin citar una fuente oficial, y esa cifra no entra en el rango.",
       "sources": [
         {
           "outlet": "Swissinfo (EFE)",
@@ -139,6 +139,14 @@
         {
           "outlet": "C5N",
           "url": "https://www.c5n.com/sociedad/cordoba-papa-leon-xiv-misa-fadea-martes-10-noviembre-2026"
+        },
+        {
+          "outlet": "La Voz de San Justo (Gobierno de Córdoba)",
+          "url": "https://www.lavozdesanjusto.com.ar/el-gobierno-de-cordoba-cifro-en-800-mil-los-asistentes-a-la-misa-de-leon-xiv-y-destaco-el-operativo-de-seguridad"
+        },
+        {
+          "outlet": "El Destape (intendente Daniel Passerini)",
+          "url": "https://www.eldestapeweb.com/sociedad/cuantas-personas-hubo-misa-papa-leon-xiv-cordoba-numeros-confirmados-20261111164918"
         }
       ],
       "expected": {
