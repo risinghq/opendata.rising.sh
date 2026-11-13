@@ -376,6 +376,40 @@ describe("validateEvent, taquilla", () => {
     expect(validateEvent(withProjection({}))).toEqual([]);
   });
 
+  test("accepts a disputed figure and a disputed budget", () => {
+    const claim = (amount: number, text: string, quote: string) => ({
+      amount,
+      text,
+      quote,
+      source: wiki,
+    });
+    const disputed = {
+      ...released,
+      worldwide: {
+        amount: 1374959729,
+        source: wiki,
+        claims: [
+          claim(1374959729, "$1,374,959,729", "$1,374,959,729"),
+          claim(1350000000, "$1.35 billion", "It grossed $1.35 billion worldwide."),
+        ],
+      },
+      budget: {
+        low: 140000000,
+        source: wiki,
+        claims: [
+          { low: 140000000, text: "$140 million", quote: "$140 million", source: wiki },
+          {
+            low: 150000000,
+            text: "$150 million",
+            quote: "budget = $150 million",
+            source: wiki,
+          },
+        ],
+      },
+    };
+    expect(validateEvent(withFilms(disputed, planned))).toEqual([]);
+  });
+
   test("accepts a projection for a film that has since been released", () => {
     const data = {
       ...series,
@@ -478,6 +512,78 @@ describe("validateEvent, taquilla", () => {
     ],
     ["a projection without a source", withProjection({ source: undefined }), "outlet and url"],
     ["a projection without an author", withProjection({ by: " " }), "who made"],
+    [
+      "claims without the value shown first",
+      withFilms(
+        {
+          ...released,
+          worldwide: {
+            amount: 600,
+            source: wiki,
+            claims: [
+              { amount: 500, text: "$500 million", quote: "$500 million", source: wiki },
+              { amount: 600, text: "$600 million", quote: "$600 million", source: wiki },
+            ],
+          },
+        },
+        planned,
+      ),
+      "the claim of the value shown",
+    ],
+    [
+      "a claim whose quote lacks the written value",
+      withFilms(
+        {
+          ...released,
+          worldwide: {
+            amount: 600,
+            source: wiki,
+            claims: [
+              { amount: 600, text: "$600 million", quote: "$600 million", source: wiki },
+              { amount: 500, text: "$500 million", quote: "It made a lot.", source: wiki },
+            ],
+          },
+        },
+        planned,
+      ),
+      "must contain the value as written",
+    ],
+    [
+      "a claim whose text writes another value",
+      withFilms(
+        {
+          ...released,
+          worldwide: {
+            amount: 600,
+            source: wiki,
+            claims: [
+              { amount: 600, text: "$600 million", quote: "$600 million", source: wiki },
+              { amount: 500, text: "$700 million", quote: "It made $700 million.", source: wiki },
+            ],
+          },
+        },
+        planned,
+      ),
+      "must write the claimed value",
+    ],
+    [
+      "an other claim equal to the value shown",
+      withFilms(
+        {
+          ...released,
+          worldwide: {
+            amount: 600,
+            source: wiki,
+            claims: [
+              { amount: 600, text: "$600 million", quote: "$600 million", source: wiki },
+              { amount: 600, text: "$600 million", quote: "It made $600 million.", source: wiki },
+            ],
+          },
+        },
+        planned,
+      ),
+      "must differ from the value shown",
+    ],
   ];
 
   test.each(failures)("rejects %s", (_name, data, message) => {

@@ -332,6 +332,17 @@ of those.
 that needs one. `Avengers: Endgame` carries one because its worldwide gross
 includes the September 2026 re-release.
 
+A figure whose article disagrees with the table carries `claims`: a list of
+`{amount, text, quote, source}` entries, or `{low, high, text, quote, source}`
+for `budget`. `text` is the value as written in the source and `quote` is the
+sentence or table cell it was read from. The first claim is the value shown:
+the table figure, because it is the one with a Box Office Mojo citation. The
+rest are the differing figures from the film's article. A budget claim may
+carry `basis` (`gross` or `net`) when the article lists production costs as
+bruto or neto; the page and CSV show it as "(bruto)" or "(neto)". The page
+lists them under the figure as "En disputa" and the CSV names the disputed
+columns in `disputa` and lists the other claims in `otras_cifras`.
+
 ### Source and licence
 
 The figures come from the box office table of "List of Marvel Cinematic
@@ -340,6 +351,12 @@ downloads state it as `Datos de Wikipedia en inglés (CC BY-SA 4.0), revisión
 del <día> de <mes> de <año>`. `source` holds the revision id and its
 permanent `?oldid=` link; each figure links the phase-page revision it came
 from, and each opening-weekend figure links the film-article revision.
+
+The importer also reads each released film's article: the `gross` and
+`budget` of its infobox and the totals stated in its box office section. A
+claim agrees when, at the coarser of the two written precisions, the table
+figure rounds or truncates to the article figure. Each disagreement is
+printed during the run and kept in `claims`.
 
 Wikipedia cites Box Office Mojo for the gross of each film. Box Office Mojo and
 The Numbers forbid scraping, so Wikipedia stays the carrier and nothing fetches
@@ -475,4 +492,5 @@ importer cannot turn into a note stops the run.
   `mundial_usd`, `fuente_taquilla` ("Box Office Mojo, vía Wikipedia" or
   "Wikipedia en inglés"), `taquilla_url`, `taquilla_copia_url`,
   `taquilla_consulta` (the Box Office Mojo page, its archive copy and the
-  access date), `fuentes` and `aviso`.
+  access date), `disputa` (the figures whose article disagrees), `otras_cifras`
+  (each other claim, its written value and link), `fuentes` and `aviso`.

@@ -103,7 +103,9 @@ the opening weekend, each article's `es` langlink for the Spanish title and
 the CPI annual averages from the BLS, then rewrites
 `data/events/mcu-taquilla.json`. `scripts/mcu-wikitext.ts` parses the box
 office table with each row's Box Office Mojo citation, the films list and the
-opening-weekend sentence.
+opening-weekend sentence. `scripts/mcu-claims.ts` reads the `gross` and
+`budget` of each article's infobox and the totals in its box office section,
+and flags the claims that disagree with the table figures.
 `scripts/mediawiki.ts` and `scripts/wikitext.ts` hold the API calls and
 wikitext helpers both importers share. `scripts/mcu/forecast.ts` fits the
 model, backtests it against the baselines, publishes per figure the method

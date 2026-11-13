@@ -202,6 +202,7 @@ describe("toFilm", () => {
     release: "2020-05-01",
     usCanada: 100,
     worldwide: 300,
+    cells: { usCanada: "", worldwide: "", budget: "" },
     article: {
       title: "Mystery Film",
       revid: 1,

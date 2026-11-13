@@ -1,0 +1,12 @@
+{{Infobox film
+| name           = Second Film
+| budget         = {{Plainlist|
+* $444–495.2 million (gross)
+* $350.6 million (net)
+}}
+| gross          = $955&nbsp;million
+}}
+'''''Second Film''''' is a 2016 superhero film.
+
+===Box office===
+''Second Film'' grossed $232.6&nbsp;million in the United States and Canada, and $722.4&nbsp;million in other territories, for a worldwide total of $955&nbsp;million.
