@@ -103,8 +103,9 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
       <section class="section" id="actos" aria-labelledby="actos-titulo">
         <h2 id="actos-titulo">Actos</h2>
         <p>
-          Cada fila dice quién dio la cifra y enlaza al informe. En un acto por realizar, la cifra
-          esperada la da una fuente oficial antes del acto y no entra en los totales.
+          Cada fila dice quién dio la cifra y enlaza al informe. La cifra esperada la dan los
+          organizadores o una autoridad antes del acto y no entra en los totales. En un acto
+          realizado, la diferencia compara la cifra central con la esperada.
         </p>
         <ActsTable acts={event.acts} />
       </section>

@@ -1,6 +1,7 @@
 import { For, Show } from "solid-js";
 
 import {
+  formatDifference,
   formatLocalTime,
   formatNumber,
   formatShortDate,
@@ -8,8 +9,8 @@ import {
   formatWeekday,
   isLimaOffset,
 } from "../data/format.ts";
-import { actDate } from "../data/stats-asistencia.ts";
-import type { Act, Source } from "../data/types.ts";
+import { actDate, expectedDifference } from "../data/stats-asistencia.ts";
+import type { Act, Expected, Source } from "../data/types.ts";
 
 function Sources(props: { sources: Source[] }) {
   return (
@@ -29,6 +30,18 @@ function Figure(props: { value?: number }) {
   return <td class="num">{props.value === undefined ? "" : formatNumber(props.value)}</td>;
 }
 
+function ExpectedSources(props: { expected: Expected; label: boolean }) {
+  return (
+    <>
+      <p class={props.label ? "expected-note" : undefined}>
+        {props.label ? "Esperada: " : ""}
+        {props.expected.attribution}
+      </p>
+      <Sources sources={[props.expected.source]} />
+    </>
+  );
+}
+
 function ActSources(props: { act: Act }) {
   const act = props.act;
   if (act.status === "held") {
@@ -36,24 +49,42 @@ function ActSources(props: { act: Act }) {
       <>
         <p>{act.attribution}</p>
         <Sources sources={act.sources} />
+        <Show when={act.expected}>
+          {(expected) => <ExpectedSources expected={expected()} label />}
+        </Show>
       </>
     );
   }
-  if (act.expected) {
-    return (
-      <>
-        <p>{act.expected.attribution}</p>
-        <Sources sources={[act.expected.source]} />
-      </>
-    );
-  }
+  if (act.expected) return <ExpectedSources expected={act.expected} label={false} />;
   return <p class="muted">Sin cifra esperada.</p>;
+}
+
+function ExpectedFigure(props: { expected?: Expected }) {
+  return (
+    <td class="num">
+      <Show when={props.expected}>
+        {(expected) => (
+          <>
+            <div>{formatNumber(expected().figure)}</div>
+            <Show when={expected().low !== undefined && expected().high !== undefined}>
+              <div class="muted small">
+                {formatNumber(expected().low ?? 0)} a {formatNumber(expected().high ?? 0)}
+              </div>
+            </Show>
+          </>
+        )}
+      </Show>
+    </td>
+  );
+}
+
+function Difference(props: { value?: number }) {
+  return <td class="num">{props.value === undefined ? "" : formatDifference(props.value)}</td>;
 }
 
 function ActRow(props: { act: Act }) {
   const act = props.act;
   const held = act.status === "held" ? act : undefined;
-  const planned = act.status === "planned" ? act : undefined;
   return (
     <tr>
       <td class="col-when">
@@ -77,7 +108,8 @@ function ActRow(props: { act: Act }) {
       <Figure value={held?.low} />
       <Figure value={held?.central} />
       <Figure value={held?.high} />
-      <Figure value={planned?.expected?.figure} />
+      <ExpectedFigure expected={act.expected} />
+      <Difference value={held ? expectedDifference(held) : undefined} />
       <td class="col-sources">
         <ActSources act={act} />
       </td>
@@ -109,6 +141,9 @@ export function ActsTable(props: { acts: Act[] }) {
             </th>
             <th scope="col" class="num">
               Esperada
+            </th>
+            <th scope="col" class="num">
+              Diferencia
             </th>
             <th scope="col">Quién la informa y fuentes</th>
           </tr>

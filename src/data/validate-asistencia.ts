@@ -8,6 +8,28 @@ import {
   type Report,
 } from "./validate-common.ts";
 
+function validateExpected(
+  expected: unknown,
+  path: string,
+  fail: Report["fail"],
+  source: Report["source"],
+) {
+  if (!isObj(expected)) return fail(path, "must be an object");
+  const { figure, low, high } = expected;
+  if (!isCount(figure) || figure === 0) fail(`${path}.figure`, "must be a positive integer");
+  if ("low" in expected !== "high" in expected) {
+    fail(path, "low and high go together");
+  } else if ("low" in expected) {
+    if (!isCount(low) || low === 0) fail(`${path}.low`, "must be a positive integer");
+    if (!isCount(high) || high === 0) fail(`${path}.high`, "must be a positive integer");
+    if (isCount(low) && isCount(figure) && isCount(high) && !(low <= figure && figure <= high)) {
+      fail(path, `low <= figure <= high does not hold (${low}, ${figure}, ${high})`);
+    }
+  }
+  if (!isText(expected.attribution)) fail(`${path}.attribution`, "must say who expects it");
+  source(expected.source, `${path}.source`);
+}
+
 export function validateAsistencia(data: Obj, { fail, source }: Report) {
   if (!Array.isArray(data.acts) || data.acts.length === 0) {
     fail("acts", "must be a non-empty list");
@@ -43,21 +65,12 @@ export function validateAsistencia(data: Obj, { fail, source }: Report) {
         } else {
           act.sources.forEach((s: unknown, j) => source(s, `${path}.sources[${j}]`));
         }
-        if ("expected" in act) fail(`${path}.expected`, "a held act has no expected figure");
+        if ("expected" in act) validateExpected(act.expected, `${path}.expected`, fail, source);
       } else if (act.status === "planned") {
         for (const key of ["low", "central", "high", "attribution", "sources"]) {
           if (key in act) fail(`${path}.${key}`, "a planned act has no figures");
         }
-        if ("expected" in act) {
-          const expected = act.expected;
-          if (!isObj(expected)) return fail(`${path}.expected`, "must be an object");
-          if (!isCount(expected.figure) || expected.figure === 0) {
-            fail(`${path}.expected.figure`, "must be a positive integer");
-          }
-          if (!isText(expected.attribution))
-            fail(`${path}.expected.attribution`, "must say who expects it");
-          source(expected.source, `${path}.expected.source`);
-        }
+        if ("expected" in act) validateExpected(act.expected, `${path}.expected`, fail, source);
       } else {
         fail(`${path}.status`, 'must be "planned" or "held"');
       }

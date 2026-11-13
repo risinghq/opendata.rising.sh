@@ -11,13 +11,25 @@ const HEADER = [
   "baja",
   "central",
   "alta",
-  "esperado",
   "atribucion",
   "fuentes",
+  "esperado",
+  "esperado_baja",
+  "esperado_alta",
+  "esperado_atribucion",
+  "esperado_fuente",
 ] as const;
 
 function row(act: Act): Cell[] {
   const common = [act.start, act.country, act.city, act.venue, act.name];
+  const expected = act.expected;
+  const forecast: Cell[] = [
+    expected?.figure,
+    expected?.low,
+    expected?.high,
+    expected?.attribution,
+    expected ? `${expected.source.outlet}: ${expected.source.url}` : undefined,
+  ];
   if (act.status === "held") {
     const links = act.sources.map((s) => `${s.outlet}: ${s.url}`).join(" | ");
     return [
@@ -26,21 +38,20 @@ function row(act: Act): Cell[] {
       act.low,
       act.central,
       act.high,
-      undefined,
       act.attribution,
       links,
+      ...forecast,
     ];
   }
-  const expected = act.expected;
   return [
     ...common,
     "previsto",
     undefined,
     undefined,
     undefined,
-    expected?.figure,
-    expected?.attribution,
-    expected ? `${expected.source.outlet}: ${expected.source.url}` : undefined,
+    undefined,
+    undefined,
+    ...forecast,
   ];
 }
 

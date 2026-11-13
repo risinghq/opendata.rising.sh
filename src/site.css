@@ -343,6 +343,11 @@ tbody tr:hover > * {
   padding-inline: var(--space-2);
 }
 
+.acts-table .expected-note {
+  margin-top: var(--space-2);
+  color: var(--fg-muted);
+}
+
 .events-table {
   min-width: 64rem;
 }

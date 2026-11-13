@@ -49,6 +49,12 @@ const decimal = new Intl.NumberFormat(LOCALE, {
   maximumFractionDigits: 2,
 });
 const percent = new Intl.NumberFormat(LOCALE, { style: "percent", maximumFractionDigits: 0 });
+const signedPercent = new Intl.NumberFormat(LOCALE, {
+  style: "percent",
+  maximumFractionDigits: 0,
+  signDisplay: "exceptZero",
+});
+export const formatDifference = (value: number) => signedPercent.format(value);
 export const formatDecimal = (value: number) => decimal.format(value);
 export const formatPercent = (value: number) => percent.format(value);
 export const formatChance = (value: number) =>

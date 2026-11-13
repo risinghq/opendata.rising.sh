@@ -23,6 +23,11 @@ export function plannedActs(event: AsistenciaData): PlannedAct[] {
   return event.acts.filter((act): act is PlannedAct => act.status === "planned");
 }
 
+export function expectedDifference(act: HeldAct): number | undefined {
+  if (!act.expected) return undefined;
+  return (act.central - act.expected.figure) / act.expected.figure;
+}
+
 export function sumRange(acts: Range[]): Range {
   return acts.reduce(
     (sum, act) => ({

@@ -18,10 +18,13 @@ export interface HeldAct extends ActBase {
   high: number;
   attribution: string;
   sources: Source[];
+  expected?: Expected;
 }
 
 export interface Expected {
   figure: number;
+  low?: number;
+  high?: number;
   attribution: string;
   source: Source;
 }
