@@ -1369,5 +1369,40 @@
       "release": "2027-12-17",
       "status": "unreleased"
     }
+  ],
+  "projections": [
+    {
+      "film": "Avengers: Doomsday",
+      "low": 400000000,
+      "high": 400000000,
+      "by": "World of Reel, a partir de las ventas anticipadas que reporta Box Office Theory",
+      "published": "2026-08-16",
+      "source": {
+        "outlet": "World of Reel",
+        "url": "https://www.worldofreel.com/blog/2026/8/16/avengers-doomsday-presales-explode-tracking-toward-100m-in-previews-alone-and-1-billion-global-opening"
+      }
+    },
+    {
+      "film": "Avengers: Doomsday",
+      "low": 425000000,
+      "high": 450000000,
+      "by": "AnthonyJPHer, usuario de los foros de Box Office Theory",
+      "published": "2026-08-18",
+      "source": {
+        "outlet": "Comic Basics",
+        "url": "https://www.comicbasics.com/avengers-doomsday-tracking-data-points-to-massive-opening-weekend-analysts-say/"
+      }
+    },
+    {
+      "film": "Avengers: Doomsday",
+      "low": 230000000,
+      "high": 260000000,
+      "by": "analistas sin nombre, según Comic Basics",
+      "published": "2026-08-18",
+      "source": {
+        "outlet": "Comic Basics",
+        "url": "https://www.comicbasics.com/avengers-doomsday-tracking-for-insane-worldwide-opening-report-says/"
+      }
+    }
   ]
 }

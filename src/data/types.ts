@@ -175,10 +175,20 @@ export interface UnreleasedFilm extends FilmBase {
 
 export type Film = ReleasedFilm | UnreleasedFilm;
 
+export interface Projection {
+  film: string;
+  low: number;
+  high: number;
+  by: string;
+  published: string;
+  source: Source;
+}
+
 export interface TaquillaData extends EventBase {
   kind: "taquilla";
   source: WikiSource;
   films: Film[];
+  projections?: Projection[];
 }
 
 export type EventData = AsistenciaData | TemporadaData | TaquillaData;

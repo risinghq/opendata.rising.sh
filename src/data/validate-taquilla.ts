@@ -50,6 +50,7 @@ export function validateTaquilla(data: Obj, report: Report) {
     return fail("films", "must be a non-empty list");
   }
   const titles = new Set<string>();
+  const releases = new Map<string, string>();
   let previous = "";
   data.films.forEach((film: unknown, i) => {
     const path = `films[${i}]`;
@@ -102,5 +103,26 @@ export function validateTaquilla(data: Obj, report: Report) {
     } else {
       fail(`${path}.status`, 'must be "released" or "unreleased"');
     }
+    if (isText(film.title) && isDate(film.release)) releases.set(film.title, film.release);
+  });
+
+  if (data.projections === undefined) return;
+  if (!Array.isArray(data.projections)) return fail("projections", "must be a list");
+  data.projections.forEach((row: unknown, i) => {
+    const path = `projections[${i}]`;
+    if (!isObj(row)) return fail(path, "must be an object");
+    const release = isText(row.film) ? releases.get(row.film) : undefined;
+    if (release === undefined) fail(`${path}.film`, "must be the title of a film in the list");
+    if (!isCount(row.low)) fail(`${path}.low`, "must be a non-negative integer");
+    if (!isCount(row.high)) fail(`${path}.high`, "must be a non-negative integer");
+    if (isCount(row.low) && isCount(row.high) && row.high < row.low)
+      fail(`${path}.high`, "must not be below low");
+    if (!isText(row.by)) fail(`${path}.by`, "must name who made the projection");
+    if (!isDate(row.published)) {
+      fail(`${path}.published`, "must be a date, YYYY-MM-DD");
+    } else if (release !== undefined && row.published >= release) {
+      fail(`${path}.published`, "must be before the release");
+    }
+    source(row.source, `${path}.source`);
   });
 }
