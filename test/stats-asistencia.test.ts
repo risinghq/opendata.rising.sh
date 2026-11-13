@@ -1,7 +1,12 @@
 import { expect, test } from "bun:test";
 
 import type { AsistenciaData, HeldAct } from "../src/data/types.ts";
-import { dailyTotals, largestAct, sumRange } from "../src/data/stats-asistencia.ts";
+import {
+  dailyTotals,
+  expectedDifference,
+  largestAct,
+  sumRange,
+} from "../src/data/stats-asistencia.ts";
 import { eventStatus } from "../src/data/stats.ts";
 
 const src = { outlet: "Medio", url: "https://example.org" };
@@ -64,6 +69,22 @@ test("the daily series accumulates, fills empty days and stops at the last held 
 
 test("the largest act is the one with the highest central figure", () => {
   expect(largestAct(event)?.central).toBe(20);
+});
+
+test.each([
+  ["a count above the forecast", 1500, 1000, 0.5],
+  ["a count below the forecast", 650, 800, -0.1875],
+  ["a count equal to the forecast", 60, 60, 0],
+])("the difference for %s", (_name, central, figure, difference) => {
+  const act: HeldAct = {
+    ...held("2026-11-07", central, central, central),
+    expected: { figure, attribution: "X.", source: src },
+  };
+  expect(expectedDifference(act)).toBeCloseTo(difference, 10);
+});
+
+test("a held act without an expected figure has no difference", () => {
+  expect(expectedDifference(held("2026-11-07", 1, 2, 3))).toBeUndefined();
 });
 
 test("an event with planned acts is en curso", () => {

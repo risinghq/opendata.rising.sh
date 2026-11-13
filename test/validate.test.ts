@@ -47,13 +47,33 @@ function withAct(act: object) {
 }
 
 describe("validateEvent", () => {
-  test("accepts a held act, a planned act and a planned act with an expected figure", () => {
+  test("accepts a held act and a planned act, each with and without an expected figure", () => {
     const expected = { figure: 50, attribution: "Organizadores.", source };
+    const range = { ...expected, low: 40, high: 60 };
     expect(validateEvent(event)).toEqual([]);
-    expect(validateEvent(withAct({ ...plannedAct, expected }))).toEqual([]);
+    for (const act of [heldAct, plannedAct]) {
+      expect(validateEvent(withAct({ ...act, expected }))).toEqual([]);
+      expect(validateEvent(withAct({ ...act, expected: range }))).toEqual([]);
+    }
   });
 
+  const expected = { figure: 50, attribution: "Organizadores.", source };
   const failures: [string, unknown, string][] = [
+    [
+      "an expected range with only a low",
+      withAct({ ...heldAct, expected: { ...expected, low: 40 } }),
+      "low and high go together",
+    ],
+    [
+      "an expected figure outside its range",
+      withAct({ ...heldAct, expected: { ...expected, low: 60, high: 70 } }),
+      "low <= figure <= high",
+    ],
+    [
+      "an expected figure of zero on a held act",
+      withAct({ ...heldAct, expected: { ...expected, figure: 0 } }),
+      "expected.figure",
+    ],
     ["low above central", withAct({ ...heldAct, low: 25 }), "low <= central <= high"],
     ["central above high", withAct({ ...heldAct, central: 40 }), "low <= central <= high"],
     ["held act without sources", withAct({ ...heldAct, sources: [] }), "needs at least one source"],
