@@ -23,7 +23,7 @@
 | 145
 | 265
 | $200&nbsp;million
-| <ref name="FirstFilm" />
+| <ref name="FirstFilmBOM">{{Cite Box Office Mojo |id=1234567 |title=First Film |access-date=November 27, 2020 |archive-url=https://web.archive.org/web/20201127165355/https://www.boxofficemojo.com/title/tt1234567/ |archive-date=November 27, 2020 |url-status=live}}</ref><ref name="FirstFilmNUM">{{Cite NUM |id=First-Film |title=First Film (2020) |access-date=April 10, 2022}}</ref>
 |-
 ! scope="row" | ''[[Second Film#Box office|Second Film]]''
 | {{#invoke:dts|main|2021|7|9}}
@@ -33,7 +33,7 @@
 | 210
 | 300
 | $160–200&nbsp;million
-| <ref name="SecondFilm" />
+| <ref name="SecondBudget">{{Cite magazine |title=Second Film budget |url=https://example.com/budget |access-date=May 1, 2022}}</ref><ref name="SecondBOM">{{#invoke:cite|web|title=Second Film |url=https://www.boxofficemojo.com/release/rl3111421441/ |url-status=live |archive-url=https://web.archive.org/web/20241213143253/https://www.boxofficemojo.com/release/rl3111421441/ |archive-date=December 13, 2024 |access-date=January 11, 2025 |website=[[Box Office Mojo]]}}</ref>
 |-
 ! scope="row" colspan="2" | '''Total'''
 | ${{val|fmt=commas|{{#expr:274286610+183651655}}}}

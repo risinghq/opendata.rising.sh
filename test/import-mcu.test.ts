@@ -34,6 +34,64 @@ describe("box office table", () => {
     });
   });
 
+  test("reads each row's Box Office Mojo citation, from the template or from a cite web url", () => {
+    const [first, second] = parseBoxOfficeRows(section);
+    expect(first!.boxOfficeMojo).toEqual({
+      url: "https://www.boxofficemojo.com/title/tt1234567/",
+      accessed: "2020-11-27",
+      archive:
+        "https://web.archive.org/web/20201127165355/https://www.boxofficemojo.com/title/tt1234567/",
+    });
+    expect(second!.boxOfficeMojo).toEqual({
+      url: "https://www.boxofficemojo.com/release/rl3111421441/",
+      accessed: "2025-01-11",
+      archive:
+        "https://web.archive.org/web/20241213143253/https://www.boxofficemojo.com/release/rl3111421441/",
+    });
+  });
+
+  const rowWith = (ref: string) => `{| class="wikitable"
+! scope="col" | Film
+|-
+! scope="row" | ''[[Third Film]]''
+| {{#invoke:dts|main|2022|1|1}} || $100,000,000 || $50,000,000 || $150,000,000 || 1 || 2 || $50&nbsp;million || ${ref}
+|}`;
+
+  test.each([
+    {
+      name: "no archive copy",
+      ref: '<ref name="B">{{Cite Box Office Mojo |id=3498820 |title=Third Film |access-date=April 9, 2022 }}</ref>',
+      expected: { url: "https://www.boxofficemojo.com/title/tt3498820/", accessed: "2022-04-09" },
+    },
+    {
+      name: "an id that already starts with tt",
+      ref: "<ref>{{cite Box Office Mojo |id=tt6320628|title=Third Film |access-date=November 19, 2019}}</ref>",
+      expected: { url: "https://www.boxofficemojo.com/title/tt6320628/", accessed: "2019-11-19" },
+    },
+    {
+      name: "a citation that follows a ref of another outlet",
+      ref: '<ref name="N">{{Cite NUM |id=Third |title=Third |access-date=April 10, 2022}}</ref><ref name="B">{{Cite Box Office Mojo |title=Third Film |id=1 |access-date=June 12, 2022 }}</ref>',
+      expected: { url: "https://www.boxofficemojo.com/title/tt1/", accessed: "2022-06-12" },
+    },
+    {
+      name: "no citation",
+      ref: '<ref name="N">{{Cite NUM |id=Third |title=Third |access-date=April 10, 2022}}</ref>',
+      expected: undefined,
+    },
+    {
+      name: "a reused name with no body",
+      ref: '<ref name="Elsewhere" />',
+      expected: undefined,
+    },
+    {
+      name: "a citation without an access date",
+      ref: "<ref>{{Cite Box Office Mojo |id=1 |title=Third Film}}</ref>",
+      expected: undefined,
+    },
+  ])("citation with $name", ({ ref, expected }) => {
+    expect(parseBoxOfficeRows(rowWith(ref))[0]!.boxOfficeMojo).toEqual(expected);
+  });
+
   test("reads cells written on one line", () => {
     const table = `{| class="wikitable"
 ! scope="col" | Film
@@ -144,6 +202,20 @@ describe("toFilm", () => {
 
   test("throws naming the film when no opening weekend is parsed", () => {
     expect(() => toFilm(released, "Mystery Film", src, src)).toThrow(/Mystery Film/);
+  });
+
+  test("stores the Box Office Mojo citation on the film", () => {
+    const boxOfficeMojo = {
+      url: "https://www.boxofficemojo.com/title/tt1/",
+      accessed: "2022-06-12",
+    };
+    const article = {
+      ...released.article,
+      wikitext: "''Mystery Film'' grossed $50 million in its opening weekend.",
+    };
+    expect(toFilm({ ...released, article, boxOfficeMojo }, "Mystery Film", src, src)).toMatchObject(
+      { boxOfficeMojo },
+    );
   });
 
   test("strips the film disambiguator from the original title", () => {

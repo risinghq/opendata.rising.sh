@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { loadEvents } from "../src/data/load.ts";
 import { latestYear, loadCpi } from "../src/data/cpi.ts";
 import { formatMoney } from "../src/data/format.ts";
-import { taquillaNotice, tournamentNotice } from "../src/data/notice.ts";
+import { MOJO_LABEL, taquillaNotice, tournamentNotice } from "../src/data/notice.ts";
 import { heldActs } from "../src/data/stats-asistencia.ts";
 import { isReleased, realAmount } from "../src/data/stats-taquilla.ts";
 import type { McuSnapshot } from "../src/forecast/mcu.ts";
@@ -64,6 +64,17 @@ test("every event page holds its metadata, tables and downloads without JavaScri
       }
       for (const film of event.films.filter(isReleased)) {
         expect(html).toContain(`href="${film.worldwide.source.url}"`);
+      }
+      const cited = event.films.filter(isReleased).filter((film) => film.boxOfficeMojo);
+      expect(cited.length).toBeGreaterThan(0);
+      expect(html.split(MOJO_LABEL).length - 1).toBe(cited.length);
+      for (const film of cited) {
+        const { url, archive, accessed } = film.boxOfficeMojo!;
+        expect(html).toContain(`href="${url.replaceAll("&", "&amp;")}"`);
+        if (archive) expect(html).toContain(`href="${archive.replaceAll("&", "&amp;")}"`);
+        expect(
+          csv.some((line) => line.includes(`"${MOJO_LABEL}",${url},${archive ?? ""},${accessed},`)),
+        ).toBe(true);
       }
       expect(json.films).toHaveLength(event.films.length);
       expect(csv).toHaveLength(event.films.length + 2);

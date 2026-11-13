@@ -356,6 +356,22 @@ describe("validateEvent, taquilla", () => {
     expect(validateEvent(series)).toEqual([]);
   });
 
+  const mojo = {
+    url: "https://www.boxofficemojo.com/title/tt1234567/",
+    accessed: "2022-04-09",
+    archive:
+      "https://web.archive.org/web/20220402064159/https://www.boxofficemojo.com/title/tt1234567/",
+  };
+
+  test("accepts a Box Office Mojo citation with and without an archive copy", () => {
+    expect(validateEvent(withFilms({ ...released, boxOfficeMojo: mojo }, planned))).toEqual([]);
+    expect(
+      validateEvent(
+        withFilms({ ...released, boxOfficeMojo: { ...mojo, archive: undefined } }, planned),
+      ),
+    ).toEqual([]);
+  });
+
   test("accepts a projection for an unreleased film", () => {
     expect(validateEvent(withProjection({}))).toEqual([]);
   });
@@ -415,6 +431,34 @@ describe("validateEvent, taquilla", () => {
       "a film out of release order",
       withFilms(released, { ...planned, release: "2019-01-01", title: "Vieja" }),
       "in order of release",
+    ],
+    [
+      "a Box Office Mojo link on another site",
+      withFilms({ ...released, boxOfficeMojo: { ...mojo, url: "https://example.com/film" } }),
+      "boxofficemojo.com",
+    ],
+    [
+      "a Box Office Mojo link on a look-alike host",
+      withFilms({
+        ...released,
+        boxOfficeMojo: { ...mojo, url: "https://evilboxofficemojo.com/x" },
+      }),
+      "boxofficemojo.com",
+    ],
+    [
+      "a Box Office Mojo access date that is not a date",
+      withFilms({ ...released, boxOfficeMojo: { ...mojo, accessed: "April 9, 2022" } }),
+      "boxOfficeMojo.accessed",
+    ],
+    [
+      "an archive copy that is not on web.archive.org",
+      withFilms({ ...released, boxOfficeMojo: { ...mojo, archive: "https://example.com/copy" } }),
+      "web.archive.org",
+    ],
+    [
+      "a Box Office Mojo citation on an unreleased film",
+      withFilms({ ...planned, boxOfficeMojo: mojo }),
+      "no grosses",
     ],
     ["a projection with low above high", withProjection({ low: 300, high: 200 }), "below low"],
     [
