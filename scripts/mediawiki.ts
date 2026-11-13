@@ -1,3 +1,5 @@
+import { rawFetch } from "./raw.ts";
+
 const USER_AGENT =
   "opendata-rising-sh-importer/1.0 (open data catalogue; https://opendata.rising.sh)";
 
@@ -11,7 +13,7 @@ export interface PageRevision {
 async function call(host: string, params: Record<string, string>): Promise<any> {
   const api = `https://${host}/w/api.php`;
   const url = `${api}?${new URLSearchParams({ format: "json", formatversion: "2", ...params })}`;
-  const response = await fetch(url, { headers: { "user-agent": USER_AGENT } });
+  const response = await rawFetch(url, { headers: { "user-agent": USER_AGENT } });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
   const body = await response.json();
   if (body.error) throw new Error(`${body.error.code}: ${body.error.info}`);

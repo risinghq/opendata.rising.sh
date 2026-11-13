@@ -2,6 +2,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
+import { rawFetch, replaying, type RawInit } from "../raw.ts";
+
 export const BASE = "https://api.5dollarfootballapi.com/v1";
 export const CACHE = join(import.meta.dirname, "..", "..", ".cache", "liga1");
 
@@ -20,12 +22,17 @@ const PER_MINUTE = 18;
 export class Api {
   requests = 0;
   remaining = -1;
-  private key = apiKey();
+  private keyValue: string | undefined;
   private stamps: number[] = [];
   private movedIds = new Map<number, number>();
 
   canonicalId(id: number): number {
     return this.movedIds.get(id) ?? id;
+  }
+
+  private key(): string {
+    if (this.keyValue === undefined) this.keyValue = apiKey();
+    return this.keyValue;
   }
 
   private async pace() {
@@ -38,12 +45,15 @@ export class Api {
   }
 
   async get(path: string): Promise<unknown> {
-    await this.pace();
-    this.stamps.push(Date.now());
-    const response = await fetch(`${BASE}${path}`, {
-      headers: { authorization: `Bearer ${this.key}` },
-      redirect: "manual",
-    });
+    const init: RawInit = { redirect: "manual" };
+    if (!replaying()) {
+      await this.pace();
+      this.stamps.push(Date.now());
+      const key = this.key();
+      init.headers = { authorization: `Bearer ${key}` };
+      init.secrets = [key];
+    }
+    const response = await rawFetch(`${BASE}${path}`, init);
     this.requests++;
     const remaining = response.headers.get("x-ratelimit-remaining");
     if (remaining !== null) this.remaining = Number(remaining);
