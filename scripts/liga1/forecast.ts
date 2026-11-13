@@ -38,7 +38,7 @@ export function run(): ForecastSnapshot {
   for (const [key, id] of Object.entries(joinMap)) {
     if (oddsById[id]) odds.set(key, oddsById[id]);
   }
-  const test = backtest(event, OPTIONS, odds, today);
+  const test = backtest(event, OPTIONS, odds);
 
   const snapshot: ForecastSnapshot = {
     season: "liga-1-2026",

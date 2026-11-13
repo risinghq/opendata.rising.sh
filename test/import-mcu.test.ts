@@ -88,6 +88,16 @@ describe("box office table", () => {
       ref: "<ref>{{Cite Box Office Mojo |id=1 |title=Third Film}}</ref>",
       expected: undefined,
     },
+    {
+      name: "an access date with no day",
+      ref: "<ref>{{Cite Box Office Mojo |id=1 |title=Third Film |access-date=November 2020}}</ref>",
+      expected: undefined,
+    },
+    {
+      name: "a day-month-year access date",
+      ref: "<ref>{{Cite Box Office Mojo |id=1 |title=Third Film |access-date=9 April 2022}}</ref>",
+      expected: { url: "https://www.boxofficemojo.com/title/tt1/", accessed: "2022-04-09" },
+    },
   ])("citation with $name", ({ ref, expected }) => {
     expect(parseBoxOfficeRows(rowWith(ref))[0]!.boxOfficeMojo).toEqual(expected);
   });

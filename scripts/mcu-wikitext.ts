@@ -101,8 +101,12 @@ function parameters(template: string): { name: string; named: Map<string, string
 const MOJO_HOST = /^https?:\/\/(www\.)?boxofficemojo\.com\//i;
 const MOJO_TEMPLATE = /^cite (box office mojo|bom)$/i;
 
+// Date.parse reads "Nov 2020" as 1 Nov, a day the citation never stated.
+const FULL_DATE =
+  /^\s*(?:[A-Za-z]+\.? \d{1,2}, \d{4}|\d{1,2} [A-Za-z]+\.? \d{4}|\d{4}-\d{2}-\d{2})\s*$/;
+
 function isoDate(text: string | undefined): string | undefined {
-  if (!text) return undefined;
+  if (!text || !FULL_DATE.test(text)) return undefined;
   const time = Date.parse(`${text} 12:00 UTC`);
   return Number.isNaN(time) ? undefined : new Date(time).toISOString().slice(0, 10);
 }
