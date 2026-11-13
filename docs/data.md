@@ -318,17 +318,67 @@ of the dollar the page uses. Every figure shown in real terms converts with
 `data/forecasts/mcu/YYYY-MM-DD.json` is a dated snapshot of the Avengers:
 Doomsday forecast, made before the release and never rewritten. It holds the
 date, the dollar base year, the films used, the model form and coefficients,
-the point and interval per figure (opening weekend and worldwide) and the
-backtest.
+the published point and 80% interval per figure (opening weekend and
+worldwide), the worldwide-given-opening ratio, the probabilities, the backtest
+and `basis`. The page lists every snapshot taken before the release, latest
+first, and shows each against the real figures once the film is released. The
+`2026-11-12.json` snapshot comes from the first model and has no `basis`,
+`ratio` or `probabilities`.
 
-The model in `src/forecast/mcu.ts` is a ridge-regularized least-squares fit
-on the log of each figure in real dollars: the previous release's figure, the
-previous figure in the same line (the previous Avengers film for Doomsday)
-and the years since the first release. The interval comes from the
-leave-one-out errors. The backtest predicts each Avengers film and each of
-the last ten releases using only the films before it, and reports the median
-absolute percentage error against the naive baseline of the previous film's
-figure.
+The model in `src/forecast/mcu.ts` has two stages, both on real dollars.
+
+The opening stage is a ridge regression (penalty 1, intercept free) of
+`ln(opening)` on a `has line predecessor` dummy and the `ln` opening of the
+line predecessor, centred on its mean over the films that have one. A film
+with no predecessor gets 0 on both. The centring matters: with the log term
+uncentred and set to 0 for films without a predecessor, the dummy has to
+offset the slope times a log level near 18.8 (about -10 for a slope of 0.56).
+The ridge penalty on the dummy pulls it toward 0, and the slope collapses to
+0.03 with it. The line is the series of the
+title (Avengers, Spider-Man and so on); for Doomsday the predecessor is
+Avengers: Endgame, whose gross includes the 2026 re-release.
+
+The ratio stage is the geometric mean of worldwide over opening across the
+released films. The worldwide forecast of the model is the opening forecast
+times that ratio.
+
+Intervals are the 10th and 90th percentiles of the leave-one-out errors of
+each stage, in logs. A film whose predecessor is the film left out is also
+left out. The probabilities that worldwide passes USD 1,000 M, USD 2,000 M and
+the Endgame gross (nominal, and in real dollars) come from 20,000 draws of the
+forecast times a random opening error and a random ratio error, taken from the
+leave-one-out errors with the seeded generator `mulberry32` (seed
+`20261113`). The same seed gives the same draws.
+
+The backtest predicts each Avengers film and each of the last ten releases
+using only the films before it, and reports the median absolute percentage
+error of the model and of the naive baseline for the opening and for worldwide.
+The naive opening is the previous film's opening. The naive worldwide is that
+opening times the ratio, so it goes through the same ratio stage as the model
+and the published worldwide is always an opening times the ratio. The backtest
+also records `previousWorldwide`, the error of repeating the previous film's
+worldwide gross, as a reference that the rule does not use. The rule that picks
+what is published is fixed before the run: the model is published only if it
+beats the naive baseline on both figures. Otherwise `basis` is `naive`: the
+snapshot publishes the previous film's opening and that opening times the
+ratio, with the opening interval from the steps between consecutive openings
+and the worldwide interval and probabilities simulated with those steps and the
+ratio errors, and keeps the model's figures in `candidate`.
+
+### Projections
+
+`projections` is an optional list in the event file, shown beside the forecast
+and never used by the model. Each row has `film` (the title of a film in the
+list, released or not), `low` and `high` (the opening weekend in the United States and Canada,
+integer nominal U.S. dollars, a single figure has both equal), `by` (who made
+it), `published` (`YYYY-MM-DD`, before the film's release) and `source`
+(`outlet` and `url` of the page that publishes it). The validator rejects a
+row with `low` above `high`, a date on or after the release, a film that is not
+in the list, or a missing `by` or `source`. A row stays valid after the film is
+released.
+
+Each row is checked at its URL on the day it is added. Add rows by hand: the
+importer keeps `projections` as it keeps the other fields.
 
 ### Importer
 
