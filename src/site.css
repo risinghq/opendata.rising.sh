@@ -432,6 +432,10 @@ tbody tr:hover > * {
   padding-block: var(--space-1);
 }
 
+.archive-copy {
+  margin-inline-start: var(--space-2);
+}
+
 .chart {
   margin: 0;
 }
@@ -657,6 +661,10 @@ tbody tr:hover > * {
   margin-inline-end: var(--space-3);
   padding-block: var(--space-1);
   white-space: nowrap;
+}
+
+.film-sources .archive-copy {
+  margin-inline-start: 0;
 }
 
 .downloads {

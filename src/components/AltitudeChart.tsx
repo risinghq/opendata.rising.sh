@@ -2,6 +2,7 @@ import { For } from "solid-js";
 
 import { formatDecimal, formatNumber } from "../data/format.ts";
 import { trend, type AltitudePoint } from "../data/stats-temporada.ts";
+import { ArchiveCopy } from "./ArchiveCopy.tsx";
 
 const WIDTH = 100;
 const HEIGHT = 56;
@@ -122,6 +123,7 @@ export function AltitudeTable(props: { points: AltitudePoint[] }) {
                   <a class="link-block" href={p.stadium.source.url}>
                     {p.stadium.source.outlet}
                   </a>
+                  <ArchiveCopy archive={p.stadium.source.archive} class="link-block" />
                 </td>
               </tr>
             )}

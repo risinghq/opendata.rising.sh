@@ -1,3 +1,5 @@
+import { isArchiveCopy } from "./wayback.ts";
+
 export type Obj = Record<string, unknown>;
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -45,6 +47,8 @@ export function createReport(): Report {
     if (!isObj(value)) return fail(path, "must be an object with outlet and url");
     if (!isText(value.outlet)) fail(`${path}.outlet`, "must be a non-empty string");
     if (!isHttps(value.url)) fail(`${path}.url`, "must be an https URL");
+    if ("archive" in value && !isArchiveCopy(value.archive, value.url))
+      fail(`${path}.archive`, "must be https://web.archive.org/web/<timestamp>/<url>");
   };
   return { errors, fail, source };
 }

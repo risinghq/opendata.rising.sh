@@ -35,7 +35,10 @@ statistics and downloads.
 
 A source is `{ "outlet": "Nombre del medio", "url": "https://example.org/nota" }`.
 `url` must start with `https://`. Open the URL before you add it. It must carry
-what you cite.
+what you cite. A source may carry `archive`, a copy of the page in the Wayback
+Machine: `https://web.archive.org/web/<14-digit timestamp>/<url>`. Run
+`bun run archive:sources` after adding or changing a source that a revision or
+an API does not already pin down; it fills every `archive` it can.
 
 The status of the event is derived. It is `en curso` while any act or match is
 planned and `finalizado` when all are held.
@@ -146,7 +149,8 @@ An event that follows another method says so in `method`.
   `pais`, `ciudad`, `lugar`, `acto`, `estado`, `baja`, `central`, `alta`,
   `atribucion`, `fuentes`, `esperado`, `esperado_baja`, `esperado_alta`,
   `esperado_atribucion` and `esperado_fuente`. Sources are joined as
-  `outlet: url | outlet: url`.
+  `outlet: url | outlet: url`, each followed by ` (copia: <archive>)` when the
+  source has one.
 
 ## Temporada
 

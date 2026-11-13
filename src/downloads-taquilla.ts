@@ -8,9 +8,11 @@ const cell = (value: string | number | undefined) => {
   return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 };
 
+const link = (url: string, archive?: string) => `${url}${archive ? ` (copia: ${archive})` : ""}`;
+
 const figureSources = (film: Film) =>
   [
-    ...new Set(
+    ...new Map(
       [
         film.budget?.source,
         isReleased(film) ? film.opening.source : undefined,
@@ -18,8 +20,8 @@ const figureSources = (film: Film) =>
         isReleased(film) ? film.worldwide.source : undefined,
       ]
         .filter((s) => s !== undefined)
-        .map((s) => s.url),
-    ),
+        .map((s) => [s.url, link(s.url, s.archive)]),
+    ).values(),
   ].join(" ");
 
 const disputeCells = (film: Film): { disputa: string; otras: string } => {
@@ -35,7 +37,7 @@ const disputeCells = (film: Film): { disputa: string; otras: string } => {
     if (!claims?.length) continue;
     names.push(name);
     for (const claim of claims.slice(1)) {
-      others.push(`${name}: ${claimLabel(claim)} ${claim.source.url}`);
+      others.push(`${name}: ${claimLabel(claim)} ${link(claim.source.url, claim.source.archive)}`);
     }
   }
   return { disputa: names.join(" "), otras: others.join(" | ") };

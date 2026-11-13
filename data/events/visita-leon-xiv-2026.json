@@ -22,15 +22,18 @@
       "sources": [
         {
           "outlet": "El Nuevo Día (AP)",
-          "url": "https://www.elnuevodia.com/noticias/mundo/notas/leon-xiv-reune-a-unas-40000-personas-en-uruguay-en-su-primera-misa-en-sudamerica/"
+          "url": "https://www.elnuevodia.com/noticias/mundo/notas/leon-xiv-reune-a-unas-40000-personas-en-uruguay-en-su-primera-misa-en-sudamerica/",
+          "archive": "https://web.archive.org/web/20261113194235/https://www.elnuevodia.com/noticias/mundo/notas/leon-xiv-reune-a-unas-40000-personas-en-uruguay-en-su-primera-misa-en-sudamerica/"
         },
         {
           "outlet": "EWTN News",
-          "url": "https://www.ewtnnews.com/es/vaticano/papa-leon-xiv-segundo-dia-uruguay"
+          "url": "https://www.ewtnnews.com/es/vaticano/papa-leon-xiv-segundo-dia-uruguay",
+          "archive": "https://web.archive.org/web/20261108041148/https://www.ewtnnews.com/es/vaticano/papa-leon-xiv-segundo-dia-uruguay"
         },
         {
           "outlet": "Teledoce (Ministerio del Interior)",
-          "url": "https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales"
+          "url": "https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales",
+          "archive": "https://web.archive.org/web/20261113194343/https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales"
         }
       ]
     },
@@ -48,15 +51,18 @@
       "sources": [
         {
           "outlet": "Teledoce (Ministerio del Interior)",
-          "url": "https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales"
+          "url": "https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales",
+          "archive": "https://web.archive.org/web/20261113194343/https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales"
         },
         {
           "outlet": "EWTN News (autoridades locales)",
-          "url": "https://www.ewtnnews.com/es/vaticano/papa-leon-xiv-segundo-dia-uruguay"
+          "url": "https://www.ewtnnews.com/es/vaticano/papa-leon-xiv-segundo-dia-uruguay",
+          "archive": "https://web.archive.org/web/20261108041148/https://www.ewtnnews.com/es/vaticano/papa-leon-xiv-segundo-dia-uruguay"
         },
         {
           "outlet": "El Observador",
-          "url": "https://www.elobservador.com.uy/multitudes-mensajes-contra-la-desigualdad-y-un-llamado-la-unidad-todo-lo-que-dejo-la-visita-del-papa-leon-xiv-uruguay-n6063211"
+          "url": "https://www.elobservador.com.uy/multitudes-mensajes-contra-la-desigualdad-y-un-llamado-la-unidad-todo-lo-que-dejo-la-visita-del-papa-leon-xiv-uruguay-n6063211",
+          "archive": "https://web.archive.org/web/20261113194459/https://www.elobservador.com.uy/multitudes-mensajes-contra-la-desigualdad-y-un-llamado-la-unidad-todo-lo-que-dejo-la-visita-del-papa-leon-xiv-uruguay-n6063211"
         }
       ],
       "expected": {
@@ -64,7 +70,8 @@
         "attribution": "Los organizadores esperaban unas 60,000 personas en la vigilia, según Vatican News.",
         "source": {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/en/pope/news/2026-11/uruguay-prepares-to-welcome-pope-leo-xiv.html"
+          "url": "https://www.vaticannews.va/en/pope/news/2026-11/uruguay-prepares-to-welcome-pope-leo-xiv.html",
+          "archive": "https://web.archive.org/web/20261108214643/https://www.vaticannews.va/en/pope/news/2026-11/uruguay-prepares-to-welcome-pope-leo-xiv.html"
         }
       }
     },
@@ -82,11 +89,13 @@
       "sources": [
         {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-homilia-misa-santuario-virgen-treinta-y-tres-florida.html"
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-homilia-misa-santuario-virgen-treinta-y-tres-florida.html",
+          "archive": "https://web.archive.org/web/20261109033801/https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-homilia-misa-santuario-virgen-treinta-y-tres-florida.html"
         },
         {
           "outlet": "Teledoce (Ministerio del Interior)",
-          "url": "https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales"
+          "url": "https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales",
+          "archive": "https://web.archive.org/web/20261113194343/https://www.teledoce.com/telemundo/nacionales/la-visita-del-papa-leon-xiv-a-uruguay-en-cifras-casi-160-000-personas-participaron-de-las-actividades-oficiales"
         }
       ]
     },
@@ -104,15 +113,18 @@
       "sources": [
         {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/es/papa/news/2026-11/leon-xiv-despide-de-argentina-rumbo-a-peru-final-viaje-apostolic.html"
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/leon-xiv-despide-de-argentina-rumbo-a-peru-final-viaje-apostolic.html",
+          "archive": "https://web.archive.org/web/20261113194604/https://www.vaticannews.va/es/papa/news/2026-11/leon-xiv-despide-de-argentina-rumbo-a-peru-final-viaje-apostolic.html"
         },
         {
           "outlet": "Diari de Tarragona (EFE)",
-          "url": "https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html"
+          "url": "https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html",
+          "archive": "https://web.archive.org/web/20261113194806/https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html"
         },
         {
           "outlet": "Gobierno de la Ciudad de Buenos Aires",
-          "url": "https://buenosaires.gob.ar/noticias/historica-santa-misa-en-la-ciudad-mas-de-dos-millones-de-personas-se-emocionaron-con-el"
+          "url": "https://buenosaires.gob.ar/noticias/historica-santa-misa-en-la-ciudad-mas-de-dos-millones-de-personas-se-emocionaron-con-el",
+          "archive": "https://web.archive.org/web/20261113194913/https://buenosaires.gob.ar/noticias/historica-santa-misa-en-la-ciudad-mas-de-dos-millones-de-personas-se-emocionaron-con-el"
         }
       ]
     },
@@ -130,23 +142,28 @@
       "sources": [
         {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/es/papa/news/2026-11/peregrinos-cordoba-viven-otra-vigilia-junto-papa-leon-xiv.html"
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/peregrinos-cordoba-viven-otra-vigilia-junto-papa-leon-xiv.html",
+          "archive": "https://web.archive.org/web/20261113195029/https://www.vaticannews.va/es/papa/news/2026-11/peregrinos-cordoba-viven-otra-vigilia-junto-papa-leon-xiv.html"
         },
         {
           "outlet": "Swissinfo (EFE)",
-          "url": "https://www.swissinfo.ch/spa/el-papa-le%C3%B3n-xiv-congrega-a-650.000-fieles-en-la-misa-en-la-provincia-argentina-de-c%C3%B3rdoba/92358034"
+          "url": "https://www.swissinfo.ch/spa/el-papa-le%C3%B3n-xiv-congrega-a-650.000-fieles-en-la-misa-en-la-provincia-argentina-de-c%C3%B3rdoba/92358034",
+          "archive": "https://web.archive.org/web/20261113195234/https://www.swissinfo.ch/spa/el-papa-le%C3%B3n-xiv-congrega-a-650.000-fieles-en-la-misa-en-la-provincia-argentina-de-c%C3%B3rdoba/92358034"
         },
         {
           "outlet": "C5N",
-          "url": "https://www.c5n.com/sociedad/cordoba-papa-leon-xiv-misa-fadea-martes-10-noviembre-2026"
+          "url": "https://www.c5n.com/sociedad/cordoba-papa-leon-xiv-misa-fadea-martes-10-noviembre-2026",
+          "archive": "https://web.archive.org/web/20261113195333/https://www.c5n.com/sociedad/cordoba-papa-leon-xiv-misa-fadea-martes-10-noviembre-2026"
         },
         {
           "outlet": "La Voz de San Justo (Gobierno de Córdoba)",
-          "url": "https://www.lavozdesanjusto.com.ar/el-gobierno-de-cordoba-cifro-en-800-mil-los-asistentes-a-la-misa-de-leon-xiv-y-destaco-el-operativo-de-seguridad"
+          "url": "https://www.lavozdesanjusto.com.ar/el-gobierno-de-cordoba-cifro-en-800-mil-los-asistentes-a-la-misa-de-leon-xiv-y-destaco-el-operativo-de-seguridad",
+          "archive": "https://web.archive.org/web/20261113195525/https://www.lavozdesanjusto.com.ar/el-gobierno-de-cordoba-cifro-en-800-mil-los-asistentes-a-la-misa-de-leon-xiv-y-destaco-el-operativo-de-seguridad"
         },
         {
           "outlet": "El Destape (intendente Daniel Passerini)",
-          "url": "https://www.eldestapeweb.com/sociedad/cuantas-personas-hubo-misa-papa-leon-xiv-cordoba-numeros-confirmados-20261111164918"
+          "url": "https://www.eldestapeweb.com/sociedad/cuantas-personas-hubo-misa-papa-leon-xiv-cordoba-numeros-confirmados-20261111164918",
+          "archive": "https://web.archive.org/web/20261113195659/https://www.eldestapeweb.com/sociedad/cuantas-personas-hubo-misa-papa-leon-xiv-cordoba-numeros-confirmados-20261111164918"
         }
       ],
       "expected": {
@@ -154,7 +171,8 @@
         "attribution": "La Municipalidad de Córdoba esperaba unas 800,000 personas en el predio de FAdeA.",
         "source": {
           "outlet": "Diario Nuevo Día",
-          "url": "https://www.eldiarionuevodia.com.ar/nacionales/el-papa-viaja-a-cordoba-esperan-800-000-personas-habra-350-cortes-y-colectivos-gratis-3197/"
+          "url": "https://www.eldiarionuevodia.com.ar/nacionales/el-papa-viaja-a-cordoba-esperan-800-000-personas-habra-350-cortes-y-colectivos-gratis-3197/",
+          "archive": "https://web.archive.org/web/20261113195755/https://www.eldiarionuevodia.com.ar/nacionales/el-papa-viaja-a-cordoba-esperan-800-000-personas-habra-350-cortes-y-colectivos-gratis-3197/"
         }
       }
     },
@@ -172,7 +190,8 @@
       "sources": [
         {
           "outlet": "Ámbito (Policía)",
-          "url": "https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-cordoba-misa-fadea-vigilia-jovenes-monumento-espa%C3%B1oles-en-vivo-minuto-a-minuto-10-noviembre"
+          "url": "https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-cordoba-misa-fadea-vigilia-jovenes-monumento-espa%C3%B1oles-en-vivo-minuto-a-minuto-10-noviembre",
+          "archive": "https://web.archive.org/web/20261113195955/https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-cordoba-misa-fadea-vigilia-jovenes-monumento-espa%C3%B1oles-en-vivo-minuto-a-minuto-10-noviembre"
         }
       ]
     },
@@ -190,15 +209,18 @@
       "sources": [
         {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/es/papa/news/2026-11/argentina-leon-xiv-vigilia-con-los-jovenes-en-buenos-aires.html"
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/argentina-leon-xiv-vigilia-con-los-jovenes-en-buenos-aires.html",
+          "archive": "https://web.archive.org/web/20261113200050/https://www.vaticannews.va/es/papa/news/2026-11/argentina-leon-xiv-vigilia-con-los-jovenes-en-buenos-aires.html"
         },
         {
           "outlet": "Infobae (Gobierno de la Ciudad)",
-          "url": "https://www.infobae.com/sociedad/2026/11/10/visita-del-papa-leon-xiv-en-vivo-la-expectativa-por-la-misa-en-cordoba-donde-se-espera-un-millon-de-fieles/"
+          "url": "https://www.infobae.com/sociedad/2026/11/10/visita-del-papa-leon-xiv-en-vivo-la-expectativa-por-la-misa-en-cordoba-donde-se-espera-un-millon-de-fieles/",
+          "archive": "https://web.archive.org/web/20261113200251/https://www.infobae.com/sociedad/2026/11/10/visita-del-papa-leon-xiv-en-vivo-la-expectativa-por-la-misa-en-cordoba-donde-se-espera-un-millon-de-fieles/"
         },
         {
           "outlet": "Ámbito (organizadores)",
-          "url": "https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-cordoba-misa-fadea-vigilia-jovenes-monumento-espa%C3%B1oles-en-vivo-minuto-a-minuto-10-noviembre"
+          "url": "https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-cordoba-misa-fadea-vigilia-jovenes-monumento-espa%C3%B1oles-en-vivo-minuto-a-minuto-10-noviembre",
+          "archive": "https://web.archive.org/web/20261113195955/https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-cordoba-misa-fadea-vigilia-jovenes-monumento-espa%C3%B1oles-en-vivo-minuto-a-minuto-10-noviembre"
         }
       ]
     },
@@ -216,7 +238,8 @@
       "sources": [
         {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-xiv-en-lujan-argentina-levantate-y-camina.html"
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-xiv-en-lujan-argentina-levantate-y-camina.html",
+          "archive": "https://web.archive.org/web/20261113200352/https://www.vaticannews.va/es/papa/news/2026-11/papa-leon-xiv-en-lujan-argentina-levantate-y-camina.html"
         },
         {
           "outlet": "Gobierno de la provincia de Buenos Aires",
@@ -224,11 +247,13 @@
         },
         {
           "outlet": "Ámbito (Policía bonaerense)",
-          "url": "https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-misa-carcel-devoto-en-vivo-minuto-a-minuto-11-noviembre"
+          "url": "https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-misa-carcel-devoto-en-vivo-minuto-a-minuto-11-noviembre",
+          "archive": "https://web.archive.org/web/20261113200633/https://www.ambito.com/politica/papa-leon-XIV-argentina-javier-milei-iglesia-vaticano-caba-lujan-misa-carcel-devoto-en-vivo-minuto-a-minuto-11-noviembre"
         },
         {
           "outlet": "Revista Gente (Ministerio de Seguridad bonaerense)",
-          "url": "https://www.revistagente.com/actualidad/multitud-record-en-lujan-la-impresionante-cifra-de-fieles-que-reunio-el-papa-leon-xiv-y-supero-su-convocatoria-del-lunes-y-la-misa-de-juan-pablo-ii-en-1982/"
+          "url": "https://www.revistagente.com/actualidad/multitud-record-en-lujan-la-impresionante-cifra-de-fieles-que-reunio-el-papa-leon-xiv-y-supero-su-convocatoria-del-lunes-y-la-misa-de-juan-pablo-ii-en-1982/",
+          "archive": "https://web.archive.org/web/20261113200728/https://www.revistagente.com/actualidad/multitud-record-en-lujan-la-impresionante-cifra-de-fieles-que-reunio-el-papa-leon-xiv-y-supero-su-convocatoria-del-lunes-y-la-misa-de-juan-pablo-ii-en-1982/"
         }
       ],
       "expected": {
@@ -238,7 +263,8 @@
         "attribution": "Carlos Bianco, ministro de Gobierno de la provincia de Buenos Aires, calculó entre 3 y 4 millones de personas en una conferencia de prensa.",
         "source": {
           "outlet": "Chequeado",
-          "url": "https://chequeado.com/el-explicador/el-papa-leon-xiv-visitara-lujan-durante-su-paso-por-argentina-algunos-datos-para-conocer-la-ciudad/"
+          "url": "https://chequeado.com/el-explicador/el-papa-leon-xiv-visitara-lujan-durante-su-paso-por-argentina-algunos-datos-para-conocer-la-ciudad/",
+          "archive": "https://web.archive.org/web/20260921063424/https://chequeado.com/el-explicador/el-papa-leon-xiv-visitara-lujan-durante-su-paso-por-argentina-algunos-datos-para-conocer-la-ciudad/"
         }
       }
     },
@@ -256,7 +282,8 @@
       "sources": [
         {
           "outlet": "Vatican News",
-          "url": "https://www.vaticannews.va/es/papa/news/2026-11/viaje-apostolico-el-papa-llega-a-lima-peru-desde-argentina.html"
+          "url": "https://www.vaticannews.va/es/papa/news/2026-11/viaje-apostolico-el-papa-llega-a-lima-peru-desde-argentina.html",
+          "archive": "https://web.archive.org/web/20261113200836/https://www.vaticannews.va/es/papa/news/2026-11/viaje-apostolico-el-papa-llega-a-lima-peru-desde-argentina.html"
         }
       ]
     },
@@ -272,7 +299,8 @@
         "attribution": "Andina informa de 52,000 entradas, agotadas según Juan Bytton, secretario general de la visita papal en Lima.",
         "source": {
           "outlet": "Andina",
-          "url": "https://andina.pe/agencia/noticia-leon-xiv-jovenes-agotaron-entradas-para-ver-al-papa-el-estadio-nacional-este-jueves-12-1099268.aspx"
+          "url": "https://andina.pe/agencia/noticia-leon-xiv-jovenes-agotaron-entradas-para-ver-al-papa-el-estadio-nacional-este-jueves-12-1099268.aspx",
+          "archive": "https://web.archive.org/web/20261113201049/https://andina.pe/agencia/noticia-leon-xiv-jovenes-agotaron-entradas-para-ver-al-papa-el-estadio-nacional-este-jueves-12-1099268.aspx"
         }
       }
     },
@@ -290,7 +318,8 @@
         "attribution": "El general Jorge Chávez Cresta, coordinador de la visita designado por el Gobierno Regional de Lambayeque, calcula entre 950,000 y 1 millón de asistentes.",
         "source": {
           "outlet": "El Tiempo",
-          "url": "https://eltiempo.pe/nacional/papa-leon-xiv-en-chiclayo-fieles-podran-ingresar-a-las-pampas-de-pimentel-desde-el-12-de-noviembre/"
+          "url": "https://eltiempo.pe/nacional/papa-leon-xiv-en-chiclayo-fieles-podran-ingresar-a-las-pampas-de-pimentel-desde-el-12-de-noviembre/",
+          "archive": "https://web.archive.org/web/20261109034937/https://eltiempo.pe/nacional/papa-leon-xiv-en-chiclayo-fieles-podran-ingresar-a-las-pampas-de-pimentel-desde-el-12-de-noviembre/"
         }
       }
     },
@@ -314,7 +343,8 @@
         "attribution": "Francisco Solís, jefe del Parque Arqueológico Nacional de Saqsaywaman, indica que la explanada recibirá a unas 75,000 personas.",
         "source": {
           "outlet": "Andina",
-          "url": "https://andina.pe/agencia/noticia-inca-fortress-of-sacsayhuaman-will-host-75000-people-to-meet-pope-leo-xiv-in-cusco-1097802.aspx"
+          "url": "https://andina.pe/agencia/noticia-inca-fortress-of-sacsayhuaman-will-host-75000-people-to-meet-pope-leo-xiv-in-cusco-1097802.aspx",
+          "archive": "https://web.archive.org/web/20261113201157/https://andina.pe/agencia/noticia-inca-fortress-of-sacsayhuaman-will-host-75000-people-to-meet-pope-leo-xiv-in-cusco-1097802.aspx"
         }
       }
     },
@@ -338,7 +368,8 @@
         "attribution": "Monseñor Guillermo Inca, secretario general de la Conferencia Episcopal Peruana, espera al menos 1.2 millones de asistentes.",
         "source": {
           "outlet": "El Peruano",
-          "url": "https://elperuano.pe/noticia/305337-papa-leon-xiv-en-peru-preven-un-millon-200000-asistentes-en-misa-en-base-las-palmas"
+          "url": "https://elperuano.pe/noticia/305337-papa-leon-xiv-en-peru-preven-1200000-asistentes-en-misa-en-base-las-palmas",
+          "archive": "https://web.archive.org/web/20261113201305/https://elperuano.pe/noticia/305337-papa-leon-xiv-en-peru-preven-1200000-asistentes-en-misa-en-base-las-palmas"
         }
       }
     }
@@ -350,7 +381,8 @@
       "attribution": "EFE, al recordar la misa por la paz en el mismo lugar.",
       "source": {
         "outlet": "Diari de Tarragona (EFE)",
-        "url": "https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html"
+        "url": "https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html",
+        "archive": "https://web.archive.org/web/20261113194806/https://www.diaridetarragona.com/internacional/275297/dos-millones-medio-fieles-acuden-misa-papa-buenos-aires.html"
       }
     },
     {
@@ -359,7 +391,8 @@
       "attribution": "Un portavoz del Vaticano, según AFP.",
       "source": {
         "outlet": "Andina (AFP)",
-        "url": "https://andina.pe/ingles/noticia-papa-francisco-no-fue-un-domingo-tipico-para-una-lima-llena-fervor-696818.aspx"
+        "url": "https://andina.pe/ingles/noticia-papa-francisco-no-fue-un-domingo-tipico-para-una-lima-llena-fervor-696818.aspx",
+        "archive": "https://web.archive.org/web/20261113201404/https://andina.pe/ingles/noticia-papa-francisco-no-fue-un-domingo-tipico-para-una-lima-llena-fervor-696818.aspx"
       }
     },
     {
@@ -368,7 +401,8 @@
       "attribution": "Los organizadores, según AP.",
       "source": {
         "outlet": "La Capital (AP)",
-        "url": "https://www.lacapital.com.ar/informacion-general/el-papa-leon-xiv-congrego-mas-un-millon-fieles-una-misa-madrid-n10263360.html"
+        "url": "https://www.lacapital.com.ar/informacion-general/el-papa-leon-xiv-congrego-mas-un-millon-fieles-una-misa-madrid-n10263360.html",
+        "archive": "https://web.archive.org/web/20261029213242/https://www.lacapital.com.ar/informacion-general/el-papa-leon-xiv-congrego-mas-un-millon-fieles-una-misa-madrid-n10263360.html"
       }
     },
     {
@@ -377,7 +411,8 @@
       "attribution": "El Vaticano, según Teleamazonas.",
       "source": {
         "outlet": "Teleamazonas",
-        "url": "https://www.teleamazonas.com/actualidad/noticias/internacional/papa-leon-xiv-reune-700-000-personas-misa-multitudinaria-paris-128954/"
+        "url": "https://www.teleamazonas.com/actualidad/noticias/internacional/papa-leon-xiv-reune-700-000-personas-misa-multitudinaria-paris-128954/",
+        "archive": "https://web.archive.org/web/20260928144101/https://www.teleamazonas.com/actualidad/noticias/internacional/papa-leon-xiv-reune-700-000-personas-misa-multitudinaria-paris-128954/"
       }
     }
   ]

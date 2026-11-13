@@ -5,6 +5,7 @@ import { MOJO_LABEL } from "../data/notice.ts";
 import type { CpiData } from "../data/cpi.ts";
 import { isReleased, realAmount } from "../data/stats-taquilla.ts";
 import type { BudgetClaim, Claim, Film } from "../data/types.ts";
+import { ArchiveCopy } from "./ArchiveCopy.tsx";
 
 function Amount(props: { amount: number; film: Film; cpi: CpiData }) {
   return (
@@ -28,6 +29,7 @@ function OtherClaims(props: { claims?: Claim[] | BudgetClaim[] }) {
               <a href={claim.source.url} class="source">
                 {claimLabel(claim)}
               </a>
+              <ArchiveCopy archive={claim.source.archive} class="source" />
             </>
           )}
         </For>
@@ -36,11 +38,14 @@ function OtherClaims(props: { claims?: Claim[] | BudgetClaim[] }) {
   );
 }
 
-function SourceLink(props: { label: string; url: string }) {
+function SourceLink(props: { label: string; url: string; archive?: string }) {
   return (
-    <a href={props.url} class="source">
-      {props.label}
-    </a>
+    <>
+      <a href={props.url} class="source">
+        {props.label}
+      </a>
+      <ArchiveCopy archive={props.archive} class="source" />
+    </>
   );
 }
 
@@ -101,22 +106,40 @@ function FilmRow(props: { film: Film; cpi: CpiData }) {
           if (!isReleased(film)) return null;
           return (
             <>
-              <SourceLink label="fin de semana" url={film.opening.source.url} />
+              <SourceLink
+                label="fin de semana"
+                url={film.opening.source.url}
+                archive={film.opening.source.archive}
+              />
               <Show when={film.budget}>
-                {(budget) => <SourceLink label="presupuesto" url={budget().source.url} />}
+                {(budget) => (
+                  <SourceLink
+                    label="presupuesto"
+                    url={budget().source.url}
+                    archive={budget().source.archive}
+                  />
+                )}
               </Show>
               <Show
                 when={film.boxOfficeMojo}
-                fallback={<SourceLink label="taquilla" url={film.worldwide.source.url} />}
+                fallback={
+                  <SourceLink
+                    label="taquilla"
+                    url={film.worldwide.source.url}
+                    archive={film.worldwide.source.archive}
+                  />
+                }
               >
                 {(mojo) => (
                   <>
                     <div class="muted">{MOJO_LABEL}</div>
                     <SourceLink label="Box Office Mojo" url={mojo().url} />
-                    <Show when={mojo().archive}>
-                      {(archive) => <SourceLink label="copia archivada" url={archive()} />}
-                    </Show>
-                    <SourceLink label="Wikipedia" url={film.worldwide.source.url} />
+                    <ArchiveCopy archive={mojo().archive} class="source" />
+                    <SourceLink
+                      label="Wikipedia"
+                      url={film.worldwide.source.url}
+                      archive={film.worldwide.source.archive}
+                    />
                   </>
                 )}
               </Show>

@@ -1,6 +1,7 @@
 export interface Source {
   outlet: string;
   url: string;
+  archive?: string;
 }
 
 interface ActBase {
@@ -62,6 +63,7 @@ export interface AsistenciaData extends EventBase {
 export interface WikiSource {
   outlet: string;
   url: string;
+  archive?: string;
   revision: number;
   revisionDate: string;
   license: string;

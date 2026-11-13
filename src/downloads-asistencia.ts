@@ -1,5 +1,8 @@
-import type { Act, AsistenciaRecord } from "./data/types.ts";
+import type { Act, AsistenciaRecord, Source } from "./data/types.ts";
 import { csv, type Cell } from "./downloads-csv.ts";
+
+const link = (source: Source) =>
+  `${source.outlet}: ${source.url}${source.archive ? ` (copia: ${source.archive})` : ""}`;
 
 const HEADER = [
   "inicio",
@@ -28,10 +31,10 @@ function row(act: Act): Cell[] {
     expected?.low,
     expected?.high,
     expected?.attribution,
-    expected ? `${expected.source.outlet}: ${expected.source.url}` : undefined,
+    expected ? link(expected.source) : undefined,
   ];
   if (act.status === "held") {
-    const links = act.sources.map((s) => `${s.outlet}: ${s.url}`).join(" | ");
+    const links = act.sources.map(link).join(" | ");
     return [
       ...common,
       "realizado",

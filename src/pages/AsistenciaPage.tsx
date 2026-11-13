@@ -2,6 +2,7 @@ import { For, Show } from "solid-js";
 
 import { ActsChart } from "../components/ActsChart.tsx";
 import { ActsTable } from "../components/ActsTable.tsx";
+import { ArchiveCopy } from "../components/ArchiveCopy.tsx";
 import { DailyChart, DailyTable } from "../components/DailyChart.tsx";
 import {
   formatDateLima,
@@ -139,6 +140,7 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
                         <a class="link-block" href={row.source.url}>
                           {row.source.outlet}
                         </a>
+                        <ArchiveCopy archive={row.source.archive} class="link-block" />
                       </td>
                     </tr>
                   )}
