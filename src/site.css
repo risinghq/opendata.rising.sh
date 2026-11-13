@@ -722,6 +722,10 @@ tbody tr:hover > * {
   text-decoration: none;
 }
 
+.team-stats-table {
+  min-width: 40rem;
+}
+
 .matches-table {
   min-width: 52rem;
 }

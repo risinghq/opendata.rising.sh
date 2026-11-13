@@ -16,6 +16,16 @@ const HEADER = [
   "estado",
   "goles_local",
   "goles_visitante",
+  "posesion_local",
+  "posesion_visitante",
+  "tiros_arco_local",
+  "tiros_arco_visitante",
+  "tiros_fuera_local",
+  "tiros_fuera_visitante",
+  "ataques_local",
+  "ataques_visitante",
+  "ataques_peligrosos_local",
+  "ataques_peligrosos_visitante",
   "fuente",
   "aviso",
 ];
@@ -33,6 +43,7 @@ export function temporadaCsv(event: TemporadaRecord): string {
     const tournament = tournaments.get(match.tournament)!;
     const stadium = stadiums.get(match.stadium)!;
     const held = match.status === "held";
+    const stats = held ? match.events?.stats : undefined;
     return [
       tournament.name,
       match.round,
@@ -46,6 +57,16 @@ export function temporadaCsv(event: TemporadaRecord): string {
       held ? "realizado" : "previsto",
       held ? match.homeScore : undefined,
       held ? match.awayScore : undefined,
+      stats?.home.possession,
+      stats?.away.possession,
+      stats?.home.shotsOnTarget,
+      stats?.away.shotsOnTarget,
+      stats?.home.shotsOffTarget,
+      stats?.away.shotsOffTarget,
+      stats?.home.attacks,
+      stats?.away.attacks,
+      stats?.home.dangerousAttacks,
+      stats?.away.dangerousAttacks,
       tournament.source.url,
       eventNotice(event),
     ];

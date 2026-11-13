@@ -5,6 +5,7 @@ import { ForecastTable, MatchForecastTable } from "../components/ForecastTable.t
 import { GoalTimingChart, GoalTimingTable } from "../components/GoalTimingChart.tsx";
 import { RoundTable } from "../components/RoundsList.tsx";
 import { StandingsTable } from "../components/StandingsTable.tsx";
+import { TeamStatsTable } from "../components/TeamStatsTable.tsx";
 import {
   formatDate,
   formatDateLima,
@@ -15,12 +16,7 @@ import {
   formatShortDate,
   formatStamp,
 } from "../data/format.ts";
-import {
-  MATCH_DATA_NOTICE,
-  MATCH_DATA_URL,
-  hasMatchEvents,
-  tournamentNotice,
-} from "../data/notice.ts";
+import { MATCH_DATA_URL, hasMatchEvents, tournamentNotice } from "../data/notice.ts";
 import { actDate } from "../data/stats-asistencia.ts";
 import {
   altitudePoints,
@@ -29,6 +25,7 @@ import {
   MIN_MATCHES_PER_STADIUM,
   rounds,
   standings,
+  teamAverages,
 } from "../data/stats-temporada.ts";
 import { eventStatus } from "../data/stats.ts";
 import type { TemporadaRecord } from "../data/types.ts";
@@ -50,6 +47,7 @@ export function TemporadaPage(props: {
   const points = altitudePoints(event);
   const forecast = props.forecast ?? null;
   const timing = hasMatchEvents(event) ? goalTiming(event) : null;
+  const averages = teamAverages(event);
   const backtest = forecast?.backtest;
   const scores = props.scores ?? [];
   const scored = scores.filter((s) => s.model !== null);
@@ -320,6 +318,18 @@ export function TemporadaPage(props: {
             <GoalTimingTable periods={periods()} />
           </section>
         )}
+      </Show>
+
+      <Show when={averages.length > 0}>
+        <section class="section" aria-labelledby="estadisticas">
+          <h2 id="estadisticas">Estadísticas por equipo</h2>
+          <p>
+            Promedio por partido de cada equipo en los partidos que tienen estadísticas. Los tiros
+            al arco en contra son los que tiró el rival. Con pocos partidos, un promedio puede
+            variar mucho de una fecha a otra.
+          </p>
+          <TeamStatsTable rows={averages} teams={teams} />
+        </section>
       </Show>
 
       <Show when={points.length > 1}>

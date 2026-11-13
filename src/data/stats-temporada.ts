@@ -131,6 +131,55 @@ export function altitudePoints(event: TemporadaData): AltitudePoint[] {
     .sort((a, b) => a.stadium.altitude - b.stadium.altitude);
 }
 
+export interface TeamAverage {
+  team: string;
+  matches: number;
+  possession: number;
+  shotsOnTarget: number;
+  shotsOnTargetAgainst: number;
+  dangerousAttacks: number;
+}
+
+export function teamAverages(event: TemporadaData): TeamAverage[] {
+  const sums = new Map<string, Omit<TeamAverage, "team">>();
+  for (const match of heldMatches(event)) {
+    const stats = match.events?.stats;
+    if (!stats) continue;
+    for (const [id, own, other] of [
+      [match.home, stats.home, stats.away],
+      [match.away, stats.away, stats.home],
+    ] as const) {
+      const row = sums.get(id) ?? {
+        matches: 0,
+        possession: 0,
+        shotsOnTarget: 0,
+        shotsOnTargetAgainst: 0,
+        dangerousAttacks: 0,
+      };
+      row.matches++;
+      row.possession += own.possession;
+      row.shotsOnTarget += own.shotsOnTarget;
+      row.shotsOnTargetAgainst += other.shotsOnTarget;
+      row.dangerousAttacks += own.dangerousAttacks;
+      sums.set(id, row);
+    }
+  }
+  const names = new Map(event.teams.map((team) => [team.id, team.name]));
+  return [...sums]
+    .map(([team, row]) => ({
+      team,
+      matches: row.matches,
+      possession: row.possession / row.matches,
+      shotsOnTarget: row.shotsOnTarget / row.matches,
+      shotsOnTargetAgainst: row.shotsOnTargetAgainst / row.matches,
+      dangerousAttacks: row.dangerousAttacks / row.matches,
+    }))
+    .sort(
+      (a, b) =>
+        b.possession - a.possession || names.get(a.team)!.localeCompare(names.get(b.team)!, "es"),
+    );
+}
+
 export function rounds(event: TemporadaData, tournament: string): Map<number, Match[]> {
   const out = new Map<number, Match[]>();
   for (const match of event.matches.filter((m) => m.tournament === tournament)) {
