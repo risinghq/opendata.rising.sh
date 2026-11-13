@@ -9,6 +9,9 @@ export function tournamentNotice(tournament: Tournament): string {
   return `Datos de Wikipedia en español (${license}), revisión del ${formatDate(revisionDate)}`;
 }
 
+export const MOJO_LABEL = "Box Office Mojo, vía Wikipedia";
+export const WIKIPEDIA_LABEL = "Wikipedia en inglés";
+
 export function taquillaNotice(event: TaquillaData): string {
   const { license, revisionDate } = event.source;
   return `Datos de Wikipedia en inglés (${license}), revisión del ${formatDate(revisionDate)}`;

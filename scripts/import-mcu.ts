@@ -33,7 +33,7 @@ const DEFAULT_FRAME = {
     "Recaudación de las películas del Universo cinematográfico de Marvel en dólares de Estados Unidos, nominales y ajustadas por inflación, con un pronóstico para Avengers: Doomsday.",
   places: ["Estados Unidos", "Canadá", "Mundial"],
   method:
-    "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
+    "Las cifras nominales son dólares de Estados Unidos del año de cada estreno, tomadas de la tabla de recaudación del artículo de Wikipedia en inglés enlazado como fuente. Wikipedia cita a Box Office Mojo para la recaudación de cada película, y cada fila enlaza esa página y, cuando Wikipedia la cita, su copia archivada. Box Office Mojo no se consulta directamente. Las cifras reales convierten cada monto a dólares del año base con el índice de precios al consumidor de Estados Unidos (serie CUUR0000SA0 del Bureau of Labor Statistics, promedios anuales). La película sin estrenar no tiene recaudación. El pronóstico se guarda con su fecha antes del estreno y se compara con las cifras reales después.",
 };
 
 const MONTHS: Record<string, string> = {
@@ -148,6 +148,7 @@ export function toFilm(
     opening: { amount: opening, source: articleSource },
     usCanada: { amount: film.usCanada, source: phaseSource },
     worldwide: { amount: film.worldwide, source: phaseSource },
+    boxOfficeMojo: film.boxOfficeMojo,
   };
 }
 
@@ -203,6 +204,14 @@ async function main() {
       source(phasePage(film.phase)),
       film.article ? source(film.article) : source(phasePage(film.phase)),
     ),
+  );
+
+  const uncited = released.filter((r) => r.boxOfficeMojo === undefined);
+  for (const film of uncited) {
+    console.warn(`no Box Office Mojo citation for ${film.originalTitle}; the source is Wikipedia`);
+  }
+  console.log(
+    `${released.length - uncited.length} of ${released.length} films cite Box Office Mojo`,
   );
 
   const existing = existsSync(values.file)

@@ -1,4 +1,4 @@
-import { taquillaNotice } from "./data/notice.ts";
+import { MOJO_LABEL, WIKIPEDIA_LABEL, taquillaNotice } from "./data/notice.ts";
 import { isReleased } from "./data/stats-taquilla.ts";
 import type { Film, TaquillaData } from "./data/types.ts";
 
@@ -28,7 +28,7 @@ export function taquillaJson(event: TaquillaData): string {
 export function taquillaCsv(event: TaquillaData): string {
   const aviso = taquillaNotice(event);
   const header =
-    "pelicula,titulo_original,fase,estreno,estado,presupuesto_min_usd,presupuesto_max_usd,estreno_fin_de_semana_usd,eeuu_y_canada_usd,mundial_usd,fuentes,aviso";
+    "pelicula,titulo_original,fase,estreno,estado,presupuesto_min_usd,presupuesto_max_usd,estreno_fin_de_semana_usd,eeuu_y_canada_usd,mundial_usd,fuente_taquilla,taquilla_url,taquilla_copia_url,taquilla_consulta,fuentes,aviso";
   const rows = event.films.map((film) =>
     [
       film.title,
@@ -41,6 +41,10 @@ export function taquillaCsv(event: TaquillaData): string {
       isReleased(film) ? film.opening.amount : undefined,
       isReleased(film) ? film.usCanada.amount : undefined,
       isReleased(film) ? film.worldwide.amount : undefined,
+      isReleased(film) ? (film.boxOfficeMojo ? MOJO_LABEL : WIKIPEDIA_LABEL) : undefined,
+      isReleased(film) ? film.boxOfficeMojo?.url : undefined,
+      isReleased(film) ? film.boxOfficeMojo?.archive : undefined,
+      isReleased(film) ? film.boxOfficeMojo?.accessed : undefined,
       figureSources(film),
       aviso,
     ]

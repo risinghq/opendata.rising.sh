@@ -26,6 +26,25 @@ function figure(
   return isCount(value.amount) ? value.amount : undefined;
 }
 
+function onHost(url: unknown, host: string): boolean {
+  if (!isHttps(url)) return false;
+  const name = new URL(String(url)).hostname;
+  return name === host || name.endsWith(`.${host}`);
+}
+
+function mojo(value: unknown, path: string, { fail }: Report) {
+  if (value === undefined) return;
+  if (!isObj(value)) return fail(path, "must be an object with url, accessed and archive");
+  if (!onHost(value.url, "boxofficemojo.com"))
+    fail(`${path}.url`, "must be an https URL on boxofficemojo.com");
+  if (!isDate(value.accessed)) fail(`${path}.accessed`, "must be a date, YYYY-MM-DD");
+  if (
+    value.archive !== undefined &&
+    (!isHttps(value.archive) || new URL(String(value.archive)).hostname !== "web.archive.org")
+  )
+    fail(`${path}.archive`, "must be an https URL on web.archive.org");
+}
+
 export function validateTaquilla(data: Obj, report: Report) {
   const { fail, source } = report;
 
@@ -96,8 +115,9 @@ export function validateTaquilla(data: Obj, report: Report) {
         fail(`${path}.opening.amount`, "must not exceed the US and Canada gross");
       if (usCanada !== undefined && worldwide !== undefined && worldwide < usCanada)
         fail(`${path}.worldwide.amount`, "must be at least the US and Canada gross");
+      mojo(film.boxOfficeMojo, `${path}.boxOfficeMojo`, report);
     } else if (film.status === "unreleased") {
-      for (const key of FIGURES) {
+      for (const key of [...FIGURES, "boxOfficeMojo"]) {
         if (key in film) fail(`${path}.${key}`, "an unreleased film has no grosses");
       }
     } else {

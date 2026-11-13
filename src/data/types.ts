@@ -181,8 +181,15 @@ interface FilmBase {
   budget?: Budget;
 }
 
+export interface MojoCitation {
+  url: string;
+  accessed: string;
+  archive?: string;
+}
+
 export interface ReleasedFilm extends FilmBase {
   status: "released";
+  boxOfficeMojo?: MojoCitation;
   opening: Figure;
   usCanada: Figure;
   worldwide: Figure;

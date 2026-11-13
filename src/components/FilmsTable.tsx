@@ -1,6 +1,7 @@
 import { For, Show } from "solid-js";
 
 import { formatDate, formatMoney } from "../data/format.ts";
+import { MOJO_LABEL } from "../data/notice.ts";
 import type { CpiData } from "../data/cpi.ts";
 import { isReleased, realAmount } from "../data/stats-taquilla.ts";
 import type { Film } from "../data/types.ts";
@@ -77,9 +78,23 @@ function FilmRow(props: { film: Film; cpi: CpiData }) {
           return (
             <>
               <SourceLink label="fin de semana" url={film.opening.source.url} />
-              <SourceLink label="taquilla" url={film.worldwide.source.url} />
               <Show when={film.budget}>
                 {(budget) => <SourceLink label="presupuesto" url={budget().source.url} />}
+              </Show>
+              <Show
+                when={film.boxOfficeMojo}
+                fallback={<SourceLink label="taquilla" url={film.worldwide.source.url} />}
+              >
+                {(mojo) => (
+                  <>
+                    <div class="muted">{MOJO_LABEL}</div>
+                    <SourceLink label="Box Office Mojo" url={mojo().url} />
+                    <Show when={mojo().archive}>
+                      {(archive) => <SourceLink label="copia archivada" url={archive()} />}
+                    </Show>
+                    <SourceLink label="Wikipedia" url={film.worldwide.source.url} />
+                  </>
+                )}
               </Show>
             </>
           );

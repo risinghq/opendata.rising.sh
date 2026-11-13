@@ -1,3 +1,4 @@
+import type { MojoCitation } from "../src/data/types.ts";
 import { expandSpans, link, parseTables, plain, splitOutside } from "./wikitext.ts";
 
 export interface RawFilm {
@@ -7,6 +8,7 @@ export interface RawFilm {
   worldwide?: number;
   budget?: { low: number; high?: number };
   note?: string;
+  boxOfficeMojo?: MojoCitation;
 }
 
 const UNITS: Record<string, number> = { million: 1e6, billion: 1e9, millones: 1e6 };
@@ -70,6 +72,61 @@ function efns(text: string): string[] {
   return out;
 }
 
+function topTemplates(text: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text.startsWith("{{", i)) {
+      if (depth++ === 0) start = i + 2;
+      i++;
+    } else if (text.startsWith("}}", i) && depth > 0) {
+      if (--depth === 0) out.push(text.slice(start, i));
+      i++;
+    }
+  }
+  return out;
+}
+
+function parameters(template: string): { name: string; named: Map<string, string> } {
+  const [name = "", ...rest] = splitOutside(template, "|");
+  const named = new Map<string, string>();
+  for (const part of rest) {
+    const m = /^\s*([\w-]+)\s*=([\s\S]*)$/.exec(part);
+    if (m) named.set(m[1]!.toLowerCase(), m[2]!.trim());
+  }
+  return { name: name.trim(), named };
+}
+
+const MOJO_HOST = /^https?:\/\/(www\.)?boxofficemojo\.com\//i;
+const MOJO_TEMPLATE = /^cite (box office mojo|bom)$/i;
+
+function isoDate(text: string | undefined): string | undefined {
+  if (!text) return undefined;
+  const time = Date.parse(`${text} 12:00 UTC`);
+  return Number.isNaN(time) ? undefined : new Date(time).toISOString().slice(0, 10);
+}
+
+export function boxOfficeMojo(refCell: string): MojoCitation | undefined {
+  for (const ref of refCell.matchAll(/<ref(?:\s[^>]*[^/])?>([\s\S]*?)<\/ref>/g)) {
+    for (const template of topTemplates(ref[1]!)) {
+      const { name, named } = parameters(template);
+      const id = named.get("id")?.replace(/^tt/i, "");
+      const url =
+        named.get("url") ??
+        (id && MOJO_TEMPLATE.test(name)
+          ? `https://www.boxofficemojo.com/title/tt${id}/`
+          : undefined);
+      if (!url || !MOJO_HOST.test(url)) continue;
+      const accessed = isoDate(named.get("access-date") ?? named.get("accessdate"));
+      if (!accessed) continue;
+      const archive = named.get("archive-url") ?? named.get("archiveurl");
+      return { url, accessed, ...(archive ? { archive } : {}) };
+    }
+  }
+  return undefined;
+}
+
 export function parseBoxOfficeRows(section: string): RawFilm[] {
   const films: RawFilm[] = [];
   const clean = section
@@ -92,6 +149,7 @@ export function parseBoxOfficeRows(section: string): RawFilm[] {
         usCanada: amounts[0],
         worldwide: amounts[2],
         budget: budget(row[7]!.text),
+        boxOfficeMojo: boxOfficeMojo(row[8]?.text ?? ""),
         note: notes.length ? notes.join(" ") : undefined,
       });
     }
