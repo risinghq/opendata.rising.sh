@@ -1,0 +1,3 @@
+# The pipeline writes these files as JSON.stringify output and the build
+# validates them against the schema; reformatting them would break every refresh.
+data/

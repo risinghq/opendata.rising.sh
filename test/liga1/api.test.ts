@@ -2,7 +2,12 @@ import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
+import { cacheReadOptional } from "../../scripts/liga1/api.ts";
 import { limaDate, parseEvents, type ApiFixture } from "../../scripts/liga1/parse.ts";
+
+test("cacheReadOptional gives undefined for a cache file a fresh checkout lacks", () => {
+  expect(cacheReadOptional("no-such-file.json")).toBeUndefined();
+});
 
 const fixture = JSON.parse(
   readFileSync(join(import.meta.dirname, "fixtures", "fixture.json"), "utf8"),

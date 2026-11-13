@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join as joinPath } from "node:path";
 
 import type { TemporadaData } from "../../src/data/types.ts";
-import { Api, cacheRead, cacheWrite } from "./api.ts";
+import { Api, cacheReadOptional, cacheWrite } from "./api.ts";
 import { limaDate, type ApiFixture } from "./parse.ts";
 
 const EVENT_FILE = joinPath(import.meta.dirname, "..", "..", "data", "events", "liga-1-2026.json");
@@ -49,7 +49,7 @@ export async function run(): Promise<void> {
     (path) => api.get(path),
     fixtures,
     clausuraStart,
-    cacheRead<Record<string, [number, number, number]>>("odds.json") ?? {},
+    cacheReadOptional<Record<string, [number, number, number]>>("odds.json") ?? {},
   );
   cacheWrite("odds.json", odds);
   console.log(`odds: ${Object.keys(odds).length} fixtures, ${api.requests} API requests total`);
