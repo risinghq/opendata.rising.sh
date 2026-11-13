@@ -1,83 +1,18 @@
 # opendata.rising.sh
 
-A catalogue of public events, in Spanish. It has three kinds. An attendance
-event lists its acts, and each figure shows who estimated it and links to the
-report. A season lists its matches, and every figure on the page is derived
-from them. A box office event lists a film series' grosses, nominal and in
-real terms. The first season is the Liga 1 2026 and the first box office
-series is the Marvel Cinematic Universe.
+A catalogue of public events, in Spanish, at
+[opendata.rising.sh](https://opendata.rising.sh). It has three kinds. An
+attendance event lists its acts, and each figure shows who estimated it and
+links to the report. A season lists its matches, and every figure on the page
+is derived from them. A box office event lists a film series' grosses, nominal
+and in real terms. The first season is the Liga 1 2026 and the first box
+office series is the Marvel Cinematic Universe.
 
-## Develop
-
-[mise](https://mise.jdx.dev) pins Bun and Node.
+Every event page offers its data as JSON and CSV.
 
 ```sh
 bun install
-bun run dev      # dev server that renders each page on request
-bun run test     # validates every event file and checks the build
-bun run check    # lint, format and types
-bun run fix      # format
-bun run build    # write the site to dist/
-bun run preview  # serve dist/ in the Worker, after bun run build
+bun run dev
 ```
 
-## Add an event
-
-1. Create `data/events/<slug>.json` with a `kind`. The slug becomes the address
-   `/eventos/<slug>`.
-2. Fill it in as [docs/data.md](docs/data.md) describes.
-3. Run `bun run test`. The test fails with a path to each invalid field.
-4. Run `bun run build`. The page, the JSON and the CSV appear under
-   `dist/eventos/`.
-
-## Refresh the Liga 1 season
-
-```sh
-bun run refresh:liga1
-bun run test
-```
-
-The command imports the Apertura and Clausura pages from Spanish Wikipedia,
-fetches match events and odds from 5DollarFootballAPI, joins them onto the
-Wikipedia matches, fits the forecast model and writes a dated snapshot. The
-Wikipedia data is CC BY-SA 4.0. The API key is read from `FOOTBALL_API_KEY` or
-`~/.config/5dollarfootballapi/key`. Raw API responses stay in `.cache/liga1/`,
-which is gitignored. A copy of every fetched response is also kept outside
-the repository and can be replayed offline; see
-[docs/raw-archive.md](docs/raw-archive.md).
-
-## Refresh the MCU box office
-
-```sh
-bun run refresh:mcu
-bun run test
-```
-
-The command imports the box office table from English Wikipedia (CC BY-SA
-4.0), the opening weekend from each film's article, the Spanish titles from
-each article's `es` langlink, and the U.S. CPI annual averages from the BLS,
-then fits the forecast model and writes a dated snapshot. A snapshot is
-never rewritten.
-
-The code map is in [docs/architecture.md](docs/architecture.md).
-
-## Deploy
-
-A push to `main` runs `.github/workflows/deploy.yml`. It checks, tests and
-builds the site, then uploads `dist/` as the static assets of the Cloudflare
-Worker `opendata` (`wrangler.jsonc`).
-
-To run your own deployment:
-
-1. In Cloudflare, open My Profile, API Tokens, and create a token from the
-   "Edit Cloudflare Workers" template. Copy its value.
-2. Copy your account id from the Workers & Pages overview.
-3. In the GitHub repository, open Settings, Environments, create the
-   environment `production`, and add two secrets: `CLOUDFLARE_API_TOKEN` with
-   the token and `CLOUDFLARE_ACCOUNT_ID` with the account id.
-4. Set `account_id` and the custom domain `routes` in `wrangler.jsonc` to your
-   own.
-5. Push to `main`, or run the `deploy` workflow by hand.
-
-To deploy from your machine, run `bun run deploy` with the same two values in
-the environment.
+The manual is in [docs/README.md](docs/README.md).
