@@ -112,8 +112,6 @@ a:hover {
 .label,
 .fig-label,
 thead th,
-.figures dt,
-.facts dt,
 .legend,
 .tag {
   font-family: var(--font-mono);
@@ -191,35 +189,25 @@ main {
   line-height: 1.4;
 }
 
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-6);
-  margin-top: var(--space-6);
-  font-size: var(--text-sm);
+/* Separators as in makingsoftware's chapter meta line. */
+.meta span:not(:last-child)::after {
+  content: "|";
+  margin-inline: var(--space-2);
+  color: var(--ink-25);
 }
 
-.facts div {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-}
-
-.facts a {
-  display: inline-block;
-  padding-block: var(--space-1);
-}
-
-.facts dt {
-  color: var(--ink-60);
+/* Dates, status and update are short; only the title may wrap. */
+.meta span + span {
+  white-space: nowrap;
 }
 
 .status::before {
   content: "";
   display: inline-block;
-  width: var(--space-2);
-  height: var(--space-2);
-  margin-inline-end: var(--space-2);
+  /* Sized in em to sit on the baseline at the cap height of the mono label. */
+  width: 0.65em;
+  height: 0.65em;
+  margin-inline-end: 0.5em;
   border: 1px solid var(--ink-60);
 }
 
@@ -245,64 +233,6 @@ main {
 
 .section > p + p {
   margin-top: var(--space-4);
-}
-
-.figures {
-  display: grid;
-  margin-top: var(--space-8);
-  border-block: 1px solid var(--rule-strong);
-}
-
-.figures > div {
-  padding: var(--space-4) 0;
-  container-type: inline-size;
-}
-
-.figures > div + div {
-  border-top: 1px solid var(--rule);
-}
-
-.figures dt {
-  color: var(--ink-60);
-}
-
-.figures dd {
-  margin-top: var(--space-2);
-}
-
-.figures .value {
-  /* Shrinks with its column so a figure like "USD 35,207.6 M" stays on one line. */
-  font-size: clamp(var(--text-lg), 9cqi, var(--text-xl));
-  line-height: 1.1;
-  color: var(--ink);
-  overflow-wrap: break-word;
-  text-wrap: balance;
-}
-
-.figures .note {
-  margin-top: var(--space-2);
-  color: var(--ink-60);
-  font-size: var(--text-sm);
-}
-
-@media (min-width: 48rem) {
-  .figures {
-    grid-auto-columns: minmax(0, 1fr);
-    grid-auto-flow: column;
-  }
-
-  .figures > div {
-    padding: var(--space-6);
-  }
-
-  .figures > div:first-child {
-    padding-inline-start: 0;
-  }
-
-  .figures > div + div {
-    border-top: 0;
-    border-left: 1px solid var(--rule);
-  }
 }
 
 .table-scroll {
@@ -991,12 +921,6 @@ thead th.num {
 .answer-figure {
   font-size: var(--text-xl);
   line-height: 1.1;
-}
-
-.score {
-  margin-top: var(--space-4);
-  color: var(--ink-60);
-  font-size: var(--text-sm);
 }
 
 .mini-bars {

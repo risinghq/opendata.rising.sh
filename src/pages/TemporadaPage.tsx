@@ -10,12 +10,10 @@ import { TeamStatsTable } from "../components/TeamStatsTable.tsx";
 import {
   formatDate,
   formatDateLima,
-  formatDateRange,
   formatDecimal,
   formatNumber,
   formatPercent,
   formatShortDate,
-  formatStamp,
 } from "../data/format.ts";
 import { MATCH_DATA_URL, hasMatchEvents, tournamentNotice } from "../data/notice.ts";
 import { actDate } from "../data/stats-asistencia.ts";
@@ -28,7 +26,6 @@ import {
   standings,
   teamAverages,
 } from "../data/stats-temporada.ts";
-import { eventStatus } from "../data/stats.ts";
 import type { TemporadaRecord } from "../data/types.ts";
 import { goalTiming } from "../forecast/events.ts";
 import type { PublishedScore } from "../forecast/scoring.ts";
@@ -42,7 +39,6 @@ export function TemporadaPage(props: {
 }) {
   const event = props.event;
   const figures = keyFigures(event);
-  const status = eventStatus(event);
   const teams = new Map(event.teams.map((team) => [team.id, team.name]));
   const stadiums = new Map(event.stadiums.map((stadium) => [stadium.id, stadium]));
   const points = altitudePoints(event);
@@ -74,29 +70,6 @@ export function TemporadaPage(props: {
   return (
     <>
       <Lede event={event} answer={forecast ? ligaAnswer(event, forecast) : null} />
-      <dl class="facts">
-        <div>
-          <dt>Fechas</dt>
-          <dd>{formatDateRange(event.start, event.end)}</dd>
-        </div>
-        <div>
-          <dt>Estado</dt>
-          <dd class="status" data-state={status}>
-            {status}
-          </dd>
-        </div>
-        <div>
-          <dt>Actualizado</dt>
-          <dd>{formatStamp(event.updated)}</dd>
-        </div>
-        <div>
-          <dt>Fuente</dt>
-          <dd>
-            <a href="#metodo">Wikipedia en español, CC BY-SA 4.0</a>
-          </dd>
-        </div>
-      </dl>
-
       <nav class="contents" aria-label="Secciones">
         <ol>
           <For each={sections.filter((section) => section.shown)}>
@@ -108,37 +81,6 @@ export function TemporadaPage(props: {
           </For>
         </ol>
       </nav>
-
-      <section class="section" aria-labelledby="cifras">
-        <h2 id="cifras" class="visually-hidden">
-          Cifras clave
-        </h2>
-        <dl class="figures">
-          <div>
-            <dt>Partidos jugados</dt>
-            <dd class="value">
-              {figures.held} de {figures.total}
-            </dd>
-            <dd class="note">
-              {figures.total - figures.held === 0
-                ? "Todos jugados"
-                : `${figures.total - figures.held} por jugar`}
-            </dd>
-          </div>
-          <div>
-            <dt>Goles por partido</dt>
-            <dd class="value">{formatDecimal(figures.goalsPerMatch)}</dd>
-            <dd class="note">{formatNumber(figures.goals)} goles en total</dd>
-          </div>
-          <div>
-            <dt>Gana el local</dt>
-            <dd class="value">{share(figures.homeWins)}</dd>
-            <dd class="note">
-              Empatan {share(figures.draws)}. Gana la visita {share(figures.awayWins)}.
-            </dd>
-          </div>
-        </dl>
-      </section>
 
       <Show when={forecast}>
         {(snap) => (
@@ -337,8 +279,10 @@ export function TemporadaPage(props: {
           <section class="section" aria-labelledby="goles">
             <h2 id="goles">Cuándo caen los goles</h2>
             <p>
-              Goles por tramo de 15 minutos en los partidos con datos de eventos. Los minutos de
-              descuento entran en el último tramo de su tiempo.
+              Los {formatNumber(figures.held)} partidos jugados suman {formatNumber(figures.goals)}{" "}
+              goles, {formatDecimal(figures.goalsPerMatch)} por partido. El gráfico cuenta los goles
+              por tramo de 15 minutos en los partidos con datos de eventos. Los minutos de descuento
+              entran en el último tramo de su tiempo.
             </p>
             <GoalTimingChart periods={periods()} />
             <GoalTimingTable periods={periods()} />
@@ -362,10 +306,12 @@ export function TemporadaPage(props: {
         <section class="section" aria-labelledby="altitud">
           <h2 id="altitud">Ventaja de local por altitud</h2>
           <p>
-            Puntos que sumó el local por partido en cada estadio, frente a la altitud del estadio.
-            Solo entran los estadios con al menos {MIN_MATCHES_PER_STADIUM} partidos jugados.
-            Algunos estadios los usan varios equipos, así que un punto mezcla la fuerza de esos
-            equipos con la altitud.
+            En toda la temporada gana el local el {share(figures.homeWins)} de los partidos, empatan
+            el {share(figures.draws)} y gana la visita el {share(figures.awayWins)}. El gráfico
+            muestra los puntos que sumó el local por partido en cada estadio, frente a la altitud
+            del estadio. Solo entran los estadios con al menos {MIN_MATCHES_PER_STADIUM} partidos
+            jugados. Algunos estadios los usan varios equipos, así que un punto mezcla la fuerza de
+            esos equipos con la altitud.
           </p>
           <AltitudeChart points={points} />
           <AltitudeTable points={points} />
@@ -375,6 +321,7 @@ export function TemporadaPage(props: {
       <section class="section" aria-labelledby="resultados">
         <h2 id="resultados">Resultados por fecha</h2>
         <p>
+          Se jugaron {formatNumber(figures.held)} de los {formatNumber(figures.total)} partidos.
           Cada fecha lista todos sus partidos. Los partidos por jugar no tienen resultado y no
           entran en ninguna cifra. Se abren la última fecha con partidos jugados y la siguiente.
         </p>

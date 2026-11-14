@@ -5,13 +5,7 @@ import { ActsTable } from "../components/ActsTable.tsx";
 import { Lede, papalAnswer } from "../components/Answer.tsx";
 import { ArchiveCopy } from "../components/ArchiveCopy.tsx";
 import { DailyChart, DailyTable } from "../components/DailyChart.tsx";
-import {
-  formatDateLima,
-  formatDateRange,
-  formatNumber,
-  formatShortDate,
-  formatStamp,
-} from "../data/format.ts";
+import { formatDateLima, formatNumber, formatShortDate } from "../data/format.ts";
 import {
   actDate,
   dailyTotals,
@@ -20,7 +14,6 @@ import {
   plannedActs,
   sumRange,
 } from "../data/stats-asistencia.ts";
-import { eventStatus } from "../data/stats.ts";
 import type { AsistenciaRecord, EventRecord } from "../data/types.ts";
 import { SITE_NAME, SITE_URL } from "../site.ts";
 
@@ -35,62 +28,28 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
   const total = sumRange(held);
   const largest = largestAct(event);
   const days = dailyTotals(event);
-  const status = eventStatus(event);
   const comparison = [...(event.comparison ?? [])].sort((a, b) => b.figure - a.figure);
 
   return (
     <>
       <Lede event={event} answer={papalAnswer(event)} />
-      <dl class="facts">
-        <div>
-          <dt>Fechas</dt>
-          <dd>{formatDateRange(event.start, event.end)}</dd>
-        </div>
-        <div>
-          <dt>Estado</dt>
-          <dd class="status" data-state={status}>
-            {status}
-          </dd>
-        </div>
-        <div>
-          <dt>Actualizado</dt>
-          <dd>{formatStamp(event.updated)}</dd>
-        </div>
-      </dl>
-
-      <dl class="figures">
-        <div>
-          <dt>Asistencia total de los actos realizados</dt>
-          <dd class="value">{formatNumber(total.central)}</dd>
-          <dd class="note">
-            Entre {formatNumber(total.low)} y {formatNumber(total.high)}
-          </dd>
-        </div>
-        <div>
-          <dt>Actos realizados</dt>
-          <dd class="value">
-            {held.length} de {event.acts.length}
-          </dd>
-          <dd class="note">
-            {planned.length === 0 ? "Todos realizados" : `${planned.length} por realizar`}
-          </dd>
-        </div>
-        <Show when={largest}>
-          {(act) => (
-            <div>
-              <dt>Acto más grande</dt>
-              <dd class="value">{formatNumber(act().central)}</dd>
-              <dd class="note">
-                {act().name}, {act().city}, {formatShortDate(actDate(act()))}
-              </dd>
-            </div>
-          )}
-        </Show>
-      </dl>
-
       <Show when={held.length > 0}>
         <section class="section" aria-labelledby="por-acto">
           <h2 id="por-acto">Asistencia por acto</h2>
+          <p>
+            Las cifras de los actos realizados suman entre {formatNumber(total.low)} y{" "}
+            {formatNumber(total.high)} personas.
+            {planned.length > 0 ? ` Faltan ${planned.length} actos.` : ""}
+            <Show when={largest}>
+              {(act) => (
+                <>
+                  {" "}
+                  El más grande fue {act().name}, en {act().city}, el{" "}
+                  {formatShortDate(actDate(act()))}, con {formatNumber(act().central)} personas.
+                </>
+              )}
+            </Show>
+          </p>
           <ActsChart acts={held} />
         </section>
 
