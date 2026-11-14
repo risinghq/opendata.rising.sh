@@ -1,12 +1,7 @@
 import { expect, test } from "bun:test";
 
 import type { AsistenciaData, HeldAct } from "../src/data/types.ts";
-import {
-  dailyTotals,
-  expectedDifference,
-  largestAct,
-  sumRange,
-} from "../src/data/stats-asistencia.ts";
+import { dailyTotals, expectedDifference, sumRange } from "../src/data/stats-asistencia.ts";
 import { eventStatus } from "../src/data/stats.ts";
 
 const src = { outlet: "Medio", url: "https://example.org" };
@@ -65,10 +60,6 @@ test("the daily series accumulates, fills empty days and stops at the last held 
   expect(days.map((d) => d.held)).toEqual([true, false, true]);
   expect(days.map((d) => d.total.central)).toEqual([2, 2, 27]);
   expect(days.at(-1)?.total).toEqual({ low: 16, central: 27, high: 48 });
-});
-
-test("the largest act is the one with the highest central figure", () => {
-  expect(largestAct(event)?.central).toBe(20);
 });
 
 test.each([

@@ -222,22 +222,35 @@ main {
 }
 
 .section > h2 {
-  margin-bottom: var(--space-4);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--rule-strong);
+  border-top: 1px solid var(--ink);
 }
 
-.section > p {
+:where(.section, .block) > p {
   max-width: var(--prose-width);
 }
 
-.section > p + p {
+/*
+ * The vertical rhythm of a section: one gap between prose, tables and lists,
+ * and a wider one around figures and sub-blocks. The selectors carry no
+ * specificity, so a component that needs its own gap overrides them.
+ */
+:where(.section, .block) > * + * {
   margin-top: var(--space-4);
+}
+
+:where(.section, .block) > * + :where(.figure, .block),
+:where(.section, .block) > :where(.figure, .block) + * {
+  margin-top: var(--space-8);
+}
+
+:where(.block) > h3 + * {
+  margin-top: var(--space-3);
 }
 
 .table-scroll {
   overflow-x: auto;
-  border-block: 1px solid var(--rule-strong);
+  border-block: 1px solid var(--rule);
 }
 
 table,
@@ -436,13 +449,6 @@ thead th.num {
   font-family: var(--font-mono);
   font-size: var(--mono-sm);
   line-height: 1.6;
-}
-
-.figure + .table-scroll,
-.figure + .figure,
-.section > p + .figure,
-.section > .table-scroll + .figure {
-  margin-top: var(--space-8);
 }
 
 .bars {
@@ -660,7 +666,6 @@ thead th.num {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-4);
-  margin-top: var(--space-4);
   padding: 0;
   list-style: none;
 }
@@ -673,26 +678,12 @@ thead th.num {
 .cite {
   display: block;
   max-width: var(--prose-width);
-  margin-top: var(--space-2);
   padding: var(--space-3);
   border: 1px solid var(--rule);
   background: var(--ink-4);
   font-family: var(--font-mono);
   font-size: var(--mono-md);
   overflow-wrap: anywhere;
-}
-
-.block + .block {
-  margin-top: var(--space-8);
-}
-
-.block > h3 {
-  margin-bottom: var(--space-3);
-}
-
-.section > p + .block,
-.section > .table-scroll + .block {
-  margin-top: var(--space-6);
 }
 
 .standings-table {
@@ -730,6 +721,10 @@ thead th.num {
 
 .round {
   border-top: 1px solid var(--rule);
+}
+
+.round + .round {
+  margin-top: 0;
 }
 
 .round:last-child {
@@ -798,7 +793,6 @@ thead th.num {
 }
 
 .notices {
-  margin-top: var(--space-4);
   padding: 0;
   list-style: none;
   max-width: var(--prose-width);

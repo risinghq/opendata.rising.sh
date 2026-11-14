@@ -22,7 +22,6 @@ export interface TaquillaFigures {
   worldwideReal: number;
   medianWorldwide: number;
   medianReal: number;
-  top: ReleasedFilm;
 }
 
 export function keyFigures(event: TaquillaData, cpi: CpiData): TaquillaFigures {
@@ -37,6 +36,5 @@ export function keyFigures(event: TaquillaData, cpi: CpiData): TaquillaFigures {
     worldwideReal: released.reduce((sum, f) => sum + realWorldwide(f, cpi), 0),
     medianWorldwide: medianFilm.worldwide.amount,
     medianReal: realWorldwide(medianFilm, cpi),
-    top: sorted.at(-1)!,
   };
 }

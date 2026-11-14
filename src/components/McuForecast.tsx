@@ -99,33 +99,42 @@ function Basis(props: { snap: McuSnapshot }) {
   );
 }
 
-function backtestSentence(snap: McuSnapshot) {
+function verdict(snap: McuSnapshot) {
   const bt = snap.backtest;
   const wins = (["opening", "worldwide"] as const).every(
     (key) => bt.byFigure[key].model < bt.byFigure[key].naive,
   );
-  const verdict =
-    typeof snap.basis === "object"
-      ? "En cada cifra se publica el método de menor error mediano."
-      : wins
-        ? "El modelo supera a la base en las dos cifras."
-        : "El modelo no supera a la base en las dos cifras, así que el pronóstico va con esa advertencia.";
+  return typeof snap.basis === "object"
+    ? "En cada cifra se publica el método de menor error mediano."
+    : wins
+      ? "El modelo supera a la base en las dos cifras."
+      : "El modelo no supera a la base en las dos cifras, así que el pronóstico va con esa advertencia.";
+}
+
+function errorSentence(snap: McuSnapshot) {
+  const bt = snap.backtest.byFigure;
   return (
-    `Para medirlo, el modelo se entrenó hacia atrás con ${bt.cases} películas: cada película de ` +
+    `El error mediano del modelo es ${formatPercent(bt.worldwide.model)} en la recaudación ` +
+    `mundial y ${formatPercent(bt.opening.model)} en el fin de semana de estreno, contra ` +
+    `${formatPercent(bt.worldwide.naive)} y ${formatPercent(bt.opening.naive)} de la base ingenua.`
+  );
+}
+
+function backtestSentence(snap: McuSnapshot) {
+  const bt = snap.backtest;
+  return (
+    `El modelo se entrenó hacia atrás con ${bt.cases} películas: cada película de ` +
     `Avengers y cada uno de los últimos diez estrenos se predijo usando solo las películas ` +
-    `anteriores. El error mediano del modelo es ${formatPercent(bt.byFigure.worldwide.model)} en ` +
-    `la recaudación mundial y ${formatPercent(bt.byFigure.opening.model)} en el fin de semana de ` +
-    `estreno, contra ${formatPercent(bt.byFigure.worldwide.naive)} y ` +
-    `${formatPercent(bt.byFigure.opening.naive)} de la base ingenua. ` +
+    `anteriores. ${errorSentence(snap)} ` +
     (bt.previousWorldwide === undefined
-      ? `La base repite las cifras de la película anterior. `
+      ? `La base repite las cifras de la película anterior.`
       : `La base toma el estreno de la película anterior y, para la recaudación mundial, ese ` +
         `estreno por la misma razón. Repetir sin más la recaudación mundial de la película ` +
         `anterior da un error mediano de ${formatPercent(bt.previousWorldwide)}, ${
           bt.previousWorldwide < bt.byFigure.worldwide.model ? "menor" : "mayor"
-        } que el ` +
-        `del modelo. `) +
-    verdict
+        } que el del modelo.`) +
+    // The Basis paragraph already gives the verdict when the snapshot records a basis.
+    (methodsOf(snap) ? "" : ` ${verdict(snap)}`)
   );
 }
 
@@ -344,11 +353,10 @@ export function McuForecast(props: {
   const snap = () => props.forecast;
   return (
     <section class="section" aria-labelledby="pronostico">
-      <h2 id="pronostico">Pronóstico: {snap().target.title}</h2>
+      <h2 id="pronostico">Pronóstico</h2>
       <p>
-        Pronóstico calculado el {day(snap().date)} con los {snap().filmsUsed.length} estrenos
-        publicados hasta ese día, en dólares de {snap().dollars}. El estreno está previsto para el{" "}
-        {day(snap().target.release)}.
+        Calculado el {day(snap().date)} con los {snap().filmsUsed.length} estrenos publicados hasta
+        ese día. Las cifras van en dólares de {snap().dollars}.
       </p>
       <Basis snap={snap()} />
       <ForecastFigures snap={snap()} event={props.event} cpi={props.cpi} />
@@ -366,7 +374,8 @@ export function McuForecast(props: {
           <div class="block">
             <h3>Pronóstico anterior, del {day(old.date)}</h3>
             <p>
-              Se conserva sin cambios, con el modelo que se usaba ese día. {backtestSentence(old)}
+              Se conserva sin cambios, con el modelo que se usaba ese día y {old.backtest.cases}{" "}
+              películas en la prueba hacia atrás. {errorSentence(old)} {verdict(old)}
             </p>
             <ForecastFigures snap={old} event={props.event} cpi={props.cpi} />
           </div>

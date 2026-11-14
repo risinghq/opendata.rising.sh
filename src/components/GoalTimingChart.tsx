@@ -21,8 +21,8 @@ export function GoalTimingChart(props: { periods: GoalPeriod[] }) {
       finding={`El tramo con más goles es el de los minutos ${peak.label}, con ${formatNumber(total(peak))}.`}
       note={
         <>
-          Goles por tramo de 15 minutos, separados entre el equipo local y el visitante. Las cifras
-          están en la <a href="#goles-tabla">tabla por tramo</a>.
+          Solo los partidos con datos de eventos. Los minutos de descuento entran en el último tramo
+          de su tiempo. Las cifras están en la <a href="#goles-tabla">tabla por tramo</a>.
         </>
       }
       source={<a href={MATCH_DATA_URL}>5DollarFootballAPI</a>}
