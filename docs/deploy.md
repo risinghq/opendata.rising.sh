@@ -1,6 +1,6 @@
 # Deploy
 
-A push to `main` runs `.github/workflows/deploy.yml`. It checks, tests and
+A push to `master` runs `.github/workflows/deploy.yml`. It checks, tests and
 builds the site, then uploads `dist/` as the static assets of the Cloudflare
 Worker `data` (`wrangler.jsonc`).
 
@@ -14,7 +14,7 @@ Worker `data` (`wrangler.jsonc`).
    the token and `CLOUDFLARE_ACCOUNT_ID` with the account id.
 4. Set `account_id` and the custom domain `routes` in `wrangler.jsonc` to your
    own.
-5. Push to `main`, or run the `deploy` workflow by hand.
+5. Push to `master`, or run the `deploy` workflow by hand.
 
 To deploy from your machine, run `bun run deploy` with the same two values in
 the environment.
