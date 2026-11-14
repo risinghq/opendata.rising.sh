@@ -15,7 +15,7 @@ import { eventStatus } from "../data/stats.ts";
 import { filmYear, keyFigures, releasedFilms } from "../data/stats-taquilla.ts";
 import type { TaquillaRecord } from "../data/types.ts";
 import type { McuSnapshot } from "../forecast/mcu.ts";
-import { SITE_URL } from "../site.ts";
+import { SITE_NAME, SITE_URL } from "../site.ts";
 
 export function TaquillaPage(props: {
   event: TaquillaRecord;
@@ -186,7 +186,7 @@ export function TaquillaPage(props: {
       <section class="section" aria-labelledby="citar">
         <h2 id="citar">Cómo citar</h2>
         <p class="cite">
-          {event.title}. Datos abiertos, actualizado el {formatDateLima(event.updated)}. {url}
+          {event.title}. {SITE_NAME}, actualizado el {formatDateLima(event.updated)}. {url}
         </p>
       </section>
     </>

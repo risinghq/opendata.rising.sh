@@ -21,7 +21,7 @@ import {
 } from "../data/stats-asistencia.ts";
 import { eventStatus } from "../data/stats.ts";
 import type { AsistenciaRecord, EventRecord } from "../data/types.ts";
-import { SITE_URL } from "../site.ts";
+import { SITE_NAME, SITE_URL } from "../site.ts";
 
 function eventUrl(event: EventRecord): string {
   return `${SITE_URL}/eventos/${event.slug}`;
@@ -175,7 +175,7 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
       <section class="section" aria-labelledby="citar">
         <h2 id="citar">Cómo citar</h2>
         <p class="cite">
-          {event.title}. Datos abiertos, actualizado el {formatDateLima(event.updated)}.{" "}
+          {event.title}. {SITE_NAME}, actualizado el {formatDateLima(event.updated)}.{" "}
           {eventUrl(event)}
         </p>
       </section>

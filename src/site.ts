@@ -1,5 +1,5 @@
-export const SITE_NAME = "Datos abiertos";
-export const SITE_URL = "https://opendata.rising.sh";
-export const SITE_TITLE = "Datos abiertos: cifras de eventos públicos";
+export const SITE_NAME = "Cifras";
+export const SITE_URL = "https://data.rising.sh";
+export const SITE_TITLE = "Cifras de eventos públicos";
 export const SITE_DESCRIPTION =
-  "Catálogo de eventos públicos con sus cifras de asistencia. Cada cifra indica quién la estimó y enlaza al informe.";
+  "Cifras de eventos públicos: asistencia a actos, partidos de fútbol y taquilla de cine. Cada cifra indica quién la publicó y enlaza a su fuente.";

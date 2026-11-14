@@ -12,7 +12,7 @@ import { isReleased, realAmount } from "../src/data/stats-taquilla.ts";
 import type { McuSnapshot } from "../src/forecast/mcu.ts";
 
 const root = join(import.meta.dirname, "..");
-const out = mkdtempSync(join(tmpdir(), "opendata-build-"));
+const out = mkdtempSync(join(tmpdir(), "data-build-"));
 const read = (path: string) => readFileSync(join(out, path), "utf8");
 
 beforeAll(() => {

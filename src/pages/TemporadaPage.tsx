@@ -32,7 +32,7 @@ import type { TemporadaRecord } from "../data/types.ts";
 import { goalTiming } from "../forecast/events.ts";
 import type { PublishedScore } from "../forecast/scoring.ts";
 import type { ForecastSnapshot } from "../forecast/snapshot.ts";
-import { SITE_URL } from "../site.ts";
+import { SITE_NAME, SITE_URL } from "../site.ts";
 
 export function TemporadaPage(props: {
   event: TemporadaRecord;
@@ -442,7 +442,7 @@ export function TemporadaPage(props: {
       <section class="section" aria-labelledby="citar">
         <h2 id="citar">Cómo citar</h2>
         <p class="cite">
-          {event.title}. Datos abiertos, actualizado el {formatDateLima(event.updated)}. {url}
+          {event.title}. {SITE_NAME}, actualizado el {formatDateLima(event.updated)}. {url}
         </p>
       </section>
     </>
