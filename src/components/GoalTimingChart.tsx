@@ -57,7 +57,14 @@ export function GoalTimingChart(props: { periods: GoalPeriod[] }) {
           </For>
         </svg>
         <div class="histogram-labels">
-          <For each={props.periods}>{(p) => <span>{p.label}</span>}</For>
+          <For each={props.periods}>
+            {(p) => (
+              <span>
+                {p.label}
+                {p === peak ? <span class="chart-note">Más goles</span> : null}
+              </span>
+            )}
+          </For>
         </div>
       </div>
     </Figure>

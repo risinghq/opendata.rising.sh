@@ -59,6 +59,8 @@ export function GrossChart(props: { points: GrossPoint[]; dollars: number }) {
   const y = (v: number) => H * (1 - v / top);
   const years = yearLabels(props.points);
   const top1 = props.points.reduce((best, p) => (p.worldwide > best.worldwide ? p : best));
+  /** The record's bar centre as a fraction of the plot width; its label sits on the roomier side. */
+  const topAt = (props.points.indexOf(top1) + 0.5) / count;
 
   return (
     <Figure
@@ -115,6 +117,12 @@ export function GrossChart(props: { points: GrossPoint[]; dollars: number }) {
             </span>
           )}
         </For>
+        <span
+          class={`chart-note ${topAt > 0.5 ? "point-left" : "point-right"}`}
+          style={`left: ${topAt * 100}%; bottom: ${(top1.worldwide / top) * 100}%`}
+        >
+          {topAt > 0.5 ? `${top1.title} →` : `← ${top1.title}`}
+        </span>
       </div>
     </Figure>
   );

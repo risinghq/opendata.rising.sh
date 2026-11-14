@@ -2,6 +2,7 @@ import { For, Show } from "solid-js";
 
 import { ActsChart } from "../components/ActsChart.tsx";
 import { ActsTable } from "../components/ActsTable.tsx";
+import { Lede, papalAnswer } from "../components/Answer.tsx";
 import { ArchiveCopy } from "../components/ArchiveCopy.tsx";
 import { DailyChart, DailyTable } from "../components/DailyChart.tsx";
 import {
@@ -39,8 +40,7 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
 
   return (
     <>
-      <h1>{event.title}</h1>
-      <p class="lead">{event.summary}</p>
+      <Lede event={event} answer={papalAnswer(event)} />
       <dl class="facts">
         <div>
           <dt>Fechas</dt>

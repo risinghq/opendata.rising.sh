@@ -57,6 +57,7 @@ export function DailyChart(props: { days: Day[] }) {
                 </svg>
               </div>
               <span class="day-date">{formatShortDate(day.date)}</span>
+              {day === busiest ? <span class="chart-note">Más gente</span> : null}
             </div>
           )}
         </For>
