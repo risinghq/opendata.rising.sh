@@ -280,9 +280,7 @@ export function TemporadaPage(props: {
             <h2 id="goles">Cuándo caen los goles</h2>
             <p>
               Los {formatNumber(figures.held)} partidos jugados suman {formatNumber(figures.goals)}{" "}
-              goles, {formatDecimal(figures.goalsPerMatch)} por partido. El gráfico cuenta los goles
-              por tramo de 15 minutos en los partidos con datos de eventos. Los minutos de descuento
-              entran en el último tramo de su tiempo.
+              goles, {formatDecimal(figures.goalsPerMatch)} por partido.
             </p>
             <GoalTimingChart periods={periods()} />
             <GoalTimingTable periods={periods()} />
@@ -307,11 +305,10 @@ export function TemporadaPage(props: {
           <h2 id="altitud">Ventaja de local por altitud</h2>
           <p>
             En toda la temporada gana el local el {share(figures.homeWins)} de los partidos, empatan
-            el {share(figures.draws)} y gana la visita el {share(figures.awayWins)}. El gráfico
-            muestra los puntos que sumó el local por partido en cada estadio, frente a la altitud
-            del estadio. Solo entran los estadios con al menos {MIN_MATCHES_PER_STADIUM} partidos
-            jugados. Algunos estadios los usan varios equipos, así que un punto mezcla la fuerza de
-            esos equipos con la altitud.
+            el {share(figures.draws)} y gana la visita el {share(figures.awayWins)}. El gráfico solo
+            incluye los estadios con al menos {MIN_MATCHES_PER_STADIUM} partidos jugados. Algunos
+            estadios los usan varios equipos, así que un punto mezcla la fuerza de esos equipos con
+            la altitud.
           </p>
           <AltitudeChart points={points} />
           <AltitudeTable points={points} />

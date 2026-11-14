@@ -39,13 +39,6 @@ export function sumRange(acts: Range[]): Range {
   );
 }
 
-export function largestAct(event: AsistenciaData): HeldAct | undefined {
-  return heldActs(event).reduce<HeldAct | undefined>(
-    (best, act) => (best === undefined || act.central > best.central ? act : best),
-    undefined,
-  );
-}
-
 function addDays(date: string, days: number): string {
   const moment = new Date(`${date}T00:00:00Z`);
   moment.setUTCDate(moment.getUTCDate() + days);

@@ -3,6 +3,7 @@ import { Show } from "solid-js";
 import {
   formatCompactDateLima,
   formatCompactRange,
+  formatDate,
   formatMoneyCompact,
   formatNumber,
   formatPercent,
@@ -26,7 +27,7 @@ export function ligaAnswer(event: TemporadaRecord, snapshot: ForecastSnapshot): 
   return {
     question: "¿Quién gana la Liga 1 2026?",
     figure: formatPercent(leader.season),
-    text: `${name} es la favorita para ganar la temporada.`,
+    text: `Probabilidad de que ${name} gane la temporada, la más alta de la liga.`,
   };
 }
 
@@ -34,7 +35,9 @@ export function mcuAnswer(snapshot: McuSnapshot): Answer {
   return {
     question: `¿Cuánto recaudará ${snapshot.target.title} en su estreno?`,
     figure: formatMoneyCompact(snapshot.predictions.opening.point),
-    text: `Primer fin de semana en EE. UU. y Canadá, en dólares de ${snapshot.dollars}.`,
+    text:
+      `Pronóstico de su primer fin de semana en EE. UU. y Canadá, en dólares de ` +
+      `${snapshot.dollars}. Se estrena el ${formatDate(snapshot.target.release)}.`,
   };
 }
 
@@ -51,7 +54,7 @@ export function papalAnswer(event: AsistenciaRecord): Answer {
   return {
     question: "¿Cuánta gente fue a ver a León XIV?",
     figure: formatNumber(sumRange(held).central),
-    text: `Personas en ${held.length} de ${event.acts.length} actos.`,
+    text: `Personas en los ${held.length} actos realizados de ${event.acts.length}, según la cifra central de cada acto.`,
   };
 }
 

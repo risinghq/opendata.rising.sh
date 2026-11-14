@@ -68,9 +68,8 @@ export function GrossChart(props: { points: GrossPoint[]; dollars: number }) {
       finding={`${top1.title} es la que más recaudó: ${formatMoneyCompact(top1.worldwide)} en dólares de ${props.dollars}.`}
       note={
         <>
-          Recaudación mundial de cada estreno en dólares de {props.dollars}. Las películas de{" "}
-          <em>Avengers</em> van en color y el resto en gris. Las cifras están en la{" "}
-          <a href="#peliculas">tabla de películas</a>.
+          En dólares de {props.dollars}, para comparar películas de años distintos con el mismo
+          dinero. Las películas de <em>Avengers</em> van en color y el resto en gris.
         </>
       }
       source={

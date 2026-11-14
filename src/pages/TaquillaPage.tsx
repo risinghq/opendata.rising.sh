@@ -40,12 +40,7 @@ export function TaquillaPage(props: {
           {formatMoneyCompact(figures.worldwide)} en el mundo,{" "}
           {formatMoneyCompact(figures.worldwideReal)} en dólares de {cpi.base}. La mediana por
           película es {formatMoneyCompact(figures.medianWorldwide)} (
-          {formatMoneyCompact(figures.medianReal)} en dólares de {cpi.base}) y la más taquillera es{" "}
-          <em>{figures.top.title}</em>, con {formatMoneyCompact(figures.top.worldwide.amount)}.
-        </p>
-        <p>
-          El gráfico muestra la recaudación mundial de cada estreno en dólares de {cpi.base}, para
-          comparar películas de años distintos con el mismo dinero.
+          {formatMoneyCompact(figures.medianReal)} en dólares de {cpi.base}).
         </p>
         <GrossChart points={points} dollars={cpi.base} />
         <div class="block">

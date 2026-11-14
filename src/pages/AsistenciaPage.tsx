@@ -5,15 +5,8 @@ import { ActsTable } from "../components/ActsTable.tsx";
 import { Lede, papalAnswer } from "../components/Answer.tsx";
 import { ArchiveCopy } from "../components/ArchiveCopy.tsx";
 import { DailyChart, DailyTable } from "../components/DailyChart.tsx";
-import { formatDateLima, formatNumber, formatShortDate } from "../data/format.ts";
-import {
-  actDate,
-  dailyTotals,
-  heldActs,
-  largestAct,
-  plannedActs,
-  sumRange,
-} from "../data/stats-asistencia.ts";
+import { formatDateLima, formatNumber } from "../data/format.ts";
+import { dailyTotals, heldActs, plannedActs, sumRange } from "../data/stats-asistencia.ts";
 import type { AsistenciaRecord, EventRecord } from "../data/types.ts";
 import { SITE_NAME, SITE_URL } from "../site.ts";
 
@@ -26,7 +19,6 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
   const held = heldActs(event);
   const planned = plannedActs(event);
   const total = sumRange(held);
-  const largest = largestAct(event);
   const days = dailyTotals(event);
   const comparison = [...(event.comparison ?? [])].sort((a, b) => b.figure - a.figure);
 
@@ -40,15 +32,6 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
             Las cifras de los actos realizados suman entre {formatNumber(total.low)} y{" "}
             {formatNumber(total.high)} personas.
             {planned.length > 0 ? ` Faltan ${planned.length} actos.` : ""}
-            <Show when={largest}>
-              {(act) => (
-                <>
-                  {" "}
-                  El más grande fue {act().name}, en {act().city}, el{" "}
-                  {formatShortDate(actDate(act()))}, con {formatNumber(act().central)} personas.
-                </>
-              )}
-            </Show>
           </p>
           <ActsChart acts={held} />
         </section>
