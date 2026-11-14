@@ -1,15 +1,13 @@
 :root {
   color-scheme: light dark;
 
-  --font-serif: "Newsreader Variable", Georgia, serif;
+  --font-serif: "Source Serif 4 Variable", Georgia, serif;
   --font-mono: "Departure Mono", ui-monospace, monospace;
 
   /* Departure Mono is drawn on an 11 px grid, so its sizes are multiples of 11 px. */
   --mono-sm: 0.6875rem;
   --mono-md: 0.8125rem;
   --mono-lg: 1.375rem;
-  --mono-xl: 2.0625rem;
-  --mono-2xl: 2.75rem;
 
   --text-sm: 0.9375rem;
   --text-base: 1.125rem;

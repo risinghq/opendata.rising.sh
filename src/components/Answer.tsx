@@ -97,8 +97,8 @@ export function AnswerText(props: { answer: Answer }) {
 }
 
 /**
- * The opening of an analysis page: the question as its heading, the answer,
- * then the event's summary. Without a current answer the title is the heading.
+ * The opening of an analysis page: the question as its heading and the answer.
+ * Without a current answer the title is the heading, followed by the summary.
  */
 export function Lede(props: { event: EventRecord; answer: Answer | null }) {
   return (
@@ -116,7 +116,6 @@ export function Lede(props: { event: EventRecord; answer: Answer | null }) {
           <p class="label">{props.event.title}</p>
           <h1 class="question">{answer().question}</h1>
           <AnswerText answer={answer()} />
-          <p class="lead">{props.event.summary}</p>
         </>
       )}
     </Show>
