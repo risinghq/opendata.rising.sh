@@ -1,7 +1,7 @@
-# opendata.rising.sh
+# data.rising.sh
 
 A catalogue of public events, in Spanish, at
-[opendata.rising.sh](https://opendata.rising.sh). It has three kinds. An
+[data.rising.sh](https://data.rising.sh). It has three kinds. An
 attendance event lists its acts, and each figure shows who estimated it and
 links to the report. A season lists its matches, and every figure on the page
 is derived from them. A box office event lists a film series' grosses, nominal

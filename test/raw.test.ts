@@ -8,7 +8,7 @@ import { rawFetch } from "../scripts/raw.ts";
 
 const realFetch = globalThis.fetch;
 const realDataHome = process.env.XDG_DATA_HOME;
-const realReplay = process.env.OPENDATA_REPLAY;
+const realReplay = process.env.DATA_REPLAY;
 const realKey = process.env.FOOTBALL_API_KEY;
 
 let archive: string;
@@ -23,17 +23,17 @@ const indexLines = () =>
     );
 
 beforeEach(() => {
-  archive = join(mkdtempSync(join(tmpdir(), "opendata-raw-")), "opendata", "raw");
-  process.env.XDG_DATA_HOME = archive.slice(0, -"/opendata/raw".length);
-  delete process.env.OPENDATA_REPLAY;
+  archive = join(mkdtempSync(join(tmpdir(), "data-raw-")), "data.rising.sh", "raw");
+  process.env.XDG_DATA_HOME = archive.slice(0, -"/data.rising.sh/raw".length);
+  delete process.env.DATA_REPLAY;
 });
 
 afterEach(() => {
   globalThis.fetch = realFetch;
   if (realDataHome === undefined) delete process.env.XDG_DATA_HOME;
   else process.env.XDG_DATA_HOME = realDataHome;
-  if (realReplay === undefined) delete process.env.OPENDATA_REPLAY;
-  else process.env.OPENDATA_REPLAY = realReplay;
+  if (realReplay === undefined) delete process.env.DATA_REPLAY;
+  else process.env.DATA_REPLAY = realReplay;
   if (realKey === undefined) delete process.env.FOOTBALL_API_KEY;
   else process.env.FOOTBALL_API_KEY = realKey;
 });
@@ -82,7 +82,7 @@ describe("rawFetch", () => {
     body = "second";
     await rawFetch("https://a.test/x");
 
-    process.env.OPENDATA_REPLAY = "1";
+    process.env.DATA_REPLAY = "1";
     stub(() => {
       throw new Error("network called in replay");
     });
@@ -92,7 +92,7 @@ describe("rawFetch", () => {
   });
 
   test("replay of an unknown URL fails naming it", async () => {
-    process.env.OPENDATA_REPLAY = "1";
+    process.env.DATA_REPLAY = "1";
     await expect(rawFetch("https://a.test/nothing")).rejects.toThrow("https://a.test/nothing");
   });
 
@@ -103,7 +103,7 @@ describe("rawFetch", () => {
     expect(await response.text()).toBe("oops");
     expect(indexLines()[0]).toMatchObject({ url: "https://a.test/down", status: 500 });
 
-    process.env.OPENDATA_REPLAY = "1";
+    process.env.DATA_REPLAY = "1";
     await expect(rawFetch("https://a.test/down")).rejects.toThrow("https://a.test/down");
   });
 
@@ -118,7 +118,7 @@ describe("rawFetch", () => {
     );
     expect(await new Api().get("/leagues/1/fixtures?page=1")).toEqual(["ok"]);
 
-    process.env.OPENDATA_REPLAY = "1";
+    process.env.DATA_REPLAY = "1";
     stub(() => {
       throw new Error("network called in replay");
     });
@@ -134,7 +134,7 @@ describe("rawFetch", () => {
     status = 200;
     await rawFetch("https://a.test/flaky");
 
-    process.env.OPENDATA_REPLAY = "1";
+    process.env.DATA_REPLAY = "1";
     expect(await (await rawFetch("https://a.test/flaky")).text()).toBe("fine");
   });
 });

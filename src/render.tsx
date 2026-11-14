@@ -16,7 +16,7 @@ import { Home } from "./pages/Home.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { TaquillaPage } from "./pages/TaquillaPage.tsx";
 import { TemporadaPage } from "./pages/TemporadaPage.tsx";
-import { SITE_DESCRIPTION, SITE_TITLE } from "./site.ts";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from "./site.ts";
 
 function html(meta: Meta, stylesheet: string, view: () => JSX.Element): string {
   return `<!doctype html>${renderToString(() => (
@@ -35,7 +35,7 @@ function mcuForecasts(): { forecast: McuSnapshot | null; earlier: McuSnapshot[] 
 
 function eventMeta(event: EventRecord): Meta {
   const path = `/eventos/${event.slug}`;
-  const title = `${event.title} | Datos abiertos`;
+  const title = `${event.title} | ${SITE_NAME}`;
   if (event.kind === "temporada") {
     const figures = keyFigures(event);
     return {
@@ -77,7 +77,7 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
     "404.html": html(
       {
         path: "/404",
-        title: "Página no encontrada | Datos abiertos",
+        title: `Página no encontrada | ${SITE_NAME}`,
         description: "La dirección no existe o cambió.",
         kind: "website",
         index: false,

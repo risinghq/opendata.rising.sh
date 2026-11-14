@@ -13,7 +13,7 @@ Clausura pages of Spanish Wikipedia and the match events and odds of
 `data/forecasts/liga-1-2026/`. It reads the API key from `FOOTBALL_API_KEY` or
 `~/.config/5dollarfootballapi/key`. Raw API responses stay in `.cache/liga1/`,
 which is gitignored. Every fetch is also kept in the
-[raw archive](raw-archive.md), and `OPENDATA_REPLAY=1` replays it offline.
+[raw archive](raw-archive.md), and `DATA_REPLAY=1` replays it offline.
 
 ## MCU box office
 

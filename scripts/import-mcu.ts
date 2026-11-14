@@ -91,7 +91,7 @@ async function fetchCpi(file: string) {
     // The single-series GET puts the years in the URL, which the raw archive keys on.
     const url = `${BLS}${CPI_SERIES}?startyear=${start}&endyear=${end}&annualaverage=true`;
     const response = await rawFetch(url, {
-      headers: { "user-agent": "opendata-rising-sh-importer/1.0" },
+      headers: { "user-agent": "data-rising-sh-importer/1.0" },
     });
     if (!response.ok) throw new Error(`BLS ${response.status}`);
     const body = await response.json();

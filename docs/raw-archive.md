@@ -9,8 +9,8 @@ not keeping it, so nothing under the archive is committed.
 
 ## Layout
 
-The archive lives at `$XDG_DATA_HOME/opendata/raw/`, or
-`~/.local/share/opendata/raw/` when `XDG_DATA_HOME` is unset.
+The archive lives at `$XDG_DATA_HOME/data.rising.sh/raw/`, or
+`~/.local/share/data.rising.sh/raw/` when `XDG_DATA_HOME` is unset.
 
 - Each response body is one file named by the SHA-256 of the body. A body
   already stored is not written twice.
@@ -22,14 +22,14 @@ The archive lives at `$XDG_DATA_HOME/opendata/raw/`, or
 
 ## Replay
 
-`OPENDATA_REPLAY=1` makes the same calls read the archive instead of the
+`DATA_REPLAY=1` makes the same calls read the archive instead of the
 network:
 
 ```sh
-OPENDATA_REPLAY=1 bun run refresh:liga1
-OPENDATA_REPLAY=1 bun scripts/import-liga1.ts
-OPENDATA_REPLAY=1 bun scripts/import-mcu.ts
-OPENDATA_REPLAY=1 bun run archive:sources
+DATA_REPLAY=1 bun run refresh:liga1
+DATA_REPLAY=1 bun scripts/import-liga1.ts
+DATA_REPLAY=1 bun scripts/import-mcu.ts
+DATA_REPLAY=1 bun run archive:sources
 ```
 
 The archive keys a response on its URL alone, so every archived request is a
@@ -37,6 +37,6 @@ GET whose URL holds all its parameters. The CPI fetch uses the BLS
 single-series GET for that reason. For each URL, the newest index entry whose status is 2xx or 3xx gives the
 response; a stored redirect is an answer the caller still follows, as the
 Liga 1 client does with `league_moved`. A URL with no stored 2xx or 3xx body
-fails with `OPENDATA_REPLAY=1: no stored response for <url>`. No request
+fails with `DATA_REPLAY=1: no stored response for <url>`. No request
 leaves the machine, no response waits on the API pace limit and the Liga 1
 API key is not needed.

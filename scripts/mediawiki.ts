@@ -1,7 +1,6 @@
 import { rawFetch } from "./raw.ts";
 
-const USER_AGENT =
-  "opendata-rising-sh-importer/1.0 (open data catalogue; https://opendata.rising.sh)";
+const USER_AGENT = "data-rising-sh-importer/1.0 (public event figures; https://data.rising.sh)";
 
 export interface PageRevision {
   title: string;

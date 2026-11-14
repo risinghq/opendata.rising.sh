@@ -45,7 +45,7 @@ export function skipReason(url: string): string | undefined {
 
 const AVAILABILITY = "https://archive.org/wayback/available?url=";
 const SAVE = "https://web.archive.org/save/";
-const USER_AGENT = "opendata.rising.sh (archive:sources)";
+const USER_AGENT = "data.rising.sh (archive:sources)";
 const GAP_MS = 1500;
 const SAVE_GAP_MS = 21_000;
 const RETRY_GAP_MS = 12_000;

@@ -2,7 +2,7 @@
 
 A push to `main` runs `.github/workflows/deploy.yml`. It checks, tests and
 builds the site, then uploads `dist/` as the static assets of the Cloudflare
-Worker `opendata` (`wrangler.jsonc`).
+Worker `data` (`wrangler.jsonc`).
 
 ## Your own deployment
 

@@ -22,12 +22,12 @@ interface IndexEntry {
 }
 
 export function replaying(): boolean {
-  return process.env.OPENDATA_REPLAY === "1";
+  return process.env.DATA_REPLAY === "1";
 }
 
 function archiveDir(): string {
   const data = process.env.XDG_DATA_HOME ?? join(homedir(), ".local", "share");
-  return join(data, "opendata", "raw");
+  return join(data, "data.rising.sh", "raw");
 }
 
 function sanitized(url: string, secrets: string[]): string {
@@ -58,7 +58,7 @@ function replay(dir: string, url: string): Response {
   const hit = readIndex(dir).findLast(
     (entry) => entry.url === url && entry.status >= 200 && entry.status < 400,
   );
-  if (!hit) throw new Error(`OPENDATA_REPLAY=1: no stored response for ${url}`);
+  if (!hit) throw new Error(`DATA_REPLAY=1: no stored response for ${url}`);
   return new Response(readFileSync(join(dir, hit.sha256)), { status: hit.status });
 }
 
