@@ -21,11 +21,6 @@ const time = new Intl.DateTimeFormat(LOCALE, {
   minute: "2-digit",
   timeZone: LIMA,
 });
-const stamp = new Intl.DateTimeFormat(LOCALE, {
-  dateStyle: "long",
-  timeStyle: "short",
-  timeZone: LIMA,
-});
 
 const utc = (date: string) => new Date(`${date}T00:00:00Z`);
 
@@ -33,10 +28,7 @@ export const formatNumber = (value: number) => number.format(value);
 export const formatDate = (date: string) => longDate.format(utc(date));
 export const formatShortDate = (date: string) => shortDate.format(utc(date));
 export const formatWeekday = (date: string) => weekday.format(utc(date));
-export const formatDateRange = (start: string, end: string) =>
-  longDate.formatRange(utc(start), utc(end));
 export const formatTimeLima = (instant: string) => time.format(new Date(instant));
-export const formatStamp = (instant: string) => `${stamp.format(new Date(instant))} (hora de Lima)`;
 
 export function formatLocalTime(instant: string): string {
   return new Intl.DateTimeFormat(LOCALE, {
@@ -93,3 +85,25 @@ const limaDate = new Intl.DateTimeFormat(LOCALE, {
   timeZone: LIMA,
 });
 export const formatDateLima = (instant: string) => limaDate.format(new Date(instant));
+
+// Peruvian abbreviations, without the dots Intl adds, for mono labels.
+const MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "set", "oct", "nov", "dic"];
+const limaDay = new Intl.DateTimeFormat("en-CA", { timeZone: LIMA });
+
+function compactParts(date: string) {
+  const [year, month, day] = date.split("-").map(Number);
+  return { year: year!, dayMonth: `${day} ${MONTHS[month! - 1]}` };
+}
+
+/** "30 ene – 22 nov 2026", with the year on both ends when they differ. */
+export function formatCompactRange(start: string, end: string): string {
+  const from = compactParts(start);
+  const to = compactParts(end);
+  const head = from.year === to.year ? from.dayMonth : `${from.dayMonth} ${from.year}`;
+  return `${head} – ${to.dayMonth} ${to.year}`;
+}
+
+export function formatCompactDateLima(instant: string): string {
+  const { year, dayMonth } = compactParts(limaDay.format(new Date(instant)));
+  return `${dayMonth} ${year}`;
+}

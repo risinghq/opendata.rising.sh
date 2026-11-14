@@ -5,14 +5,8 @@ import { FilmsTable } from "../components/FilmsTable.tsx";
 import { GrossChart, grossPoints, GrossTable } from "../components/GrossChart.tsx";
 import { McuForecast } from "../components/McuForecast.tsx";
 import { latestYear, loadCpi } from "../data/cpi.ts";
-import {
-  formatDateLima,
-  formatDateRange,
-  formatMoneyCompact,
-  formatStamp,
-} from "../data/format.ts";
+import { formatDateLima, formatMoneyCompact } from "../data/format.ts";
 import { taquillaNotice } from "../data/notice.ts";
-import { eventStatus } from "../data/stats.ts";
 import { filmYear, keyFigures, releasedFilms } from "../data/stats-taquilla.ts";
 import type { TaquillaRecord } from "../data/types.ts";
 import type { McuSnapshot } from "../forecast/mcu.ts";
@@ -26,7 +20,6 @@ export function TaquillaPage(props: {
   const event = props.event;
   const cpi = loadCpi();
   const figures = keyFigures(event, cpi);
-  const status = eventStatus(event);
   const points = grossPoints(releasedFilms(event), cpi);
   const forecast = props.forecast ?? null;
   const url = `${SITE_URL}/analisis/${event.slug}`;
@@ -34,63 +27,6 @@ export function TaquillaPage(props: {
   return (
     <>
       <Lede event={event} answer={forecast ? mcuAnswer(forecast) : null} />
-      <dl class="facts">
-        <div>
-          <dt>Fechas</dt>
-          <dd>{formatDateRange(event.start, event.end)}</dd>
-        </div>
-        <div>
-          <dt>Estado</dt>
-          <dd class="status" data-state={status}>
-            {status}
-          </dd>
-        </div>
-        <div>
-          <dt>Actualizado</dt>
-          <dd>{formatStamp(event.updated)}</dd>
-        </div>
-        <div>
-          <dt>Fuente</dt>
-          <dd>
-            <a href="#metodo">Wikipedia en inglés, CC BY-SA 4.0</a>
-          </dd>
-        </div>
-      </dl>
-
-      <section class="section" aria-labelledby="cifras">
-        <h2 id="cifras" class="visually-hidden">
-          Cifras clave
-        </h2>
-        <dl class="figures">
-          <div>
-            <dt>Películas estrenadas</dt>
-            <dd class="value">
-              {figures.released} de {figures.total}
-            </dd>
-            <dd class="note">{figures.total - figures.released} por estrenar</dd>
-          </div>
-          <div>
-            <dt>Recaudación mundial</dt>
-            <dd class="value">{formatMoneyCompact(figures.worldwide)}</dd>
-            <dd class="note">
-              {formatMoneyCompact(figures.worldwideReal)} en dólares de {cpi.base}
-            </dd>
-          </div>
-          <div>
-            <dt>Mediana mundial</dt>
-            <dd class="value">{formatMoneyCompact(figures.medianWorldwide)}</dd>
-            <dd class="note">
-              {formatMoneyCompact(figures.medianReal)} en dólares de {cpi.base}
-            </dd>
-          </div>
-          <div>
-            <dt>Película más taquillera</dt>
-            <dd class="value top">{figures.top.title}</dd>
-            <dd class="note">{formatMoneyCompact(figures.top.worldwide.amount)} mundial</dd>
-          </div>
-        </dl>
-      </section>
-
       <Show when={forecast}>
         {(snap) => (
           <McuForecast event={event} cpi={cpi} forecast={snap()} earlier={props.earlier ?? []} />
@@ -100,8 +36,16 @@ export function TaquillaPage(props: {
       <section class="section" aria-labelledby="en-el-tiempo">
         <h2 id="en-el-tiempo">Taquilla en el tiempo</h2>
         <p>
-          Recaudación mundial de cada estreno en dólares de {cpi.base}, para comparar películas de
-          años distintos con el mismo dinero.
+          Las {figures.released} películas estrenadas de {figures.total} recaudaron{" "}
+          {formatMoneyCompact(figures.worldwide)} en el mundo,{" "}
+          {formatMoneyCompact(figures.worldwideReal)} en dólares de {cpi.base}. La mediana por
+          película es {formatMoneyCompact(figures.medianWorldwide)} (
+          {formatMoneyCompact(figures.medianReal)} en dólares de {cpi.base}) y la más taquillera es{" "}
+          <em>{figures.top.title}</em>, con {formatMoneyCompact(figures.top.worldwide.amount)}.
+        </p>
+        <p>
+          El gráfico muestra la recaudación mundial de cada estreno en dólares de {cpi.base}, para
+          comparar películas de años distintos con el mismo dinero.
         </p>
         <GrossChart points={points} dollars={cpi.base} />
         <div class="block">
