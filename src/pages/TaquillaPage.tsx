@@ -28,7 +28,7 @@ export function TaquillaPage(props: {
   const status = eventStatus(event);
   const points = grossPoints(releasedFilms(event), cpi);
   const forecast = props.forecast ?? null;
-  const url = `${SITE_URL}/eventos/${event.slug}`;
+  const url = `${SITE_URL}/analisis/${event.slug}`;
 
   return (
     <>
@@ -170,12 +170,12 @@ export function TaquillaPage(props: {
         <h2 id="descargas">Descargas</h2>
         <ul class="downloads">
           <li>
-            <a class="link-block" href={`/eventos/${event.slug}.json`}>
+            <a class="link-block" href={`/analisis/${event.slug}.json`}>
               Datos en JSON
             </a>
           </li>
           <li>
-            <a class="link-block" href={`/eventos/${event.slug}.csv`}>
+            <a class="link-block" href={`/analisis/${event.slug}.csv`}>
               Películas en CSV
             </a>
           </li>

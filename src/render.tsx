@@ -34,7 +34,7 @@ function mcuForecasts(): { forecast: McuSnapshot | null; earlier: McuSnapshot[] 
 }
 
 function eventMeta(event: EventRecord): Meta {
-  const path = `/eventos/${event.slug}`;
+  const path = `/analisis/${event.slug}`;
   const title = `${event.title} | ${SITE_NAME}`;
   if (event.kind === "temporada") {
     const figures = keyFigures(event);
@@ -70,9 +70,25 @@ function eventMeta(event: EventRecord): Meta {
 export function renderSite(events: EventRecord[], stylesheet: string): Record<string, string> {
   const files: Record<string, string> = {
     "index.html": html(
-      { path: "/", title: SITE_TITLE, description: SITE_DESCRIPTION, kind: "website", index: true },
+      {
+        path: "/",
+        title: `${SITE_TITLE} | ${SITE_NAME}`,
+        description: SITE_DESCRIPTION,
+        kind: "website",
+        index: true,
+      },
       stylesheet,
-      () => <Home events={events} />,
+      () => (
+        <Home
+          events={events}
+          forecasts={Object.fromEntries(
+            events
+              .filter((event) => event.kind === "temporada")
+              .map((event) => [event.slug, latestSnapshot(event.slug)]),
+          )}
+          mcu={mcuForecasts().forecast}
+        />
+      ),
     ),
     "404.html": html(
       {
@@ -88,7 +104,7 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
   };
   for (const event of events) {
     const scores = event.kind === "temporada" ? publishedScores(event) : undefined;
-    files[`eventos/${event.slug}.html`] = html(eventMeta(event), stylesheet, () =>
+    files[`analisis/${event.slug}.html`] = html(eventMeta(event), stylesheet, () =>
       event.kind === "temporada" ? (
         <TemporadaPage event={event} forecast={latestSnapshot(event.slug)} scores={scores} />
       ) : event.kind === "taquilla" ? (
@@ -97,8 +113,8 @@ export function renderSite(events: EventRecord[], stylesheet: string): Record<st
         <AsistenciaPage event={event} />
       ),
     );
-    files[`eventos/${event.slug}.json`] = toJson(event, scores);
-    files[`eventos/${event.slug}.csv`] = toCsv(event);
+    files[`analisis/${event.slug}.json`] = toJson(event, scores);
+    files[`analisis/${event.slug}.csv`] = toCsv(event);
   }
   return files;
 }

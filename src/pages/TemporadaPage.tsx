@@ -54,7 +54,7 @@ export function TemporadaPage(props: {
   const pending = scores.filter((s) => s.model === null);
   const share = (count: number) =>
     figures.held === 0 ? "0 %" : formatPercent(count / figures.held);
-  const url = `${SITE_URL}/eventos/${event.slug}`;
+  const url = `${SITE_URL}/analisis/${event.slug}`;
 
   return (
     <>
@@ -426,12 +426,12 @@ export function TemporadaPage(props: {
         <h2 id="descargas">Descargas</h2>
         <ul class="downloads">
           <li>
-            <a class="link-block" href={`/eventos/${event.slug}.json`}>
+            <a class="link-block" href={`/analisis/${event.slug}.json`}>
               Datos en JSON
             </a>
           </li>
           <li>
-            <a class="link-block" href={`/eventos/${event.slug}.csv`}>
+            <a class="link-block" href={`/analisis/${event.slug}.csv`}>
               Partidos en CSV
             </a>
           </li>

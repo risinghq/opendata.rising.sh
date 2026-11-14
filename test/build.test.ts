@@ -1,5 +1,5 @@
 import { beforeAll, expect, test } from "bun:test";
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -10,6 +10,7 @@ import { MOJO_LABEL, taquillaNotice, tournamentNotice } from "../src/data/notice
 import { heldActs } from "../src/data/stats-asistencia.ts";
 import { isReleased, realAmount } from "../src/data/stats-taquilla.ts";
 import type { McuSnapshot } from "../src/forecast/mcu.ts";
+import { SITE_NAME, SITE_TITLE, SITE_URL } from "../src/site.ts";
 
 const root = join(import.meta.dirname, "..");
 const out = mkdtempSync(join(tmpdir(), "data-build-"));
@@ -22,13 +23,12 @@ beforeAll(() => {
 
 test("every event page holds its metadata, tables and downloads without JavaScript", () => {
   for (const event of loadEvents()) {
-    const html = read(`eventos/${event.slug}.html`);
-    expect(html).toContain(`<title>${event.title}`);
+    const html = read(`analisis/${event.slug}.html`);
     expect(html).toContain('property="og:title"');
     expect(html).toContain('name="description"');
     expect(html).not.toContain("<script");
-    const json = JSON.parse(read(`eventos/${event.slug}.json`));
-    const csv = read(`eventos/${event.slug}.csv`).split("\r\n");
+    const json = JSON.parse(read(`analisis/${event.slug}.json`));
+    const csv = read(`analisis/${event.slug}.csv`).split("\r\n");
 
     if (event.kind === "asistencia") {
       expect(html).toContain('<table class="acts-table">');
@@ -87,9 +87,18 @@ test("every event page holds its metadata, tables and downloads without JavaScri
   }
 });
 
-test("the home page lists each event and the 404 page exists", () => {
-  for (const event of loadEvents()) expect(read("index.html")).toContain(`/eventos/${event.slug}`);
-  expect(read("404.html")).toContain("<title>");
+test("pages live under /analisis/ and titles end with the site name", () => {
+  const home = read("index.html");
+  expect(home).toContain(`<title>${SITE_TITLE} | ${SITE_NAME}</title>`);
+  for (const event of loadEvents()) {
+    expect(home).toContain(`href="/analisis/${event.slug}"`);
+    const html = read(`analisis/${event.slug}.html`);
+    expect(html).toContain(`<title>${event.title} | ${SITE_NAME}</title>`);
+    expect(html).toContain(`<link rel="canonical" href="${SITE_URL}/analisis/${event.slug}"`);
+    expect(html).toContain(`href="/analisis/${event.slug}.json"`);
+  }
+  expect(read("404.html")).toContain(`<title>Página no encontrada | ${SITE_NAME}</title>`);
+  expect(existsSync(join(out, "eventos"))).toBe(false);
 });
 
 test("the forecast shows the actual figures once the target film is released", () => {

@@ -37,14 +37,15 @@ export function Document(props: { meta: Meta; stylesheet: string; children: JSX.
       <body>
         <header class="site-header">
           <div class="page">
-            <a class="brand" href="/">
-              {SITE_NAME}
+            <a class="brand" href="/" aria-label={SITE_NAME}>
+              <span>data</span>
+              <span class="accent">science</span>
             </a>
           </div>
         </header>
         <main class="page">{props.children}</main>
         <footer class="site-footer">
-          <div class="page">Cada evento ofrece sus datos en JSON y CSV.</div>
+          <div class="page">Cada análisis ofrece sus datos en JSON y CSV.</div>
         </footer>
       </body>
     </html>

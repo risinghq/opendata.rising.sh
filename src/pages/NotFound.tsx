@@ -5,7 +5,7 @@ export function NotFound() {
       <p class="lead">La dirección no existe o cambió.</p>
       <p class="lead">
         <a class="link-block" href="/">
-          Volver a la lista de eventos
+          Volver al inicio
         </a>
       </p>
     </>

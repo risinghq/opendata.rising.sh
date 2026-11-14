@@ -24,7 +24,7 @@ import type { AsistenciaRecord, EventRecord } from "../data/types.ts";
 import { SITE_NAME, SITE_URL } from "../site.ts";
 
 function eventUrl(event: EventRecord): string {
-  return `${SITE_URL}/eventos/${event.slug}`;
+  return `${SITE_URL}/analisis/${event.slug}`;
 }
 
 export function AsistenciaPage(props: { event: AsistenciaRecord }) {
@@ -160,12 +160,12 @@ export function AsistenciaPage(props: { event: AsistenciaRecord }) {
         <h2 id="descargas">Descargas</h2>
         <ul class="downloads">
           <li>
-            <a class="link-block" href={`/eventos/${event.slug}.json`}>
+            <a class="link-block" href={`/analisis/${event.slug}.json`}>
               Datos en JSON
             </a>
           </li>
           <li>
-            <a class="link-block" href={`/eventos/${event.slug}.csv`}>
+            <a class="link-block" href={`/analisis/${event.slug}.csv`}>
               Actos en CSV
             </a>
           </li>
