@@ -91,15 +91,11 @@ export function TaquillaPage(props: {
         </dl>
       </section>
 
-      <section class="section" aria-labelledby="peliculas">
-        <h2 id="peliculas">Películas</h2>
-        <p>
-          Todas las películas en orden de estreno. Cada cifra nominal va seguida de su valor en
-          dólares de {cpi.base}, en letra pequeña. El fin de semana de estreno y la recaudación de
-          EE. UU. y Canadá son taquilla doméstica; la mundial es la suma de todos los mercados.
-        </p>
-        <FilmsTable films={event.films} cpi={cpi} />
-      </section>
+      <Show when={forecast}>
+        {(snap) => (
+          <McuForecast event={event} cpi={cpi} forecast={snap()} earlier={props.earlier ?? []} />
+        )}
+      </Show>
 
       <section class="section" aria-labelledby="en-el-tiempo">
         <h2 id="en-el-tiempo">Taquilla en el tiempo</h2>
@@ -114,11 +110,15 @@ export function TaquillaPage(props: {
         </div>
       </section>
 
-      <Show when={forecast}>
-        {(snap) => (
-          <McuForecast event={event} cpi={cpi} forecast={snap()} earlier={props.earlier ?? []} />
-        )}
-      </Show>
+      <section class="section" aria-labelledby="peliculas">
+        <h2 id="peliculas">Películas</h2>
+        <p>
+          Todas las películas en orden de estreno. Cada cifra nominal va seguida de su valor en
+          dólares de {cpi.base}, en letra pequeña. El fin de semana de estreno y la recaudación de
+          EE. UU. y Canadá son taquilla doméstica; la mundial es la suma de todos los mercados.
+        </p>
+        <FilmsTable films={event.films} cpi={cpi} />
+      </section>
 
       <section class="section" aria-labelledby="metodo">
         <h2 id="metodo">Método</h2>

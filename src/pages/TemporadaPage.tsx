@@ -58,10 +58,10 @@ export function TemporadaPage(props: {
   const url = `${SITE_URL}/analisis/${event.slug}`;
   // Mirrors the sections below and the conditions that show them.
   const sections = [
-    { id: "posiciones", title: "Tabla de posiciones", shown: true },
     { id: "pronostico", title: "Pronóstico", shown: forecast !== null },
     { id: "acierto", title: "Qué tan bien acierta", shown: backtest !== undefined },
     { id: "publicados", title: "Pronósticos publicados", shown: scores.length > 0 },
+    { id: "posiciones", title: "Tabla de posiciones", shown: true },
     { id: "goles", title: "Cuándo caen los goles", shown: timing !== null },
     { id: "estadisticas", title: "Estadísticas por equipo", shown: averages.length > 0 },
     { id: "altitud", title: "Ventaja de local por altitud", shown: points.length > 1 },
@@ -138,36 +138,6 @@ export function TemporadaPage(props: {
             </dd>
           </div>
         </dl>
-      </section>
-
-      <section class="section" aria-labelledby="posiciones">
-        <h2 id="posiciones">Tabla de posiciones</h2>
-        <p>
-          La tabla sale de los resultados de este archivo: 3 puntos por victoria, 1 por empate.
-          Ordena por puntos, diferencia de goles y goles a favor. La tabla oficial puede diferir por
-          sanciones administrativas, como puntos descontados o partidos dados por ganados en un
-          fallo, que los marcadores no reflejan.
-        </p>
-        <For each={event.tournaments}>
-          {(tournament) => (
-            <div class="block">
-              <h3>{tournament.name}</h3>
-              <StandingsTable
-                caption={`Posiciones del ${tournament.name}`}
-                rows={standings(event, tournament.id)}
-                teams={teams}
-              />
-            </div>
-          )}
-        </For>
-        <div class="block">
-          <h3>Acumulada de los dos torneos</h3>
-          <StandingsTable
-            caption="Posiciones acumuladas de los dos torneos"
-            rows={standings(event)}
-            teams={teams}
-          />
-        </div>
       </section>
 
       <Show when={forecast}>
@@ -331,6 +301,36 @@ export function TemporadaPage(props: {
           </For>
         </section>
       </Show>
+
+      <section class="section" aria-labelledby="posiciones">
+        <h2 id="posiciones">Tabla de posiciones</h2>
+        <p>
+          La tabla sale de los resultados de este archivo: 3 puntos por victoria, 1 por empate.
+          Ordena por puntos, diferencia de goles y goles a favor. La tabla oficial puede diferir por
+          sanciones administrativas, como puntos descontados o partidos dados por ganados en un
+          fallo, que los marcadores no reflejan.
+        </p>
+        <For each={event.tournaments}>
+          {(tournament) => (
+            <div class="block">
+              <h3>{tournament.name}</h3>
+              <StandingsTable
+                caption={`Posiciones del ${tournament.name}`}
+                rows={standings(event, tournament.id)}
+                teams={teams}
+              />
+            </div>
+          )}
+        </For>
+        <div class="block">
+          <h3>Acumulada de los dos torneos</h3>
+          <StandingsTable
+            caption="Posiciones acumuladas de los dos torneos"
+            rows={standings(event)}
+            teams={teams}
+          />
+        </div>
+      </section>
 
       <Show when={timing}>
         {(periods) => (

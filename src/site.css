@@ -1,20 +1,20 @@
 @import "./tokens.css";
 
 @font-face {
-  font-family: "Newsreader Variable";
+  font-family: "Source Serif 4 Variable";
   font-style: normal;
   font-display: swap;
-  font-weight: 200 800;
-  src: url("../node_modules/@fontsource-variable/newsreader/files/newsreader-latin-standard-normal.woff2")
+  font-weight: 200 900;
+  src: url("../node_modules/@fontsource-variable/source-serif-4/files/source-serif-4-latin-standard-normal.woff2")
     format("woff2-variations");
 }
 
 @font-face {
-  font-family: "Newsreader Variable";
+  font-family: "Source Serif 4 Variable";
   font-style: italic;
   font-display: swap;
-  font-weight: 200 800;
-  src: url("../node_modules/@fontsource-variable/newsreader/files/newsreader-latin-standard-italic.woff2")
+  font-weight: 200 900;
+  src: url("../node_modules/@fontsource-variable/source-serif-4/files/source-serif-4-latin-standard-italic.woff2")
     format("woff2-variations");
 }
 
@@ -271,9 +271,8 @@ main {
 }
 
 .figures .value {
-  font-family: var(--font-mono);
   /* Shrinks with its column so a figure like "USD 35,207.6 M" stays on one line. */
-  font-size: clamp(var(--mono-lg), 9cqi, var(--mono-xl));
+  font-size: clamp(var(--text-lg), 9cqi, var(--text-xl));
   line-height: 1.1;
   color: var(--ink);
   overflow-wrap: break-word;
@@ -990,8 +989,7 @@ thead th.num {
 }
 
 .answer-figure {
-  font-family: var(--font-mono);
-  font-size: var(--mono-xl);
+  font-size: var(--text-xl);
   line-height: 1.1;
 }
 
@@ -1123,13 +1121,6 @@ thead th.num {
 
 .label + .question {
   margin-top: var(--space-2);
-}
-
-/* Under an answer the summary is detail, so it steps down from the lead size. */
-.score + .lead {
-  margin-top: var(--space-6);
-  font-size: var(--text-base);
-  line-height: var(--leading-body);
 }
 
 .contents {
