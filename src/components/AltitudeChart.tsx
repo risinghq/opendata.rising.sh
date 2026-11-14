@@ -3,6 +3,7 @@ import { For } from "solid-js";
 import { formatDecimal, formatNumber } from "../data/format.ts";
 import { trend, type AltitudePoint } from "../data/stats-temporada.ts";
 import { ArchiveCopy } from "./ArchiveCopy.tsx";
+import { Figure } from "./Figure.tsx";
 
 const WIDTH = 100;
 const HEIGHT = 56;
@@ -24,13 +25,34 @@ export function AltitudeChart(props: { points: AltitudePoint[] }) {
     line ? line.intercept + (line.slopePerKm / 1000) * altitude : 0;
 
   return (
-    <figure class="chart">
-      <figcaption>
-        Un punto por estadio: la altitud en el eje horizontal y los puntos que sumó el local por
-        partido en el vertical. El tamaño del punto indica cuántos partidos se jugaron allí. La
-        línea es el ajuste por mínimos cuadrados, ponderado por partidos. Las cifras están en la{" "}
-        <a href="#altitud-tabla">tabla por estadio</a>.
-      </figcaption>
+    <Figure
+      title="Ventaja de local por altitud"
+      finding={
+        line
+          ? `Por cada 1000 m de altitud, el local suma ${formatDecimal(Math.abs(line.slopePerKm))} puntos por partido ${line.slopePerKm >= 0 ? "más" : "menos"}.`
+          : undefined
+      }
+      note={
+        <>
+          Un punto por estadio: la altitud en metros en el eje horizontal y los puntos que sumó el
+          local por partido en el vertical. El tamaño del punto indica cuántos partidos se jugaron
+          allí. La línea es el ajuste por mínimos cuadrados, ponderado por partidos. Las cifras
+          están en la <a href="#altitud-tabla">tabla por estadio</a>.
+        </>
+      }
+      source={
+        <>
+          resultados de Wikipedia en español; altitudes citadas en la{" "}
+          <a href="#altitud-tabla">tabla por estadio</a>
+        </>
+      }
+      legend={
+        <>
+          <span>Estadio, con al menos 5 partidos</span>
+          <span class="key-range">Ajuste por mínimos cuadrados</span>
+        </>
+      }
+    >
       <div class="scatter" aria-hidden="true">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
           <For each={Y_TICKS}>
@@ -68,18 +90,7 @@ export function AltitudeChart(props: { points: AltitudePoint[] }) {
           )}
         </For>
       </div>
-      <div class="legend" aria-hidden="true">
-        <span>Estadio, con al menos 5 partidos</span>
-        <span class="key-range">
-          {line
-            ? `Ajuste: ${formatDecimal(line.slopePerKm)} puntos por partido por cada 1000 m`
-            : "Sin ajuste"}
-        </span>
-      </div>
-      <p class="axis-note muted">
-        Eje horizontal: altitud en metros. Eje vertical: puntos del local por partido.
-      </p>
-    </figure>
+    </Figure>
   );
 }
 

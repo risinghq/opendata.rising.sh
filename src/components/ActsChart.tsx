@@ -1,9 +1,10 @@
 import { For } from "solid-js";
 
-import { formatCompact, formatNumber, formatShortDate } from "../data/format.ts";
+import { formatCompact, formatNumber, formatPercent, formatShortDate } from "../data/format.ts";
 import { actDate } from "../data/stats-asistencia.ts";
 import type { HeldAct } from "../data/types.ts";
 import { niceScale } from "./chart-scale.ts";
+import { Figure } from "./Figure.tsx";
 
 const ROW_HEIGHT = 32;
 const BAR_HEIGHT = 12;
@@ -14,13 +15,27 @@ export function ActsChart(props: { acts: HeldAct[] }) {
   const pct = (value: number) => (value / scale.max) * 100;
   const barTop = (ROW_HEIGHT - BAR_HEIGHT) / 2;
   const mid = ROW_HEIGHT / 2;
+  const largest = props.acts.reduce((best, act) => (act.central > best.central ? act : best));
+  const total = props.acts.reduce((sum, act) => sum + act.central, 0);
 
   return (
-    <figure class="chart">
-      <figcaption>
-        Gráfico de barras con la cifra central de cada acto realizado y una línea desde la cifra
-        baja hasta la alta. Las mismas cifras están en la <a href="#actos">tabla de actos</a>.
-      </figcaption>
+    <Figure
+      title="Asistencia por acto"
+      finding={`Mayor asistencia: ${largest.name} en ${largest.city}, con ${formatNumber(largest.central)} personas, ${formatPercent(largest.central / total)} de lo reunido en los actos realizados.`}
+      note={
+        <>
+          Barras con la cifra central de cada acto realizado y una línea desde la cifra baja hasta
+          la alta. Las mismas cifras están en la <a href="#actos">tabla de actos</a>.
+        </>
+      }
+      source={<a href="#actos">los informes citados en cada fila de la tabla de actos</a>}
+      legend={
+        <>
+          <span>Cifra central</span>
+          <span class="key-range">Desde la cifra baja hasta la alta</span>
+        </>
+      }
+    >
       <div class="bars" aria-hidden="true">
         <For each={props.acts}>
           {(act) => (
@@ -80,10 +95,6 @@ export function ActsChart(props: { acts: HeldAct[] }) {
           </div>
         </div>
       </div>
-      <div class="legend" aria-hidden="true">
-        <span>Cifra central</span>
-        <span class="key-range">Desde la cifra baja hasta la alta</span>
-      </div>
-    </figure>
+    </Figure>
   );
 }

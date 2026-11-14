@@ -1,17 +1,17 @@
 import { For } from "solid-js";
 
 import { lineOf } from "../forecast/mcu.ts";
-import { formatMoney, formatMoneyCompact, formatShortDate } from "../data/format.ts";
+import { formatMoney, formatMoneyCompact, formatNumber, formatShortDate } from "../data/format.ts";
 import type { CpiData } from "../data/cpi.ts";
 import { realWorldwide } from "../data/stats-taquilla.ts";
+import { WIKIPEDIA_LABEL } from "../data/notice.ts";
 import type { ReleasedFilm } from "../data/types.ts";
+import { Figure } from "./Figure.tsx";
 
-const W = 640;
-const H = 240;
-const PAD_L = 44;
-const PAD_B = 28;
-const PAD_T = 8;
-const PAD_R = 4;
+const W = 100;
+const H = 100;
+/** Year labels are mono text of fixed size, so at most this many fit under the plot on a phone. */
+const MAX_YEAR_LABELS = 8;
 
 export interface GrossPoint {
   title: string;
@@ -36,62 +36,87 @@ function niceStep(max: number): number {
   return 2e9;
 }
 
+/** The first release of each year, skipping years that would crowd the previous label. */
+function yearLabels(points: GrossPoint[]): { year: number; i: number }[] {
+  const gap = points.length / MAX_YEAR_LABELS;
+  const labels: { year: number; i: number }[] = [];
+  points.forEach((point, i) => {
+    const year = Number(point.release.slice(0, 4));
+    const last = labels.at(-1);
+    if (!last || (year !== last.year && i - last.i >= gap)) labels.push({ year, i });
+  });
+  return labels;
+}
+
 export function GrossChart(props: { points: GrossPoint[]; dollars: number }) {
   const max = Math.max(...props.points.map((p) => p.worldwide));
   const step = niceStep(max);
   const top = Math.ceil(max / step) * step;
   const ticks = Array.from({ length: top / step + 1 }, (_, i) => i * step);
-  const plotW = W - PAD_L - PAD_R;
-  const plotH = H - PAD_T - PAD_B;
-  const barW = Math.max(4, (plotW / props.points.length) * 0.7);
-  const x = (i: number) => PAD_L + ((i + 0.5) * plotW) / props.points.length - barW / 2;
-  const y = (v: number) => PAD_T + plotH * (1 - v / top);
-  const years = props.points.map((p, i) => ({ year: Number(p.release.slice(0, 4)), i }));
+  const count = props.points.length;
+  const barW = (W / count) * 0.7;
+  const x = (i: number) => ((i + 0.5) * W) / count - barW / 2;
+  const y = (v: number) => H * (1 - v / top);
+  const years = yearLabels(props.points);
+  const top1 = props.points.reduce((best, p) => (p.worldwide > best.worldwide ? p : best));
 
   return (
-    <figure class="chart">
-      <figcaption>
-        Recaudación mundial de cada estreno en dólares de {props.dollars}. Las películas de{" "}
-        <em>Avengers</em> van marcadas con el color de acento. Las cifras están en la{" "}
-        <a href="#peliculas">tabla de películas</a>.
-      </figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-hidden="true" class="gross-chart">
+    <Figure
+      title="Recaudación mundial por estreno"
+      finding={`${top1.title} es la que más recaudó: ${formatMoneyCompact(top1.worldwide)} en dólares de ${props.dollars}.`}
+      note={
+        <>
+          Recaudación mundial de cada estreno en dólares de {props.dollars}. Las películas de{" "}
+          <em>Avengers</em> van en color y el resto en gris. Las cifras están en la{" "}
+          <a href="#peliculas">tabla de películas</a>.
+        </>
+      }
+      source={
+        <>
+          Box Office Mojo y {WIKIPEDIA_LABEL}, citadas por película en la{" "}
+          <a href="#peliculas">tabla</a>; IPC de la BLS (<a href="#metodo">método</a>)
+        </>
+      }
+      legend={
+        <>
+          <span>Película de Avengers</span>
+          <span class="key-ink">Otras películas del UCM</span>
+        </>
+      }
+    >
+      <div class="gross-chart" aria-hidden="true">
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none">
+          <For each={ticks}>
+            {(t) => <line class="grid-line" x1="0" x2={W} y1={y(t)} y2={y(t)} />}
+          </For>
+          <For each={props.points}>
+            {(point, i) => (
+              <rect
+                class={point.avengers ? "bar-fill" : "bar-ink"}
+                x={x(i())}
+                y={y(point.worldwide)}
+                width={barW}
+                height={H - y(point.worldwide)}
+              />
+            )}
+          </For>
+        </svg>
         <For each={ticks}>
           {(t) => (
-            <>
-              <line class="grid-line" x1={PAD_L} x2={W - PAD_R} y1={y(t)} y2={y(t)} />
-              <text class="chart-tick" x={PAD_L - 6} y={y(t) + 4} text-anchor="end">
-                {t === 0 ? "0" : formatMoneyCompact(t)}
-              </text>
-            </>
+            <span class="tick-y" style={`bottom: ${(t / top) * 100}%`}>
+              {t === 0 ? "0" : `${formatNumber(t / 1e6)} M`}
+            </span>
           )}
         </For>
-        <For each={props.points}>
-          {(point, i) => (
-            <rect
-              class={point.avengers ? "bar-fill avengers" : "bar-fill"}
-              x={x(i())}
-              y={y(point.worldwide)}
-              width={barW}
-              height={Math.max(1, PAD_T + plotH - y(point.worldwide))}
-            >
-              <title>{`${point.title}: ${formatMoney(point.worldwide)}`}</title>
-            </rect>
-          )}
-        </For>
-        <For each={years.filter((p, i) => i === 0 || p.year !== years[i - 1]!.year)}>
+        <For each={years}>
           {(p) => (
-            <text class="chart-tick" x={x(p.i) + barW / 2} y={H - 8} text-anchor="middle">
+            <span class="tick-x" style={`left: ${((p.i + 0.5) / count) * 100}%`}>
               {p.year}
-            </text>
+            </span>
           )}
         </For>
-      </svg>
-      <div class="legend" aria-hidden="true">
-        <span class="key-avengers">Película de Avengers</span>
-        <span>Otras películas del UCM</span>
       </div>
-    </figure>
+    </Figure>
   );
 }
 

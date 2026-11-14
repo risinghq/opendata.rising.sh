@@ -2,18 +2,35 @@ import { For } from "solid-js";
 
 import { formatCompact, formatNumber, formatShortDate } from "../data/format.ts";
 import type { Day } from "../data/stats-asistencia.ts";
+import { Figure } from "./Figure.tsx";
 
 export function DailyChart(props: { days: Day[] }) {
   const max = Math.max(...props.days.map((d) => d.total.central));
   const pct = (value: number) => (value / max) * 100;
+  const last = props.days[props.days.length - 1];
+  const busiest = props.days.reduce((best, day) =>
+    day.day.central > best.day.central ? day : best,
+  );
 
   return (
-    <figure class="chart">
-      <figcaption>
-        Columnas con la asistencia acumulada al final de cada día. La parte clara es lo acumulado
-        hasta el día anterior y la oscura es lo de ese día. Las cifras están en la{" "}
-        <a href="#por-dia">tabla por día</a>.
-      </figcaption>
+    <Figure
+      title="Asistencia acumulada por día"
+      finding={`Al ${formatShortDate(last.date)} se acumulan ${formatNumber(last.total.central)} asistentes. El día con más gente fue el ${formatShortDate(busiest.date)}, con ${formatNumber(busiest.day.central)}.`}
+      note={
+        <>
+          Columnas con la asistencia acumulada al final de cada día. La parte en gris es lo
+          acumulado hasta el día anterior y la parte en color es lo de ese día. Las cifras están en
+          la <a href="#por-dia">tabla por día</a>.
+        </>
+      }
+      source={<a href="#actos">los informes citados en cada fila de la tabla de actos</a>}
+      legend={
+        <>
+          <span class="key-ink">Acumulado hasta el día anterior</span>
+          <span>Asistencia de ese día</span>
+        </>
+      }
+    >
       <div class="days" aria-hidden="true" style={`--days: ${props.days.length}`}>
         <For each={props.days}>
           {(day) => (
@@ -24,7 +41,7 @@ export function DailyChart(props: { days: Day[] }) {
                 </span>
                 <svg viewBox="0 0 10 100" preserveAspectRatio="none">
                   <rect
-                    class="bar-fill-past"
+                    class="bar-ink"
                     x="0"
                     y={100 - pct(day.total.central - day.day.central)}
                     width="10"
@@ -44,11 +61,7 @@ export function DailyChart(props: { days: Day[] }) {
           )}
         </For>
       </div>
-      <div class="legend" aria-hidden="true">
-        <span class="key-past">Acumulado hasta el día anterior</span>
-        <span>Asistencia de ese día</span>
-      </div>
-    </figure>
+    </Figure>
   );
 }
 

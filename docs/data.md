@@ -1,8 +1,8 @@
 # Event data
 
 Each event is one file, `data/events/<slug>.json`. The slug is lowercase words
-joined by hyphens. It becomes the address `/eventos/<slug>` and the names of
-the downloads `/eventos/<slug>.json` and `/eventos/<slug>.csv`.
+joined by hyphens. It becomes the address `/analisis/<slug>` and the names of
+the downloads `/analisis/<slug>.json` and `/analisis/<slug>.csv`.
 
 `bun run test` validates every file. The build fails on an invalid file.
 
@@ -144,8 +144,8 @@ An event that follows another method says so in `method`.
 
 ### Downloads
 
-- `/eventos/<slug>.json` holds the event with its `slug`.
-- `/eventos/<slug>.csv` holds one row per act, with the columns `inicio`,
+- `/analisis/<slug>.json` holds the event with its `slug`.
+- `/analisis/<slug>.csv` holds one row per act, with the columns `inicio`,
   `pais`, `ciudad`, `lugar`, `acto`, `estado`, `baja`, `central`, `alta`,
   `atribucion`, `fuentes`, `esperado`, `esperado_baja`, `esperado_alta`,
   `esperado_atribucion` and `esperado_fuente`. Sources are joined as
@@ -303,11 +303,11 @@ including `stadiums`. It stops and lists any stadium missing from `stadiums`.
 
 ### Downloads
 
-- `/eventos/<slug>.json` holds the event with its `slug`, an `aviso` with the
+- `/analisis/<slug>.json` holds the event with its `slug`, an `aviso` with the
   notice of each tournament and `forecastScores`, one entry per published
   snapshot with `date`, `matches`, `model` and `baseRates` as the
   "Pronósticos publicados" section shows them.
-- `/eventos/<slug>.csv` holds one row per match, with the columns `torneo`,
+- `/analisis/<slug>.csv` holds one row per match, with the columns `torneo`,
   `fecha`, `inicio`, `local`, `visitante`, `estadio`, `ciudad`, `altitud_m`,
   `arbitro`, `estado`, `goles_local`, `goles_visitante`, the statistics
   `posesion_*`, `tiros_arco_*`, `tiros_fuera_*`, `ataques_*` and
@@ -488,9 +488,9 @@ importer cannot turn into a note stops the run.
 
 ### Downloads
 
-- `/eventos/<slug>.json` holds the event with its `slug` and an `aviso` with
+- `/analisis/<slug>.json` holds the event with its `slug` and an `aviso` with
   the notice.
-- `/eventos/<slug>.csv` holds one row per film, with the columns `pelicula`,
+- `/analisis/<slug>.csv` holds one row per film, with the columns `pelicula`,
   `titulo_original`, `fase`, `estreno`, `estado`, `presupuesto_min_usd`,
   `presupuesto_max_usd`, `estreno_fin_de_semana_usd`, `eeuu_y_canada_usd`,
   `mundial_usd`, `fuente_taquilla` ("Box Office Mojo, vía Wikipedia" or

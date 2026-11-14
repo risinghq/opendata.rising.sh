@@ -128,7 +128,7 @@ the dark theme. `src/site.css` holds the rules and loads the fonts from the
 ## Build-time HTML and downloads
 
 `src/render.tsx` turns events into a map from file path to content: `index.html`,
-`404.html`, and `eventos/<slug>.html`, `.json` and `.csv` for each event. It
+`404.html`, and `analisis/<slug>.html`, `.json` and `.csv` for each event. It
 picks the page by `kind`. `src/downloads.ts` picks the JSON and the CSV writer
 by `kind`: `src/downloads-asistencia.ts`, `src/downloads-temporada.ts` or
 `src/downloads-taquilla.ts`.
@@ -138,4 +138,4 @@ through Vite's server so the JSX compiles for the server, and writes the map.
 `scripts/dev.ts` serves the same map on request.
 
 `wrangler.jsonc` sends unknown paths to `404.html` with status 404, and serves
-`eventos/<slug>.html` at `/eventos/<slug>`.
+`analisis/<slug>.html` at `/analisis/<slug>`.
