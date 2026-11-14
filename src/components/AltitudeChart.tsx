@@ -46,12 +46,6 @@ export function AltitudeChart(props: { points: AltitudePoint[] }) {
           <a href="#altitud-tabla">tabla por estadio</a>
         </>
       }
-      legend={
-        <>
-          <span>Estadio, con al menos 5 partidos</span>
-          <span class="key-range">Ajuste por mínimos cuadrados</span>
-        </>
-      }
     >
       <div class="scatter" aria-hidden="true">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
@@ -89,6 +83,11 @@ export function AltitudeChart(props: { points: AltitudePoint[] }) {
             </span>
           )}
         </For>
+        {line ? (
+          <span class="chart-note line-end" style={`bottom: ${(at(X_MAX) / Y_MAX) * 100}%`}>
+            Ajuste
+          </span>
+        ) : null}
       </div>
     </Figure>
   );

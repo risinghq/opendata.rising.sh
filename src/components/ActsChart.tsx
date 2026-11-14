@@ -43,6 +43,7 @@ export function ActsChart(props: { acts: HeldAct[] }) {
               <div class="bar-label">
                 <span class="bar-date">{formatShortDate(actDate(act))}</span>
                 {act.city}, {act.name}
+                {act === largest ? <span class="chart-note">Mayor asistencia</span> : null}
               </div>
               <svg class="bar-plot" viewBox={`0 0 100 ${ROW_HEIGHT}`} preserveAspectRatio="none">
                 <For each={scale.ticks.slice(1)}>

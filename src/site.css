@@ -1070,6 +1070,89 @@ thead th.num {
   color: var(--accent);
 }
 
+.mini-note {
+  grid-column: 2 / -1;
+  color: var(--ink-60);
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+}
+
+.mini-directions .mini-plot {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  color: var(--ink-60);
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+}
+
+/* A label set on a chart beside the mark it names, in place of a legend entry. */
+.chart-note {
+  display: block;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  white-space: nowrap;
+}
+
+.scatter .chart-note,
+.gross-chart .chart-note {
+  position: absolute;
+}
+
+.chart-note.line-end {
+  right: 0;
+  margin-bottom: var(--space-1);
+  color: var(--ink);
+}
+
+.chart-note.point-left {
+  margin-left: calc(var(--space-2) * -1);
+  transform: translate(-100%, 50%);
+}
+
+.chart-note.point-right {
+  margin-left: var(--space-2);
+  transform: translateY(50%);
+}
+
+.day-date + .chart-note {
+  text-align: center;
+}
+
+.label + .question {
+  margin-top: var(--space-2);
+}
+
+/* Under an answer the summary is detail, so it steps down from the lead size. */
+.score + .lead {
+  margin-top: var(--space-6);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+.contents {
+  margin-top: var(--space-6);
+}
+
+.contents ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.contents a {
+  display: inline-block;
+  padding-block: var(--space-1);
+}
+
 @media print {
   .site-header,
   .site-footer {

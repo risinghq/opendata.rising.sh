@@ -1,6 +1,7 @@
 import { For, Show } from "solid-js";
 
 import { AltitudeChart, AltitudeTable } from "../components/AltitudeChart.tsx";
+import { Lede, ligaAnswer } from "../components/Answer.tsx";
 import { ForecastTable, MatchForecastTable } from "../components/ForecastTable.tsx";
 import { GoalTimingChart, GoalTimingTable } from "../components/GoalTimingChart.tsx";
 import { RoundTable } from "../components/RoundsList.tsx";
@@ -55,11 +56,24 @@ export function TemporadaPage(props: {
   const share = (count: number) =>
     figures.held === 0 ? "0 %" : formatPercent(count / figures.held);
   const url = `${SITE_URL}/analisis/${event.slug}`;
+  // Mirrors the sections below and the conditions that show them.
+  const sections = [
+    { id: "posiciones", title: "Tabla de posiciones", shown: true },
+    { id: "pronostico", title: "Pronóstico", shown: forecast !== null },
+    { id: "acierto", title: "Qué tan bien acierta", shown: backtest !== undefined },
+    { id: "publicados", title: "Pronósticos publicados", shown: scores.length > 0 },
+    { id: "goles", title: "Cuándo caen los goles", shown: timing !== null },
+    { id: "estadisticas", title: "Estadísticas por equipo", shown: averages.length > 0 },
+    { id: "altitud", title: "Ventaja de local por altitud", shown: points.length > 1 },
+    { id: "resultados", title: "Resultados por fecha", shown: true },
+    { id: "metodo", title: "Método", shown: true },
+    { id: "descargas", title: "Descargas", shown: true },
+    { id: "citar", title: "Cómo citar", shown: true },
+  ];
 
   return (
     <>
-      <h1>{event.title}</h1>
-      <p class="lead">{event.summary}</p>
+      <Lede event={event} answer={forecast ? ligaAnswer(event, forecast) : null} />
       <dl class="facts">
         <div>
           <dt>Fechas</dt>
@@ -82,6 +96,18 @@ export function TemporadaPage(props: {
           </dd>
         </div>
       </dl>
+
+      <nav class="contents" aria-label="Secciones">
+        <ol>
+          <For each={sections.filter((section) => section.shown)}>
+            {(section) => (
+              <li>
+                <a href={`#${section.id}`}>{section.title}</a>
+              </li>
+            )}
+          </For>
+        </ol>
+      </nav>
 
       <section class="section" aria-labelledby="cifras">
         <h2 id="cifras" class="visually-hidden">

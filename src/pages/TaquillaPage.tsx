@@ -1,5 +1,6 @@
 import { Show } from "solid-js";
 
+import { Lede, mcuAnswer } from "../components/Answer.tsx";
 import { FilmsTable } from "../components/FilmsTable.tsx";
 import { GrossChart, grossPoints, GrossTable } from "../components/GrossChart.tsx";
 import { McuForecast } from "../components/McuForecast.tsx";
@@ -32,8 +33,7 @@ export function TaquillaPage(props: {
 
   return (
     <>
-      <h1>{event.title}</h1>
-      <p class="lead">{event.summary}</p>
+      <Lede event={event} answer={forecast ? mcuAnswer(forecast) : null} />
       <dl class="facts">
         <div>
           <dt>Fechas</dt>

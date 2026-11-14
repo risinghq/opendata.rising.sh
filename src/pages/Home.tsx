@@ -1,27 +1,36 @@
 import { For, Show } from "solid-js";
 import type { JSX } from "@solidjs/web";
 
+import {
+  AnswerText,
+  comparedActs,
+  ligaAnswer,
+  mcuAnswer,
+  papalAnswer,
+  type Answer,
+} from "../components/Answer.tsx";
 import { Figure } from "../components/Figure.tsx";
 import {
   formatDateLima,
   formatDifference,
   formatMoneyCompact,
-  formatNumber,
   formatPercent,
 } from "../data/format.ts";
-import { expectedDifference, heldActs, sumRange } from "../data/stats-asistencia.ts";
 import type {
   AsistenciaRecord,
   EventRecord,
   TaquillaRecord,
   TemporadaRecord,
 } from "../data/types.ts";
-import { lineOf, scoresOf, type FigureKey, type McuSnapshot } from "../forecast/mcu.ts";
+import { lineOf, type McuSnapshot } from "../forecast/mcu.ts";
 import type { ForecastSnapshot } from "../forecast/snapshot.ts";
 
 const KIND_ORDER = { temporada: 0, taquilla: 1, asistencia: 2 } as const;
 
-/** One row of a small figure. `from` and `to` are fractions of the plot width. */
+/**
+ * One row of a small figure. `from` and `to` are fractions of the plot width.
+ * `note` sits under the plot, beside the mark it explains.
+ */
 interface Row {
   label: string;
   value: string;
@@ -29,11 +38,23 @@ interface Row {
   to: number;
   key?: boolean;
   range?: [number, number];
+  note?: string;
 }
 
-function MiniBars(props: { rows: Row[]; axis?: number }) {
+/** `directions` labels the two sides of the axis, above the rows. */
+function MiniBars(props: { rows: Row[]; axis?: number; directions?: [string, string] }) {
   return (
     <ol class="mini-bars">
+      <Show when={props.directions}>
+        {(directions) => (
+          <li class="mini-directions" aria-hidden="true">
+            <span class="mini-plot">
+              <span>{directions()[0]}</span>
+              <span>{directions()[1]}</span>
+            </span>
+          </li>
+        )}
+      </Show>
       <For each={props.rows}>
         {(row) => (
           <li class={row.key ? "key" : undefined}>
@@ -56,6 +77,9 @@ function MiniBars(props: { rows: Row[]; axis?: number }) {
               </Show>
             </span>
             <span class="mini-value">{row.value}</span>
+            <Show when={row.note}>
+              <span class="mini-note">{row.note}</span>
+            </Show>
           </li>
         )}
       </For>
@@ -63,21 +87,14 @@ function MiniBars(props: { rows: Row[]; axis?: number }) {
   );
 }
 
-function Entry(props: {
-  event: EventRecord;
-  question: string;
-  answer: JSX.Element;
-  figure: JSX.Element;
-  score: JSX.Element;
-}) {
+function Entry(props: { event: EventRecord; answer: Answer; figure: JSX.Element }) {
   return (
     <article class="analysis">
       <div class="analysis-text">
         <h2>
-          <a href={`/analisis/${props.event.slug}`}>{props.question}</a>
+          <a href={`/analisis/${props.event.slug}`}>{props.answer.question}</a>
         </h2>
-        <div class="answer">{props.answer}</div>
-        <p class="score">{props.score}</p>
+        <AnswerText answer={props.answer} />
       </div>
       {props.figure}
     </article>
@@ -102,20 +119,11 @@ function LigaEntry(props: { event: TemporadaRecord; snapshot: ForecastSnapshot }
   const names = new Map(props.event.teams.map((team) => [team.id, team.name]));
   const name = (id: string) => names.get(id) ?? id;
   const top = [...props.snapshot.teams].sort((a, b) => b.season - a.season).slice(0, 4);
-  const leader = top[0]!;
-  const bt = props.snapshot.backtest;
-  const beatsBase = bt.model.logLoss < bt.baseRates.logLoss;
-  const beatsOdds = bt.odds ? bt.model.logLoss < bt.odds.logLoss : undefined;
+  const second = top[1];
   return (
     <Entry
       event={props.event}
-      question="¿Quién gana la Liga 1 2026?"
-      answer={
-        <>
-          <p class="answer-figure">{formatPercent(leader.season)}</p>
-          <p>{name(leader.team)} es la favorita para ganar la temporada.</p>
-        </>
-      }
+      answer={ligaAnswer(props.event, props.snapshot)}
       figure={
         <Figure title="Probabilidad de ganar la temporada">
           <MiniBars
@@ -125,38 +133,17 @@ function LigaEntry(props: { event: TemporadaRecord; snapshot: ForecastSnapshot }
               from: 0,
               to: team.season,
               key: i === 0,
+              // Percentage points: plain "puntos" would read as league points.
+              note:
+                i === 0 && second
+                  ? `${Math.round((team.season - second.season) * 100)} puntos porcentuales más que ${name(second.team)}.`
+                  : undefined,
             }))}
           />
         </Figure>
       }
-      score={
-        (beatsBase ? "Supera a las frecuencias base" : "No supera a las frecuencias base") +
-        (beatsOdds === undefined
-          ? "."
-          : beatsOdds
-            ? " y a las cuotas de Bet365."
-            : beatsBase
-              ? ", pero no a las cuotas de Bet365."
-              : " ni a las cuotas de Bet365.")
-      }
     />
   );
-}
-
-/** Whether the model's backtest error is at most that of its best baseline. */
-function modelWins(snapshot: McuSnapshot, key: FigureKey): boolean {
-  const { model, ...baselines } = scoresOf(snapshot.backtest, key);
-  return model! <= Math.min(...Object.values(baselines));
-}
-
-function mcuScore(snapshot: McuSnapshot): string {
-  const opening = modelWins(snapshot, "opening");
-  const worldwide = modelWins(snapshot, "worldwide");
-  if (opening && worldwide)
-    return "Supera a su mejor base en el estreno y en la recaudación mundial.";
-  if (opening) return "Supera a su mejor base en el estreno, pero no en la recaudación mundial.";
-  if (worldwide) return "No supera a su mejor base en el estreno, sí en la recaudación mundial.";
-  return "No supera a su mejor base ni en el estreno ni en la recaudación mundial.";
 }
 
 function McuEntry(props: { event: TaquillaRecord; snapshot: McuSnapshot }) {
@@ -168,24 +155,9 @@ function McuEntry(props: { event: TaquillaRecord; snapshot: McuSnapshot }) {
   return (
     <Entry
       event={props.event}
-      question={`¿Cuánto recaudará ${snap.target.title} en su estreno?`}
-      answer={
-        <>
-          <p class="answer-figure">{formatMoneyCompact(opening.point)}</p>
-          <p>Primer fin de semana en EE. UU. y Canadá, en dólares de {snap.dollars}.</p>
-        </>
-      }
+      answer={mcuAnswer(snap)}
       figure={
-        <Figure
-          title="Estreno de las películas de Avengers"
-          legend={
-            <>
-              <span class="key-ink">Estreno real</span>
-              <span>Pronóstico</span>
-              <span class="key-range">Intervalo</span>
-            </>
-          }
-        >
+        <Figure title="Estreno de las películas de Avengers">
           <MiniBars
             rows={[
               ...avengers.map((film) => ({
@@ -201,58 +173,45 @@ function McuEntry(props: { event: TaquillaRecord; snapshot: McuSnapshot }) {
                 to: opening.point / max,
                 key: true,
                 range: [opening.low / max, opening.high / max] as [number, number],
+                note: `Pronóstico. Intervalo del ${formatPercent(snap.model.interval)}: de ${formatMoneyCompact(opening.low)} a ${formatMoneyCompact(opening.high)}.`,
               },
             ]}
           />
         </Figure>
       }
-      score={mcuScore(snap)}
     />
   );
 }
 
 function PapalEntry(props: { event: AsistenciaRecord }) {
-  const held = heldActs(props.event);
-  const total = sumRange(held).central;
-  const compared = held.flatMap((act) => {
-    const difference = expectedDifference(act);
-    return difference === undefined ? [] : [{ act, difference }];
-  });
-  const above = compared.filter((c) => c.difference > 0).length;
+  const compared = comparedActs(props.event);
   const reach = Math.max(0.1, ...compared.map((c) => Math.abs(c.difference)));
   const at = (difference: number) => 0.5 + difference / reach / 2;
+  const widest = compared.reduce<(typeof compared)[number] | undefined>(
+    (best, c) => (best && Math.abs(best.difference) >= Math.abs(c.difference) ? best : c),
+    undefined,
+  );
   return (
     <Entry
       event={props.event}
-      question="¿Cuánta gente fue a ver a León XIV?"
-      answer={
-        <>
-          <p class="answer-figure">{formatNumber(total)}</p>
-          <p>
-            Personas en {held.length} de {props.event.acts.length} actos.
-          </p>
-        </>
-      }
+      answer={papalAnswer(props.event)}
       figure={
         <Show when={compared.length > 0}>
           <Figure title="Asistencia frente a lo esperado">
             <MiniBars
               axis={0.5}
+              directions={["← Por debajo", "Por encima →"]}
               rows={compared.map((c) => ({
                 label: c.act.city,
                 value: formatDifference(c.difference),
                 from: Math.min(0.5, at(c.difference)),
                 to: Math.max(0.5, at(c.difference)),
                 key: c.difference < 0,
+                note: c === widest ? "La mayor diferencia." : undefined,
               }))}
             />
           </Figure>
         </Show>
-      }
-      score={
-        compared.length === 0
-          ? "Todavía no hay actos con una cifra esperada publicada."
-          : `${above} de ${compared.length} actos ${above === 1 ? "superó" : "superaron"} la cifra esperada.`
       }
     />
   );
